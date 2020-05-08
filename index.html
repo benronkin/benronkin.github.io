@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Enrichment Workflow | Ben Ronkin Portfolio</title>
+  </head>
+
+  <body><main>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="index.html" class="brand-logo" style="margin-left: 20px;"
+        >Ben Ronkin</a
+      >
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+          <a href="https://www.linkedin.com/in/ronkin" target="_blank"
+            ><img
+              src="img/li-48.png"
+              alt="LinkedIn"
+              class="responsive-img"
+              width="65%"
+          /></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>My Portfolio</h1>
+    <p class="lead">
+      Thank you for visiting my portfolio. I am a JavaScript developer, focusing
+      on <strong>Node.js</strong> web applications and
+      <strong>Google Apps Script</strong>
+      automation. Below are samples of my work.
+    </p>
+
+    <portfolio-card
+      title="Lead sharing web app"
+      subtitle="Node.js Express"
+      image="img/leadsharing-lead.png"
+      target="lead-sharing.html"
+    >
+      <div slot="description">
+        <p>
+          As a solo developer on the project, I've been designing, developing,
+          releasing, and maintaining a secured Node.js Express web application
+          on Google Cloud Platform.
+        </p>
+        <p>
+          The application enables managers and their partners to track the
+          progress of sales leads and exchange messages about lead status.
+        </p>
+        <p>
+          Lead data is stored securely in a NoSQL database. The app offers a
+          variety of derived data attributes that are calculated in real-time,
+          client-side.
+        </p>
+      </div>
+    </portfolio-card>
+
+    <portfolio-card
+      title="Data enrichment workflow"
+      subtitle="Google Apps Script"
+      image="img/data-enrichment-lifecycle.png"
+      target="data-enrichment.html"
+    >
+      <div slot="description">
+        <p>
+          As a solo developer on the project, I created a sophisticated workflow
+          system that handles new file submission in Google Apps Script.
+        </p>
+        <p>
+          The system cuts down on the effort to validate and enrich submitted
+          files, while providing stakeholders with a clear picture regarding the
+          status of every submission.
+        </p>
+      </div>
+    </portfolio-card>
+
+    <portfolio-card
+      title="Google Sheet columns to Docs"
+      subtitle="Google Apps Script"
+      image="img/columns-to-docs-cover.png"
+      target="sheet-columns-to-docs.html"
+    >
+      <div slot="description">
+        <p>
+          As a solo developer on the project, I created a simple Google Apps
+          Script that converts Google Sheet columns to a set of Google Docs.
+        </p>
+        <p>
+          The script uses the header row as the name of each file. All rows in
+          each column are populated one after the other into the body of every
+          Google Doc.
+        </p>
+      </div>
+    </portfolio-card>
+
+    <portfolio-card
+      title="Website message from Google Sheet"
+      subtitle="Google Apps Script"
+      image="img/iframe-spreadsheet-personal-message.png"
+      target="message-from-spreadsheet.html"
+    >
+      <div slot="description">
+        <p>
+          In this small project, the client had a standalone website that was
+          separate from Google GSuite.
+        </p>
+        <p>
+          The client needed to present a personal message to every logged-in
+          user. Messages were stored in a two-column Google Spreadsheet column
+          containing email addresses and the message for each user.
+        </p>
+        <p>
+          The project requiring fetching the right message as the user accessed
+          the message page.
+        </p>
+      </div>
+    </portfolio-card>
+  </div>
+</main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/portfolioCard.js"></script>
+  </body>
+</html>
