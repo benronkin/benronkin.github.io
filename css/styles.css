@@ -84,6 +84,19 @@ li img {
   visibility: hidden;
 }
 
+input[type='text']:not(.browser-default):focus:not([readonly]) + label,
+input[type='email']:not(.browser-default):focus:not([readonly]) + label,
+textarea:not(.browser-default):focus:not([readonly]) + label {
+  color: #e91e63;
+}
+
+input[type='text']:not(.browser-default):focus:not([readonly]),
+input[type='email']:not(.browser-default):focus:not([readonly]),
+textarea:not(.browser-default):focus:not([readonly]) {
+  border-bottom: 1px solid #e91e63;
+  box-shadow: none;
+}
+
 .lead {
   font-size: 1.2rem;
 
