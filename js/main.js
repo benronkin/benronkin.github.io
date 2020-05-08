@@ -13,7 +13,6 @@ const handleContactSubmit = (e) => {
 
   const url =
     'https://script.google.com/macros/s/AKfycbwRQpnZjqbIFLP1BYOPcQ5z0fvPdzAZ8Za8rRYKWQKYxCGxX-6p/exec';
-
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');
 
