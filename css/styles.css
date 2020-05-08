@@ -52,6 +52,10 @@ li img {
   top: 10px;
 }
 
+#alert {
+  color: #f50057;
+}
+
 .col-r {
   display: flex !important;
   justify-content: flex-end !important;
@@ -74,6 +78,10 @@ li img {
 
 .hero img {
   max-width: 400px;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 .lead {
