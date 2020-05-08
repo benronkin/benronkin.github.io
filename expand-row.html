@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Enrichment Workflow | Ben Ronkin Portfolio</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="index.html" class="brand-logo" style="margin-left: 20px;"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+              <a href="contact.html"> <i class="material-icons">email</i></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/ronkin" target="_blank"
+                ><img
+                  src="img/li-48.png"
+                  alt="LinkedIn"
+                  class="responsive-img"
+                  width="65%"
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  <div class="container">
+    <h1>Expand Google Sheet rows</h1>
+    <h5>Google Apps Script</h5>
+
+    <div class="row">
+      <div class="col col-r s12 m6">
+        <img
+          src="img/expand-row-detail.png"
+          alt="Lead enrichment"
+          class="responsive-img"
+        />
+      </div>
+      <div class="col col-r s12 m6">
+        <ul class="collection with-header">
+          <li class="collection-header"><h4>Key highlights</h4></li>
+          <li class="collection-item">
+            Client needed to expand Google Sheet rows based on custom rules
+          </li>
+          <li class="collection-item">
+            I implemented Google Apps Script to duplicate rows based on date range in row
+          </li>
+          <li class="collection-item">
+            The script runs on every row that the client marks for expansion
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="summary">
+      <h2>Summary</h2>
+      <p>
+        In this small project, the client had a Google Sheet with two tabs (summary and detail), and required a way to expand summary rows based on date range in each of the rows. I developed a Google Apps Script 
+        to enable the client to expand the rows on demand.
+      </p>
+    </div>
+
+    <div class="row">
+      <div class="col s12 m4">
+        <h2>Expandable summary rows</h2>
+        <p>
+          The Summary tab includes campaign rows with start and end dates. The client wanted a way to indicate which rows to expand using a "Split Campaign" column.
+        </p>
+        <p>
+          Here we see two rows marked for expansion: the first is for dates between Feb and May, and other for the month of March.
+        </p>
+      </div>
+      <div class="col col-r s12 m8">
+        <img
+          src="img/expand-row-summary.png"
+          alt="Expand row summary"
+          class="responsive-img"
+          style="width: 75%;"
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 m8">
+        <img
+          src="img/expand-row-detail.png"
+          alt="Expand row detail"
+          class="responsive-img"
+        />
+      </div>
+      <div class="col col-r s12 m4">
+        <div class="">
+          <h2>Detail rows for each month</h2>
+          <p>
+            Once the user flagged the two rows for expansion, my Google Apps Script expanded them on the Details tab based on their data ranges. Each row is marked by the month. 
+          </p>
+          <p>The first campaign received four details row for the months Feb through May, and the second campaign received one details row for the month of March.</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Technologies and libraries in project</span>
+        <br />
+        <div class="chip">Google Apps Script</div>
+        <div class="chip">Google Spreadsheet Service</div>
+        <div class="chip">eslint</div>
+        <div class="chip">prettier</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/portfolioCard.js"></script>
+  </body>
+</html>
