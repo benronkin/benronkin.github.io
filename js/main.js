@@ -37,9 +37,10 @@ const handleContactSubmit = (e) => {
 
 const ready = () => {
   console.log('ready');
-  document
-    .querySelector('#contact-submit')
-    .addEventListener('click', handleContactSubmit);
+  const contactSubmit = document.querySelector('#contact-submit');
+  if (contactSubmit) {
+    contactSubmit.addEventListener('click', handleContactSubmit);
+  }
 };
 
 if (document.readyState === 'loading') {
