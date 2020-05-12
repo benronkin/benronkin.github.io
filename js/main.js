@@ -36,7 +36,7 @@ const handleContactSubmit = (e) => {
 };
 
 const handleSelect = (e) => {
-  const instance = M.FormSelect.getInstance(e.target);
+  const instance = M.FormSelect.getInstance($('#type-filter'));
   document
     .querySelectorAll('portfolio-card')
     .forEach((portfolioCard) => portfolioCard.classList.add('hide'));
@@ -52,9 +52,11 @@ const toggleSelect = (value) => {
   switch (value) {
     case 'node':
       $('#type-filter').val('Node.js').change().formSelect();
+      handleSelect();
       break;
     case 'gas':
       $('#type-filter').val('Google Apps Script').change().formSelect();
+      handleSelect();
       break;
     default:
       return;
