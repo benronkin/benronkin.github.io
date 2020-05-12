@@ -1,6 +1,6 @@
 const handleContactSubmit = (e) => {
   e.preventDefault();
-  const formEl = document.forms[0];
+  const formEl = e.target;
   const formData = new FormData(formEl);
 
   const name = formData.get('name');
@@ -10,6 +10,8 @@ const handleContactSubmit = (e) => {
     document.querySelector('#alert').classList.remove('hidden');
     return false;
   }
+
+  document.querySelector('#contact-submit').disabled = true;
 
   const url =
     'https://script.google.com/macros/s/AKfycbwRQpnZjqbIFLP1BYOPcQ5z0fvPdzAZ8Za8rRYKWQKYxCGxX-6p/exec';
@@ -25,20 +27,60 @@ const handleContactSubmit = (e) => {
 
   fetch(req)
     .then(() => {
-      console.log('posted');
       document.querySelector('#contact-form').classList.add('hidden');
       document.querySelector(
         '.lead'
-      ).innerText = `Thank you! I'll be in touch soon.`;
+      ).innerText = `Your message was recorded successfully. I'll be in touch soon.`;
     })
     .catch((err) => console.log(err));
 };
 
+const handleSelect = (e) => {
+  const instance = M.FormSelect.getInstance(e.target);
+  document
+    .querySelectorAll('portfolio-card')
+    .forEach((portfolioCard) => portfolioCard.classList.add('hide'));
+
+  instance.getSelectedValues().forEach((value) => {
+    document
+      .querySelectorAll(`portfolio-card[subtitle="${value}"]`)
+      .forEach((elem) => elem.classList.remove('hide'));
+  });
+};
+
+const toggleSelect = (value) => {
+  switch (value) {
+    case 'node':
+      $('#type-filter').val('Node.js').change().formSelect();
+      break;
+    case 'gas':
+      $('#type-filter').val('Google Apps Script').change().formSelect();
+      break;
+    default:
+      return;
+  }
+};
+
 const ready = () => {
   console.log('ready');
-  const contactSubmit = document.querySelector('#contact-submit');
-  if (contactSubmit) {
-    contactSubmit.addEventListener('click', handleContactSubmit);
+  // Contact form
+  const contactForm = document.querySelector('#contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', handleContactSubmit);
+  }
+  // Portfolio filter
+  const selectors = document.querySelectorAll('select');
+  let instances;
+  if (selectors) {
+    instances = M.FormSelect.init(selectors, {});
+    selectors.forEach((selector) =>
+      selector.addEventListener('change', handleSelect)
+    );
+  }
+  // Query param for portfolio filter
+  const searchParams = new URLSearchParams(window.location.search);
+  if (searchParams.has('p')) {
+    toggleSelect(searchParams.get('p'));
   }
 };
 
