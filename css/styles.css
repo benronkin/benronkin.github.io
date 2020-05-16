@@ -89,9 +89,19 @@ li img {
   margin: 0 0 40px 0 !important;
 }
 
-.filter-row > .col {
+.filter-row > .col.s3 {
   background-color: white;
 }
+
+.filter-row input {
+  box-sizing: border-box;
+  text-overflow: ellipsis !important;
+}
+
+.filter-row .caret {
+  right: -10px;
+}
+
 .hero {
   display: flex;
   justify-content: center;
