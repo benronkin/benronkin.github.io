@@ -138,7 +138,8 @@ textarea:not(.browser-default):focus:not([readonly]) {
   margin-bottom: 50px;
 }
 
-.responsive-img {
+.col-l .responsive-img,
+.col-r .responsive-img {
   max-width: 600px !important;
 }
 
