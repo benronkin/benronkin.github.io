@@ -140,7 +140,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
 .col-l .responsive-img,
 .col-r .responsive-img {
-  max-width: 600px !important;
+  max-width: 500px !important;
 }
 
 .row {
