@@ -1,5 +1,5 @@
 body {
-  background: #eeeeee;
+  background: white;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
@@ -7,6 +7,16 @@ body {
 
 main {
   flex: 1 0 auto;
+}
+
+nav {
+  background-color: #ffffff;
+}
+
+nav a,
+nav .brand-logo,
+nav i {
+  color: #333355;
 }
 
 p {
@@ -141,6 +151,10 @@ textarea:not(.browser-default):focus:not([readonly]) {
 .col-l .responsive-img,
 .col-r .responsive-img {
   max-width: 500px !important;
+}
+
+.page-footer {
+  background-color: black;
 }
 
 .row {

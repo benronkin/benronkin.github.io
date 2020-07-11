@@ -4,6 +4,7 @@ template.innerHTML = `
   a {
     text-decoration: none;
   }
+
   h2 {
     color: #999;
     font-size: 2rem;
@@ -18,13 +19,32 @@ template.innerHTML = `
   h2 + h3 {
     margin-top: -20px;
   }
+
+  .btn {
+    text-decoration: none;
+    color: #fff;
+    background-color: #2696aa;
+    text-align: center;
+    letter-spacing: .5px;
+
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 16px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+  }
   
   .card {
     background-color: white;
     border-radius: 2px;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
-    height: 500px;
-    margin: .5rem 0 5rem 0;
+    /* box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2); */
+    /* height: 500px; */
+    margin: .5rem 0 7rem 0;
     overflow: hidden;
     position: relative;
     transition: box-shadow .25s, -webkit-box-shadow .25s;
@@ -44,16 +64,17 @@ template.innerHTML = `
     flex-direction: column;
   }
   .card .card-content {
-    flex-grow: 1;
-    padding: 24px;
+    /* flex-grow: 1; */
+    padding: 0 24px 24px 24px;
     border-radius: 0 0 2px 2px;
   }
 
   .card .card-action {
-    background-color: #f44336;
-    border-top: 1px solid rgba(160,160,160,0.2);
+    /* background-color: #f44336; */
+    /*border-top: 1px solid rgba(160,160,160,0.2);*/
     position: relative;
-    padding: 16px 24px;
+    padding: 0;
+    margin-left: 24px;
   }
   .card .card-action.emphasized a {
     font-weight: 600;
@@ -65,12 +86,6 @@ template.innerHTML = `
     -webkit-transition: color .3s ease;
     transition: color .3s ease;
     text-transform: uppercase;
-  }
-
-  .card .card-image {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
   }
 
   @media only screen and (max-width: 600px) {
@@ -93,7 +108,7 @@ template.innerHTML = `
       <p><slot name="description"</p>
     </div>
     <div class="card-action">
-      <a>View project details</a>
+      <a class="btn">View project details ➤</a>
     </div>
   </div>
 </div>`;
