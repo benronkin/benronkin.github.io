@@ -37,10 +37,7 @@ template.innerHTML = `
     position: relative;
   }
   .card.horizontal .card-image img {
-    border: 1px solid #eee;
-    border-radius: 2px 0 0 2px;
-    max-width: 100%;
-    width: auto;
+    width: 100%;
   }
   .card.horizontal .card-stacked {
     display: flex;
@@ -68,6 +65,12 @@ template.innerHTML = `
     -webkit-transition: color .3s ease;
     transition: color .3s ease;
     text-transform: uppercase;
+  }
+
+  .card .card-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   @media only screen and (max-width: 600px) {
