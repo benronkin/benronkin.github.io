@@ -6,14 +6,14 @@ template.innerHTML = `
   }
 
   h2 {
-    color: #999;
+    color: #333355;
     font-size: 2rem;
     font-weight: 400;
     margin-top: 0;
   }
 
   h3 {
-    color: #835d5e ;
+    color: #2696aa ;
   }
 
   h2 + h3 {
