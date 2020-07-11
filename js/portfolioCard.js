@@ -1,19 +1,27 @@
 const template = document.createElement('template');
 template.innerHTML = `
 <style>
+  :root {
+    --blue: #0c3559;
+    --dark-blue: #092640;
+    --gray: #687b8c;
+    --light-gray: #aab9bf;
+    --white: #f2f2f2;
+  }
+  
   a {
     text-decoration: none;
   }
 
   h2 {
-    color: #333355;
+    color: var(--gray);
     font-size: 2rem;
     font-weight: 400;
     margin-top: 0;
   }
 
   h3 {
-    color: #2696aa ;
+    color: var(--dark-blue);
   }
 
   h2 + h3 {
@@ -23,7 +31,7 @@ template.innerHTML = `
   .btn {
     text-decoration: none;
     color: #fff;
-    background-color: #2696aa;
+    background-color: #0c3559;
     text-align: center;
     letter-spacing: .5px;
 

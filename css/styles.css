@@ -1,3 +1,11 @@
+:root {
+  --blue: #0c3559;
+  --dark-blue: #092640;
+  --gray: #687b8c;
+  --light-gray: #aab9bf;
+  --white: #f2f2f2;
+}
+
 body {
   background: white;
   display: flex;
@@ -10,13 +18,15 @@ main {
 }
 
 nav {
-  background-color: #ffffff;
+  background-color: var(--white);
 }
 
+h1,
 nav a,
 nav .brand-logo,
-nav i {
-  color: #333355;
+nav i,
+p {
+  color: var(--dark-blue);
 }
 
 p {
@@ -27,19 +37,18 @@ footer {
   margin-top: 100px;
 }
 h1 {
-  color: #666;
   font-size: 2.5rem;
   margin: 50px 0;
 }
 
 h2 {
-  color: #777;
+  color: var(--gray);
   font-size: 2rem;
   margin-top: 0;
 }
 
 h3 {
-  color: #2696aa;
+  color: var(--blue);
   margin: 0;
 }
 
@@ -48,11 +57,12 @@ h1 + h5 {
 }
 
 h4 {
+  color: var(--blue);
   font-size: 1.4rem;
 }
 
 h5 {
-  color: #835d5e;
+  color: var(--dark-blue);
   font-size: 1.25rem;
 }
 
@@ -69,15 +79,20 @@ li img {
 [type='checkbox']:checked + span:not(.lever):before {
   border-top: 1px solid transparent !important;
   border-left: 1px solid transparent !important;
-  border-right: 1px solid #f50057 !important;
-  border-bottom: 1px solid #f50057 !important;
+  border-right: 1px solid var(--blue) !important;
+  border-bottom: 1px solid var(--blue) !important;
 }
 .select-wrapper input.select-dropdown:focus {
-  border-bottom: 1px solid #f50057;
+  border-bottom: 1px solid var(--blue);
 }
 
 #alert {
-  color: #f50057;
+  color: var(--blue);
+}
+
+.chip {
+  background-color: var(--dark-blue);
+  color: var(--white);
 }
 
 .col-r {
@@ -88,7 +103,8 @@ li img {
 .collection-header,
 .collection-item {
   background-color: transparent !important;
-  color: black !important;
+  color: var(--blue) !important;
+  font-size: 0.9rem !important;
 }
 
 .container img {
@@ -170,7 +186,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: hsla(358, 79%, 68%, 0.8);
+  background-color: var(--blue);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 20px 0;
 }
@@ -186,7 +202,35 @@ textarea:not(.browser-default):focus:not([readonly]) {
   text-align: center;
 }
 
+.techs {
+  background-color: var(--white);
+}
+
+.techs .card-title {
+  color: var(--gray);
+}
+
 .collection-item {
   font-size: 0.95rem;
   color: #666;
+}
+
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 30px;
+  top: 100%;
+  margin-top: 5px;
+  padding: 5px;
+  background-color: var(--white);
+  color: var(--gray);
+  font-size: 0.8rem;
+  width: 55px;
 }

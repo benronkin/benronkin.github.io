@@ -22,10 +22,13 @@
       <nav>
         <div class="nav-wrapper">
           <a href="index.html" class="brand-logo" style="margin-left: 20px;"
-            >Ben Ronkin</a
+            >Ben Ronkin 🧡 Google</a
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li>
+            <li data-tooltip="Work">
+              <a href="index.html"> <i class="material-icons">work</i></a>
+            </li>
+            <li data-tooltip="Contact">
               <a href="contact.html"> <i class="material-icons">email</i></a>
             </li>
             <li>
@@ -44,27 +47,27 @@
   </body>
 </html>
   <div class="container">
-    <h1>Portfolio</h1>
+    <h1>Work</h1>
     <p class="lead">
-      Hi, I am Ben, a JavaScript developer, focusing
-      on Node.js web applications and Google Apps automation. 
-      I enjoy deploying apps on Google Cloud Platform. Below are samples of my work.
+      Hi, I am Ben, a JavaScript developer, focusing on Google execution environments. I build Node.js web applications on <b>Google Cloud Platform</b>, as well as GSuite automation on <b>Google Apps Script</b>.
+      <br /><br/>Below are samples of my work.
     </p>
 
     <div class="row filter-row">
-      <div class="col s3 z-depth-1">
-        <label>Filter by type</label>
+      <div class="col s5 z-depth-1">
+        <label>Filter projects by type</label>
         <select multiple id="type-filter" class="filter-select pink">
-          <option selected value="Node.js">Node</option>
-          <option selected value="Google Apps Script">Google Apps</option>
+          <option selected value="Google Cloud">Google Cloud</option>
+          <option selected value="Google Apps">Google Apps</option>
+          <option selected value="Other">Other</option>
         </select>
       </div>
     </div>
 
 
     <portfolio-card
-      title="Lead sharing web app"
-      subtitle="Node.js"
+      title="Data management app"
+      subtitle="Google Cloud"
       image="img/leadsharing-lead.png"
       target="lead-sharing.html"
     >
@@ -87,24 +90,8 @@
     </portfolio-card>
 
     <portfolio-card
-      title="Static site generator for MarTech demos"
-      subtitle="Node.js"
-      image="img/static-site-generator-category.png"
-      target="static-site-generator.html"
-    >
-      <div slot="description">
-        <p>
-          In this project, I delivered a static website generator to a MarTech vendor who needed to showcase its solutions on demo websites for different industry verticals. 
-        </p>
-        <p>The generator is fully customizable: The client generates category and product feeds for retail, financial services, and other verticals. The client modifies page template for each vertical.
-          </p>
-          <p>The generator then uses the feeds and the templates to generate the static sites.</p>
-      </div>
-    </portfolio-card>
-
-    <portfolio-card
       title="Data enrichment workflow"
-      subtitle="Google Apps Script"
+      subtitle="Google Apps"
       image="img/data-enrichment-lifecycle.png"
       target="data-enrichment.html"
     >
@@ -123,7 +110,7 @@
 
     <portfolio-card
       title="CRM server in Google sheet"
-      subtitle="Google Apps Script"
+      subtitle="Google Apps"
       image="img/db-api-cover.png"
       target="db-api.html"
     >
@@ -141,7 +128,7 @@
 
     <portfolio-card
       title="Update custom form in real-time"
-      subtitle="Google Apps Script"
+      subtitle="Google Apps"
       image="img/survey-in-survey-form1.png"
       target="survey-in-survey.html"
     >
@@ -159,7 +146,7 @@
 
     <portfolio-card
       title="Google Sheet columns to Docs"
-      subtitle="Google Apps Script"
+      subtitle="Google Apps"
       image="img/columns-to-docs-cover.png"
       target="sheet-columns-to-docs.html"
     >
@@ -178,7 +165,7 @@
 
     <portfolio-card
       title="Google Sheet to PDF"
-      subtitle="Google Apps Script"
+      subtitle="Google Apps"
       image="img/sheet-to-pdf-pdf.png"
       target="sheet-to-pdf.html"
     >
@@ -193,7 +180,7 @@
 
     <portfolio-card
       title="Custom form to Google Sheet"
-      subtitle="Google Apps Script"
+      subtitle="Google Apps"
       image="img/custom-form-form.png"
       target="custom-form.html"
     >
@@ -206,7 +193,7 @@
    
     <portfolio-card
       title="Expand Google Sheet rows"
-      subtitle="Google Apps Script"
+      subtitle="Google Apps"
       image="img/expand-row-summary.png"
       target="expand-row.html"
     >
@@ -220,7 +207,7 @@
     
     <portfolio-card
       title="Website message from Google Sheet"
-      subtitle="Google Apps Script"
+      subtitle="Google Apps"
       image="img/iframe-spreadsheet-personal-message.png"
       target="message-from-spreadsheet.html"
     >
@@ -240,7 +227,22 @@
         </p>
       </div>
     </portfolio-card>
-   
+
+    <portfolio-card
+    title="Static site generator for MarTech demos"
+    subtitle="Other"
+    image="img/static-site-generator-category.png"
+    target="static-site-generator.html"
+  >
+    <div slot="description">
+      <p>
+        In this project, I delivered a static website generator to a MarTech vendor who needed to showcase its solutions on demo websites for different industry verticals. 
+      </p>
+      <p>The generator is fully customizable: The client generates category and product feeds for retail, financial services, and other verticals. The client modifies page template for each vertical.
+        </p>
+        <p>The generator then uses the feeds and the templates to generate the static sites.</p>
+    </div>
+  </portfolio-card>
 
   </div>
 </main>

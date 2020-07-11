@@ -51,11 +51,11 @@ const handleSelect = (e) => {
 const toggleSelect = (value) => {
   switch (value) {
     case 'node':
-      $('#type-filter').val('Node.js').change().formSelect();
+      $('#type-filter').val('Google Cloud').change().formSelect();
       handleSelect();
       break;
     case 'gas':
-      $('#type-filter').val('Google Apps Script').change().formSelect();
+      $('#type-filter').val('Google Apps').change().formSelect();
       handleSelect();
       break;
     default:
