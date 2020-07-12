@@ -11,30 +11,44 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <link rel="stylesheet" href="./css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Custom form to Google sheet | Ben Ronkin Portfolio</title>
+    <title>Custom form to Google sheet | Ben Ronkin</title>
   </head>
 
   <body>
     <main>
       <nav>
         <div class="nav-wrapper">
-          <a href="index.html" class="brand-logo" style="margin-left: 20px;"
-            >Ben Ronkin 🧡 Google</a
+          <a
+            href="./index.html"
+            class="brand-logo"
+            style="margin-left: 20px;"
+            >Ben Ronkin</a
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html">
+                <i class="material-icons">work</i></a
+              >
+            </li>
+            <li data-tooltip="Blog">
+              <a href="./blog/index.html">
+                <i class="material-icons">rss_feed</i></a
+              >
             </li>
             <li data-tooltip="Contact">
-              <a href="contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html">
+                <i class="material-icons">email</i></a
+              >
             </li>
             <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
                 ><img
-                  src="img/li-48.png"
+                  src="./img/li-48.png"
                   alt="LinkedIn"
                   class="responsive-img"
                   width="65%"
@@ -43,9 +57,6 @@
           </ul>
         </div>
       </nav>
-    </main>
-  </body>
-</html>
   <div class="container">
     <h1>Custom form to Google sheet</h1>
     <h5>Google Apps Script</h5>
@@ -195,7 +206,9 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/portfolioCard.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="./js/main.js"></script>
+    <script src="./js/portfolioCard.js"></script>
   </body>
 </html>

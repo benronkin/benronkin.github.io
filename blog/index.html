@@ -13,10 +13,10 @@
     />
     <link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact | Ben Ronkin</title>
+    <title>Blog | Ben Ronkin</title>
   </head>
 
   <body>
@@ -24,31 +24,31 @@
       <nav>
         <div class="nav-wrapper">
           <a
-            href="./index.html"
+            href="../index.html"
             class="brand-logo"
             style="margin-left: 20px;"
             >Ben Ronkin</a
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html">
+              <a href="../index.html">
                 <i class="material-icons">work</i></a
               >
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
+              <a href="../blog/index.html">
                 <i class="material-icons">rss_feed</i></a
               >
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html">
+              <a href="../contact.html">
                 <i class="material-icons">email</i></a
               >
             </li>
             <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
                 ><img
-                  src="./img/li-48.png"
+                  src="../img/li-48.png"
                   alt="LinkedIn"
                   class="responsive-img"
                   width="65%"
@@ -57,38 +57,27 @@
           </ul>
         </div>
       </nav>
-  <div class="container">
-    <h1>Contact</h1>
-    <p class="lead" style="position: relative; z-index: 100;">
-      Drop me a line and I'll respond ASAP.
-    </p>
+<div class="container">
+  <h1>Blog</h1>
 
-<div class="row">
-  <form id='contact-form' class="col s12 m6" autocomplete="off">
-    <div class="input-field">
-      <input id="name" type="text" name="name" autocomplete="off">
-      <label for="name">Name</label>
-    </div>
-    <div class="input-field">
-      <input id="email"type="email" name="email" autocomplete="off">
-      <label for="email">Email</label>
-    </div>
-    <div class="input-field">
-      <textarea id="message" name="message" class="materialize-textarea"></textarea>
-      <label for="message">Message</label>
-    </div>
-    
-    
-    
-  <button type="submit" id="contact-submit" class="btn">Send</button>
-  <p id="alert" class="hidden">Do me a favor and fill out the three fields.</p>
-  </form>
-</div>
-
-  
-
-    
+  <div class="blog-listing">
+    <h2><a href="using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html">Using a single environment variables file for both Google cloud function and local dev</a></h2>
+    <p class="muted"><span style="display: flex; align-items: center;"><i class="material-icons">today</i>July 11, 2020</p></span>
+      
+    <p>Whenever I need to write a cloud function for a Google Cloud Platform (GCP) project, I prefer to develop and test my code locally and deploy it as a cloud function only when it's done. It's often the case that I need to use environment variables to store important and sensitive information. For instance, if my code needs to access a Google Sheet via the Google Sheet API, then I prefer to store the sheet ID in an environment variable, instead of hard-coding it in the code.
+      <a href="using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html">Continue reading [...]</a></p>
   </div>
+
+  <div class="blog-listing">
+    <h2><a href="using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html">Using the Google Sheets API in a Cloud Function on Google Cloud Platform</a></h2>
+    <p class="muted"><span style="display: flex; align-items: center;"><i class="material-icons">today</i>July 2, 2020</p></span>
+    <p>Cloud functions on Google Cloud Platform (GCP) are a great way to ship production code quickly and efficiently. I often use them to take advantage of the services that GCP offers, such as Google Sheets API.</p>
+    <p>This post details the process of using Google Cloud Platform (GCP) to deploy a cloud function that uses the Sheets API. I use the code included in this article as a template for all my GCP projects. This speeds up the process of creating new projects. 
+      <a href="using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html">Continue reading [...]</a></p>
+    </p>
+  </div>
+  
+</div>
 </main>
 
     <footer class="page-footer">
@@ -127,7 +116,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="./js/main.js"></script>
-    <script src="./js/portfolioCard.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolioCard.js"></script>
   </body>
 </html>

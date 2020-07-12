@@ -2,11 +2,12 @@ const template = document.createElement('template');
 template.innerHTML = `
 <style>
   :root {
-    --blue: #0c3559;
-    --dark-blue: #092640;
-    --gray: #687b8c;
-    --light-gray: #aab9bf;
-    --white: #f2f2f2;
+    --secondary: #bf6b82;
+    --primary: #456389;
+    --third: #527869;
+    --forth: #f2acb9;
+    --black: #260101;
+    --white: #F0F2F1;
   }
   
   a {
@@ -14,14 +15,14 @@ template.innerHTML = `
   }
 
   h2 {
-    color: var(--gray);
+    color: var(--third);
     font-size: 2rem;
     font-weight: 400;
     margin-top: 0;
   }
 
   h3 {
-    color: var(--dark-blue);
+    color: var(--primary);
   }
 
   h2 + h3 {
@@ -31,7 +32,7 @@ template.innerHTML = `
   .btn {
     text-decoration: none;
     color: #fff;
-    background-color: #0c3559;
+    background-color: var(--secondary);
     text-align: center;
     letter-spacing: .5px;
 
@@ -45,6 +46,10 @@ template.innerHTML = `
     text-transform: uppercase;
     vertical-align: middle;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn:hover {
+    background-color: var(--forth);
   }
   
   .card {
@@ -83,9 +88,6 @@ template.innerHTML = `
     position: relative;
     padding: 0;
     margin-left: 24px;
-  }
-  .card .card-action.emphasized a {
-    font-weight: 600;
   }
 
   .card .card-action a {
