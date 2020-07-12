@@ -218,10 +218,10 @@ textarea:not(.browser-default):focus:not([readonly]) {
   margin-bottom: 50px;
 }
 
-.col-l .responsive-img,
+/* .col-l .responsive-img,
 .col-r .responsive-img {
   max-width: 500px !important;
-}
+} */
 
 .muted {
   color: var(--third);
