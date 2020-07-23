@@ -14,6 +14,10 @@ body {
   flex-direction: column;
 }
 
+label {
+  color: var(--third);
+}
+
 main {
   flex: 1 0 auto;
 }
@@ -91,15 +95,15 @@ li img {
 [type='checkbox']:checked + span:not(.lever):before {
   border-top: 1px solid transparent !important;
   border-left: 1px solid transparent !important;
-  border-right: 1px solid var(--blue) !important;
-  border-bottom: 1px solid var(--blue) !important;
+  border-right: 1px solid var(--primary) !important;
+  border-bottom: 1px solid var(--primary) !important;
 }
 .select-wrapper input.select-dropdown:focus {
-  border-bottom: 1px solid var(--blue);
+  border-bottom: 1px solid var(--primary);
 }
 
 #alert {
-  color: var(--blue);
+  color: var(--third);
 }
 
 .blog-listing {
@@ -108,7 +112,7 @@ li img {
 }
 
 .blog-listing p a {
-  color: var(--blue);
+  color: var(--third);
 }
 
 .blog-listing:not(:last-of-type) {
@@ -202,13 +206,13 @@ li img {
 input[type='text']:not(.browser-default):focus:not([readonly]) + label,
 input[type='email']:not(.browser-default):focus:not([readonly]) + label,
 textarea:not(.browser-default):focus:not([readonly]) + label {
-  color: var(--blue);
+  color: var(--third);
 }
 
 input[type='text']:not(.browser-default):focus:not([readonly]),
 input[type='email']:not(.browser-default):focus:not([readonly]),
 textarea:not(.browser-default):focus:not([readonly]) {
-  border-bottom: 1px solid var(--blue);
+  border-bottom: 1px solid var(--third);
   box-shadow: none;
 }
 
