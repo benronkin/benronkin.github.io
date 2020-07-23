@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="./css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Custom form to Google sheet | Ben Ronkin</title>
+    <title>Gmail to Google Sheets | Ben Ronkin</title>
   </head>
 
   <body>
@@ -67,13 +67,13 @@
         </div>
       </nav>
   <div class="container">
-    <h1>CRM server in Google sheet</h1>
+    <h1>Gmail to Google Sheets</h1>
     <h5>Google Apps</h5>
 
     <div class="row">
       <div class="col s12 m6">
         <img
-          src="img/db-api-client.png"
+          src="img/gmail-to-sheets-messages.png"
           alt="Sales leads in client"
           class="responsive-img"
         />
@@ -82,19 +82,19 @@
         <ul class="collection with-header">
           <li class="collection-header"><h4>Key highlights</h4></li>
           <li class="collection-item">
-            A master Google Sheet tracks all sales leads
+            Google Apps Script that works like a Contact Management System
           </li>
           <li class="collection-item">
-            A Google Apps Script web app acts as an API endpoint, handling GET and POST requests with the master sheet
+            The script watches a Gmail inbox
           </li>
           <li class="collection-item">
-            Sales reps pull their individual leads into their local spreadsheets
+            New email messages are captured in a Google Sheet
           </li>
           <li class="collection-item">
-            Changes that sales reps make locally immediately appear in the CRM sheet
+            Sender information is saved in a different Google Sheet
           </li>
           <li class="collection-item">
-            Reps can add new leads and edit existing leads
+            Users can easily pull all messages by a sender's email address
           </li>
         </ul>
       </div>
@@ -103,27 +103,25 @@
     <div class="summary">
       <h2>Summary</h2>
       <p>
-        A sales manager manages all sales leads in a Google Sheet. She needs to route leads to her team and have her reps
-        follow up on the leads and update their status and information. Instead of having the reps update the master sheet, 
-        she uses the Google Apps Script web app to distribute leads to reps and update the master sheet based on reps' local updates.
+        This project required watching a specific Gmail inbox and capturing new email messages into a Google Sheet.
+        The Google Apps Script also pulls out sender information into a contacts sheet. Spreadsheet owners can easily
+        view all messages by sender.
       </p>
     </div>
 
     <div class="row">
       <div class="col s12 m4">
-        <h2>Master sales CRM</h2>
+        <h2>Watching Gmail inbox</h2>
         <p>
-          A master Google Sheet functions as a CRM. Leads from the Marketing department are added to the sheet. 
+          The script periodically watches a pre-specified Gmail inbox for new incoming messages.
         </p>
         <p>
-          The sales manager assigns each lead to a sales rep on her team (column A). On her team, only the sales manager
-          has access to the CRM sheet.
+          When new messages arrive, the script process them and parses their information into a Google Sheet
         </p>
       </div>
       <div class="col col-r s12 m8">
         <img
-          src="img/db-api-server.png"
-          alt="CRM sheet"
+          src="img/gmail-to-sheets-inbox.png"
           class="responsive-img"
           style="width: 75%;"
         />
@@ -131,44 +129,39 @@
     </div>
 
     <div class="row">
-      <div class="col col-l s12 m8">
+      <div class="col col-l s12 m5">
         <img
-          src="img/db-api-gas.png"
-          alt="API endpoint"
+          src="img/gmail-to-sheets-users.png"
           class="responsive-img"
         />
       </div>
-      <div class="col col-r s12 m4">
+      <div class="col col-r s12 m7">
         <div class="">
-          <h2>API endpoint</h2>
+          <h2>Sender CRM</h2>
           <p>
-            A Google Apps Script web app functions as an API server in front of the master sheet. The web app receives GET and POST requests from 
-            individual sales reps sheets. The web app enables reps to view and operate only on their leads.
+            The script pulls out the sender information from each messages, separting out the sender's name and their email address.
           </p>
-          <p>A second Google Apps Script contained in the sales rep sheet uses an installable trigger to handle rep edits. The client-side script 
-            interacts with the web app. For instance, when the sales rep adds a new lead, the client-side script sends the info to the web app, 
-            which, in return, generates a new ID for the lead and sends it back to the client, which updates the sales rep sheet with the new ID.
+          <p>The script checks whether the email address is already captured in the sheet. If it's not then the script adds the new user to the sheet.
           </p>
         </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col s12 m4">
-        <h2>Real-time CRUD operations</h2>
+      <div class="col s12 m6">
+        <h2>Message storage</h2>
         <p>
-          Each sales rep has his or her own sheet. The rep uses a custom menu to fetch the assigned leads from the master sheet.
+          The script pulls information about each message onto a separate sheet. The script checks whether the message ID is already 
+          captured in the sheet, and if it's not then the script adds in the new message.
         </p>
         <p>
-          The rep can update existing leads and even add new leads to their local sheet. Any such operation is immediately sent by the client script to the 
-          master Google Apps Script, which updates the master sheet.
+          The script pulls the sender's email address together with the message information. This enables grouping and viewing all messages by a given sender.
         </p>
         <p></p>
       </div>
-      <div class="col col-r s12 m8">
+      <div class="col col-r s12 m6">
         <img
-          src="img/db-api-client.png"
-          alt="Client sheets"
+          src="img/gmail-to-sheets-messages.png"
           class="responsive-img"
         />
       </div>
@@ -181,9 +174,9 @@
         <span class="card-title">Technologies and libraries in project</span>
         <br />
         <div class="chip">Google Apps Script</div>
-        <div class="chip">Web app</div>
+        <div class="chip">Google Sheets</div>
+        <div class="chip">GMail Service</div>
         <div class="chip">Google Spreadsheet Service</div>
-        <div class="chip">UrlFetch</div>
         <div class="chip">eslint</div>
         <div class="chip">prettier</div>
       </div>
