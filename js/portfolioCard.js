@@ -70,7 +70,7 @@ template.innerHTML = `
     position: relative;
   }
   .card.horizontal .card-image img {
-    width: 100%;
+    width: 400px;
   }
   .card.horizontal .card-stacked {
     display: flex;
@@ -98,8 +98,9 @@ template.innerHTML = `
     text-transform: uppercase;
   }
 
-  @media only screen and (max-width: 600px) {
-    .card.horizontal .card-image {
+  @media only screen and (max-width: 920px) {
+    .card.horizontal .card-image,
+    .card.horizontal .card-image img {
       max-width: 100%;
     }
     .horizontal {
