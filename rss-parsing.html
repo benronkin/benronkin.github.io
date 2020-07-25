@@ -94,8 +94,9 @@
     <div class="summary">
       <h2>Summary</h2>
       <p>
-        The client needed to routinely parse a number of RSS feeds. I created a Google Apps Script that reads the client's feed list, and provides metadata and entries of each feed.
-        Client can run the script manually or automatically using a timer.
+        The project needed to routinely parse a number of RSS feeds and store key information about each feed item. 
+        I created a Google Apps Script that parses an arbitrary list of feed URLs, and updates a Google Sheet with metadata and entries of each feed.
+        The script can be run directly from the sheet menu or automatically using a timer.
       </p>
     </div>
 
@@ -141,10 +142,12 @@
       <div class="col s12 m5">
         <h2>Feed items</h2>
         <p>
-          The script creates a running list of all the feeds' items. Users can configure the list of attributes they wish to pull for each item.
+          The script creates a running list of all the feeds' items. 
+          Users can configure the list of attributes they wish to pull for each item.
         </p>
         <p>
           The script maintains previous pulls and uses the item's GUID to ensure that each item is pulled only once.
+          The script uses custom logic to fall back on channel-level data when item-level data isn't present.
         </p>
       </div>
       <div class="col col-r s12 m7">
