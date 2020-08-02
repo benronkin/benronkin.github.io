@@ -77,9 +77,14 @@ h4 {
   font-size: 1.4rem;
 }
 
-h5 {
+h5,
+h5 a {
   color: var(--secondary);
   font-size: 1.25rem;
+}
+
+h5 a:hover {
+  color: var(--primary);
 }
 
 li img {
