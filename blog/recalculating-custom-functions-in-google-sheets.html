@@ -88,7 +88,7 @@ applying them inside Google Sheet cells. I use the great Yahoo API to fetch dail
 quotes and store them in a log sheet to save on API calls. So one example of a custom 
 function is to pull the latest close price of a given stock from the log:
 </p>
-<pre><code>function LASTPRICE(ticker) {
+<p><pre><code>function LASTPRICE(ticker) {
   const headers = getQuotesHeaders();
   const lastPrices = getQuotesPrices().slice(-1).flat();
       
@@ -98,7 +98,7 @@ function is to pull the latest close price of a given stock from the log:
     throw Error(`Company not recognized: ${ticker}`);
   }
   return lastPrices[tickerIdx];
-}</code></pre>
+}</code></pre></p>
 <p>
 In LASTPRICE, I pass in the company I'm interested in. I use some other functions to get the header
 row and price rows from the log sheet. I find the column index of the stock I'm interested in and I
@@ -137,8 +137,7 @@ Alright, so what's the fastest way to pass in a second argument that changes its
 enough so that the function always picks the last row from my log? I know, I'll just pass in the 
 standard Google Sheet function NOW(), yay!
 </p>
-<pre><code>=LASTPRICE(A2, NOW())
-</code></pre>
+<p><pre><code>=LASTPRICE(A2, NOW())</code></pre></p>
 
 <p>
 End of story? Hardly! You try a stunt like that and Google Sheets is quick to chastise: 
@@ -158,96 +157,32 @@ change the value of an argument I have no intention to use. My day is going on s
 Take two:
 </p>
 
-<pre><code>function updateCustomFunctions() {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Summary');
-  let formula = sheet.getRange('C2').getFormula();
-  const flag = parseInt(formula[formula.length - 2]) === 0 ? '1' : '0';
-  formula = formula.replaceAt(formula.length - 2, flag);
-  sheet.getRange('C2').setFormula(formula);
-}
+<p><pre><code>function saveNewDate() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Config');
+  const date = new Date();
+  sheet.getRange('B1').setValue(date.toLocaleString('en-US'));
+}</code></pre></p>
 
-String.prototype.replaceAt = function (index, replacement) {
-  return (
-    this.substr(0, index) +
-    replacement +
-    this.substr(index + replacement.length)
-  );
-};</code></pre>
+<p>This is a simple function to update a cell value. Of course it requires me to create a new 
+'Config' tab to keep it separate from my summary data. I need to update my API function slightly 
+to call this function whenever I fetch new data. No biggie.</p>
 
-<p>
-This is not the most elegant solution, but the idea here is to inspect the formula, toggle the 
-value of its dummy argument and save back the formula to the cell. All I need to do now is call 
-'updateCustomFunctions' after appending new rows to my log sheet. This will force the sheet to 
-recalculate. 
-</p>
-<p>
-You'd think that this is the end of the ordeal, but it's not. I have custom functions all over my
-Summary sheet, not just in cell C2. And what happens if six weeks from now I decide to enter
-custom functions in new cells and forget about this whole recalculate thing? I'd end up with updated
-values in some locations and old values in others. Debugging the sheet will be a nightmare.
-</p>
-<p>
-So now I need to expand the operation and examine every cell in my sheet. This is going on 
-swimmingly! 
+<p>Now I need to update all my custom functions to reference this new cell:</p>
+
+<p><pre><code>=LASTPRICE(A2, Config!$A$2)</code></pre></p>
+
+<p>This is ugly. I set up a named range for the cell, so can now use:</p>
+
+<p><pre><code>=LASTPRICE(A2, LastPull)</code></pre></p>
+
+<p>This will run when the API runs, but I can always have the custom functions recalculate by
+  manually updating the config cell value. The functions will recalculate as soon as I update the
+  cell, so that's nice.
 </p>
 
 <p>
-Take three:
-</p>
-
-<pre><code>function updateCustomFunctions() {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Summary');
-  let flag;
-
-  for (let x = 1; x < sheet.getLastColumn(); x++) {
-    for (let y = 1; y < sheet.getLastRow(); y++) {
-      let c = sheet.getRange(y, x).getFormula();
-      const customFormula = isCustomFunction(c);
-
-      if (!flag && customFormula) {
-        flag = parseInt(c[c.length - 2]) === 0 ? '1' : '0';
-      }
-
-      if (customFormula) {
-        c = c.replaceAt(c.length - 2, flag);
-        sheet.getRange(y, x).setFormula(c);
-      }
-    }
-  }
-}
-
-function isCustomFunction(data) {
-  const customFormulas = ['PRICECHANGE', 'LASTPRICE'];
-
-  if (!data) {
-    return false;
-  }
-
-  for (let i = 0; i < customFormulas.length; i++) {
-    if (data.includes(`=${customFormulas[i]}`)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-String.prototype.replaceAt = function (index, replacement) {
-  return (
-    this.substr(0, index) +
-    replacement +
-    this.substr(index + replacement.length)
-  );
-};</code></pre>
-
-<p>
-So now I have to inspect every cell of the sheet for the existence of a custom function. I validate
-that a cell contains a custom function and then I set the flag for the dummy argument. Once the flag
-is set I update the function.
-</p>
-<p>
-This is not a robust solution. Every time I create a new custom function I have to register it in 
-`isCustomFunction'. If I decide to use a custom function in other sheets beyond 'Summary' then I need
-to run 'updateCustomFunctions' on other sheets. But at least it gets the job done (for now).
+This is not a robust solution. Every time I use a new custom function I have to remember to use the
+dummy field. But at least it gets the job done.
 </p>
 <p>
 – Ben
