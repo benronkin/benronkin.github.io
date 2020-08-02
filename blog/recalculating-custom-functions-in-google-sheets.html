@@ -110,7 +110,7 @@ to the bottom of the sheet.
 This works as expected, but there's just one problem with custom functions: they don't recalculate
 like regular Google Sheets functions do when you open or refresh a sheet. By design, custom 
 functions recalculate only when their arguments change. But in my summary sheet I 
-don't change them: I have a row per company and a in LASTPRICE I simply refer to the ticker of the
+don't change them: I have a row per company and in LASTPRICE I simply refer to the ticker of the
 company listed in column A of that row. It's the underlying data in my log sheet that changes. I
 need LASTPRICE to recognize when new rows are added to the log and inspect the new last row.
 </p>
@@ -169,7 +169,7 @@ to call this function whenever I fetch new data. No biggie.</p>
 
 <p>Now I need to update all my custom functions to reference this new cell:</p>
 
-<p><pre><code>=LASTPRICE(A2, Config!$A$2)</code></pre></p>
+<p><pre><code>=LASTPRICE(A2, Config!$B$1)</code></pre></p>
 
 <p>This is ugly. I set up a named range for the cell, so can now use:</p>
 
