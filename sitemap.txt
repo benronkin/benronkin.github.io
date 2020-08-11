@@ -17,6 +17,7 @@ https://benronkin.github.io/sheet-columns-to-docs.html
 https://benronkin.github.io/sheet-to-pdf.html
 https://benronkin.github.io/static-site-generator.html
 https://benronkin.github.io/survey-in-survey.html
+https://benronkin.github.io/youtube-to-sheet.html
 https://benronkin.github.io/blog/_post-template.html
 https://benronkin.github.io/blog/index.html
 https://benronkin.github.io/blog/recalculating-custom-functions-in-google-sheets.html

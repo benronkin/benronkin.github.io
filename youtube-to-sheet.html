@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="./css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Google Forms to Google Doc | Ben Ronkin</title>
+    <title>YouTube API to Google Sheets | Ben Ronkin</title>
   </head>
 
   <body>
@@ -67,28 +67,36 @@
         </div>
       </nav>
   <div class="container">
-    <h1>Google Forms to Google Doc</h1>
+    <h1>YouTube API to Google Sheets</h1>
     <h5>Google Apps</h5>
 
     <div class="row">
-      <div class="col s12 m6">
+      <div class="col s12 m8">
         <img
-          src="img/forms-to-doc-doc.png"
-          alt="Final PDF file"
+          src="img/youtube-to-sheet-videos.png"
           class="responsive-img"
         />
       </div>
-      <div class="col col-r s12 m6">
+      <div class="col col-r s12 m4">
         <ul class="collection with-header">
           <li class="collection-header"><h4>Key highlights</h4></li>
           <li class="collection-item">
-            Two Google Forms collect signatures and comments
+            Pull YouTube data using the YouTube Data API
           </li>
           <li class="collection-item">
-            Google Doc updates in real-time with form submissions
+            Collate data into Google Sheets
           </li>
           <li class="collection-item">
-            Entries also stored in Google Sheets
+            Collect new data, avoid duplicating old data
+          </li>
+          <li class="collection-item">
+            Pull YouTube channel metadata
+          </li>
+          <li class="collection-item">
+            Loop through and get all playlists and videos
+          </li>
+          <li class="collection-item">
+            Easy configuration by end user
           </li>
         </ul>
       </div>
@@ -97,21 +105,27 @@
     <div class="summary">
       <h2>Summary</h2>
       <p>
-        The client needed to collect signatures and comments on an open letter. A Google Apps Script records
-        each form submission directly into a dedicated table inside a Google Doc.
+        The project involved pulling information about YouTube channels and their videos and playlists, using the YouTube Data API. 
+        A Google Apps Script was built to take
+        an arbitrary number of channel IDs, get their metadata, and then iterate through their videos and playlists and get their own metadata. 
+        All information is to be pulled into a Google Sheet.
       </p>
     </div>
 
     <div class="row">
       <div class="col s12 m4">
-        <h2>Data capture via Google Forms</h2>
+        <h2>Easy to use</h2>
         <p>
-          Two Google Forms capture submissions of public signatures and comments.
+          An instructions tab guides the user on how to configure the Google Apps Script. The instructions show the various data elements 
+          pulled for channels, videos, and playlists.
+        </p>
+        <p>
+          The script can run on a timer, pulling data periodically, or manually via a custom menu item.
         </p>
       </div>
       <div class="col col-r s12 m8">
         <img
-          src="img/forms-to-doc-form.png"
+          src="img/youtube-to-sheet-instructions.png"
           class="responsive-img"
         />
       </div>
@@ -120,15 +134,24 @@
     <div class="row">
       <div class="col col-l s12 m8">
         <img
-          src="img/forms-to-doc-responses.png"
+          src="img/youtube-to-sheet-config.png"
           class="responsive-img"
         />
       </div>
       <div class="col col-r s12 m4">
         <div class="">
-          <h2>Form submissions stored in sheets</h2>
+          <h2>Configurable script execution</h2>
           <p>
-            Each of the forms records entries in dedicated Google Sheets.
+            A configuration sheet is included in the spreadsheet where the user can specify important information for the script. The user
+            supplies the names of the sheets that will house channel, video, and playlist information. 
+          </p>
+          <p>
+            The user supplies the various data elements they want to pull for channels, videos, and playlists. These will appear as metadata columns
+            inside the output sheet.
+          </p>
+          <p>
+            Finally, the user also enters the series of YouTube
+            channel IDs that the script will run through. This makes it easy to change the data that gets pulled out of the API and where it is stored.
           </p>
           
         </div>
@@ -136,18 +159,69 @@
     </div>
 
     <div class="row">
-      <div class="col s12 m5">
-        <h2>Updated Google Doc</h2>
+      <div class="col s12 m4">
+        <h2>YouTube channel data</h2>
         <p>
-          When users submit new entries into the Google Forms, the entries are appended onto a Google Doc that serves as an open letter.
+          When the script runs, it pulls the channel IDs from the Configuration sheet and supplies in this sheet the metadata for each channel. 
         </p>
         <p>
-          Each form records into a dedicated table inside the document.
+          The metadata is 
+          determined based on the columns that the user entered in the Configuration sheet.
         </p>
       </div>
-      <div class="col col-r s12 m7">
+      <div class="col col-r s12 m8">
         <img
-          src="img/forms-to-doc-doc.png"
+          src="img/youtube-to-sheet-channels.png"
+          class="responsive-img"
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-l s12 m8">
+        <img
+          src="img/youtube-to-sheet-videos.png"
+          class="responsive-img"
+        />
+      </div>
+      <div class="col col-r s12 m4">
+        <div class="">
+          <h2>YouTube video data</h2>
+          <p>
+            For each channel ID in the configuration tab, the script pulls all the uploaded videos. It then displays the video metadata based on the 
+            columns specified in the Configuration sheet.
+          </p>
+          <p>
+            The script makes subsequent API calls to fetch more videos using "nextPage" tokens, 
+            similar to how search result pages work.
+          </p>
+          <p>
+            The script ensures that each video shows up only once. To improve performance, the script stops pulling video information the moment it encounters an older
+            video that was previously pulled and stored in this sheet.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 m4">
+        <h2>YouTube playlist data</h2>
+        <p>
+          For each channel ID in the configuration tab, the script pulls all of the channel's playlists. It then displays the playlist metadata based on the 
+          columns specified in the Configuration sheet.
+        </p>
+        <p>
+          The script makes subsequent API calls to fetch more playlists using "nextPage" tokens, 
+          similar to how search result pages work.
+        </p>
+        <p>
+          The script ensures that each playlist shows up only once. To improve performance, the script stops pulling playlist information the moment it encounters an older
+          playlist that was previously pulled and stored in this sheet.
+        </p>
+      </div>
+      <div class="col col-r s12 m8">
+        <img
+          src="img/youtube-to-sheet-playlists.png"
           class="responsive-img"
         />
       </div>
@@ -160,8 +234,7 @@
         <span class="card-title">Technologies and libraries in project</span>
         <br />
         <div class="chip">Google Apps Script</div>
-        <div class="chip">Google Forms Service</div>
-        <div class="chip">Google Document Service</div>
+        <div class="chip">Google YouTube Data API</div>
         <div class="chip">Google Sheets</div>
         <div class="chip">eslint</div>
         <div class="chip">prettier</div>
