@@ -85,6 +85,24 @@
     </div>
 
     <portfolio-card
+    title="Google Sheets to Google Cloud Storage"
+    subtitle="Google Cloud"
+    image="img/sheets-to-storage-storage.png"
+    target="sheets-to-storage.html"
+  >
+    <div slot="description">
+      <p>
+        The project required developing a Node.js app on Google Cloud Platform that processes campaign registrations from Google Sheets.
+        The app reads the sheet via Google Sheets API, groups the registrations by campaign ID, and creates a CSV file for each campaign.
+      </p>
+      <p>
+        The file then gets uploaded to Google Cloud Storage, where the app sets access permission on the file.
+        Finally, the app emails a download link to the CSV file.
+      </p>
+    </div>
+  </portfolio-card>
+
+    <portfolio-card
     title="YouTube API to Google Sheets"
     subtitle="Google Apps"
     image="img/youtube-to-sheet-channels.png"

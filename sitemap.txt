@@ -15,6 +15,7 @@ https://benronkin.github.io/message-from-spreadsheet.html
 https://benronkin.github.io/rss-parsing.html
 https://benronkin.github.io/sheet-columns-to-docs.html
 https://benronkin.github.io/sheet-to-pdf.html
+https://benronkin.github.io/sheets-to-storage.html
 https://benronkin.github.io/static-site-generator.html
 https://benronkin.github.io/survey-in-survey.html
 https://benronkin.github.io/youtube-to-sheet.html
