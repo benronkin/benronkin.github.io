@@ -176,45 +176,14 @@
         <div class="">
           <h2>Email notifications</h2>
           <p>
-            When the script encounters validation errors for a submitted file, it triggers an email message to the submitter's email address (
-              captured during file submission
-            ). The email contains a link to the submitted file and explanation regarding the validation errors.
-          </p>
-
-          <p>
-            The script ensures that each video shows up only once. To improve performance, the script stops pulling video information the moment it encounters an older
-            video that was previously pulled and stored in this sheet.
+            When the script encounters validation errors for a submitted file, it triggers an email message to the submitter's email address 
+            (captured during file submission). The email contains a link to the submitted file and explanation regarding the validation errors.
           </p>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col s12 m4">
-        <h2>YouTube playlist data</h2>
-        <p>
-          For each channel ID in the configuration tab, the script pulls all of the channel's playlists. It then displays the playlist metadata based on the 
-          columns specified in the Configuration sheet.
-        </p>
-        <p>
-          The script makes subsequent API calls to fetch more playlists using "nextPage" tokens, 
-          similar to how search result pages work.
-        </p>
-        <p>
-          The script ensures that each playlist shows up only once. To improve performance, the script stops pulling playlist information the moment it encounters an older
-          playlist that was previously pulled and stored in this sheet.
-        </p>
-      </div>
-      <div class="col col-r s12 m8">
-        <img
-          src="img/youtube-to-sheet-playlists.png"
-          class="responsive-img"
-        />
-      </div>
-    </div>
-
-
-
+    
     <div class="card techs">
       <div class="card-content">
         <span class="card-title">Technologies and libraries in project</span>
