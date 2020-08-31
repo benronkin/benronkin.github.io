@@ -161,6 +161,7 @@ li img {
 .col-r {
   display: flex !important;
   justify-content: flex-end !important;
+  align-items: center;
 }
 
 .collection-header,

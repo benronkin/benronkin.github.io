@@ -1,10 +1,5 @@
 https://benronkin.github.io/
 https://benronkin.github.io/blog/
-https://benronkin.github.io/blog/_post-template.html
-https://benronkin.github.io/blog/index.html
-https://benronkin.github.io/blog/recalculating-custom-functions-in-google-sheets.html
-https://benronkin.github.io/blog/using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html
-https://benronkin.github.io/blog/using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html
 https://benronkin.github.io/contact.html
 https://benronkin.github.io/custom-form.html
 https://benronkin.github.io/data-enrichment.html
@@ -25,3 +20,8 @@ https://benronkin.github.io/sheets-to-storage.html
 https://benronkin.github.io/static-site-generator.html
 https://benronkin.github.io/survey-in-survey.html
 https://benronkin.github.io/youtube-to-sheet.html
+https://benronkin.github.io/blog/_post-template.html
+https://benronkin.github.io/blog/index.html
+https://benronkin.github.io/blog/recalculating-custom-functions-in-google-sheets.html
+https://benronkin.github.io/blog/using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html
+https://benronkin.github.io/blog/using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html
