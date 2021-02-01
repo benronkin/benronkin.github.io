@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="./css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data enrichment workflow | Ben Ronkin</title>
+    <title>Google Forms Replacement | Ben Ronkin</title>
   </head>
 
   <body>
@@ -67,14 +67,14 @@
         </div>
       </nav>
   <div class="container">
-    <h1>Data enrichment workflow</h1>
+    <h1>Google Forms Replacement</h1>
     <h5>Google Workspace</h5>
 
     <div class="row">
       <div class="col s12 m6">
         <img
-          src="img/data-enrichment-lifecycle.png"
-          alt="Lead enrichment"
+          src="img/google-forms-replacement-form.png"
+          alt="Final PDF file"
           class="responsive-img"
         />
       </div>
@@ -82,25 +82,13 @@
         <ul class="collection with-header">
           <li class="collection-header"><h4>Key highlights</h4></li>
           <li class="collection-item">
-            Implemented script triggers to inspect GDrive folders
+            Completely replaced Google Forms
           </li>
           <li class="collection-item">
-            Wrote customizable list of validation tests for new files
+            Developed a custom form management systems
           </li>
           <li class="collection-item">
-            Developed email notification systems to handle submission errors
-          </li>
-          <li class="collection-item">
-            Pulled data using Google Cloud SQL
-          </li>
-          <li class="collection-item">
-            Standardized submissions into a consistent file format
-          </li>
-          <li class="collection-item">
-            Routed enriched files to different stakeholders using routing rules
-          </li>
-          <li class="collection-item">
-            Logged every state of files and exposed data in Google Sheets
+            Admins can manage questions and flows on their own
           </li>
         </ul>
       </div>
@@ -109,103 +97,101 @@
     <div class="summary">
       <h2>Summary</h2>
       <p>
-        As a solo developer on the project, I created a sophisticated workflow
-        system that handles new file submission in Google Apps Script. The
-        system cuts down on the effort to validate and enrich submitted files,
-        while providing stakeholders with a clear picture regarding the status
-        of every submission.
+        The client hit the limits of what Google Forms can offer. I developed a custom form management systems that enables 
+        admins to manage form questions and how they are ordered on the form. Included unlimited form branching and dynamic 
+        field prepopulation.
       </p>
     </div>
 
     <div class="row">
       <div class="col s12 m4">
-        <h2>Watch for new files</h2>
+        <h2>Complete control over question metadata</h2>
         <p>
-          A Google Apps Script watches a specified GDrive folder for new file
-          submissions.
+          Admins can add, edit, and remove questions. They can set different question types, as well as the answers to multiple-choice questions.
         </p>
         <p>
-          Every submission is copied and archived automatically. Submissions are
-          logged for reporting and analysis.
+          Admins can pull data from third-party systems based on a query parameter and pre-populate some questions based on that data.
         </p>
       </div>
       <div class="col col-r s12 m8">
         <img
-          src="img/data-enrichment-submission.png"
-          alt="Lead sharing"
+          src="img/google-forms-replacement-metadata.png"
           class="responsive-img"
-          style="width: 75%;"
         />
       </div>
     </div>
 
     <div class="row">
-      <div class="col s12 m8">
+      <div class="col col-l s12 m8">
         <img
-          src="img/data-enrichment-validations.png"
-          alt="Lead sharing"
+          src="img/google-forms-replacement-flows.png"
           class="responsive-img"
         />
       </div>
       <div class="col col-r s12 m4">
         <div class="">
-          <h2>Flexible validation schemes</h2>
+          <h2>Unlimited form branching</h2>
           <p>
-            Different file submissions served different business purposes that
-            required files adhere to different set of rules.
+            Admins can define as many branching as they need based on user answers. Each row in the sheet represents a possible flow.
           </p>
           <p>
-            My GAS solution offered a customizable set of validation rules for
-            every type of file. I made it super easy to add new validation
-            schemes and update the schemes periodically as a need arises.
+            Admins define the branching points and the sequence of questions that follows each branch.
           </p>
         </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col s12 m4">
-        <h2>Customizable file formatting</h2>
-        <p>
-          My Google Apps Script needed to enforce spreadsheet column uniformity
-          while allowing for different spreadsheet types.
+      <div class="col s12 m5">
+        <h2>Dynamic field evaluation</h2>
+        <p>Admins can define custom conditionals that are calculated in real-time as users fill out the form.
         </p>
         <p>
-          I've built the script in such a way that made it easy to support new
-          formats, as well as change existing format, by easily adding
-          instructions regarding adding and removing columns, renaming columns,
-          and more.
+          For instance, admins can define some questions as required (or hidden) based on such conditionals.
         </p>
       </div>
-      <div class="col col-r s12 m8">
+      <div class="col col-r s12 m7">
         <img
-          src="img/data-enrichment-formatting.png"
-          alt="Lead sharing"
+          src="img/google-forms-replacement-conditionals.png"
           class="responsive-img"
         />
       </div>
     </div>
 
     <div class="row">
-      <div class="col s12 m8">
+      <div class="col col-l s12 m8">
         <img
-          src="img/data-enrichment-email.png"
-          alt="Lead sharing"
+          src="img/google-forms-replacement-sidebar.png"
           class="responsive-img"
         />
       </div>
       <div class="col col-r s12 m4">
         <div class="">
-          <h2>Email notifications for owners</h2>
+          <h2>Form preview</h2>
           <p>
-            Every file submitted to my Google Apps Script has to be routed to
-            the right owner once formatted.
+            Admins can preview their changes using a Google Sheet sidebar that reflects their in the Metadata, Flows, or Conditionals sheets.
           </p>
           <p>
-            The Google Apps Script uses a GMail service and a lookup Google
-            Sheet to alert users when new files are ready for final processing.
+            Once admins are happy with the results, they can publish their form changes.
           </p>
         </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 m5">
+        <h2>Dynamic form experience</h2>
+        <p>Users interact with the form via a Google Apps Script webapp. The webapp receives all necessary data from the GAS backend and renders the form accordingly.
+        </p>
+        <p>
+          When users submits their form responses, the webapp stores the data into a Google Sheet that admins can access and use.
+        </p>
+      </div>
+      <div class="col col-r s12 m7">
+        <img
+          src="img/google-forms-replacement-form.png"
+          class="responsive-img"
+        />
       </div>
     </div>
 
@@ -214,11 +200,7 @@
         <span class="card-title">Technologies and libraries in project</span>
         <br />
         <div class="chip">Google Apps Script</div>
-        <div class="chip">GAS Triggers</div>
-        <div class="chip">Gmail Service</div>
-        <div class="chip">GDrive Service</div>
-        <div class="chip">Google Spreadsheet Service</div>
-        <div class="chip">Google Cloud SQL</div>
+        <div class="chip">Google Sheets</div>
         <div class="chip">eslint</div>
         <div class="chip">prettier</div>
       </div>
