@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-91362999-4');
+  </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic data validation in Google Sheets | Ben Ronkin</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a
+            href="../index.html"
+            class="brand-logo"
+            style="margin-left: 20px;"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../index.html">
+                <i class="material-icons">work</i></a
+              >
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html">
+                <i class="material-icons">rss_feed</i></a
+              >
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html">
+                <i class="material-icons">email</i></a
+              >
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/ronkin" target="_blank"
+                ><img
+                  src="../img/li-48.png"
+                  alt="LinkedIn"
+                  class="responsive-img"
+                  width="65%"
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+<div class="container">
+<div class="blog-post">
+  <div class="blog-post-header">
+
+    <h5><a href="index.html">Blog</a></h5>
+    <h1>Dynamic data validation in Google Sheets</h1>
+    <p class="muted">
+      <span style="display: flex; align-items: center;">
+        <i class="material-icons">today</i>February 18, 2021
+      </span>
+    </p>
+  </div>
+
+<div class="blog-post-body">
+<p>
+  I have a Google Sheet with a column for company names. To ensure data quality, I prefer to select the company name in each row from a dropdown list 
+  so that the company is always spelled the same way. I could use the standard data validation in Google Sheet, but my list of companies contains over 35,000 names, 
+  and adding all of them into a data validation rule slows down Google Sheets considerably.
+</p>
+
+<p>
+  The solution I came up with is to type a few characters of the company name into the cell in the column and have a Google Apps Script dynamically set a data 
+  validation rule with only the company names that contain these characters;
+</p>
+
+<p>
+  <img src="../../img/dynamic-validation.png" alt="Dynamic data validation in Google Sheet" width="50%">
+  </p>
+<p>
+  For this to work, I have to hit the enter key after typing the characters since Google Apps Script executes server-side. The approach is a bit clunky and I have to 
+  wait about three seconds for the validation to be set, but it does work. Here's how I set it up.
+</p>
+<p>
+  I have a Google Sheet with two sheets: one named 'Edit' where I type my information, and the other named 'Companies', which has 35,000 companies listed in column A.
+</p>
+
+<p>
+  Inside a Google Apps Script, I create an onEdit(e) function that will be triggered automatically every time the spreadsheet is edited.
+</p>
+
+<pre><code>  function onEdit(e) {
+    // triggered automatically by Google Apps Script
+  }
+</code></pre>
+
+<p>
+  The first thing I do is to get all the company names from the spreadsheet. I use a map to convert the nested array I get from the sheet into a 
+  flat array of names. I lower-case the names so that later I can ignore case when comparing the names to the characters entered in the cell.
+</p>
+
+<pre><code>  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const allCompanies = ss
+    .getSheetByName('Companies')
+    .getDataRange()
+    .getValues()
+    .map((row) => row[0].toLowerCase());
+</code></pre>
+
+<p>
+  Next, I make sure that the user is editing the company name column. If the edit is done anywhere else then I exit the function.
+</p>
+
+<pre><code>  const inDroppableCell =
+  ss.getActiveSheet().getName() === 'Edit' &&
+  e.range.getColumn() === 1 &&
+  e.range.getRow() !== 1;
+
+  if (!inDroppableCell) {
+    return;
+  }
+</code></pre>
+
+<p>
+  The next step is to get the entered characters. Again, I check if the change contains some characters, and if not then I exit the function:
+</p>
+
+<pre><code>  const userInput = e.range.getValue().toString().toLowerCase();
+
+  if (userInput.toString().trim().length === 0) {
+    return;
+  }
+</code></pre>
+
+<p>
+  I now filter the list of companies to those containing the user's input. I also limit the list to 500 names since Google Sheet doesn't support validation
+  lists that are longer than 500 values:
+</p>
+
+<pre><code>  const matchedCompanies = allCompanies.filter(
+    (row) => row.includes(userInput)
+  );
+  
+  matchedCompanies.splice(500, matchedCompanies.length);
+</code></pre>
+
+<p>
+  The last step is to set the validation rule on the edited cell:
+</p>
+
+<pre><code>  const rule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(matchedCompanies)
+    .build();
+  e.range.setDataValidation(rule);
+</code></pre>
+
+<p>
+  The entire code is available <a href="https://github.com/benronkin/dynamic-sheets-data-validation/blob/main/Code.js" target="_blank">in my repo.</a>
+</p>
+
+<p>
+  I hope this helps you out.
+</p>
+<p>
+– Ben
+</p>
+
+
+</div>
+</div>
+</div>
+</main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2021 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolioCard.js"></script>
+  </body>
+</html>
+
+

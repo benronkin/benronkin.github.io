@@ -1,9 +1,10 @@
 :root {
-  --secondary: #bf6b82;
+  --secondary: #162d4d;
   --primary: #456389;
-  --third: #527869;
+  --third: #287078;
   --forth: #f2acb9;
   --black: #260101;
+  --dark: #555555;
   --white: #f0f2f1;
 }
 
@@ -103,6 +104,11 @@ li img {
   border-right: 1px solid var(--primary) !important;
   border-bottom: 1px solid var(--primary) !important;
 }
+
+.hljs {
+  background: #dddddd;
+}
+
 .select-wrapper input.select-dropdown:focus {
   border-bottom: 1px solid var(--primary);
 }
@@ -235,7 +241,8 @@ textarea:not(.browser-default):focus:not([readonly]) {
 }
 
 .page-footer {
-  background-color: var(--black);
+  padding: 10px 0;
+  background-color: var(--dark);
 }
 
 .row {
