@@ -151,6 +151,21 @@ li img {
   margin-top: 50px;
 }
 
+.blog-post p,
+.blog-post li {
+  font-size: 1.1rem;
+}
+
+.blog-post .lead {
+  font-size: 1.3rem;
+  font-weight: 300;
+  font-style: italic;
+  color: white;
+  background: #260101;
+  padding: 10px;
+  text-align: center;
+}
+
 .btn {
   background-color: var(--secondary);
 }
@@ -229,7 +244,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
 }
 
 .lead {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 
   margin-bottom: 50px;
 }
