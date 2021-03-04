@@ -152,7 +152,8 @@ li img {
 }
 
 .blog-post p,
-.blog-post li {
+.blog-post li,
+.blog-listing p {
   font-size: 1.1rem;
 }
 
