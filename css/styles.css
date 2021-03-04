@@ -312,7 +312,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
   margin-top: 5px;
   padding: 5px;
   background-color: var(--white);
-  color: var(--forth);
+  color: var(--third);
   font-size: 0.8rem;
   width: 55px;
 }
