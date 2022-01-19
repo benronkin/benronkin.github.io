@@ -105,6 +105,11 @@ li img {
   border-bottom: 1px solid var(--primary) !important;
 }
 
+.center-div {
+  display: flex;
+  justify-content: center;
+}
+
 .hljs {
   background: #dddddd;
 }
