@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="./css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Google Sheets to Google Cloud Storage | Ben Ronkin</title>
+    <title>Google Sheets to Google Calendar | Ben Ronkin</title>
   </head>
 
   <body>
@@ -66,82 +66,80 @@
           </ul>
         </div>
       </nav>
+
       <div class="container">
-        <h1>Google Sheets to Google Cloud Storage</h1>
-        <h5>Google Cloud</h5>
+        <h1>Google Calendar Events from a Google Sheet</h1>
+        <h5>Google Workspace</h5>
 
         <div class="row">
-          <div class="col s12 m8">
-            <img
-              src="img/sheets-to-storage-storage.png"
-              class="responsive-img"
-            />
-          </div>
-          <div class="col col-r s12 m4">
-            <ul class="collection with-header">
-              <li class="collection-header"><h4>Key highlights</h4></li>
-              <li class="collection-item">
-                Pull campaign data from Google Sheets
-              </li>
-              <li class="collection-item">Group data by campaign ID</li>
-              <li class="collection-item">
-                Create or update CSV for each campaign
-              </li>
-              <li class="collection-item">
-                Upload CSVs to Google Cloud storage
-              </li>
-              <li class="collection-item">Set file permissions</li>
-              <li class="collection-item">Email CSV file download link</li>
-            </ul>
+          <div class="col s8 offset-s2">
+            <iframe
+              width="560"
+              height="412"
+              src="https://www.youtube.com/embed/-snt4qOo03s?rel=0"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
 
         <div class="summary">
-          <h2>Summary</h2>
+          <h2>Key Highlights</h2>
           <p>
-            The project required developing a Node.js app on Google Cloud
-            Platform that processes campaign registrations from Google Sheets.
-            The app reads the sheet via Google Sheets API, groups the
-            registrations by campaign ID, and creates a CSV file for each
-            campaign. The file then gets uploaded to Google Cloud Storage, where
-            the app sets access permission on the file. Finally, the app emails
-            a download link to the CSV file.
+            This Google Apps Script tracks meeting requests that are entered
+            into a Google Sheet. The script creates Google Calendar event for
+            every registration, and populates the invite with customizable
+            title, description, guests, and more.
           </p>
         </div>
 
         <div class="row">
           <div class="col s12 m4">
-            <h2>Read Google Sheet</h2>
+            <h2>Track Sheet updates</h2>
             <p>
-              Campagin registrations are collected via a form and saved in a
-              Google Sheet. The app contains a service account that is permitted
-              to access the sheet.
+              The script tracks a Google Sheet that aggregates meeting requests.
+              Every row in the sheet captures a single event.
             </p>
             <p>
-              The app reads the sheet periodically, being triggered by a Google
-              Cloud Scheduler that publishes a message to a Google Pub/Sub
-              topic.
+              Information for each event includes name, email, and company of
+              the requester, as well as desired date, start time, and end time.
+            </p>
+            <p>
+              After creating a calendar event, the script adds an event ID to
+              the sheet that can be used to track the event.
             </p>
           </div>
           <div class="col col-r s12 m8">
             <img
-              src="img/sheets-to-storage-sheets.png"
+              src="img/sheets-to-calendar-events.png"
+              alt="Requests"
               class="responsive-img"
             />
           </div>
         </div>
 
         <div class="row">
-          <div class="col col-l s12 m8">
-            <img src="img/sheets-to-storage-app.png" class="responsive-img" />
+          <div class="col s12 m8">
+            <img
+              src="img/sheets-to-calendar-config.png"
+              alt="Config"
+              class="responsive-img"
+            />
           </div>
           <div class="col col-r s12 m4">
             <div class="">
-              <h2>Create Cloud Storage files</h2>
+              <h2>Easy to use</h2>
               <p>
-                The app groups together all leads that belong to the same
-                campaign. The leads are stored in a CSV file that the app saves
-                to Google Cloud Storage.
+                Business users can customize the operation of the script on
+                their own directly in the sheet. A configuration tab captures
+                the name of the calendar to use, the default title of the event,
+                the description of the event, and guests.
+              </p>
+              <p>
+                The script reads this information every time it needs to create
+                new events.
               </p>
             </div>
           </div>
@@ -149,37 +147,22 @@
 
         <div class="row">
           <div class="col s12 m4">
-            <h2>Insert or update files</h2>
+            <h2>Calendar events</h2>
             <p>
-              The app saves individual files to a Google Cloud Storage bucket.
-              The app sets access permissions on each file.
+              The final result of the script is a new Google Calendar event. The
+              event includes all the information from the sheet registration row
+              and the configuration tab.
             </p>
             <p>
-              Since Cloud Storage objects are immutable, the app uses a smart
-              technique to update existing files with new leads.
+              The script uses the event ID to prevent duplication of events.
             </p>
           </div>
           <div class="col col-r s12 m8">
             <img
-              src="img/sheets-to-storage-storage.png"
+              src="img/sheets-to-calendar-calendar.png"
+              alt="Calendar"
               class="responsive-img"
             />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col col-l s12 m8">
-            <img src="img/sheets-to-storage-gmail.png" class="responsive-img" />
-          </div>
-          <div class="col col-r s12 m4">
-            <div class="">
-              <h2>Email CSV file links</h2>
-              <p>
-                A Google Apps Script scans the Cloud Storage bucket for new
-                files. Whenever new files are encountered, the script emails a
-                link to the CSV file.
-              </p>
-            </div>
           </div>
         </div>
 
@@ -189,16 +172,10 @@
               >Technologies and libraries in project</span
             >
             <br />
-            <div class="chip">Google Cloud Platform</div>
-            <div class="chip">Google Cloud Function</div>
             <div class="chip">Google Apps Script</div>
-            <div class="chip">Google Cloud Storage</div>
-            <div class="chip">Google Cloud Scheduler</div>
-            <div class="chip">Google Cloud Pub/Sub</div>
-            <div class="chip">Google Sheets</div>
-            <div class="chip">Google Sheets API</div>
-            <div class="chip">Google Cloud Storage API</div>
-            <div class="chip">Google Gmail API</div>
+            <div class="chip">GAS Triggers</div>
+            <div class="chip">Google Spreadsheet Service</div>
+            <div class="chip">Google Calendar Service</div>
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>

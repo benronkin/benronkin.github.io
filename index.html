@@ -2,14 +2,19 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag('config', 'UA-91362999-4');
-  </script>
+      gtag("config", "UA-91362999-4");
+    </script>
     <link rel="shortcut icon" href="/img/favicon.ico" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -20,8 +25,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,17 +39,12 @@
     <main>
       <nav>
         <div class="nav-wrapper">
-          <a
-            href="./index.html"
-            class="brand-logo"
-            style="margin-left: 20px;"
+          <a href="./index.html" class="brand-logo" style="margin-left: 20px"
             >Ben Ronkin</a
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html">
-                <i class="material-icons">work</i></a
-              >
+              <a href="./index.html"> <i class="material-icons">work</i></a>
             </li>
             <li data-tooltip="Blog">
               <a href="./blog/index.html">
@@ -50,11 +52,9 @@
               >
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html">
-                <i class="material-icons">email</i></a
-              >
+              <a href="./contact.html"> <i class="material-icons">email</i></a>
             </li>
-            <li>
+            <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
                 ><img
                   src="./img/li-48.png"
@@ -62,370 +62,423 @@
                   class="responsive-img"
                   width="65%"
               /></a>
-            </li>
+            </li>-->
           </ul>
         </div>
       </nav>
-  <div class="container">
-    <h1>Work</h1>
-    <p class="lead">
-      Hi, I am Ben, a JavaScript developer, focusing on Google execution environments. I build Node.js web applications on <b>Google Cloud Platform</b>, as well as Google Workspace automation on <b>Google Apps Script</b>.
-      <br /><br/>Below are samples of my work.
-    </p>
+      <div class="container">
+        <h1>Work</h1>
+        <p class="lead">
+          Hi, I am Ben, a JavaScript developer, focusing on Google execution
+          environments. I build Node.js web applications on
+          <b>Google Cloud Platform</b>, as well as Google Workspace automation
+          on <b>Google Apps Script</b>. <br /><br />Below are samples of my
+          work.
+        </p>
 
-    <div class="row filter-row">
-      <div class="col s5 z-depth-1">
-        <label>Filter projects by type</label>
-        <select multiple id="type-filter" class="filter-select pink">
-          <option selected value="Google Cloud">Google Cloud</option>
-          <option selected value="Google Workspace">Google Workspace</option>
-          <option selected value="Other">Other</option>
-        </select>
+        <div class="row filter-row">
+          <div class="col s5 z-depth-1">
+            <label>Filter projects by type</label>
+            <select multiple id="type-filter" class="filter-select pink">
+              <option selected value="Google Cloud">Google Cloud</option>
+              <option selected value="Google Workspace">
+                Google Workspace
+              </option>
+              <option selected value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <portfolio-card
+          title="Calendar Events from Google Sheet"
+          subtitle="Google Workspace"
+          image="img/sheets-to-calendar-calendar.png"
+          target="sheets-to-calendar.html"
+        >
+          <div slot="description">
+            <p>
+              This Google Apps Script tracks meeting requests that are entered
+              into a Google Sheet. The script creates Google Calendar event for
+              every registration, and populates the invite with customizable
+              title, description, guests, and more.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Google Forms Replacement"
+          subtitle="Google Workspace"
+          image="img/google-forms-replacement-form.png"
+          target="google-forms-replacement.html"
+        >
+          <div slot="description">
+            <p>
+              The client hit the limits of what Google Forms can offer. I
+              developed a custom form management systems that enables admins to
+              manage form questions and how they are ordered on the form.
+              Included unlimited form branching and dynamic field prepopulation.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Google Form File Validation"
+          subtitle="Google Cloud"
+          image="img/form-file-validation-form.png"
+          target="form-file-validation.html"
+        >
+          <div slot="description">
+            <p>
+              The project involved creating a Google Form that accepts file
+              uploads. Upon every upload, a Google Apps Script was to validate
+              the file against a set of validation rules that are configurable
+              by managers. The script was to email the file submitter if errors
+              occurred.
+            </p>
+            <p>
+              The script was to log every submission and its validation results.
+              Valid files are moved to a destination folder.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Google Sheets to Google Cloud Storage"
+          subtitle="Google Cloud"
+          image="img/sheets-to-storage-storage.png"
+          target="sheets-to-storage.html"
+        >
+          <div slot="description">
+            <p>
+              The project required developing a Node.js app on Google Cloud
+              Platform that processes campaign registrations from Google Sheets.
+              The app reads the sheet via Google Sheets API, groups the
+              registrations by campaign ID, and creates a CSV file for each
+              campaign.
+            </p>
+            <p>
+              The file then gets uploaded to Google Cloud Storage, where the app
+              sets access permission on the file. Finally, the app emails a
+              download link to the CSV file.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="YouTube API to Google Sheets"
+          subtitle="Google Workspace"
+          image="img/youtube-to-sheet-channels.png"
+          target="youtube-to-sheet.html"
+        >
+          <div slot="description">
+            <p>
+              The project involved pulling information about YouTube channels
+              and their videos and playlists, using the YouTube Data API. A
+              Google Apps Script was built to take an arbitrary number of
+              channel IDs, get their metadata, and then iterate through their
+              videos and playlists and get their own metadata.
+            </p>
+            <p>All information is to be pulled into a Google Sheet.</p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Google Map in Google Sheet"
+          subtitle="Google Workspace"
+          image="img/map-in-sheets-map.png"
+          target="map-in-sheets.html"
+        >
+          <div slot="description">
+            <p>
+              This project involves parsing addresses in a Google Sheet along
+              with their metadata. A Google Apps Script is launched via a custom
+              menu. It creates a sidebar with a Google Map, converts the
+              addresses into lat/long data points, centers the map according to
+              the addresses, and displays the addresses as markers on the map.
+            </p>
+            <p>
+              Address metadata is shown when the user hovers over the marker.
+              The map can be viewed in full-screen mode.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Google Forms to Google Doc"
+          subtitle="Google Workspace"
+          image="img/forms-to-doc-doc.png"
+          target="forms-to-doc.html"
+        >
+          <div slot="description">
+            <p>
+              The client needed to collect signatures and comments on an open
+              letter. A Google Apps Script records each form submission directly
+              into a dedicated table inside a Google Doc.
+            </p>
+            <p></p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Gmail to Google Sheets"
+          subtitle="Google Workspace"
+          image="img/gmail-to-sheets-inbox.png"
+          target="gmail-to-sheets.html"
+        >
+          <div slot="description">
+            <p>
+              This project required watching a specific Gmail inbox and
+              capturing new email messages into a Google Sheet. The Google Apps
+              Script also pulls out sender information into a contacts sheet.
+              Spreadsheet owners can easily view all messages by sender.
+            </p>
+            <p></p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Lead sharing app"
+          subtitle="Google Cloud"
+          image="img/leadsharing2-email.png"
+          target="lead-sharing2.html"
+        >
+          <div slot="description">
+            <p>
+              The client needed to share sales leads with channel partners in a
+              secured way. I implemented a solution that ingests sales leads and
+              assigned partners, builds CSV files on Google Cloud Storage, and
+              routinely emails partners links to the CSV files.
+            </p>
+            <p>
+              Partners must authenticate into their Google account to download
+              the file.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Data management app"
+          subtitle="Google Cloud"
+          image="img/leadsharing-lead.png"
+          target="lead-sharing.html"
+        >
+          <div slot="description">
+            <p>
+              As a solo developer on the project, I've been designing,
+              developing, releasing, and maintaining a secured Node.js Express
+              web application on Google Cloud Platform.
+            </p>
+            <p>
+              The application enables managers and their partners to track the
+              progress of sales leads and exchange messages about lead status.
+            </p>
+            <p>
+              Lead data is stored securely in a NoSQL database. The app offers a
+              variety of derived data attributes that are calculated in
+              real-time, client-side.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="RSS feed parsing"
+          subtitle="Google Workspace"
+          image="img/rss-parsing-entries.png"
+          target="rss-parsing.html"
+        >
+          <div slot="description">
+            <p>
+              The project needed to routinely parse a number of RSS feeds and
+              store key information about each feed item. I created a Google
+              Apps Script that parses an arbitrary list of feed URLs, and
+              updates a Google Sheet with metadata and entries of each feed.
+            </p>
+            <p>
+              The script can be run directly from the sheet menu or
+              automatically using a timer.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Data enrichment workflow"
+          subtitle="Google Workspace"
+          image="img/data-enrichment-lifecycle.png"
+          target="data-enrichment.html"
+        >
+          <div slot="description">
+            <p>
+              As a solo developer on the project, I created a sophisticated
+              workflow system that handles new file submission in Google Apps
+              Script.
+            </p>
+            <p>
+              The system cuts down on the effort to validate and enrich
+              submitted files, while providing stakeholders with a clear picture
+              regarding the status of every submission.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="CRM server in Google sheet"
+          subtitle="Google Workspace"
+          image="img/db-api-cover.png"
+          target="db-api.html"
+        >
+          <div slot="description">
+            <p>
+              A sales manager manages all sales leads in a Google Sheet. She
+              needs to route leads to her team and have her reps follow up on
+              the leads and update their status and information.
+            </p>
+            <p>
+              Instead of having the reps update the master sheet, she uses the
+              Google Apps Script web app to distribute leads to reps and update
+              the master sheet based on reps' local updates.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Update custom form in real-time"
+          subtitle="Google Workspace"
+          image="img/survey-in-survey-form1.png"
+          target="survey-in-survey.html"
+        >
+          <div slot="description">
+            <p>
+              The client needed to display a series of survey questions, and
+              then present the user with a followup question that is determined
+              in real-time, using prior survey submissions.
+            </p>
+            <p>
+              I developed a Google Apps Script web app to capture responses,
+              search for best match response, display that to the user, and
+              record all the user's answers in the sheet.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Google Sheet columns to Docs"
+          subtitle="Google Workspace"
+          image="img/columns-to-docs-cover.png"
+          target="sheet-columns-to-docs.html"
+        >
+          <div slot="description">
+            <p>
+              As a solo developer on the project, I created a simple Google Apps
+              Script that converts Google Sheet columns to a set of Google Docs.
+            </p>
+            <p>
+              The script uses the header row as the name of each file. All rows
+              in each column are populated one after the other into the body of
+              every Google Doc.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Google Sheet to PDF"
+          subtitle="Google Workspace"
+          image="img/sheet-to-pdf-pdf.png"
+          target="sheet-to-pdf.html"
+        >
+          <div slot="description">
+            <p>
+              I needed an invoice generator that takes Google Sheet rows and
+              converts them to formatted PDF files.
+            </p>
+            <p>
+              I created A Google Apps Script that is invoked from a custom menu
+              option in Google Sheet and converts the sheet row into a PDF by
+              populating the row data into a formatted Google Doc template.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Custom form to Google Sheet"
+          subtitle="Google Workspace"
+          image="img/custom-form-form.png"
+          target="custom-form.html"
+        >
+          <div slot="description">
+            <p>
+              I needed a contact form deployed for this portfolio website. Opted
+              to have a custom form that fits my site design instead of using
+              Google Form. I built a custom form that, when submitted, sends the
+              form data to a Google Apps Script that stores submissions in a
+              Google Sheet and sends me an email notification.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Expand Google Sheet rows"
+          subtitle="Google Workspace"
+          image="img/expand-row-summary.png"
+          target="expand-row.html"
+        >
+          <div slot="description">
+            <p>
+              In this small project, the client had a Google Sheet with two tabs
+              (summary and detail), and required a way to expand summary rows
+              based on date range in each of the rows. I developed a Google Apps
+              Script to enable the client to expand the rows on demand.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Website message from Google Sheet"
+          subtitle="Google Workspace"
+          image="img/iframe-spreadsheet-personal-message.png"
+          target="message-from-spreadsheet.html"
+        >
+          <div slot="description">
+            <p>
+              In this small project, the client had a standalone website that
+              was separate from Google GSuite.
+            </p>
+            <p>
+              The client needed to present a personal message to every logged-in
+              user. Messages were stored in a two-column Google Spreadsheet
+              column containing email addresses and the message for each user.
+            </p>
+            <p>
+              The project requiring fetching the right message as the user
+              accessed the message page.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
+          title="Static site generator for MarTech demos"
+          subtitle="Other"
+          image="img/static-site-generator-category.png"
+          target="static-site-generator.html"
+        >
+          <div slot="description">
+            <p>
+              In this project, I delivered a static website generator to a
+              MarTech vendor who needed to showcase its solutions on demo
+              websites for different industry verticals.
+            </p>
+            <p>
+              The generator is fully customizable: The client generates category
+              and product feeds for retail, financial services, and other
+              verticals. The client modifies page template for each vertical.
+            </p>
+            <p>
+              The generator then uses the feeds and the templates to generate
+              the static sites.
+            </p>
+          </div>
+        </portfolio-card>
       </div>
-    </div>
-
-    <portfolio-card
-    title="Google Forms Replacement"
-    subtitle="Google Workspace"
-    image="img/google-forms-replacement-form.png"
-    target="google-forms-replacement.html"
-  >
-    <div slot="description">
-      <p>
-        The client hit the limits of what Google Forms can offer. I developed a custom form management systems that enables 
-        admins to manage form questions and how they are ordered on the form. Included unlimited form branching and dynamic 
-        field prepopulation.
-      </p>
-    </div>
-  </portfolio-card>
-
-    <portfolio-card
-    title="Google Form File Validation"
-    subtitle="Google Cloud"
-    image="img/form-file-validation-form.png"
-    target="form-file-validation.html"
-  >
-    <div slot="description">
-      <p>
-        The project involved creating a Google Form that accepts file uploads. Upon every upload, a Google Apps Script was to validate the 
-        file against a set of validation rules that are configurable by managers. The script was to email the file submitter if errors 
-        occurred. 
-      </p>
-      <p>
-        The script was to log every submission and its validation results. Valid files are moved to a destination folder.
-      </p>
-    </div>
-  </portfolio-card>
-
-    <portfolio-card
-    title="Google Sheets to Google Cloud Storage"
-    subtitle="Google Cloud"
-    image="img/sheets-to-storage-storage.png"
-    target="sheets-to-storage.html"
-  >
-    <div slot="description">
-      <p>
-        The project required developing a Node.js app on Google Cloud Platform that processes campaign registrations from Google Sheets.
-        The app reads the sheet via Google Sheets API, groups the registrations by campaign ID, and creates a CSV file for each campaign.
-      </p>
-      <p>
-        The file then gets uploaded to Google Cloud Storage, where the app sets access permission on the file.
-        Finally, the app emails a download link to the CSV file.
-      </p>
-    </div>
-  </portfolio-card>
-
-    <portfolio-card
-    title="YouTube API to Google Sheets"
-    subtitle="Google Workspace"
-    image="img/youtube-to-sheet-channels.png"
-    target="youtube-to-sheet.html"
-  >
-    <div slot="description">
-      <p>
-        The project involved pulling information about YouTube channels and their videos and playlists, using the YouTube Data API. 
-        A Google Apps Script was built to take
-        an arbitrary number of channel IDs, get their metadata, and then iterate through their videos and playlists and get their own metadata. 
-  
-      </p>
-      <p>
-        All information is to be pulled into a Google Sheet.
-      </p>
-    </div>
-  </portfolio-card>
-
-    <portfolio-card
-    title="Google Map in Google Sheet"
-    subtitle="Google Workspace"
-    image="img/map-in-sheets-map.png"
-    target="map-in-sheets.html"
-  >
-    <div slot="description">
-      <p>
-        This project involves parsing addresses in a Google Sheet along with their metadata. 
-        A Google Apps Script is launched via a custom menu. It creates a sidebar with a Google Map, converts
-        the addresses into lat/long data points, centers the map according to the addresses, and displays the 
-        addresses as markers on the map. 
-      </p>
-      <p>
-        Address metadata is shown when the user hovers over the marker. The map
-        can be viewed in full-screen mode.
-      </p>
-    </div>
-  </portfolio-card>
-
-    <portfolio-card
-    title="Google Forms to Google Doc"
-    subtitle="Google Workspace"
-    image="img/forms-to-doc-doc.png"
-    target="forms-to-doc.html"
-  >
-    <div slot="description">
-      <p>
-        The client needed to collect signatures and comments on an open letter. A Google Apps Script records
-        each form submission directly into a dedicated table inside a Google Doc.
-      </p>
-      <p>
-      </p>
-    </div>
-  </portfolio-card>
-
-    <portfolio-card
-    title="Gmail to Google Sheets"
-    subtitle="Google Workspace"
-    image="img/gmail-to-sheets-inbox.png"
-    target="gmail-to-sheets.html"
-  >
-    <div slot="description">
-      <p>
-        This project required watching a specific Gmail inbox and capturing new email messages into a Google Sheet.
-        The Google Apps Script also pulls out sender information into a contacts sheet. Spreadsheet owners can easily
-        view all messages by sender.
-      </p>
-      <p>
-      </p>
-    </div>
-  </portfolio-card>
-
-    <portfolio-card
-      title="Lead sharing app"
-      subtitle="Google Cloud"
-      image="img/leadsharing2-email.png"
-      target="lead-sharing2.html"
-    >
-      <div slot="description">
-        <p>
-          The client needed to share sales leads with channel partners in a secured 
-          way. I implemented a solution that ingests sales leads and assigned 
-          partners, builds CSV files on Google Cloud Storage, and routinely emails 
-          partners links to the CSV files. 
-        </p>
-        <p>
-        Partners must authenticate into their Google 
-        account to download the file.
-        </p>
-      </div>
-    </portfolio-card>
-
-    <portfolio-card
-      title="Data management app"
-      subtitle="Google Cloud"
-      image="img/leadsharing-lead.png"
-      target="lead-sharing.html"
-    >
-      <div slot="description">
-        <p>
-          As a solo developer on the project, I've been designing, developing,
-          releasing, and maintaining a secured Node.js Express web application
-          on Google Cloud Platform.
-        </p>
-        <p>
-          The application enables managers and their partners to track the
-          progress of sales leads and exchange messages about lead status.
-        </p>
-        <p>
-          Lead data is stored securely in a NoSQL database. The app offers a
-          variety of derived data attributes that are calculated in real-time,
-          client-side.
-        </p>
-      </div>
-    </portfolio-card>
-
-    <portfolio-card
-      title="RSS feed parsing"
-      subtitle="Google Workspace"
-      image="img/rss-parsing-entries.png"
-      target="rss-parsing.html"
-    >
-      <div slot="description">
-        <p>
-          The project needed to routinely parse a number of RSS feeds and store key information about each feed item. 
-          I created a Google Apps Script that parses an arbitrary list of feed URLs, and updates a Google Sheet with metadata and entries of each feed.
-          
-        </p>
-        <p>
-          The script can be run directly from the sheet menu or automatically using a timer.
-        </p>
-      </div>
-    </portfolio-card>
-
-    <portfolio-card
-      title="Data enrichment workflow"
-      subtitle="Google Workspace"
-      image="img/data-enrichment-lifecycle.png"
-      target="data-enrichment.html"
-    >
-      <div slot="description">
-        <p>
-          As a solo developer on the project, I created a sophisticated workflow
-          system that handles new file submission in Google Apps Script.
-        </p>
-        <p>
-          The system cuts down on the effort to validate and enrich submitted
-          files, while providing stakeholders with a clear picture regarding the
-          status of every submission.
-        </p>
-      </div>
-    </portfolio-card>
-
-    <portfolio-card
-      title="CRM server in Google sheet"
-      subtitle="Google Workspace"
-      image="img/db-api-cover.png"
-      target="db-api.html"
-    >
-      <div slot="description">
-        <p>
-          A sales manager manages all sales leads in a Google Sheet. She needs to route leads to her team and have her reps
-        follow up on the leads and update their status and information. 
-        </p>
-        <p>
-          Instead of having the reps update the master sheet, 
-        she uses the Google Apps Script web app to distribute leads to reps and update the master sheet based on reps' local updates.
-        </p>
-      </div>
-    </portfolio-card>
-
-    <portfolio-card
-      title="Update custom form in real-time"
-      subtitle="Google Workspace"
-      image="img/survey-in-survey-form1.png"
-      target="survey-in-survey.html"
-    >
-      <div slot="description">
-        <p>
-          The client needed to display a series of survey questions, and then present the user with a followup question that is determined in real-time,
-          using prior survey submissions. 
-        </p>
-        <p>
-          I developed a Google Apps Script web app to capture responses, search for best match response, display that to the user, and record
-          all the user's answers in the sheet.
-        </p>
-      </div>
-    </portfolio-card>
-
-    <portfolio-card
-      title="Google Sheet columns to Docs"
-      subtitle="Google Workspace"
-      image="img/columns-to-docs-cover.png"
-      target="sheet-columns-to-docs.html"
-    >
-      <div slot="description">
-        <p>
-          As a solo developer on the project, I created a simple Google Apps
-          Script that converts Google Sheet columns to a set of Google Docs.
-        </p>
-        <p>
-          The script uses the header row as the name of each file. All rows in
-          each column are populated one after the other into the body of every
-          Google Doc.
-        </p>
-      </div>
-    </portfolio-card>
-
-    <portfolio-card
-      title="Google Sheet to PDF"
-      subtitle="Google Workspace"
-      image="img/sheet-to-pdf-pdf.png"
-      target="sheet-to-pdf.html"
-    >
-      <div slot="description">
-        <p>
-          I needed an invoice generator that takes Google Sheet rows and converts them to formatted PDF files.
-        </p><p>I created A Google Apps Script that is invoked from a custom menu option in Google Sheet and converts the sheet row into a PDF by populating
-          the row data into a formatted Google Doc template.
-        </p>
-      </div>
-    </portfolio-card>
-
-    <portfolio-card
-      title="Custom form to Google Sheet"
-      subtitle="Google Workspace"
-      image="img/custom-form-form.png"
-      target="custom-form.html"
-    >
-      <div slot="description">
-        <p>
-          I needed a contact form deployed for this portfolio website. Opted to have a custom form that fits my site design instead of using Google Form. I built a custom form that, when submitted, sends the form data to a Google Apps Script that stores submissions in a Google Sheet and sends me an email notification.
-        </p>
-      </div>
-    </portfolio-card>
-   
-    <portfolio-card
-      title="Expand Google Sheet rows"
-      subtitle="Google Workspace"
-      image="img/expand-row-summary.png"
-      target="expand-row.html"
-    >
-      <div slot="description">
-        <p>
-          In this small project, the client had a Google Sheet with two tabs (summary and detail), and required a way to expand summary rows based on date range in each of the rows. I developed a Google Apps Script 
-          to enable the client to expand the rows on demand.
-        </p>
-      </div>
-    </portfolio-card>
-    
-    <portfolio-card
-      title="Website message from Google Sheet"
-      subtitle="Google Workspace"
-      image="img/iframe-spreadsheet-personal-message.png"
-      target="message-from-spreadsheet.html"
-    >
-      <div slot="description">
-        <p>
-          In this small project, the client had a standalone website that was
-          separate from Google GSuite.
-        </p>
-        <p>
-          The client needed to present a personal message to every logged-in
-          user. Messages were stored in a two-column Google Spreadsheet column
-          containing email addresses and the message for each user.
-        </p>
-        <p>
-          The project requiring fetching the right message as the user accessed
-          the message page.
-        </p>
-      </div>
-    </portfolio-card>
-
-    <portfolio-card
-    title="Static site generator for MarTech demos"
-    subtitle="Other"
-    image="img/static-site-generator-category.png"
-    target="static-site-generator.html"
-  >
-    <div slot="description">
-      <p>
-        In this project, I delivered a static website generator to a MarTech vendor who needed to showcase its solutions on demo websites for different industry verticals. 
-      </p>
-      <p>The generator is fully customizable: The client generates category and product feeds for retail, financial services, and other verticals. The client modifies page template for each vertical.
-        </p>
-        <p>The generator then uses the feeds and the templates to generate the static sites.</p>
-    </div>
-  </portfolio-card>
-
-  </div>
-</main>
+    </main>
 
     <footer class="page-footer">
       <!-- <div class="container">
@@ -449,7 +502,7 @@
       </div> -->
       <div class="footer-copyright">
         <div class="container space-between">
-          <span>© 2021 Copyright Ben Ronkin</span>
+          <span>© 2022 Copyright Ben Ronkin</span>
           <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
         </div>
       </div>
@@ -462,7 +515,9 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
     <script src="./js/main.js"></script>
     <script src="./js/portfolioCard.js"></script>
   </body>

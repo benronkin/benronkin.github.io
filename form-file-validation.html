@@ -2,14 +2,19 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag('config', 'UA-91362999-4');
-  </script>
+      gtag("config", "UA-91362999-4");
+    </script>
     <link rel="shortcut icon" href="/img/favicon.ico" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -20,8 +25,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,17 +39,12 @@
     <main>
       <nav>
         <div class="nav-wrapper">
-          <a
-            href="./index.html"
-            class="brand-logo"
-            style="margin-left: 20px;"
+          <a href="./index.html" class="brand-logo" style="margin-left: 20px"
             >Ben Ronkin</a
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html">
-                <i class="material-icons">work</i></a
-              >
+              <a href="./index.html"> <i class="material-icons">work</i></a>
             </li>
             <li data-tooltip="Blog">
               <a href="./blog/index.html">
@@ -50,11 +52,9 @@
               >
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html">
-                <i class="material-icons">email</i></a
-              >
+              <a href="./contact.html"> <i class="material-icons">email</i></a>
             </li>
-            <li>
+            <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
                 ><img
                   src="./img/li-48.png"
@@ -62,142 +62,151 @@
                   class="responsive-img"
                   width="65%"
               /></a>
-            </li>
+            </li>-->
           </ul>
         </div>
       </nav>
-  <div class="container">
-    <h1>Google Form File Validation</h1>
-    <h5>Google Workspace</h5>
+      <div class="container">
+        <h1>Google Form File Validation</h1>
+        <h5>Google Workspace</h5>
 
-    <div class="row">
-      <div class="col s12 m8">
-        <img
-          src="img/form-file-validation-form.png"
-          class="responsive-img"
-        />
-      </div>
-      <div class="col col-r s12 m4">
-        <ul class="collection with-header">
-          <li class="collection-header"><h4>Key highlights</h4></li>
-          <li class="collection-item">
-            Accept file uploads via Google Form
-          </li>
-          <li class="collection-item">
-            Managers configure file validations
-          </li>
-          <li class="collection-item">
-            Script executes validations on file
-          </li>
-          <li class="collection-item">
-            Script logs validation results
-          </li>
-          <li class="collection-item">
-            Script emails submitter with errors
-          </li>
-          <li class="collection-item">
-            Easy configuration by managers
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="summary">
-      <h2>Summary</h2>
-      <p>
-        The project involved creating a Google Form that accepts file uploads. Upon every upload, a Google Apps Script was to validate the 
-        file against a set of validation rules that are configurable by managers. The script was to email the file submitter if errors 
-        occurred. The script was to log every submission and its validation results. Valid files are moved to a destination folder.
-      </p>
-    </div>
-
-    <div class="row">
-      <div class="col s12 m4">
-        <h2>Easy to use</h2>
-        <p>
-          Form managers have access to a configuration panel where they can turn on or turn off specific validation rules. They can also
-          configure things such as required columns and then base validations on these headers.
-        </p>
-        <p>
-          It's easy to add custom validations to the script.
-        </p>
-      </div>
-      <div class="col col-r s12 m8">
-        <img
-          src="img/form-file-validation-config.png"
-          class="responsive-img"
-        />
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col col-l s12 m8">
-        <img
-          src="img/form-file-validation-form.png"
-          class="responsive-img"
-        />
-      </div>
-      <div class="col col-r s12 m4">
-        <div class="">
-          <h2>File submission form</h2>
-          <p>
-            A simple Google Forms enables end users to submit files. When a file is submitted, a Google Apps script is triggered. The script
-            performs the set of validation rules previously selected by the managers. 
-          </p>
-          <p>The script moves files that successfully pass validation to a predefined destination folder.</p>
+        <div class="row">
+          <div class="col s12 m8">
+            <img
+              src="img/form-file-validation-form.png"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m4">
+            <ul class="collection with-header">
+              <li class="collection-header"><h4>Key highlights</h4></li>
+              <li class="collection-item">
+                Accept file uploads via Google Form
+              </li>
+              <li class="collection-item">
+                Managers configure file validations
+              </li>
+              <li class="collection-item">
+                Script executes validations on file
+              </li>
+              <li class="collection-item">Script logs validation results</li>
+              <li class="collection-item">
+                Script emails submitter with errors
+              </li>
+              <li class="collection-item">Easy configuration by managers</li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col s12 m4">
-        <h2>Submission log</h2>
-        <p>
-          The script logs every file submission and its validation status to a separate Google Sheets. Managers can track and report on the
-          various submissions.
-        </p>
-      </div>
-      <div class="col col-r s12 m8">
-        <img
-          src="img/form-file-validation-log.png"
-          class="responsive-img"
-        />
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col col-l s12 m8">
-        <img
-          src="img/form-file-validation-email.png"
-          class="responsive-img"
-        />
-      </div>
-      <div class="col col-r s12 m4">
-        <div class="">
-          <h2>Email notifications</h2>
+        <div class="summary">
+          <h2>Summary</h2>
           <p>
-            When the script encounters validation errors for a submitted file, it triggers an email message to the submitter's email address 
-            (captured during file submission). The email contains a link to the submitted file and explanation regarding the validation errors.
+            The project involved creating a Google Form that accepts file
+            uploads. Upon every upload, a Google Apps Script was to validate the
+            file against a set of validation rules that are configurable by
+            managers. The script was to email the file submitter if errors
+            occurred. The script was to log every submission and its validation
+            results. Valid files are moved to a destination folder.
           </p>
         </div>
-      </div>
-    </div>
 
-    
-    <div class="card techs">
-      <div class="card-content">
-        <span class="card-title">Technologies and libraries in project</span>
-        <br />
-        <div class="chip">Google Apps Script</div>
-        <div class="chip">Google Forms</div>
-        <div class="chip">Google Sheets</div>
-        <div class="chip">Google Gmail Service</div>
-        <div class="chip">eslint</div>
-        <div class="chip">prettier</div>
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Easy to use</h2>
+            <p>
+              Form managers have access to a configuration panel where they can
+              turn on or turn off specific validation rules. They can also
+              configure things such as required columns and then base
+              validations on these headers.
+            </p>
+            <p>It's easy to add custom validations to the script.</p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="img/form-file-validation-config.png"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-l s12 m8">
+            <img
+              src="img/form-file-validation-form.png"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m4">
+            <div class="">
+              <h2>File submission form</h2>
+              <p>
+                A simple Google Forms enables end users to submit files. When a
+                file is submitted, a Google Apps script is triggered. The script
+                performs the set of validation rules previously selected by the
+                managers.
+              </p>
+              <p>
+                The script moves files that successfully pass validation to a
+                predefined destination folder.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Submission log</h2>
+            <p>
+              The script logs every file submission and its validation status to
+              a separate Google Sheets. Managers can track and report on the
+              various submissions.
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="img/form-file-validation-log.png"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-l s12 m8">
+            <img
+              src="img/form-file-validation-email.png"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m4">
+            <div class="">
+              <h2>Email notifications</h2>
+              <p>
+                When the script encounters validation errors for a submitted
+                file, it triggers an email message to the submitter's email
+                address (captured during file submission). The email contains a
+                link to the submitted file and explanation regarding the
+                validation errors.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">Google Apps Script</div>
+            <div class="chip">Google Forms</div>
+            <div class="chip">Google Sheets</div>
+            <div class="chip">Google Gmail Service</div>
+            <div class="chip">eslint</div>
+            <div class="chip">prettier</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</main>
+    </main>
 
     <footer class="page-footer">
       <!-- <div class="container">
@@ -221,7 +230,7 @@
       </div> -->
       <div class="footer-copyright">
         <div class="container space-between">
-          <span>© 2021 Copyright Ben Ronkin</span>
+          <span>© 2022 Copyright Ben Ronkin</span>
           <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
         </div>
       </div>
@@ -234,7 +243,9 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
     <script src="./js/main.js"></script>
     <script src="./js/portfolioCard.js"></script>
   </body>

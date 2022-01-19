@@ -2,14 +2,19 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag('config', 'UA-91362999-4');
-  </script>
+      gtag("config", "UA-91362999-4");
+    </script>
     <link rel="shortcut icon" href="/img/favicon.ico" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -20,29 +25,28 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
     <link rel="stylesheet" href="../css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Filtering a nested array with another nested array | Ben Ronkin</title>
+    <title>
+      Filtering a nested array with another nested array | Ben Ronkin
+    </title>
   </head>
 
   <body>
     <main>
       <nav>
         <div class="nav-wrapper">
-          <a
-            href="../index.html"
-            class="brand-logo"
-            style="margin-left: 20px;"
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
             >Ben Ronkin</a
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="../index.html">
-                <i class="material-icons">work</i></a
-              >
+              <a href="../index.html"> <i class="material-icons">work</i></a>
             </li>
             <li data-tooltip="Blog">
               <a href="../blog/index.html">
@@ -50,9 +54,7 @@
               >
             </li>
             <li data-tooltip="Contact">
-              <a href="../contact.html">
-                <i class="material-icons">email</i></a
-              >
+              <a href="../contact.html"> <i class="material-icons">email</i></a>
             </li>
             <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -66,30 +68,35 @@
           </ul>
         </div>
       </nav>
-<div class="container">
-<div class="blog-post">
-  <div class="blog-post-header">
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Filtering a nested array with another nested array</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i>February 26, 2021
+              </span>
+            </p>
+          </div>
 
-    <h5><a href="index.html">Blog</a></h5>
-    <h1>Filtering a nested array with another nested array</h1>
-    <p class="muted">
-      <span style="display: flex; align-items: center;">
-        <i class="material-icons">today</i>February 26, 2021
-      </span>
-    </p>
-  </div>
-
-<div class="blog-post-body">
-<p>I often write code that operates on Google Sheets, which means that I have to deal with nested arrays a lot.
-One of the things I have to do is to find rows in one array that don't have corresponding rows in another nested
-array.
-</p>
-<p>For instance, I may have a Google Sheet with some user information, and another sheet with file information. 
-  Files are created for unique combinations of user departments and user roles. As more users are added to the 
-  users sheet, I need to find department-role combinations that don't already have a corresponding file.
-</p>
-<p>Let's assume the following situation:</p>
-<pre><code>const users = [
+          <div class="blog-post-body">
+            <p>
+              I often write code that operates on Google Sheets, which means
+              that I have to deal with nested arrays a lot. One of the things I
+              have to do is to find rows in one array that don't have
+              corresponding rows in another nested array.
+            </p>
+            <p>
+              For instance, I may have a Google Sheet with some user
+              information, and another sheet with file information. Files are
+              created for unique combinations of user departments and user
+              roles. As more users are added to the users sheet, I need to find
+              department-role combinations that don't already have a
+              corresponding file.
+            </p>
+            <p>Let's assume the following situation:</p>
+            <pre><code>const users = [
     ["First Name", "Last Name", "Department ID", "Role ID"],
     ["John", "Smith", "D1020", "R17"],
     ["Dan", "Rhodes", "D1020", "R17"],
@@ -101,31 +108,49 @@ const files = [
   ["Department ID", "Role ID", "File ID", "File URL"],
   ["D1020", "R17", "ABC123", "https://..."],
 ];</code></pre>
-<p>I already have a file for the D1020-R17 combination, but not for D1010-R20 and not for D1020-R20.</p>
-<p>Instead of using nested loops to iterate through the users array and compare each row to each row in the files
-  array, I use higher-order functions that make the code cleaner.
-</p>
-<p>To get the users whose departments-roles don't have a file, I use the <b>.find()</b> method inside the <b>.filter()</b> method:</p>
-<pre><code class="javascript">const usersWithNoFiles = users.filter(
+            <p>
+              I already have a file for the D1020-R17 combination, but not for
+              D1010-R20 and not for D1020-R20.
+            </p>
+            <p>
+              Instead of using nested loops to iterate through the users array
+              and compare each row to each row in the files array, I use
+              higher-order functions that make the code cleaner.
+            </p>
+            <p>
+              To get the users whose departments-roles don't have a file, I use
+              the <b>.find()</b> method inside the <b>.filter()</b> method:
+            </p>
+            <pre><code class="javascript">const usersWithNoFiles = users.filter(
   ([_, __, deptId, roleId]) =>
     !files.find((row) => row[2] === deptId && row[3] === roleId)
   );</code></pre>
-<p>The find method is will be truthy if none of the rows contain the data I'm looking for. The result I get:</p>
-<pre><code>[
+            <p>
+              The find method is will be truthy if none of the rows contain the
+              data I'm looking for. The result I get:
+            </p>
+            <pre><code>[
   [ 'Mary', 'Jones', 'D1010', 'R20' ],
   [ 'Steve', 'Arden', 'D1020', 'R20' ]
 ]</code></pre>
-<p>This works well, but in my world it's not very resilient. The data in my Google Sheets is populated by humans, who 
-  are not very consistent. I often encounter different casing as well as leading and trailing spaces. To normalize 
-  against this, I use a quick utility function that can be easily expanded to handle more variations:
-</p>
-<pre><code>function __c(value) {
+            <p>
+              This works well, but in my world it's not very resilient. The data
+              in my Google Sheets is populated by humans, who are not very
+              consistent. I often encounter different casing as well as leading
+              and trailing spaces. To normalize against this, I use a quick
+              utility function that can be easily expanded to handle more
+              variations:
+            </p>
+            <pre><code>function __c(value) {
   return value.toString().toLowerCase().trim();
 }</code></pre>
-<p>Another issue, is that column order changes from time to time, as spreadsheet users shift columns around. 
-  So, yeah, I have another utility for that: </p>
+            <p>
+              Another issue, is that column order changes from time to time, as
+              spreadsheet users shift columns around. So, yeah, I have another
+              utility for that:
+            </p>
 
-<pre><code>
+            <pre><code>
   function getColIdx(headersParam, headerParam) {
     if (!Array.isArray(headersParam)) {
       throw Error(`Expected an array and received ${typeof headersParam}`);
@@ -145,12 +170,19 @@ const files = [
   }
 </code></pre>
 
-<p>The <b>getColIdx</b> function uses the cleanup utility as well. What I normally do is slice (or splice, depending on
-the use case) the header row of the Google Sheet and pass it together with the header I'm after to the function.</p>
+            <p>
+              The <b>getColIdx</b> function uses the cleanup utility as well.
+              What I normally do is slice (or splice, depending on the use case)
+              the header row of the Google Sheet and pass it together with the
+              header I'm after to the function.
+            </p>
 
-<p>To take advantage of these utilities, I revise the above code as follows:</p>
+            <p>
+              To take advantage of these utilities, I revise the above code as
+              follows:
+            </p>
 
-<pre><code>  const usersHeaders = usersInSomeProject.slice(0, 1).flat();
+            <pre><code>  const usersHeaders = usersInSomeProject.slice(0, 1).flat();
   const filesHeaders = filesForSomeProject.slice(0, 1).flat();
 
   const uDeptColIdx = getColIdx(usersHeaders, 'Department ID');
@@ -170,18 +202,12 @@ the use case) the header row of the Google Sheet and pass it together with the h
   console.log(usersWithNoFiles);
 }</code></pre>
 
-<p>
-  I hope this helps you out.
-</p>
-  <p>
-– Ben
-</p>
-
-
-</div>
-</div>
-</div>
-</main>
+            <p>I hope this helps you out.</p>
+            <p>– Ben</p>
+          </div>
+        </div>
+      </div>
+    </main>
 
     <footer class="page-footer">
       <!-- <div class="container">
@@ -205,7 +231,7 @@ the use case) the header row of the Google Sheet and pass it together with the h
       </div> -->
       <div class="footer-copyright">
         <div class="container space-between">
-          <span>© 2021 Copyright Ben Ronkin</span>
+          <span>© 2022 Copyright Ben Ronkin</span>
           <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
         </div>
       </div>
@@ -218,10 +244,10 @@ the use case) the header row of the Google Sheet and pass it together with the h
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
     <script src="../js/main.js"></script>
     <script src="../js/portfolioCard.js"></script>
   </body>
 </html>
-
-

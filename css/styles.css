@@ -94,11 +94,11 @@ li img {
   top: 10px;
 }
 
-[type='checkbox'] + span:not(.lever):before {
+[type="checkbox"] + span:not(.lever):before {
   border: 2px solid #5a5a5a !important;
 }
 
-[type='checkbox']:checked + span:not(.lever):before {
+[type="checkbox"]:checked + span:not(.lever):before {
   border-top: 1px solid transparent !important;
   border-left: 1px solid transparent !important;
   border-right: 1px solid var(--primary) !important;
@@ -231,14 +231,14 @@ li img {
   display: none;
 }
 
-input[type='text']:not(.browser-default):focus:not([readonly]) + label,
-input[type='email']:not(.browser-default):focus:not([readonly]) + label,
+input[type="text"]:not(.browser-default):focus:not([readonly]) + label,
+input[type="email"]:not(.browser-default):focus:not([readonly]) + label,
 textarea:not(.browser-default):focus:not([readonly]) + label {
   color: var(--third);
 }
 
-input[type='text']:not(.browser-default):focus:not([readonly]),
-input[type='email']:not(.browser-default):focus:not([readonly]),
+input[type="text"]:not(.browser-default):focus:not([readonly]),
+input[type="email"]:not(.browser-default):focus:not([readonly]),
 textarea:not(.browser-default):focus:not([readonly]) {
   border-bottom: 1px solid var(--third);
   box-shadow: none;

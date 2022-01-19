@@ -2,14 +2,19 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag('config', 'UA-91362999-4');
-  </script>
+      gtag("config", "UA-91362999-4");
+    </script>
     <link rel="shortcut icon" href="/img/favicon.ico" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -20,8 +25,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,17 +39,12 @@
     <main>
       <nav>
         <div class="nav-wrapper">
-          <a
-            href="./index.html"
-            class="brand-logo"
-            style="margin-left: 20px;"
+          <a href="./index.html" class="brand-logo" style="margin-left: 20px"
             >Ben Ronkin</a
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html">
-                <i class="material-icons">work</i></a
-              >
+              <a href="./index.html"> <i class="material-icons">work</i></a>
             </li>
             <li data-tooltip="Blog">
               <a href="./blog/index.html">
@@ -50,11 +52,9 @@
               >
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html">
-                <i class="material-icons">email</i></a
-              >
+              <a href="./contact.html"> <i class="material-icons">email</i></a>
             </li>
-            <li>
+            <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
                 ><img
                   src="./img/li-48.png"
@@ -62,127 +62,133 @@
                   class="responsive-img"
                   width="65%"
               /></a>
-            </li>
+            </li>-->
           </ul>
         </div>
       </nav>
-  <div class="container">
-    <h1>Gmail to Google Sheets</h1>
-    <h5>Google Workspace</h5>
+      <div class="container">
+        <h1>Gmail to Google Sheets</h1>
+        <h5>Google Workspace</h5>
 
-    <div class="row">
-      <div class="col s12 m6">
-        <img
-          src="img/gmail-to-sheets-messages.png"
-          alt="Sales leads in client"
-          class="responsive-img"
-        />
-      </div>
-      <div class="col col-r s12 m6">
-        <ul class="collection with-header">
-          <li class="collection-header"><h4>Key highlights</h4></li>
-          <li class="collection-item">
-            Google Apps Script that works like a Contact Management System
-          </li>
-          <li class="collection-item">
-            The script watches a Gmail inbox
-          </li>
-          <li class="collection-item">
-            New email messages are captured in a Google Sheet
-          </li>
-          <li class="collection-item">
-            Sender information is saved in a different Google Sheet
-          </li>
-          <li class="collection-item">
-            Users can easily pull all messages by a sender's email address
-          </li>
-        </ul>
-      </div>
-    </div>
+        <div class="row">
+          <div class="col s12 m6">
+            <img
+              src="img/gmail-to-sheets-messages.png"
+              alt="Sales leads in client"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m6">
+            <ul class="collection with-header">
+              <li class="collection-header"><h4>Key highlights</h4></li>
+              <li class="collection-item">
+                Google Apps Script that works like a Contact Management System
+              </li>
+              <li class="collection-item">The script watches a Gmail inbox</li>
+              <li class="collection-item">
+                New email messages are captured in a Google Sheet
+              </li>
+              <li class="collection-item">
+                Sender information is saved in a different Google Sheet
+              </li>
+              <li class="collection-item">
+                Users can easily pull all messages by a sender's email address
+              </li>
+            </ul>
+          </div>
+        </div>
 
-    <div class="summary">
-      <h2>Summary</h2>
-      <p>
-        This project required watching a specific Gmail inbox and capturing new email messages into a Google Sheet.
-        The Google Apps Script also pulls out sender information into a contacts sheet. Spreadsheet owners can easily
-        view all messages by sender.
-      </p>
-    </div>
-
-    <div class="row">
-      <div class="col s12 m4">
-        <h2>Watching Gmail inbox</h2>
-        <p>
-          The script periodically watches a pre-specified Gmail inbox for new incoming messages.
-        </p>
-        <p>
-          When new messages arrive, the script process them and parses their information into a Google Sheet
-        </p>
-      </div>
-      <div class="col col-r s12 m8">
-        <img
-          src="img/gmail-to-sheets-inbox.png"
-          class="responsive-img"
-          style="width: 75%;"
-        />
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col col-l s12 m5">
-        <img
-          src="img/gmail-to-sheets-users.png"
-          class="responsive-img"
-        />
-      </div>
-      <div class="col col-r s12 m7">
-        <div class="">
-          <h2>Sender CRM</h2>
+        <div class="summary">
+          <h2>Summary</h2>
           <p>
-            The script pulls out the sender information from each messages, separting out the sender's name and their email address.
-          </p>
-          <p>The script checks whether the email address is already captured in the sheet. If it's not then the script adds the new user to the sheet.
+            This project required watching a specific Gmail inbox and capturing
+            new email messages into a Google Sheet. The Google Apps Script also
+            pulls out sender information into a contacts sheet. Spreadsheet
+            owners can easily view all messages by sender.
           </p>
         </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col s12 m6">
-        <h2>Message storage</h2>
-        <p>
-          The script pulls information about each message onto a separate sheet. The script checks whether the message ID is already 
-          captured in the sheet, and if it's not then the script adds in the new message.
-        </p>
-        <p>
-          The script pulls the sender's email address together with the message information. This enables grouping and viewing all messages by a given sender.
-        </p>
-        <p></p>
-      </div>
-      <div class="col col-r s12 m6">
-        <img
-          src="img/gmail-to-sheets-messages.png"
-          class="responsive-img"
-        />
-      </div>
-    </div>
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Watching Gmail inbox</h2>
+            <p>
+              The script periodically watches a pre-specified Gmail inbox for
+              new incoming messages.
+            </p>
+            <p>
+              When new messages arrive, the script process them and parses their
+              information into a Google Sheet
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="img/gmail-to-sheets-inbox.png"
+              class="responsive-img"
+              style="width: 75%"
+            />
+          </div>
+        </div>
 
+        <div class="row">
+          <div class="col col-l s12 m5">
+            <img src="img/gmail-to-sheets-users.png" class="responsive-img" />
+          </div>
+          <div class="col col-r s12 m7">
+            <div class="">
+              <h2>Sender CRM</h2>
+              <p>
+                The script pulls out the sender information from each messages,
+                separting out the sender's name and their email address.
+              </p>
+              <p>
+                The script checks whether the email address is already captured
+                in the sheet. If it's not then the script adds the new user to
+                the sheet.
+              </p>
+            </div>
+          </div>
+        </div>
 
+        <div class="row">
+          <div class="col s12 m6">
+            <h2>Message storage</h2>
+            <p>
+              The script pulls information about each message onto a separate
+              sheet. The script checks whether the message ID is already
+              captured in the sheet, and if it's not then the script adds in the
+              new message.
+            </p>
+            <p>
+              The script pulls the sender's email address together with the
+              message information. This enables grouping and viewing all
+              messages by a given sender.
+            </p>
+            <p></p>
+          </div>
+          <div class="col col-r s12 m6">
+            <img
+              src="img/gmail-to-sheets-messages.png"
+              class="responsive-img"
+            />
+          </div>
+        </div>
 
-    <div class="card techs">
-      <div class="card-content">
-        <span class="card-title">Technologies and libraries in project</span>
-        <br />
-        <div class="chip">Google Apps Script</div>
-        <div class="chip">Google Sheets</div>
-        <div class="chip">GMail Service</div>
-        <div class="chip">Google Spreadsheet Service</div>
-        <div class="chip">eslint</div>
-        <div class="chip">prettier</div>
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">Google Apps Script</div>
+            <div class="chip">Google Sheets</div>
+            <div class="chip">GMail Service</div>
+            <div class="chip">Google Spreadsheet Service</div>
+            <div class="chip">eslint</div>
+            <div class="chip">prettier</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</main>
+    </main>
 
     <footer class="page-footer">
       <!-- <div class="container">
@@ -206,7 +212,7 @@
       </div> -->
       <div class="footer-copyright">
         <div class="container space-between">
-          <span>© 2021 Copyright Ben Ronkin</span>
+          <span>© 2022 Copyright Ben Ronkin</span>
           <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
         </div>
       </div>
@@ -219,7 +225,9 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
     <script src="./js/main.js"></script>
     <script src="./js/portfolioCard.js"></script>
   </body>

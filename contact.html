@@ -2,14 +2,19 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag('config', 'UA-91362999-4');
-  </script>
+      gtag("config", "UA-91362999-4");
+    </script>
     <link rel="shortcut icon" href="/img/favicon.ico" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -20,8 +25,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,17 +39,12 @@
     <main>
       <nav>
         <div class="nav-wrapper">
-          <a
-            href="./index.html"
-            class="brand-logo"
-            style="margin-left: 20px;"
+          <a href="./index.html" class="brand-logo" style="margin-left: 20px"
             >Ben Ronkin</a
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html">
-                <i class="material-icons">work</i></a
-              >
+              <a href="./index.html"> <i class="material-icons">work</i></a>
             </li>
             <li data-tooltip="Blog">
               <a href="./blog/index.html">
@@ -50,11 +52,9 @@
               >
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html">
-                <i class="material-icons">email</i></a
-              >
+              <a href="./contact.html"> <i class="material-icons">email</i></a>
             </li>
-            <li>
+            <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
                 ><img
                   src="./img/li-48.png"
@@ -62,43 +62,43 @@
                   class="responsive-img"
                   width="65%"
               /></a>
-            </li>
+            </li>-->
           </ul>
         </div>
       </nav>
-  <div class="container">
-    <h1>Contact</h1>
-    <p class="lead" style="position: relative; z-index: 100;">
-      Drop me a line and I'll respond ASAP.
-    </p>
+      <div class="container">
+        <h1>Contact</h1>
+        <p class="lead" style="position: relative; z-index: 100">
+          Drop me a line and I'll respond ASAP.
+        </p>
 
-<div class="row">
-  <form id='contact-form' class="col s12 m6" autocomplete="off">
-    <div class="input-field">
-      <input id="name" type="text" name="name" autocomplete="off">
-      <label for="name">Name</label>
-    </div>
-    <div class="input-field">
-      <input id="email"type="email" name="email" autocomplete="off">
-      <label for="email">Email</label>
-    </div>
-    <div class="input-field">
-      <textarea id="message" name="message" class="materialize-textarea"></textarea>
-      <label for="message">Message</label>
-    </div>
-    
-    
-    
-  <button type="submit" id="contact-submit" class="btn">Send</button>
-  <p id="alert" class="hidden">Do me a favor and fill out the three fields.</p>
-  </form>
-</div>
+        <div class="row">
+          <form id="contact-form" class="col s12 m6" autocomplete="off">
+            <div class="input-field">
+              <input id="name" type="text" name="name" autocomplete="off" />
+              <label for="name">Name</label>
+            </div>
+            <div class="input-field">
+              <input id="email" type="email" name="email" autocomplete="off" />
+              <label for="email">Email</label>
+            </div>
+            <div class="input-field">
+              <textarea
+                id="message"
+                name="message"
+                class="materialize-textarea"
+              ></textarea>
+              <label for="message">Message</label>
+            </div>
 
-  
-
-    
-  </div>
-</main>
+            <button type="submit" id="contact-submit" class="btn">Send</button>
+            <p id="alert" class="hidden">
+              Do me a favor and fill out the three fields.
+            </p>
+          </form>
+        </div>
+      </div>
+    </main>
 
     <footer class="page-footer">
       <!-- <div class="container">
@@ -122,7 +122,7 @@
       </div> -->
       <div class="footer-copyright">
         <div class="container space-between">
-          <span>© 2021 Copyright Ben Ronkin</span>
+          <span>© 2022 Copyright Ben Ronkin</span>
           <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
         </div>
       </div>
@@ -135,7 +135,9 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
     <script src="./js/main.js"></script>
     <script src="./js/portfolioCard.js"></script>
   </body>

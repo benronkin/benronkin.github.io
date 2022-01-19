@@ -2,14 +2,19 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag('config', 'UA-91362999-4');
-  </script>
+      gtag("config", "UA-91362999-4");
+    </script>
     <link rel="shortcut icon" href="/img/favicon.ico" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -20,29 +25,28 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
     <link rel="stylesheet" href="../css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>How to duplicate Google Drive folders automatically | Ben Ronkin</title>
+    <title>
+      How to duplicate Google Drive folders automatically | Ben Ronkin
+    </title>
   </head>
 
   <body>
     <main>
       <nav>
         <div class="nav-wrapper">
-          <a
-            href="../index.html"
-            class="brand-logo"
-            style="margin-left: 20px;"
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
             >Ben Ronkin</a
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="../index.html">
-                <i class="material-icons">work</i></a
-              >
+              <a href="../index.html"> <i class="material-icons">work</i></a>
             </li>
             <li data-tooltip="Blog">
               <a href="../blog/index.html">
@@ -50,9 +54,7 @@
               >
             </li>
             <li data-tooltip="Contact">
-              <a href="../contact.html">
-                <i class="material-icons">email</i></a
-              >
+              <a href="../contact.html"> <i class="material-icons">email</i></a>
             </li>
             <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -66,81 +68,127 @@
           </ul>
         </div>
       </nav>
-<div class="container">
-<div class="blog-post">
-  <div class="blog-post-header">
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>How to duplicate Google Drive folders automatically</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i>March 4, 2021
+              </span>
+            </p>
+          </div>
 
-    <h5><a href="index.html">Blog</a></h5>
-    <h1>How to duplicate Google Drive folders automatically</h1>
-    <p class="muted">
-      <span style="display: flex; align-items: center;">
-        <i class="material-icons">today</i>March 4, 2021
-      </span>
-    </p>
-  </div>
+          <div class="blog-post-body">
+            <p>
+              As a Google Workspace developer, I live in Google Drive all day
+              long. It's often the case that I need to duplicate a complex
+              structure of Drive folders and files.
+            </p>
 
-<div class="blog-post-body">
-<p>As a Google Workspace developer, I live in Google Drive all day long. It's often the case that I 
-  need to duplicate a complex structure of Drive folders and files.</p>
+            <p>
+              For example, when I create a new project, I have several folders
+              and files to contend with. There are folders where I keep my
+              scripts, folders where I store Google Sheets that are used for
+              reporting, folders that contains configuration files that enable
+              users of my systems to control their operations, folders that
+              contain artifacts such as user guides, folders where my scripts
+              execute the work, etc.
+            </p>
 
-<p>For example, when I create a new project, I have several folders and files to contend with. There
-  are folders where I keep my scripts, folders where I store Google Sheets that are used for reporting,
-  folders that contains configuration files that enable users of my systems to control their operations, 
-  folders that contain artifacts such as user guides, folders where my scripts execute the work, etc.</p>
+            <p>
+              I have one set of folders that I use to develop the initial
+              solution, as well as handle bugs and feature requests. But then I
+              need a duplicate folder system for my production environment,
+              because – well – developing in a production environment isn't the
+              healthiest thing to do.
+            </p>
 
-<p>I have one set of folders that I use to develop the initial solution, as well as handle bugs and 
-  feature requests. But then I need a duplicate folder system for my production environment, because 
-  – well – developing in a production environment isn't the healthiest thing to do. </p>
+            <p>
+              Sometimes I even have to duplicate the folders a second time when
+              users ask for a sandbox environment where they can try out the
+              system without having to worry that they might break something.
+            </p>
 
+            <p>
+              Unfortunately, there is no easy way in Google Drive right now to
+              duplicate folders quickly like you can do with a Google Sheet, for
+              example. You have to copy stuff manually one by one, which is very
+              annoying.
+            </p>
 
-<p>Sometimes I even have to duplicate the folders a second time when users ask for a sandbox environment 
-  where they can try out the system without having to worry that they might break something. </p>
+            <p>
+              In this blog post I'll walk you though the process of creating a
+              Google Apps Script web app that will automate the folder
+              duplication process. It will look like this:
+            </p>
 
-<p>Unfortunately, there is no easy way in Google Drive right now to duplicate folders quickly like you can 
-  do with a Google Sheet, for example. You have to copy stuff manually one by one, which is very annoying.</p>
+            <img
+              src="../img/duplicate-drive-folders-automatically.png"
+              class="responsive-img"
+              alt="Duplicate folders automatically"
+            />
 
-<p>In this blog post I'll walk you though the process of creating a Google Apps Script web app that will automate 
-  the folder duplication process. It will look like this:
-  </p>
+            <p>
+              the UI is pretty simple: You have a form with two input fields for
+              the IDs of the source and destination folders (what do you want to
+              copy and where to), a checkbox to optionally duplicate files in
+              folders as well, a button to trigger the work, and a message
+              container.
+            </p>
 
-<img src="../img/duplicate-drive-folders-automatically.png" class="responsive-img" alt="Duplicate folders automatically">
+            <p>
+              Obviously, I could have made things prettier by using a Drive
+              picker, but that would involve an API, authentication token, etc,
+              and I didn't want to make things more complicated than they need
+              to be.
+            </p>
 
-<p>the UI is pretty simple: You have a form with two input fields for the IDs of the source and destination  
-  folders (what do you want to copy and where to), a checkbox to optionally duplicate files in folders as 
-  well, a button to trigger the work, and a message container.</p>
+            <p class="lead">
+              This solution will duplicate a folder with any number of nested
+              sub-folder levels. It uses recursion to dig into sub-folders
+              copying everything inside until it reaches the deepest sub-folder.
+            </p>
 
-<p>Obviously, I could have made things prettier by using a Drive picker, but that would involve an API, 
-  authentication token, etc, and I didn't want to make things more complicated than they need to be.</p> 
+            <p>
+              To use the form, I copy the ID from the URL of the folder that I
+              want to duplicate. I then create a destination folder, copy its id
+              from its URL, and paste the IDs in the form. Check the box if I
+              want to also copy the files therein, and click the button. After a
+              minute or two, the entire source structure is copied as is to the
+              destination.
+            </p>
 
-<p class="lead">This solution will duplicate a folder with any number of nested sub-folder levels. It uses 
-  recursion to dig into sub-folders copying everything inside until it reaches the deepest sub-folder.
-</p>
+            <h2>The project structure</h2>
 
-<p>To use the form, I copy the ID from the URL of the folder that I want to duplicate. I then create a destination folder, 
-  copy its id from its URL, and paste the IDs in the form. Check the box if I want to also copy the files therein, and 
-  click the button. After a minute or two, the entire source structure is copied as is to the destination.
-</p>
+            <p>
+              For this project, create a new Google Apps Script with three files
+              in a folder named <b>public</b>:
+            </p>
 
-<h2>The project structure</h2>
+            <ol>
+              <li>public/index.html: The HTML that is rendered to the user.</li>
+              <li>
+                public/mainjs.html: The JS that will handle client-side
+                operations.
+              </li>
+              <li>public/styles.html: For minor CSS adjustments.</li>
+            </ol>
 
-<p>For this project, create a new Google Apps Script with three files in a folder named <b>public</b>:</p>
+            There are two additional files in the project:
 
-<ol>
-  <li>public/index.html: The HTML that is rendered to the user.</li>
-  <li>public/mainjs.html: The JS that will handle client-side operations.</li>
-  <li>public/styles.html: For minor CSS adjustments.</li>
-</ol>
+            <ol>
+              <li>Code.js: Handles server-side work.</li>
+              <li>appscript.json: Contains script configuration</li>
+            </ol>
 
-There are two additional files in the project:
+            <p>
+              The GAS will work as a web app and will operate in Google Drive.
+              For that, we need to adjust the appscript.json as follows:
+            </p>
 
-<ol>
-  <li>Code.js: Handles server-side work.</li>
-  <li>appscript.json: Contains script configuration</li>
-</ol>
-
-<p>The GAS will work as a web app and will operate in Google Drive. For that, we need to adjust the appscript.json as follows:</p>
-
-<pre><code class="json">{
+            <pre><code class="json">{
   "timeZone": "America/Los_Angeles",
   "dependencies": {},
   "webapp": {
@@ -153,13 +201,17 @@ There are two additional files in the project:
 }
 </code></pre>
 
-<h2>Setting up the web app</h2>
+            <h2>Setting up the web app</h2>
 
-<p>For the GAS to serve the form, we need to set up a doGet function that will serve the contents of the public/index.html file. 
-  And since index.html contains references to the public/mainjs.html and public/styles.html files, we need an <b>include</b> 
-  function as well.</p>
+            <p>
+              For the GAS to serve the form, we need to set up a doGet function
+              that will serve the contents of the public/index.html file. And
+              since index.html contains references to the public/mainjs.html and
+              public/styles.html files, we need an <b>include</b> function as
+              well.
+            </p>
 
-<pre><code>// Code.js:
+            <pre><code>// Code.js:
 function doGet(request) {
   return HtmlService.createTemplateFromFile('public/index').evaluate();
 }
@@ -168,11 +220,14 @@ function include(filename) {
   return HtmlService.createHtmlOutputFromFile(filename).getContent();
 }</code></pre>
 
-<p><b>index.html</b> has a straightforward HTML structure. I'm using materializeCSS to reduce 
-  the amount of CSS work I need do, but you don't have to. You can see that I'm also including 
- the CSS and Javascript files:</p>
+            <p>
+              <b>index.html</b> has a straightforward HTML structure. I'm using
+              materializeCSS to reduce the amount of CSS work I need do, but you
+              don't have to. You can see that I'm also including the CSS and
+              Javascript files:
+            </p>
 
-<pre><code class="html">&lt;!DOCTYPE html&gt;
+            <pre><code class="html">&lt;!DOCTYPE html&gt;
   &lt;html lang="en"&gt;
     &lt;head&gt;
       &lt;link
@@ -196,10 +251,13 @@ function include(filename) {
     &lt;/body&gt;
   &lt;/html></code></pre>
 
-  <p>The code for the page header and the form couldn't be simpler. I set up a few IDs to make it easier to target 
-    the elements in the Javascript file:</p>
+            <p>
+              The code for the page header and the form couldn't be simpler. I
+              set up a few IDs to make it easier to target the elements in the
+              Javascript file:
+            </p>
 
-  <pre><code>&lt;div class="container"&gt;
+            <pre><code>&lt;div class="container"&gt;
     &lt;h1&gt;Duplicate Google Drive Folders Utility | Ben Ronkin&lt;/h1&gt;
 
     &lt;div class="row"&gt;
@@ -238,8 +296,11 @@ function include(filename) {
     &lt;/div&gt;
   &lt;/div&gt;</code></pre>
 
- <p>styles.html contains minimal CSS, which you can change as you see fit:</p>
- <pre><code>&lt;style&gt;
+            <p>
+              styles.html contains minimal CSS, which you can change as you see
+              fit:
+            </p>
+            <pre><code>&lt;style&gt;
   h1 {
     font-size: 2rem;
     color: #5588cc;
@@ -253,17 +314,20 @@ function include(filename) {
     color: red;
   }
 &lt;/style&gt;</code></pre>
-  
-  
-<h2>Client-side Javascript</h2>
 
-<p><b>mainjs.html</b> contains the code that responds to the form button clicks. It collects the data from the 
-  form and sends it to the server-side code for processing. It also contains callback functions that handle 
-the success or failure of the server-side operation.</p>
+            <h2>Client-side Javascript</h2>
 
-<p>First, we set up an event listener for the button:</p>
+            <p>
+              <b>mainjs.html</b> contains the code that responds to the form
+              button clicks. It collects the data from the form and sends it to
+              the server-side code for processing. It also contains callback
+              functions that handle the success or failure of the server-side
+              operation.
+            </p>
 
-<pre><code>&lt;script&gt;
+            <p>First, we set up an event listener for the button:</p>
+
+            <pre><code>&lt;script&gt;
   window.addEventListener('DOMContentLoaded', () => {
     const copyButton = document
       .querySelector('#copyFoldersBtn')
@@ -273,9 +337,12 @@ the success or failure of the server-side operation.</p>
   });
 &lt;/script&gt;</code></pre>
 
-<p>The copy function notifies the user that the duplication process has begun, and passes the form data to the server:</p> 
+            <p>
+              The copy function notifies the user that the duplication process
+              has begun, and passes the form data to the server:
+            </p>
 
-<pre><code>function copyFolder() {
+            <pre><code>function copyFolder() {
     document.querySelector('#message').classList.remove('red-text');
     document.querySelector('#message').innerText = 'Duplicating folder...';
 
@@ -289,9 +356,12 @@ the success or failure of the server-side operation.</p>
       .copyFolder({ sourceId, destinationId, isCopyFiles });
 }</code></pre>
 
-<p>The callback functions simply update the user about the status of the operations:</p>
+            <p>
+              The callback functions simply update the user about the status of
+              the operations:
+            </p>
 
-<pre><code>function onCopySuccess() {
+            <pre><code>function onCopySuccess() {
   document.querySelector('#message').classList.remove('red-text');
   document.querySelector('#message').innerText =
     'Folder duplicated successfully!';
@@ -305,19 +375,22 @@ function onCopyFailure(e) {
   );
 }</code></pre>
 
-<h2>Server-side processing</h2>
+            <h2>Server-side processing</h2>
 
-<p>So far in <b>Code.js</b>, we're handling the get request from the browser. We now need to add the <b>copyFolder</b> 
-  function that will do the heavy lifting. The setup of the function is simple:</p>
+            <p>
+              So far in <b>Code.js</b>, we're handling the get request from the
+              browser. We now need to add the <b>copyFolder</b> function that
+              will do the heavy lifting. The setup of the function is simple:
+            </p>
 
-<pre><code>function copyFolder({ sourceId, destinationId, isCopyFiles }) {
+            <pre><code>function copyFolder({ sourceId, destinationId, isCopyFiles }) {
   let sourceFolder;
   let destinationFolder;
 }</code></pre>
 
-<p>The first thing we do is valdiate our inputs:</p>
+            <p>The first thing we do is valdiate our inputs:</p>
 
-<pre><code>if (!sourceId) {
+            <pre><code>if (!sourceId) {
   throw Error(`Source folder ID wasn't provided`);
 }
 
@@ -337,12 +410,15 @@ try {
   throw Error(`${destinationId} is not a valid folder ID`);
 }</code></pre>
 
-<p>Now comes the trickier part: We need to duplicate the top-level folder, iterate over its contents, and duplicate any folder 
-  inside (and optionally files as well). I like to use recursion for things like that, using an inner function that calls itself
-  as long as new subfolders are encountered:
-</p>
+            <p>
+              Now comes the trickier part: We need to duplicate the top-level
+              folder, iterate over its contents, and duplicate any folder inside
+              (and optionally files as well). I like to use recursion for things
+              like that, using an inner function that calls itself as long as
+              new subfolders are encountered:
+            </p>
 
-<pre><code>copy_(sourceFolder, destinationFolder, isCopyFiles);
+            <pre><code>copy_(sourceFolder, destinationFolder, isCopyFiles);
 
 function copy_(from, to, isCopyFiles) {
   if (isCopyFiles) {
@@ -361,29 +437,34 @@ function copy_(from, to, isCopyFiles) {
   }
 }</code></pre>
 
-<p>If <b>Also duplicate files</b> is checked, then we get any files in the folder and copy them to our target. We then iterate 
-on the list of sub-folders. We duplicate each one, set each one as a target, and repeat the copying process for that folder.</p>
+            <p>
+              If <b>Also duplicate files</b> is checked, then we get any files
+              in the folder and copy them to our target. We then iterate on the
+              list of sub-folders. We duplicate each one, set each one as a
+              target, and repeat the copying process for that folder.
+            </p>
 
-<p>That's pretty much all it takes. Once the code is set, you can deploy the GAS, accept the permission prompt, and copy the 
-  webapp URL. I simply bookmark it in my browser for easy access. 
-</p>
+            <p>
+              That's pretty much all it takes. Once the code is set, you can
+              deploy the GAS, accept the permission prompt, and copy the webapp
+              URL. I simply bookmark it in my browser for easy access.
+            </p>
 
-<p>
-  The entire code is available <a href="https://github.com/benronkin/duplicate-drive-folder" target="_blank">in my repo.</a>
-</p>
+            <p>
+              The entire code is available
+              <a
+                href="https://github.com/benronkin/duplicate-drive-folder"
+                target="_blank"
+                >in my repo.</a
+              >
+            </p>
 
-<p>
-  I hope this helps you out.
-</p>
-<p>
-– Ben
-</p>
-
-
-</div>
-</div>
-</div>
-</main>
+            <p>I hope this helps you out.</p>
+            <p>– Ben</p>
+          </div>
+        </div>
+      </div>
+    </main>
 
     <footer class="page-footer">
       <!-- <div class="container">
@@ -407,7 +488,7 @@ on the list of sub-folders. We duplicate each one, set each one as a target, and
       </div> -->
       <div class="footer-copyright">
         <div class="container space-between">
-          <span>© 2021 Copyright Ben Ronkin</span>
+          <span>© 2022 Copyright Ben Ronkin</span>
           <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
         </div>
       </div>
@@ -420,10 +501,10 @@ on the list of sub-folders. We duplicate each one, set each one as a target, and
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
     <script src="../js/main.js"></script>
     <script src="../js/portfolioCard.js"></script>
   </body>
 </html>
-
-
