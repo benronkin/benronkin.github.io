@@ -1,4 +1,4 @@
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = `
 <style>
   :root {
@@ -65,6 +65,7 @@ template.innerHTML = `
   .horizontal {
     display: flex;
   }
+
   .card.horizontal .card-image {
     max-width: 50%;
     position: relative;
@@ -108,7 +109,7 @@ template.innerHTML = `
     }
   }
 </style>
-<div class="card horizontal">
+<div class="card horizontal" data-topics="" data-url="">
   <div class="card-image">
   <a><img></a>
   </div>
@@ -125,17 +126,17 @@ template.innerHTML = `
 </div>`;
 
 function hasClass(ele, cls) {
-  return !!ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+  return !!ele.className.match(new RegExp("(\\s|^)" + cls + "(\\s|$)"));
 }
 
 function addClass(ele, cls) {
-  if (!hasClass(ele, cls)) ele.className += ' ' + cls;
+  if (!hasClass(ele, cls)) ele.className += " " + cls;
 }
 
 function removeClass(ele, cls) {
   if (hasClass(ele, cls)) {
-    var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
-    ele.className = ele.className.replace(reg, ' ');
+    var reg = new RegExp("(\\s|^)" + cls + "(\\s|$)");
+    ele.className = ele.className.replace(reg, " ");
   }
 }
 
@@ -153,15 +154,17 @@ class PortfolioCard extends HTMLElement {
   constructor() {
     super();
 
-    this.attachShadow({ mode: 'open' });
+    this.setAttribute("data-topics", this.getAttribute("topics"));
+    this.setAttribute("data-url", this.getAttribute("target"));
+
+    this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-    this.shadowRoot.querySelector('img').src = this.getAttribute('image');
-    this.shadowRoot.querySelector('h2').innerText = this.getAttribute('title');
-    this.shadowRoot.querySelector('h3').innerText = this.getAttribute(
-      'subtitle'
-    );
-    const as = this.shadowRoot.querySelectorAll('a');
-    const href = this.getAttribute('target');
+    this.shadowRoot.querySelector("img").src = this.getAttribute("image");
+    this.shadowRoot.querySelector("h2").innerText = this.getAttribute("title");
+    this.shadowRoot.querySelector("h3").innerText =
+      this.getAttribute("subtitle");
+    const as = this.shadowRoot.querySelectorAll("a");
+    const href = this.getAttribute("target");
     as.forEach(function (a) {
       a.href = href;
     });
@@ -169,27 +172,27 @@ class PortfolioCard extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot
-      .querySelector('.card')
+      .querySelector(".card")
       .addEventListener(
-        'mouseover',
-        toggleClass(this.shadowRoot.querySelector('.card-action'), 'emphasized')
+        "mouseover",
+        toggleClass(this.shadowRoot.querySelector(".card-action"), "emphasized")
       );
     this.shadowRoot
-      .querySelector('.card')
+      .querySelector(".card")
       .addEventListener(
-        'mouseout',
-        toggleClass(this.shadowRoot.querySelector('.card-action'), 'emphasized')
+        "mouseout",
+        toggleClass(this.shadowRoot.querySelector(".card-action"), "emphasized")
       );
   }
 
   disconnectedCallback() {
     this.shadowRoot
-      .querySelector('.card')
-      .removeEventListener('mouseover', toggleClass);
+      .querySelector(".card")
+      .removeEventListener("mouseover", toggleClass);
     this.shadowRoot
-      .querySelector('.card')
-      .removeEventListener('mouseout', toggleClass);
+      .querySelector(".card")
+      .removeEventListener("mouseout", toggleClass);
   }
 }
 
-window.customElements.define('portfolio-card', PortfolioCard);
+window.customElements.define("portfolio-card", PortfolioCard);

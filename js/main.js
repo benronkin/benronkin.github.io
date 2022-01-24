@@ -56,6 +56,27 @@ const handleSelect = (e) => {
   });
 };
 
+/**
+ * Logs a list of URLs for a given topic
+ */
+function showUrlsByTopic(topic) {
+  const cards = document.querySelectorAll(
+    `portfolio-card[data-topics*="${topic.toLowerCase()}"]`
+  );
+  if (cards.length === 0) {
+    console.log(`No cards found containing ${topic}`);
+    return;
+  }
+  cards.forEach((card) => {
+    const url = card.getAttribute("data-url");
+    // log to console w/o file/line no. on the right
+    // for easy copy/paste
+    setTimeout(
+      console.log.bind(console, `https://${window.location.hostname}/${url}`)
+    );
+  });
+}
+
 // this is for query param
 // const toggleSelect = (value) => {
 //   switch (value) {
