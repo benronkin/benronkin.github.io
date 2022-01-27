@@ -94,7 +94,6 @@ function showUrlsByTopic(topic) {
 // };
 
 const ready = () => {
-  console.log("ready");
   // Contact form
   const contactForm = document.querySelector("#contact-form");
   if (contactForm) {
