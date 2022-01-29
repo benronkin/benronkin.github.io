@@ -108,6 +108,16 @@ template.innerHTML = `
       flex-direction: column;
     }
   }
+  @media only screen and (max-width: 1112px) {
+    .horizontal {
+      flex-direction: column;
+      align-items: center
+    }
+
+    .card-image {
+      margin-bottom: 10px;
+    }
+  }
 </style>
 <div class="card horizontal" data-topics="" data-url="">
   <div class="card-image">

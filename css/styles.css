@@ -250,9 +250,9 @@ textarea:not(.browser-default):focus:not([readonly]) {
 }
 
 .lead {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
 
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .muted {
@@ -302,6 +302,42 @@ textarea:not(.browser-default):focus:not([readonly]) {
   color: var(--third);
 }
 
+.testimonial.card {
+  background-color: var(--secondary);
+  font-size: 85%;
+}
+
+.testimonial.card .card-action {
+  padding-top: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 0;
+}
+
+.testimonial.card .card-action p {
+  color: white;
+  font-size: 100%;
+  margin: 0;
+}
+
+.testimonial.card .card-content {
+  height: 90px;
+}
+
+.testimonial.card .card-content p {
+  font-style: italic;
+}
+
+.testimonial-row {
+  margin: 40px 0;
+}
+
+.upworkreviews-row {
+  margin: -30px 0 60px 0;
+  font-size: 75%;
+}
+
 [data-tooltip] {
   position: relative;
 }
@@ -320,4 +356,10 @@ textarea:not(.browser-default):focus:not([readonly]) {
   color: var(--third);
   font-size: 0.8rem;
   width: 55px;
+}
+
+@media only screen and (max-width: 1112px) {
+  .testimonial.card .card-content {
+    height: 110px;
+  }
 }
