@@ -52,11 +52,13 @@ footer {
 h1 {
   font-size: 2rem;
   margin: 50px 0;
+  font-weight: 200;
 }
 
 h2 {
   color: var(--third);
   font-size: 1.8rem;
+  font-weight: 100;
   margin-top: 0;
 }
 
@@ -268,6 +270,11 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
 .row {
   margin: 100px 0;
+}
+
+.top-image {
+  display: flex;
+  justify-content: center;
 }
 
 .space-between {
