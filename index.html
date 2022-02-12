@@ -152,6 +152,24 @@
         </div>
 
         <portfolio-card
+          title="Geo location lookup in Google Sheet"
+          subtitle="Google Workspace"
+          image="img/geo-lookup-target.png"
+          target="geo-lookup.html"
+          topics="gas sheet api"
+        >
+          <div slot="description">
+            <p>
+              This Google Apps Script looks for new IP addresses that are
+              entered in a Google Sheet. The script validates each IP address,
+              triggers a call to a Geo lookup API, and updates a different sheet
+              with geographical data, such asa city, state, and internet service
+              provider.
+            </p>
+          </div>
+        </portfolio-card>
+
+        <portfolio-card
           title="Yahoo Finance API to Google Sheet"
           subtitle="Google Workspace"
           image="img/yahoo-finance-summary.png"
@@ -162,8 +180,8 @@
             <p>
               This Google Apps Script pulls daily stock quotes from the Yahoo
               Finance API. It stores the data in a Google Sheet for historical
-              look-ups. The script updates a summary sheet by calculating today's
-              price change in dollars and percentage.
+              look-ups. The script updates a summary sheet by calculating
+              today's price change in dollars and percentage.
             </p>
           </div>
         </portfolio-card>

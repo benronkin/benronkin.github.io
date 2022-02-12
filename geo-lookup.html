@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="./css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yahoo Finance Data in Google Sheet | Ben Ronkin</title>
+    <title>Geo location lookup in Google Sheet | Ben Ronkin</title>
   </head>
 
   <body>
@@ -68,13 +68,13 @@
       </nav>
 
       <div class="container">
-        <h1>Yahoo Finance Data in Google Sheet</h1>
+        <h1>Geo location lookup in Google Sheet</h1>
         <h5>Google Workspace</h5>
 
         <div class="row top-image">
           <img
-            src="img/yahoo-finance-summary.png"
-            alt="Yahoo Finance summary"
+            src="img/geo-lookup-target.png"
+            alt="Geo lookup target"
             class="responsive-img"
           />
         </div>
@@ -82,30 +82,29 @@
         <div class="summary">
           <h2>Key Highlights</h2>
           <p>
-            This Google Apps Script pulls daily stock quotes from the Yahoo
-            Finance API. It stores the data in a Google Sheet for historical
-            look-ups. The script updates a summary sheet by calculating today's
-            price change in dollars and percentage.
+            This Google Apps Script looks for new IP addresses that are entered
+            in a Google Sheet. The script validates each IP address, triggers a
+            call to a Geo lookup API, and updates a different sheet with
+            geographical data, such asa city, state, and internet service
+            provider.
           </p>
         </div>
 
         <div class="row">
           <div class="col s12 m4">
-            <h2>Get Yahoo Finance data</h2>
+            <h2>Look for new addresses</h2>
             <p>
-              A Google Sheet serves as a repository for historical stock prices.
+              A Google Sheet is regularly updated with IP addresses that are
+              collected by a separate service.
             </p>
-            <p>
-              Every stock ticker has a column. Every row represents the market
-              close data for a given date.
-            </p>
+            <p>Addresses can in either IPv4 or IPv6 format.</p>
           </div>
           <div class="col col-r s12 m8">
             <img
-              src="img/yahoo-finance-detail.png"
-              alt="sheet"
+              src="img/geo-lookup-source.png"
+              alt="Geo lookup source"
               class="responsive-img"
-              style="width: 75%"
+              style="width: 90%"
             />
           </div>
         </div>
@@ -113,8 +112,8 @@
         <div class="row">
           <div class="col s12 m8">
             <img
-              src="img/yahoo-finance-code.png"
-              alt="Yahoo Finance code"
+              src="img/geo-lookup-code.png"
+              alt="Geo lookup code"
               class="responsive-img"
               style="width: 75%"
             />
@@ -124,14 +123,11 @@
               <h2>Automated API processing</h2>
 
               <p>
-                An Installable Trigger launches a Google Apps Script that
-                fetches daily stock prices for a customized list of stock
-                tickers after market close.
+                A Google Apps Script routinely looks for new IP submissions.
               </p>
               <p>
-                The script avoids data duplication by comparing the API date
-                with the last date stored in the sheet: it either appends a new
-                data row or updates the last row's data.
+                The script validates each IP address, and makes an API call to a
+                Geo lookup service.
               </p>
             </div>
           </div>
@@ -141,19 +137,14 @@
           <div class="col s12 m4">
             <h2>Summary dashboard</h2>
             <p>
-              A summary sheet includes calculated metrics that uses the
-              historical data, such as difference in prices between yesterday
-              and today.
-            </p>
-            <p>
-              The user can update the sheet manually at any time using a custom
-              menu option.
+              A summary sheet includes the geographical data for each IP
+              address.
             </p>
           </div>
           <div class="col col-r s12 m8">
             <img
-              src="img/yahoo-finance-summary.png"
-              alt="Yahoo Finance Summary"
+              src="img/geo-lookup-target.png"
+              alt="Geo lookup target"
               class="responsive-img"
             />
           </div>
@@ -168,7 +159,7 @@
             <div class="chip">Google Apps Script</div>
             <div class="chip">GAS Triggers</div>
             <div class="chip">Google Spreadsheet Service</div>
-            <div class="chip">Yahoo Finance API</div>
+            <div class="chip">Geo Lookup API</div>
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
