@@ -404,4 +404,16 @@ textarea:not(.browser-default):focus:not([readonly]) {
   .testimonial.card .card-content {
     height: 110px;
   }
+
+  h1 {
+    text-align: center;
+  }
+
+  #ben-image {
+    display: none;
+  }
+
+  a.brand-logo {
+    margin: 0 !important;
+  }
 }
