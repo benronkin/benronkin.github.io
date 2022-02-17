@@ -108,9 +108,9 @@ section#home-hero {
   background: linear-gradient(
     180deg,
     rgba(22, 22, 44, 1) 0%,
-    rgba(22, 45, 77, 1) 37%,
-    rgb(84, 104, 133) 65%,
-    rgba(255, 255, 255, 1) 100%
+    rgba(22, 45, 77, 1) 30%,
+    rgb(84, 104, 133) 55%,
+    rgba(255, 255, 255, 1) 80%
   );
 
   padding-bottom: 1px;
@@ -274,7 +274,6 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
 .lead {
   font-size: 1.1rem;
-
   margin-bottom: 30px;
 }
 
