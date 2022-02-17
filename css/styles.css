@@ -1,6 +1,7 @@
 :root {
   --secondary: #162d4d;
   --primary: #456389;
+  --primary-lighter: #859bb8;
   --third: #287078;
   --forth: #f2acb9;
   --black: #260101;
@@ -14,6 +15,7 @@ body {
   min-height: 100vh;
   flex-direction: column;
   font-family: Helvetica, Geneva, Tahoma, sans-serif;
+  color: #555555;
 }
 
 label {
@@ -35,9 +37,9 @@ nav#nav-home {
 }
 
 h1,
-nav .brand-logo,
+a.brand-logo,
 nav i {
-  color: var(--primary);
+  color: var(--primary-lighter);
 }
 
 a:hover,
@@ -46,7 +48,7 @@ a:hover,
 }
 
 a.brand-logo:hover {
-  color: var(--primary);
+  color: var(--primary-lighter);
 }
 
 p {
@@ -126,6 +128,15 @@ section#home-hero {
   border-left: 1px solid transparent !important;
   border-right: 1px solid var(--primary) !important;
   border-bottom: 1px solid var(--primary) !important;
+}
+
+#ben-image {
+  box-shadow: none;
+  position: relative;
+}
+
+#lead-div {
+  display: flex;
 }
 
 .center-div {
@@ -357,7 +368,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
 }
 
 .testimonial-row {
-  margin: 40px 0;
+  margin: -10px; 0 0 0;
 }
 
 .text-white {
