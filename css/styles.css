@@ -342,7 +342,6 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
 .testimonial.card {
   background-color: var(--primary);
-  font-size: 85%;
 }
 
 .testimonial.card .card-action {
