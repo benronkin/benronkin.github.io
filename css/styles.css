@@ -27,6 +27,12 @@ nav {
   background-color: var(--white);
 }
 
+nav#nav-home {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 h1,
 nav .brand-logo,
 nav i {
@@ -94,6 +100,20 @@ li img {
   position: relative;
   left: 10px;
   top: 10px;
+}
+
+section#home-hero {
+  background-color: var(--secondary);
+  background: linear-gradient(
+    180deg,
+    rgba(22, 22, 44, 1) 0%,
+    rgba(22, 45, 77, 1) 37%,
+    rgb(84, 104, 133) 65%,
+    rgba(255, 255, 255, 1) 100%
+  );
+
+  padding-bottom: 1px;
+  margin-bottom: 50px;
 }
 
 [type="checkbox"] + span:not(.lever):before {
@@ -310,7 +330,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
 }
 
 .testimonial.card {
-  background-color: var(--secondary);
+  background-color: var(--primary);
   font-size: 85%;
 }
 
@@ -338,6 +358,10 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
 .testimonial-row {
   margin: 40px 0;
+}
+
+.text-white {
+  color: white;
 }
 
 .upworkreviews-row {
