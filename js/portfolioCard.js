@@ -2,9 +2,9 @@ const template = document.createElement("template");
 template.innerHTML = `
 <style>
   :root {
-    --secondary: #bf6b82;
+    --secondary: #162d4d;
     --primary: #456389;
-    --third: #527869;
+    --third: #287078;
     --forth: #f2acb9;
     --black: #260101;
     --white: #F0F2F1;
@@ -32,7 +32,7 @@ template.innerHTML = `
   .btn {
     text-decoration: none;
     color: #fff;
-    background-color: var(--secondary);
+    background-color: var(--third);
     text-align: center;
     letter-spacing: .5px;
 
@@ -49,7 +49,7 @@ template.innerHTML = `
   }
 
   .btn:hover {
-    background-color: var(--forth);
+    background-color: var(--primary);
   }
   
   .card {
@@ -79,7 +79,7 @@ template.innerHTML = `
   }
   .card .card-content {
     /* flex-grow: 1; */
-    padding: 0 24px 24px 24px;
+    padding: 0 24px 2px 24px;
     border-radius: 0 0 2px 2px;
   }
 
@@ -130,7 +130,7 @@ template.innerHTML = `
       <p><slot name="description"</p>
     </div>
     <div class="card-action">
-      <a class="btn">View project details ➤</a>
+      <a class="btn">Read more ➤</a>
     </div>
   </div>
 </div>`;
