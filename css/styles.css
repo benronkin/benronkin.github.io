@@ -115,9 +115,6 @@ section#home-hero {
     rgb(84, 104, 133) 55%,
     rgba(255, 255, 255, 1) 80%
   );
-
-  padding-bottom: 1px;
-  margin-bottom: 50px;
 }
 
 [type="checkbox"] + span:not(.lever):before {
@@ -135,6 +132,17 @@ section#home-hero {
   box-shadow: none;
   position: relative;
 }
+
+#home-h1-div {
+  margin: 80px 0 40px 0;
+  border-bottom: 5px solid var(--primary-lighter);
+}
+
+#home-h1-div h1 {
+  margin-bottom: 10px;
+  color: var(--primary-lighter);
+}
+
 
 #lead-div {
   display: flex;
@@ -238,7 +246,7 @@ section#home-hero {
 }
 
 .filter-row {
-  margin: 0 0 40px 0 !important;
+  margin: 0 0 70px 0 !important;
 }
 
 .filter-row > .col.s3 {
