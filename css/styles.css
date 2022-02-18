@@ -113,7 +113,7 @@ section#home-hero {
     rgba(22, 22, 44, 1) 0%,
     rgba(22, 45, 77, 1) 30%,
     rgb(84, 104, 133) 55%,
-    rgba(255, 255, 255, 1) 80%
+    rgba(255, 255, 255, 1) 90%
   );
 }
 
@@ -146,6 +146,7 @@ section#home-hero {
 
 #lead-div {
   display: flex;
+  margin-top: 80px;
 }
 
 .center-div {
