@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-91362999-4");
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download images automatically to Google Drive | Ben Ronkin</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="./index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="./index.html"> <i class="material-icons">work</i></a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="./blog/index.html">
+                <i class="material-icons">rss_feed</i></a
+              >
+            </li>
+            <li data-tooltip="Contact">
+              <a href="./contact.html"> <i class="material-icons">email</i></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/ronkin" target="_blank"
+                ><img
+                  src="./img/li-48.png"
+                  alt="LinkedIn"
+                  class="responsive-img"
+                  width="65%"
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1>Download images automatically to Google Drive</h1>
+        <h5>Google Workspace</h5>
+
+        <div class="row top-image">
+          <img
+            src="img/download-images-files.png"
+            alt="download images files"
+            class="responsive-img"
+          />
+        </div>
+
+        <div class="summary">
+          <h2>Key Highlights</h2>
+          <p>
+            This Google Apps Script solution downloads images from the web into
+            a Google Drive folder. Users can provide a Google Sheet with a list
+            of image URLs. Or they can specify a web page address that the
+            solution will crawl and fetch its images.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m7">
+            <h2>Automated image download</h2>
+            <p>
+              The script can run automatically by observing a Google Drive
+              folder, waiting for a new sheet with a list of image URLs.
+            </p>
+            <p>
+              When a sheet is dropped in the folder, the script will download
+              the images.
+            </p>
+          </div>
+          <div class="col col-r s12 m5">
+            <img
+              src="img/download-images-spreadsheet.png"
+              alt="download images spreadsheet"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m8">
+            <img
+              src="img/download-images-app.png"
+              alt="Merge sheets merge"
+              class="responsive-img"
+              style="width: 90%"
+            />
+          </div>
+          <div class="col col-r s12 m4">
+            <div class="">
+              <h2>Manual control</h2>
+
+              <p>
+                Alternatively, users can leverage a Google Apps Script web app,
+                where they can specify where to pull the images from, and where
+                to save them.
+              </p>
+              <p>
+                Users can either point to a web address of a page that contains
+                the images or to a sheet that contains the image URLs.
+              </p>
+              <p>
+                Finally, users specify the Google Drive folder where the images
+                should be save to.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Downloaded images</h2>
+            <p>
+              The solution will store all the images encountered in a Google
+              Drive folder.
+            </p>
+            <p>
+              This script provides information about the download: count of
+              images, and names, sizes, and URLs of the images.
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="img/download-images-files.png"
+              alt="download images files"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">Google Apps Script</div>
+            <div class="chip">Google Spreadsheet Service</div>
+            <div class="chip">Google Drive Service</div>
+            <div class="chip">URL Fetch Service</div>
+            <div class="chip">eslint</div>
+            <div class="chip">prettier</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2022 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script src="./js/main.js"></script>
+    <script src="./js/portfolioCard.js"></script>
+  </body>
+</html>
