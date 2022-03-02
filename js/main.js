@@ -1,4 +1,4 @@
-const handleContactSubmit = (e) => {
+const handleContactSubmit = e => {
   e.preventDefault();
   const formEl = e.target;
   const formData = new FormData(formEl);
@@ -32,17 +32,17 @@ const handleContactSubmit = (e) => {
         ".lead"
       ).innerText = `Your message was recorded successfully. I'll be in touch soon.`;
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 };
 
-const handleSelect = (e) => {
+const handleSelect = e => {
   const instance = M.FormSelect.getInstance($("#type-filter"));
 
   document
     .querySelectorAll("portfolio-card")
-    .forEach((portfolioCard) => portfolioCard.classList.add("hide"));
+    .forEach(portfolioCard => portfolioCard.classList.add("hide"));
 
-  instance.getSelectedValues().forEach((value) => {
+  instance.getSelectedValues().forEach(value => {
     // Materialize doesn't seem to like multi-token option values
     // (e.g 'Google Workspace'), so the filter now includes a single
     // token (Workspace, Cloud, Other), so we need to add 'Google' back in
@@ -52,7 +52,7 @@ const handleSelect = (e) => {
 
     document
       .querySelectorAll(`portfolio-card[subtitle="${value}"]`)
-      .forEach((elem) => elem.classList.remove("hide"));
+      .forEach(elem => elem.classList.remove("hide"));
   });
 };
 
@@ -60,6 +60,8 @@ const handleSelect = (e) => {
  * Logs a list of URLs for a given topic
  */
 function showUrlsByTopic(topic) {
+  const allCards = document.querySelectorAll("portfolio-card");
+  console.log(`Total case studies: ${allCards.length}`);
   const cards = document.querySelectorAll(
     `portfolio-card[data-topics*="${topic.toLowerCase()}"]`
   );
@@ -67,7 +69,7 @@ function showUrlsByTopic(topic) {
     console.log(`No cards found containing ${topic}`);
     return;
   }
-  cards.forEach((card) => {
+  cards.forEach(card => {
     const url = card.getAttribute("data-url");
     // log to console w/o file/line no. on the right
     // for easy copy/paste
@@ -104,7 +106,7 @@ const ready = () => {
   let instances;
   if (selectors) {
     instances = M.FormSelect.init(selectors, {});
-    selectors.forEach((selector) =>
+    selectors.forEach(selector =>
       selector.addEventListener("change", handleSelect)
     );
   }

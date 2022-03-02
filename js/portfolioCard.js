@@ -123,7 +123,7 @@ template.innerHTML = `
 </style>
 <div class="card horizontal" data-topics="" data-url="">
   <div class="card-image">
-  <a><img></a>
+  <a><img loading="lazy"></a>
   </div>
   <div class="card-stacked">
     <div class="card-content">
