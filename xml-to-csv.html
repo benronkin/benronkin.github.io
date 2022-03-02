@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-91362999-4");
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Convert XML to CSV in Google Workspace | Ben Ronkin</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="./index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="./index.html"> <i class="material-icons">work</i></a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="./blog/index.html">
+                <i class="material-icons">rss_feed</i></a
+              >
+            </li>
+            <li data-tooltip="Contact">
+              <a href="./contact.html"> <i class="material-icons">email</i></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/ronkin" target="_blank"
+                ><img
+                  src="./img/li-48.png"
+                  alt="LinkedIn"
+                  class="responsive-img"
+                  width="65%"
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1>Convert XML to CSV in Google Workspace</h1>
+        <h5>Google Workspace</h5>
+
+        <div class="row top-image">
+          <img
+            src="img/xml-csv-hero.png"
+            alt="xml-csv-hero"
+            class="responsive-img"
+          />
+        </div>
+
+        <div class="summary">
+          <h2>Key Highlights</h2>
+          <p>
+            This Google Apps Script looks for new XML files in a Google Drive
+            folder. It takes in a customizable mapping of XML entries to CSV
+            headers, and automatically converts the XML to a CSV file. Both
+            input and output files are then automatically moved to different
+            Google Drive folders for subsequent automation.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m5">
+            <h2>Customizable file location</h2>
+            <p>
+              Users can specify Google Drive folders where new XML files will be
+              stored, where they should be archived, and where the CSV files
+              should be stored.
+            </p>
+            <p>Clients can also configure the name of the CSV file.</p>
+            <p>
+              The conversion process can be initiated either manually via a
+              custom menu option, or automatically via a timer.
+            </p>
+          </div>
+          <div class="col col-r s12 m7">
+            <img
+              src="img/xml-csv-admin.png"
+              alt="xml-csv-admin"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m8">
+            <img
+              src="img/xml-csv-mapping.png"
+              alt="xml-csv-mapping"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m4">
+            <div class="">
+              <h2>Customizable field mapping</h2>
+              <p>
+                Users can modify the mapping of XML entries to CSV columns at
+                any time without any code modifications. They simply enter a CSV
+                header and map it to the nested XML element.
+              </p>
+              <p>
+                Users can also specify formatting requirements for each field;
+                f.g, split full names to first and last, format dates, etc.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m5">
+            <h2>Automated process</h2>
+            <p>
+              Once the script initiates, it creates a CSV file with a header row
+              containing the columns from the mapping sheet. It uses recursion
+              to iterate through the nested XML document, pulling elements and
+              their attributes, and creating new CSV rows. It then compares each
+              attribute to the mapping list. If if finds a specified attribute
+              then it adds its value to the right position in the row.
+            </p>
+            <p>
+              Finally, the script saves the CSV to the specified drive, and
+              moves the XML file to an archive folder.
+            </p>
+          </div>
+          <div class="col col-r s12 m7">
+            <img
+              src="img/xml-csv-hero.png"
+              alt="xml-csv-hero"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">Google Apps Script</div>
+            <div class="chip">Google Drive Service</div>
+            <div class="chip">XML Service</div>
+            <div class="chip">eslint</div>
+            <div class="chip">prettier</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2022 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script src="./js/main.js"></script>
+    <script src="./js/portfolioCard.js"></script>
+  </body>
+</html>
