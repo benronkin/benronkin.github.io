@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-91362999-4");
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrape website pages | Ben Ronkin</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="./index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="./index.html"> <i class="material-icons">work</i></a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="./blog/index.html">
+                <i class="material-icons">rss_feed</i></a
+              >
+            </li>
+            <li data-tooltip="Contact">
+              <a href="./contact.html"> <i class="material-icons">email</i></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/ronkin" target="_blank"
+                ><img
+                  src="./img/li-48.png"
+                  alt="LinkedIn"
+                  class="responsive-img"
+                  width="65%"
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1>Scrape website pages</h1>
+        <h5>Google Workspace</h5>
+
+        <div class="row top-image">
+          <img
+            src="img/scrape-website-links.png"
+            alt="scrape-website-links.png"
+            class="responsive-img"
+            style="width: 80%"
+          />
+        </div>
+
+        <div class="summary">
+          <h2>Key Highlights</h2>
+          <p>
+            This Google Apps Script accepts one or more website URLs to scrape.
+            It fetches the HTML code of each URL and then extracts different
+            data elements from each page, based on business needs, and stores
+            the information in a Google Sheet.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m5">
+            <h2>Website crawling</h2>
+            <p>
+              A Google Apps Script is configured to visit website URLs and pull
+              their HTML code. The list of URLs is configurable.
+            </p>
+          </div>
+          <div class="col col-r s12 m7">
+            <img
+              src="img/scrape-website-website.png"
+              alt="scrape-website-website.png"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m8">
+            <img
+              src="img/scrape-website-code.png"
+              alt="scrape-website-code.png"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m4">
+            <div class="">
+              <h2>Custom data scraping</h2>
+              <p>
+                The script can pull information from the HTML head or body. A
+                set of functions enables the script to locate HTML elements by
+                tag name, class name, or id.
+              </p>
+              <p>
+                The script can pull out different aspects of the desired HTML
+                elements, including their inner text, HTML, value, and
+                attributes.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m5">
+            <h2>Save the scraped data</h2>
+            <p>
+              The script stores the website content that it extracts in a Google
+              Sheet.
+            </p>
+            <p>
+              Here, the script visited the website home page and extracted the
+              URLs of all the portolio pages that are listed on the home page.
+            </p>
+          </div>
+          <div class="col col-r s12 m7">
+            <img
+              src="img/scrape-website-links.png"
+              alt="scrape-website-links.png"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">Google Apps Script</div>
+            <div class="chip">Google Spreadsheet Service</div>
+            <div class="chip">Google XML Service</div>
+            <div class="chip">eslint</div>
+            <div class="chip">prettier</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2022 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script src="./js/main.js"></script>
+    <script src="./js/portfolioCard.js"></script>
+  </body>
+</html>

@@ -318,6 +318,11 @@ textarea:not(.browser-default):focus:not([readonly]) {
   justify-content: center;
 }
 
+.top-image img {
+  border: 1px solid #eeeeee;
+  filter: drop-shadow(10px 10px 4px #cccccc);
+}
+
 .space-between {
   display: flex;
   justify-content: space-between;
@@ -414,7 +419,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
     height: 110px;
   }
 
-  h1 {
+  h1,h2,h3,h4,h5 {
     text-align: center;
   }
 
