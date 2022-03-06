@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="./css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Scrape website pages | Ben Ronkin</title>
+    <title>Chrome extension for site scraping | Ben Ronkin</title>
   </head>
 
   <body>
@@ -68,13 +68,13 @@
       </nav>
 
       <div class="container">
-        <h1>Scrape website pages</h1>
+        <h1>Chrome extension for site scraping</h1>
         <h5>Google Workspace</h5>
 
         <div class="row top-image">
           <img
-            src="img/scrape-website-links.png"
-            alt="scrape-website-links.png"
+            src="img/scrape-site-extension-hero.png"
+            alt="scrape-site-extension-hero.png"
             class="responsive-img"
             style="width: 80%"
           />
@@ -83,25 +83,27 @@
         <div class="summary">
           <h2>Key Highlights</h2>
           <p>
-            This Google Apps Script accepts one or more website URLs to scrape.
-            It fetches the HTML code of each URL and then extracts different
-            data elements from each page, based on business needs, and stores
-            the information in a Google Sheet.
+            The client needed a Chrome extension, which his team would use to
+            mark their website pages for scraping. A Google Apps Script accepts
+            the extension's page requests, scrapes the web page, and saves the
+            data in a Google Doc based on a template.
           </p>
         </div>
 
         <div class="row">
           <div class="col s12 m5">
-            <h2>Website crawling</h2>
+            <h2>Chrome extension</h2>
             <p>
-              A Google Apps Script is configured to visit website URLs and pull
-              their HTML code. The list of URLs is configurable.
+              A Chrome extension is used to identify web site pages for
+              scraping. When users click the extension, it sends the web page
+              URL to a Google Apps Script, which crawls the page, and retrieves
+              specific information.
             </p>
           </div>
           <div class="col col-r s12 m7">
             <img
-              src="img/scrape-website-website.png"
-              alt="scrape-website-website.png"
+              src="img/scrape-site-extension-site.png"
+              alt="scrape-site-extension-site.png"
               class="responsive-img"
             />
           </div>
@@ -110,7 +112,7 @@
         <div class="row">
           <div class="col s12 m6">
             <img
-              src="img/scrape-website-code.png"
+              src="img/scrape-site-extension-doc.png"
               alt="scrape-website-code.png"
               class="responsive-img"
             />
@@ -133,23 +135,47 @@
         </div>
 
         <div class="row">
-          <div class="col s12 m5">
-            <h2>Save the scraped data</h2>
+          <div class="col s12 m7">
+            <h2>Customizable template</h2>
             <p>
-              The script stores the website content that it extracts in a Google
-              Sheet.
+              A Google Doc template is used for the production of documents
+              based on website data.
             </p>
             <p>
-              Here, the script visited the website home page and extracted the
-              URLs of all the portfolio pages that are listed on the home page.
+              The client identifies the location of each website element that
+              should be included in the file.
             </p>
           </div>
-          <div class="col col-r s12 m7">
+          <div class="col col-r s12 m5">
             <img
-              src="img/scrape-website-links.png"
-              alt="scrape-website-links.png"
+              src="img/scrape-site-extension-template.png"
+              alt="scrape-site-extension-template.png"
               class="responsive-img"
             />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m5">
+            <img
+              src="img/scrape-site-extension-doc.png"
+              alt="scrape-site-extension-doc.png"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m7">
+            <div class="">
+              <h2>Final document</h2>
+              <p>
+                Once the script scrapes the web page, it duplicates the
+                template. It then replaces each placeholder with the actual site
+                data.
+              </p>
+              <p>
+                The script renames the file and stores it in a specific Google
+                Drive folder for additional processing.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -160,7 +186,7 @@
             >
             <br />
             <div class="chip">Google Apps Script</div>
-            <div class="chip">Google Spreadsheet Service</div>
+            <div class="chip">Google Document Service</div>
             <div class="chip">Google XML Service</div>
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
