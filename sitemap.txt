@@ -1,5 +1,7 @@
-https://benronkin.github.io/contact.html
-https://benronkin.github.io/blog/
+https://www.benronkin.github.io/
+https://www.benronkin.github.io/index.html
+https://www.benronkin.github.io/contact.html
+https://www.benronkin.github.io/blog/
 https://benronkin.github.io/blog/index.html
 https://benronkin.github.io/blog/_post-template.html
 https://benronkin.github.io/blog/dynamic-data-validation-in-google-sheets.html
