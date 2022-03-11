@@ -62,9 +62,12 @@ const handleSelect = e => {
 function showUrlsByTopic(topic) {
   const allCards = document.querySelectorAll("portfolio-card");
   console.log(`Total case studies: ${allCards.length}`);
-  const cards = document.querySelectorAll(
-    `portfolio-card[data-topics*="${topic.toLowerCase()}"]`
-  );
+  const cards = topic
+    ? document.querySelectorAll(
+        `portfolio-card[data-topics*="${topic.toLowerCase()}"]`
+      )
+    : allCards;
+
   if (cards.length === 0) {
     console.log(`No cards found containing ${topic}`);
     return;
