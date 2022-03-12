@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -208,6 +206,101 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Integrate Calendly with Google Sheets"
+            subtitle="Google Workspace"
+            image="img/calendly-form-sheet-hero.png"
+            target="calendly-form-sheet.html"
+            topics="gas webapp sheet form api Calendly"
+          >
+            <div slot="description">
+              <p>
+                This project embeds a Calendly form on a Google Apps Script web
+                app page. Calendly can be pre-filled with data if the user is a
+                returning customer. When the user completes the registration, a
+                Calendly webhook calls the web app end point, which updates a
+                Google Sheet with the registration data.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Form File Validation"
+            subtitle="Google Cloud"
+            image="img/form-file-validation-form.png"
+            target="form-file-validation.html"
+            topics="gas form sheet email"
+          >
+            <div slot="description">
+              <p>
+                The project involved creating a Google Form that accepts file
+                uploads. Upon every upload, a Google Apps Script was to validate
+                the file against a set of validation rules that are configurable
+                by managers. The script was to email the file submitter if
+                errors occurred.
+              </p>
+              <p>
+                The script was to log every submission and its validation
+                results. Valid files are moved to a destination folder.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Forms to Google Doc"
+            subtitle="Google Workspace"
+            image="img/forms-to-doc-doc.png"
+            target="forms-to-doc.html"
+            topics="gas form sheet doc"
+          >
+            <div slot="description">
+              <p>
+                The client needed to collect signatures and comments on an open
+                letter. A Google Apps Script records each form submission
+                directly into a dedicated table inside a Google Doc.
+              </p>
+              <p></p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Update custom form in real-time"
+            subtitle="Google Workspace"
+            image="img/survey-in-survey-form1.png"
+            target="survey-in-survey.html"
+            topics="gas form sheet webapp"
+          >
+            <div slot="description">
+              <p>
+                The client needed to display a series of survey questions, and
+                then present the user with a followup question that is
+                determined in real-time, using prior survey submissions.
+              </p>
+              <p>
+                I developed a Google Apps Script web app to capture responses,
+                search for best match response, display that to the user, and
+                record all the user's answers in the sheet.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Custom form to Google Sheet"
+            subtitle="Google Workspace"
+            image="img/custom-form-form.png"
+            target="custom-form.html"
+            topics="gas sheet form email webapp"
+          >
+            <div slot="description">
+              <p>
+                I needed a contact form deployed for this portfolio website.
+                Opted to have a custom form that fits my site design instead of
+                using Google Form. I built a custom form that, when submitted,
+                sends the form data to a Google Apps Script that stores
+                submissions in a Google Sheet and sends me an email
+                notification.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

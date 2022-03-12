@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -80,7 +78,7 @@
         </div>
 
         <div class="summary">
-          <h2>Key Highlights</h2>
+          <h2>SUMMARY</h2>
           <p>
             This Google Apps Script accepts a URL to a Google Drive folder that
             contains several source files (Google Sheets, Excel, and CSV). The
@@ -188,6 +186,107 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Expand Google Sheet rows"
+            subtitle="Google Workspace"
+            image="img/expand-row-summary.png"
+            target="expand-row.html"
+            topics="gas sheet"
+          >
+            <div slot="description">
+              <p>
+                In this small project, the client had a Google Sheet with two
+                tabs (summary and detail), and required a way to expand summary
+                rows based on date range in each of the rows. I developed a
+                Google Apps Script to enable the client to expand the rows on
+                demand.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Data enrichment workflow"
+            subtitle="Google Workspace"
+            image="img/data-enrichment-lifecycle.png"
+            target="data-enrichment.html"
+            topics="gas drive sheets excel csv email"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a sophisticated
+                workflow system that handles new file submission in Google Apps
+                Script.
+              </p>
+              <p>
+                The system cuts down on the effort to validate and enrich
+                submitted files, while providing stakeholders with a clear
+                picture regarding the status of every submission.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Sheet columns to Docs"
+            subtitle="Google Workspace"
+            image="img/columns-to-docs-cover.png"
+            target="sheet-columns-to-docs.html"
+            topics="gas sheet doc drive"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a simple Google
+                Apps Script that converts Google Sheet columns to a set of
+                Google Docs.
+              </p>
+              <p>
+                The script uses the header row as the name of each file. All
+                rows in each column are populated one after the other into the
+                body of every Google Doc.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Forms to Google Doc"
+            subtitle="Google Workspace"
+            image="img/forms-to-doc-doc.png"
+            target="forms-to-doc.html"
+            topics="gas form sheet doc"
+          >
+            <div slot="description">
+              <p>
+                The client needed to collect signatures and comments on an open
+                letter. A Google Apps Script records each form submission
+                directly into a dedicated table inside a Google Doc.
+              </p>
+              <p></p>
+            </div>
+          </portfolio-card>
+
+          <portfolio-card
+            title="Website message from Google Sheet"
+            subtitle="Google Workspace"
+            image="img/iframe-spreadsheet-personal-message.png"
+            target="message-from-spreadsheet.html"
+            topics="gas sheet webapp"
+          >
+            <div slot="description">
+              <p>
+                In this small project, the client had a standalone website that
+                was separate from Google GSuite.
+              </p>
+              <p>
+                The client needed to present a personal message to every
+                logged-in user. Messages were stored in a two-column Google
+                Spreadsheet column containing email addresses and the message
+                for each user.
+              </p>
+              <p>
+                The project requiring fetching the right message as the user
+                accessed the message page.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

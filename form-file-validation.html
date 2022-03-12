@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -204,6 +202,62 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Google Forms Replacement"
+            subtitle="Google Workspace"
+            image="img/google-forms-replacement-form.png"
+            target="google-forms-replacement.html"
+            topics="gas webapp sheet form applet algorithm"
+          >
+            <div slot="description">
+              <p>
+                The client hit the limits of what Google Forms can offer. I
+                developed a custom form management systems that enables admins
+                to manage form questions and how they are ordered on the form.
+                Included unlimited form branching and dynamic field
+                prepopulation.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Email Google Sheet as PDF"
+            subtitle="Google Workspace"
+            image="img/sheet-pdf-email-sidebar.png"
+            target="sheet-pdf-email.html"
+            topics="gas sheet email pdf"
+          >
+            <div slot="description">
+              <p>
+                A Google Sheet contains a summary sheet that aggregates data
+                from 12 monthly sheets. A sidebar enables users to PDF and email
+                a single monthly sheet or the entire workbook, with customizable
+                email recipients, subject, and body.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Lead sharing app"
+            subtitle="Google Cloud"
+            image="img/leadsharing2-email.png"
+            target="lead-sharing2.html"
+            topics="gcp webapp gas email csv"
+          >
+            <div slot="description">
+              <p>
+                The client needed to share sales leads with channel partners in
+                a secured way. I implemented a solution that ingests sales leads
+                and assigned partners, builds CSV files on Google Cloud Storage,
+                and routinely emails partners links to the CSV files.
+              </p>
+              <p>
+                Partners must authenticate into their Google account to download
+                the file.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

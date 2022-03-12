@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -71,35 +69,12 @@
         <h5>Google Workspace</h5>
 
         <div class="row">
-          <div class="col s12 m6">
+          <div class="col s12">
             <img
-              src="img/db-api-client.png"
+              src="img/db-api-cover.png"
               alt="Sales leads in client"
               class="responsive-img"
             />
-          </div>
-          <div class="col col-r s12 m6">
-            <ul class="collection with-header">
-              <li class="collection-header"><h4>Key highlights</h4></li>
-              <li class="collection-item">
-                A master Google Sheet tracks all sales leads
-              </li>
-              <li class="collection-item">
-                A Google Apps Script web app acts as an API endpoint, handling
-                GET and POST requests with the master sheet
-              </li>
-              <li class="collection-item">
-                Sales reps pull their individual leads into their local
-                spreadsheets
-              </li>
-              <li class="collection-item">
-                Changes that sales reps make locally immediately appear in the
-                CRM sheet
-              </li>
-              <li class="collection-item">
-                Reps can add new leads and edit existing leads
-              </li>
-            </ul>
           </div>
         </div>
 
@@ -205,6 +180,64 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Data enrichment workflow"
+            subtitle="Google Workspace"
+            image="img/data-enrichment-lifecycle.png"
+            target="data-enrichment.html"
+            topics="gas drive sheets excel csv email"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a sophisticated
+                workflow system that handles new file submission in Google Apps
+                Script.
+              </p>
+              <p>
+                The system cuts down on the effort to validate and enrich
+                submitted files, while providing stakeholders with a clear
+                picture regarding the status of every submission.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Merge Google Sheets"
+            subtitle="Google Workspace"
+            image="img/merge-sheets-dashboard.png"
+            target="merge-sheets.html"
+            topics="gas excel csv sheet drive"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script accepts a URL to a Google Drive folder
+                that contains several source files (Google Sheets, Excel, and
+                CSV). The script duplicates a sheet template, merges the source
+                files based on a common key, and then populates the templated
+                sheet. The output sheet includes a dashboard that summarizes key
+                information in the spreadsheet.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Forms Replacement"
+            subtitle="Google Workspace"
+            image="img/google-forms-replacement-form.png"
+            target="google-forms-replacement.html"
+            topics="gas webapp sheet form applet algorithm"
+          >
+            <div slot="description">
+              <p>
+                The client hit the limits of what Google Forms can offer. I
+                developed a custom form management systems that enables admins
+                to manage form questions and how they are ordered on the form.
+                Included unlimited form branching and dynamic field
+                prepopulation.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

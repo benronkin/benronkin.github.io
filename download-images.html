@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -80,7 +78,7 @@
         </div>
 
         <div class="summary">
-          <h2>Key Highlights</h2>
+          <h2>SUMMARY</h2>
           <p>
             This Google Apps Script solution downloads images from the web into
             a Google Drive folder. Users can provide a Google Sheet with a list
@@ -174,6 +172,88 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Duplicate files and folders automatically"
+            subtitle="Google Workspace"
+            image="img/duplicate-folders-hero.png"
+            target="duplicate-folders.html"
+            topics="gas drive webapp"
+          >
+            <div slot="description">
+              <p>
+                Duplicating folders in Google Drive is currently a manual
+                process in which yoy create folders one at a time. This Google
+                Apps Script automates the process. Users select the folder they
+                want to copy and its target folder. The web app duplicates all
+                files and sub-folders. Users can run this process automatically
+                on a schedule.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Data management app"
+            subtitle="Google Cloud"
+            image="img/leadsharing-lead.png"
+            target="lead-sharing.html"
+            topics="gcp drive webapp"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I've been designing,
+                developing, releasing, and maintaining a secured Node.js Express
+                web application on Google Cloud Platform.
+              </p>
+              <p>
+                The application enables managers and their partners to track the
+                progress of sales leads and exchange messages about lead status.
+              </p>
+              <p>
+                Lead data is stored securely in a NoSQL database. The app offers
+                a variety of derived data attributes that are calculated in
+                real-time, client-side.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Form File Validation"
+            subtitle="Google Cloud"
+            image="img/form-file-validation-form.png"
+            target="form-file-validation.html"
+            topics="gas form sheet email"
+          >
+            <div slot="description">
+              <p>
+                The project involved creating a Google Form that accepts file
+                uploads. Upon every upload, a Google Apps Script was to validate
+                the file against a set of validation rules that are configurable
+                by managers. The script was to email the file submitter if
+                errors occurred.
+              </p>
+              <p>
+                The script was to log every submission and its validation
+                results. Valid files are moved to a destination folder.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Chrome extension for site scraping"
+            subtitle="Google Workspace"
+            image="img/scrape-site-extension-hero.png"
+            target="scrape-site-extension.html"
+            topics="gas doc xml api scraping"
+          >
+            <div slot="description">
+              <p>
+                The client needed a Chrome extension, which his team would use
+                to mark their website pages for scraping. A Google Apps Script
+                accepts the extension's page requests, scrapes the web page, and
+                saves the data in a Google Doc based on a template.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

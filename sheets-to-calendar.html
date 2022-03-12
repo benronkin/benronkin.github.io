@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -86,7 +84,7 @@
         </div>
 
         <div class="summary">
-          <h2>Key Highlights</h2>
+          <h2>SUMMARY</h2>
           <p>
             This Google Apps Script tracks meeting requests that are entered
             into a Google Sheet. The script creates Google Calendar event for
@@ -179,6 +177,101 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Integrate Calendly with Google Sheets"
+            subtitle="Google Workspace"
+            image="img/calendly-form-sheet-hero.png"
+            target="calendly-form-sheet.html"
+            topics="gas webapp sheet form api Calendly"
+          >
+            <div slot="description">
+              <p>
+                This project embeds a Calendly form on a Google Apps Script web
+                app page. Calendly can be pre-filled with data if the user is a
+                returning customer. When the user completes the registration, a
+                Calendly webhook calls the web app end point, which updates a
+                Google Sheet with the registration data.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Forms to Google Doc"
+            subtitle="Google Workspace"
+            image="img/forms-to-doc-doc.png"
+            target="forms-to-doc.html"
+            topics="gas form sheet doc"
+          >
+            <div slot="description">
+              <p>
+                The client needed to collect signatures and comments on an open
+                letter. A Google Apps Script records each form submission
+                directly into a dedicated table inside a Google Doc.
+              </p>
+              <p></p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Merge Google Sheets"
+            subtitle="Google Workspace"
+            image="img/merge-sheets-dashboard.png"
+            target="merge-sheets.html"
+            topics="gas excel csv sheet drive"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script accepts a URL to a Google Drive folder
+                that contains several source files (Google Sheets, Excel, and
+                CSV). The script duplicates a sheet template, merges the source
+                files based on a common key, and then populates the templated
+                sheet. The output sheet includes a dashboard that summarizes key
+                information in the spreadsheet.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Forms Replacement"
+            subtitle="Google Workspace"
+            image="img/google-forms-replacement-form.png"
+            target="google-forms-replacement.html"
+            topics="gas webapp sheet form applet algorithm"
+          >
+            <div slot="description">
+              <p>
+                The client hit the limits of what Google Forms can offer. I
+                developed a custom form management systems that enables admins
+                to manage form questions and how they are ordered on the form.
+                Included unlimited form branching and dynamic field
+                prepopulation.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Website message from Google Sheet"
+            subtitle="Google Workspace"
+            image="img/iframe-spreadsheet-personal-message.png"
+            target="message-from-spreadsheet.html"
+            topics="gas sheet webapp"
+          >
+            <div slot="description">
+              <p>
+                In this small project, the client had a standalone website that
+                was separate from Google GSuite.
+              </p>
+              <p>
+                The client needed to present a personal message to every
+                logged-in user. Messages were stored in a two-column Google
+                Spreadsheet column containing email addresses and the message
+                for each user.
+              </p>
+              <p>
+                The project requiring fetching the right message as the user
+                accessed the message page.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

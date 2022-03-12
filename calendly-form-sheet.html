@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -80,7 +78,7 @@
         </div>
 
         <div class="summary">
-          <h2>Key Highlights</h2>
+          <h2>SUMMARY</h2>
           <p>
             This project embeds a Calendly form on a Google Apps Script web app
             page. Calendly can be pre-filled with data if the user is a
@@ -194,6 +192,77 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Pull Twitter data into Google Data Studio"
+            subtitle="Google Workspace"
+            image="img/twitter-datastudio-twitter.png"
+            target="twitter-to-datastudio.html"
+            topics="gas sheet api twitter"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script queries the Twitter API, pulling data
+                about tweets and followers into a Google Sheet, which is synched
+                with a Google Data Studio report.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Sheet to Asana via Zapier"
+            subtitle="Google Workspace"
+            image="img/sheet-zapier-asana-asana2.png"
+            target="sheet-zapier-asana.html"
+            topics="gas sheet trigger api zapier asana"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script pulls new entries from a Google Sheet in
+                real-time. It uses a Zapier webhook to insert new to-do tasks
+                into an Asana project. The payload includes a mix of standard
+                and custom Asana fields. The script updates the sheet with
+                Zapier IDs to eliminate duplicate inserts.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Calendar Events from Google Sheet"
+            subtitle="Google Workspace"
+            image="img/sheets-to-calendar-calendar.png"
+            target="sheets-to-calendar.html"
+            topics="gas calendar sheet trigger"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script tracks meeting requests that are entered
+                into a Google Sheet. The script creates Google Calendar event
+                for every registration, and populates the invite with
+                customizable title, description, guests, and more.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Update custom form in real-time"
+            subtitle="Google Workspace"
+            image="img/survey-in-survey-form1.png"
+            target="survey-in-survey.html"
+            topics="gas form sheet webapp"
+          >
+            <div slot="description">
+              <p>
+                The client needed to display a series of survey questions, and
+                then present the user with a followup question that is
+                determined in real-time, using prior survey submissions.
+              </p>
+              <p>
+                I developed a Google Apps Script web app to capture responses,
+                search for best match response, display that to the user, and
+                record all the user's answers in the sheet.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

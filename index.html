@@ -45,17 +45,13 @@
             >
             <ul id="nav-mobile" class="right hide-on-med-and-down">
               <li data-tooltip="Work">
-                <a href="./index.html"> <i class="material-icons">work</i></a>
+                <a href="./index.html"> WORK</a>
               </li>
               <li data-tooltip="Blog">
-                <a href="./blog/index.html">
-                  <i class="material-icons">rss_feed</i></a
-                >
+                <a href="./blog/index.html"> BLOG</a>
               </li>
               <li data-tooltip="Contact">
-                <a href="./contact.html">
-                  <i class="material-icons">email</i></a
-                >
+                <a href="./contact.html"> CONTACT</a>
               </li>
               <li>
                 <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -156,22 +152,37 @@
           </div>
         </div>
         <div class="row filter-row">
+          <div class="col z-depth-1">
+            <label>View projects by use case</label>
+            <select id="case-filter" class="filter-select blue">
+              <option selected value="all">All</option>
+              <option value="api">API</option>
+              <option value="csv">CSV/Excel</option>
+              <option value="email">Email</option>
+              <option value="form">Forms</option>
+              <option value="sheet">Google Sheets</option>
+              <option value="scraping">Scraping</option>
+              <option value="webapp">Web apps</option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="row filter-row">
           <div class="col s5 z-depth-1">
-            <label>Filter projects by type</label>
+            <label>View projects by type</label>
             <select multiple id="type-filter" class="filter-select pink">
               <option selected value="Cloud">Google Cloud</option>
               <option selected value="Workspace">Google Workspace</option>
               <option selected value="Other">Other</option>
             </select>
           </div>
-        </div>
+        </div> -->
 
         <portfolio-card
           title="Chrome extension for site scraping"
           subtitle="Google Workspace"
           image="img/scrape-site-extension-hero.png"
           target="scrape-site-extension.html"
-          topics="gas doc xml api"
+          topics="gas doc xml api scraping"
         >
           <div slot="description">
             <p>
@@ -239,7 +250,7 @@
           subtitle="Google Workspace"
           image="img/calendly-form-sheet-hero.png"
           target="calendly-form-sheet.html"
-          topics="gas webapp sheet api Calendly"
+          topics="gas webapp sheet form api Calendly"
         >
           <div slot="description">
             <p>
@@ -347,7 +358,7 @@
           subtitle="Google Workspace"
           image="img/sheet-pdf-email-sidebar.png"
           target="sheet-pdf-email.html"
-          topics="gas sheet mail pdf"
+          topics="gas sheet email pdf"
         >
           <div slot="description">
             <p>
@@ -416,7 +427,7 @@
           subtitle="Google Cloud"
           image="img/form-file-validation-form.png"
           target="form-file-validation.html"
-          topics="gas form sheet mail"
+          topics="gas form sheet email"
         >
           <div slot="description">
             <p>
@@ -519,7 +530,7 @@
           subtitle="Google Workspace"
           image="img/gmail-to-sheets-inbox.png"
           target="gmail-to-sheets.html"
-          topics="gas mail sheet crm"
+          topics="gas email sheet crm"
         >
           <div slot="description">
             <p>
@@ -537,7 +548,7 @@
           subtitle="Google Cloud"
           image="img/leadsharing2-email.png"
           target="lead-sharing2.html"
-          topics="gcp webapp gas mail csv"
+          topics="gcp webapp gas email csv"
         >
           <div slot="description">
             <p>
@@ -624,7 +635,7 @@
           title="CRM server in Google sheet"
           subtitle="Google Workspace"
           image="img/db-api-cover.png"
-          target="db-api.html"
+          target="crm-in-sheets.html"
           topics="gas sheets crm webapp"
         >
           <div slot="description">
@@ -707,7 +718,7 @@
           subtitle="Google Workspace"
           image="img/custom-form-form.png"
           target="custom-form.html"
-          topics="gas sheet form mail webapp"
+          topics="gas sheet form email webapp"
         >
           <div slot="description">
             <p>

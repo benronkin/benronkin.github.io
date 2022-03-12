@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -171,6 +169,107 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Geo location lookup in Google Sheet"
+            subtitle="Google Workspace"
+            image="img/geo-lookup-target.png"
+            target="geo-lookup.html"
+            topics="gas sheet api"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script looks for new IP addresses that are
+                entered in a Google Sheet. The script validates each IP address,
+                triggers a call to a Geo lookup API, and updates a different
+                sheet with geographical data, such asa city, state, and internet
+                service provider.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Chrome extension for site scraping"
+            subtitle="Google Workspace"
+            image="img/scrape-site-extension-hero.png"
+            target="scrape-site-extension.html"
+            topics="gas doc xml api scraping"
+          >
+            <div slot="description">
+              <p>
+                The client needed a Chrome extension, which his team would use
+                to mark their website pages for scraping. A Google Apps Script
+                accepts the extension's page requests, scrapes the web page, and
+                saves the data in a Google Doc based on a template.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Pull Twitter data into Google Data Studio"
+            subtitle="Google Workspace"
+            image="img/twitter-datastudio-twitter.png"
+            target="twitter-to-datastudio.html"
+            topics="gas sheet api twitter"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script queries the Twitter API, pulling data
+                about tweets and followers into a Google Sheet, which is synched
+                with a Google Data Studio report.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Integrate Calendly with Google Sheets"
+            subtitle="Google Workspace"
+            image="img/calendly-form-sheet-hero.png"
+            target="calendly-form-sheet.html"
+            topics="gas webapp sheet form api Calendly"
+          >
+            <div slot="description">
+              <p>
+                This project embeds a Calendly form on a Google Apps Script web
+                app page. Calendly can be pre-filled with data if the user is a
+                returning customer. When the user completes the registration, a
+                Calendly webhook calls the web app end point, which updates a
+                Google Sheet with the registration data.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Yahoo Finance API to Google Sheet"
+            subtitle="Google Workspace"
+            image="img/yahoo-finance-summary.png"
+            target="yahoo-finance.html"
+            topics="gas sheet api yahoo"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script pulls daily stock quotes from the Yahoo
+                Finance API. It stores the data in a Google Sheet for historical
+                look-ups. The script updates a summary sheet by calculating
+                today's price change in dollars and percentage.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Sheet to Asana via Zapier"
+            subtitle="Google Workspace"
+            image="img/sheet-zapier-asana-asana2.png"
+            target="sheet-zapier-asana.html"
+            topics="gas sheet trigger api zapier asana"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script pulls new entries from a Google Sheet in
+                real-time. It uses a Zapier webhook to insert new to-do tasks
+                into an Asana project. The payload includes a mix of standard
+                and custom Asana fields. The script updates the sheet with
+                Zapier IDs to eliminate duplicate inserts.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

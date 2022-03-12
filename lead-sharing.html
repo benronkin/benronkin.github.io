@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -71,46 +69,12 @@
         <h5>Google Cloud</h5>
 
         <div class="row">
-          <div class="col s12 m6">
+          <div class="col s12">
             <img
               src="img/leadsharing-lead.png"
               alt="Lead sharing"
               class="responsive-img"
             />
-          </div>
-          <div class="col col-r s12 m6">
-            <ul class="collection with-header">
-              <li class="collection-header"><h4>Key highlights</h4></li>
-              <li class="collection-item">
-                Wrote the application from scratch
-              </li>
-              <li class="collection-item">
-                Implemented GCP Identity-Aware Proxy for user authentication
-              </li>
-              <li class="collection-item">
-                Implemented JWT signed headers for every request
-              </li>
-              <li class="collection-item">
-                Developed a roles and permissions system from the ground up for
-                user authorization
-              </li>
-              <li class="collection-item">
-                Using GCP Firestore (NoSQL database) for data storage
-              </li>
-              <li class="collection-item">
-                Implemented multi-tenancy to handle multiple users and accounts
-                in the database
-              </li>
-              <li class="collection-item">
-                Implemented cron jobs to pipe new data to the database
-              </li>
-              <li class="collection-item">
-                Implemented EJS for view templating
-              </li>
-              <li class="collection-item">
-                Using jQuery and MaterializeCSS client-side
-              </li>
-            </ul>
           </div>
         </div>
 
@@ -217,6 +181,68 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Google Sheets to Google Cloud Storage"
+            subtitle="Google Cloud"
+            image="img/sheets-to-storage-storage.png"
+            target="sheets-to-storage.html"
+            topics="gcp gas webapp sheet csv email api"
+          >
+            <div slot="description">
+              <p>
+                The project required developing a Node.js app on Google Cloud
+                Platform that processes campaign registrations from Google
+                Sheets. The app reads the sheet via Google Sheets API, groups
+                the registrations by campaign ID, and creates a CSV file for
+                each campaign.
+              </p>
+              <p>
+                The file then gets uploaded to Google Cloud Storage, where the
+                app sets access permission on the file. Finally, the app emails
+                a download link to the CSV file.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Lead sharing app"
+            subtitle="Google Cloud"
+            image="img/leadsharing2-email.png"
+            target="lead-sharing2.html"
+            topics="gcp webapp gas email csv"
+          >
+            <div slot="description">
+              <p>
+                The client needed to share sales leads with channel partners in
+                a secured way. I implemented a solution that ingests sales leads
+                and assigned partners, builds CSV files on Google Cloud Storage,
+                and routinely emails partners links to the CSV files.
+              </p>
+              <p>
+                Partners must authenticate into their Google account to download
+                the file.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Forms Replacement"
+            subtitle="Google Workspace"
+            image="img/google-forms-replacement-form.png"
+            target="google-forms-replacement.html"
+            topics="gas webapp sheet form applet algorithm"
+          >
+            <div slot="description">
+              <p>
+                The client hit the limits of what Google Forms can offer. I
+                developed a custom form management systems that enables admins
+                to manage form questions and how they are ordered on the form.
+                Included unlimited form branching and dynamic field
+                prepopulation.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

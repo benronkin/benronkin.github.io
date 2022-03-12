@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -157,6 +155,82 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Google Sheet columns to Docs"
+            subtitle="Google Workspace"
+            image="img/columns-to-docs-cover.png"
+            target="sheet-columns-to-docs.html"
+            topics="gas sheet doc drive"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a simple Google
+                Apps Script that converts Google Sheet columns to a set of
+                Google Docs.
+              </p>
+              <p>
+                The script uses the header row as the name of each file. All
+                rows in each column are populated one after the other into the
+                body of every Google Doc.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Chrome extension for site scraping"
+            subtitle="Google Workspace"
+            image="img/scrape-site-extension-hero.png"
+            target="scrape-site-extension.html"
+            topics="gas doc xml api scraping"
+          >
+            <div slot="description">
+              <p>
+                The client needed a Chrome extension, which his team would use
+                to mark their website pages for scraping. A Google Apps Script
+                accepts the extension's page requests, scrapes the web page, and
+                saves the data in a Google Doc based on a template.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Forms Replacement"
+            subtitle="Google Workspace"
+            image="img/google-forms-replacement-form.png"
+            target="google-forms-replacement.html"
+            topics="gas webapp sheet form applet algorithm"
+          >
+            <div slot="description">
+              <p>
+                The client hit the limits of what Google Forms can offer. I
+                developed a custom form management systems that enables admins
+                to manage form questions and how they are ordered on the form.
+                Included unlimited form branching and dynamic field
+                prepopulation.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Sheet to PDF"
+            subtitle="Google Workspace"
+            image="img/sheet-to-pdf-pdf.png"
+            target="sheet-to-pdf.html"
+            topics="gas sheet pdf doc"
+          >
+            <div slot="description">
+              <p>
+                I needed an invoice generator that takes Google Sheet rows and
+                converts them to formatted PDF files.
+              </p>
+              <p>
+                I created A Google Apps Script that is invoked from a custom
+                menu option in Google Sheet and converts the sheet row into a
+                PDF by populating the row data into a formatted Google Doc
+                template.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

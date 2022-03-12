@@ -33,7 +33,7 @@ https://benronkin.com/lead-sharing2.html
 https://benronkin.com/lead-sharing.html
 https://benronkin.com/rss-parsing.html
 https://benronkin.com/data-enrichment.html
-https://benronkin.com/db-api.html
+https://benronkin.com/crm-in-sheets.html
 https://benronkin.com/survey-in-survey.html
 https://benronkin.com/sheet-columns-to-docs.html
 https://benronkin.com/sheet-to-pdf.html

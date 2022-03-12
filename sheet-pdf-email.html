@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -79,7 +77,7 @@
           />
         </div>
         <div class="summary">
-          <h2>Key Highlights</h2>
+          <h2>SUMMARY</h2>
           <p>
             A Google Sheet contains a summary sheet that aggregates data from 12
             monthly sheets. A sidebar enables users to PDF and email a single
@@ -196,6 +194,89 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Google Sheet to PDF"
+            subtitle="Google Workspace"
+            image="img/sheet-to-pdf-pdf.png"
+            target="sheet-to-pdf.html"
+            topics="gas sheet pdf doc"
+          >
+            <div slot="description">
+              <p>
+                I needed an invoice generator that takes Google Sheet rows and
+                converts them to formatted PDF files.
+              </p>
+              <p>
+                I created A Google Apps Script that is invoked from a custom
+                menu option in Google Sheet and converts the sheet row into a
+                PDF by populating the row data into a formatted Google Doc
+                template.
+              </p>
+            </div>
+          </portfolio-card>
+
+          <portfolio-card
+            title="Data enrichment workflow"
+            subtitle="Google Workspace"
+            image="img/data-enrichment-lifecycle.png"
+            target="data-enrichment.html"
+            topics="gas drive sheets excel csv email"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a sophisticated
+                workflow system that handles new file submission in Google Apps
+                Script.
+              </p>
+              <p>
+                The system cuts down on the effort to validate and enrich
+                submitted files, while providing stakeholders with a clear
+                picture regarding the status of every submission.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Sheets to Google Cloud Storage"
+            subtitle="Google Cloud"
+            image="img/sheets-to-storage-storage.png"
+            target="sheets-to-storage.html"
+            topics="gcp gas webapp sheet csv email api"
+          >
+            <div slot="description">
+              <p>
+                The project required developing a Node.js app on Google Cloud
+                Platform that processes campaign registrations from Google
+                Sheets. The app reads the sheet via Google Sheets API, groups
+                the registrations by campaign ID, and creates a CSV file for
+                each campaign.
+              </p>
+              <p>
+                The file then gets uploaded to Google Cloud Storage, where the
+                app sets access permission on the file. Finally, the app emails
+                a download link to the CSV file.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Download images automatically"
+            subtitle="Google Workspace"
+            image="img/download-images-files.png"
+            target="download-images.html"
+            topics="gas sheet drive webapp"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script solution downloads images from the web
+                into a Google Drive folder. Users can provide a Google Sheet
+                with a list of image URLs. Or they can specify a web page
+                address that the solution will crawl and fetch its images.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -80,7 +78,7 @@
         </div>
 
         <div class="summary">
-          <h2>Key Highlights</h2>
+          <h2>SUMMARY</h2>
           <p>
             This Google Apps Script looks for new XML files in a Google Drive
             folder. It takes in a customizable mapping of XML entries to CSV
@@ -175,9 +173,82 @@
             <div class="chip">prettier</div>
           </div>
         </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+        </div>
+        <portfolio-card
+          title="Data enrichment workflow"
+          subtitle="Google Workspace"
+          image="img/data-enrichment-lifecycle.png"
+          target="data-enrichment.html"
+          topics="gas drive sheets excel csv email"
+        >
+          <div slot="description">
+            <p>
+              As a solo developer on the project, I created a sophisticated
+              workflow system that handles new file submission in Google Apps
+              Script.
+            </p>
+            <p>
+              The system cuts down on the effort to validate and enrich
+              submitted files, while providing stakeholders with a clear picture
+              regarding the status of every submission.
+            </p>
+          </div>
+        </portfolio-card>
+        <portfolio-card
+          title="RSS feed parsing"
+          subtitle="Google Workspace"
+          image="img/rss-parsing-entries.png"
+          target="rss-parsing.html"
+          topics="gas sheets rss api"
+        >
+          <div slot="description">
+            <p>
+              The project needed to routinely parse a number of RSS feeds and
+              store key information about each feed item. I created a Google
+              Apps Script that parses an arbitrary list of feed URLs, and
+              updates a Google Sheet with metadata and entries of each feed.
+            </p>
+            <p>
+              The script can be run directly from the sheet menu or
+              automatically using a timer.
+            </p>
+          </div>
+        </portfolio-card>
+        <portfolio-card
+          title="Chrome extension for site scraping"
+          subtitle="Google Workspace"
+          image="img/scrape-site-extension-hero.png"
+          target="scrape-site-extension.html"
+          topics="gas doc xml api scraping"
+        >
+          <div slot="description">
+            <p>
+              The client needed a Chrome extension, which his team would use to
+              mark their website pages for scraping. A Google Apps Script
+              accepts the extension's page requests, scrapes the web page, and
+              saves the data in a Google Doc based on a template.
+            </p>
+          </div>
+        </portfolio-card>
+        <portfolio-card
+          title="Pull Twitter data into Google Data Studio"
+          subtitle="Google Workspace"
+          image="img/twitter-datastudio-twitter.png"
+          target="twitter-to-datastudio.html"
+          topics="gas sheet api twitter"
+        >
+          <div slot="description">
+            <p>
+              This Google Apps Script queries the Twitter API, pulling data
+              about tweets and followers into a Google Sheet, which is synched
+              with a Google Data Studio report.
+            </p>
+          </div>
+        </portfolio-card>
       </div>
     </main>
-
     <footer class="page-footer">
       <!-- <div class="container">
         <div class="row">

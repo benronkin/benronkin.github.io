@@ -36,31 +36,56 @@ const handleContactSubmit = e => {
 };
 
 const handleSelect = e => {
-  const instance = M.FormSelect.getInstance($("#type-filter"));
-
+  // const instance = M.FormSelect.getInstance($("#case-filter"));
+  // const userSelection = instance.val();
+  const userSelection = document.querySelector("#case-filter").value;
+  const cards = document.querySelectorAll("portfolio-card");
+  if (userSelection == "all") {
+    cards.forEach(card => card.classList.remove("hide"));
+    return;
+  }
+  cards.forEach(card => card.classList.add("hide"));
   document
-    .querySelectorAll("portfolio-card")
-    .forEach(portfolioCard => portfolioCard.classList.add("hide"));
-
-  instance.getSelectedValues().forEach(value => {
-    // Materialize doesn't seem to like multi-token option values
-    // (e.g 'Google Workspace'), so the filter now includes a single
-    // token (Workspace, Cloud, Other), so we need to add 'Google' back in
-    if (value !== "Other") {
-      value = `Google ${value}`;
-    }
-
-    document
-      .querySelectorAll(`portfolio-card[subtitle="${value}"]`)
-      .forEach(elem => elem.classList.remove("hide"));
-  });
+    .querySelectorAll(
+      `portfolio-card[data-topics*="${userSelection.toLowerCase()}"]`
+    )
+    .forEach(elem => elem.classList.remove("hide"));
 };
+
+// Handle multi type select
+// const handleSelect = e => {
+//   const instance = M.FormSelect.getInstance($("#type-filter"));
+
+//   document
+//     .querySelectorAll("portfolio-card")
+//     .forEach(portfolioCard => portfolioCard.classList.add("hide"));
+
+//   instance.getSelectedValues().forEach(value => {
+//     // Materialize doesn't seem to like multi-token option values
+//     // (e.g 'Google Workspace'), so the filter now includes a single
+//     // token (Workspace, Cloud, Other), so we need to add 'Google' back in
+//     if (value !== "Other") {
+//       value = `Google ${value}`;
+//     }
+
+//     document
+//       .querySelectorAll(`portfolio-card[subtitle="${value}"]`)
+//       .forEach(elem => elem.classList.remove("hide"));
+//   });
+// };
 
 /**
  * Logs a list of URLs for a given topic
  */
 function showUrlsByTopic(topic) {
   const allCards = document.querySelectorAll("portfolio-card");
+  console.log(
+    "\u001b[" +
+      31 +
+      "m" +
+      `Remember to update sitemap.txt by running this function without an argument.` +
+      "\u001b[0m"
+  );
   console.log(`Total case studies: ${allCards.length}`);
   const cards = topic
     ? document.querySelectorAll(

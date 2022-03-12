@@ -44,15 +44,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <!--            <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -186,6 +184,108 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Google Form File Validation"
+            subtitle="Google Cloud"
+            image="img/form-file-validation-form.png"
+            target="form-file-validation.html"
+            topics="gas form sheet email"
+          >
+            <div slot="description">
+              <p>
+                The project involved creating a Google Form that accepts file
+                uploads. Upon every upload, a Google Apps Script was to validate
+                the file against a set of validation rules that are configurable
+                by managers. The script was to email the file submitter if
+                errors occurred.
+              </p>
+              <p>
+                The script was to log every submission and its validation
+                results. Valid files are moved to a destination folder.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Email Google Sheet as PDF"
+            subtitle="Google Workspace"
+            image="img/sheet-pdf-email-sidebar.png"
+            target="sheet-pdf-email.html"
+            topics="gas sheet email pdf"
+          >
+            <div slot="description">
+              <p>
+                A Google Sheet contains a summary sheet that aggregates data
+                from 12 monthly sheets. A sidebar enables users to PDF and email
+                a single monthly sheet or the entire workbook, with customizable
+                email recipients, subject, and body.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Data enrichment workflow"
+            subtitle="Google Workspace"
+            image="img/data-enrichment-lifecycle.png"
+            target="data-enrichment.html"
+            topics="gas drive sheets excel csv email"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a sophisticated
+                workflow system that handles new file submission in Google Apps
+                Script.
+              </p>
+              <p>
+                The system cuts down on the effort to validate and enrich
+                submitted files, while providing stakeholders with a clear
+                picture regarding the status of every submission.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Custom form to Google Sheet"
+            subtitle="Google Workspace"
+            image="img/custom-form-form.png"
+            target="custom-form.html"
+            topics="gas sheet form email webapp"
+          >
+            <div slot="description">
+              <p>
+                I needed a contact form deployed for this portfolio website.
+                Opted to have a custom form that fits my site design instead of
+                using Google Form. I built a custom form that, when submitted,
+                sends the form data to a Google Apps Script that stores
+                submissions in a Google Sheet and sends me an email
+                notification.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Website message from Google Sheet"
+            subtitle="Google Workspace"
+            image="img/iframe-spreadsheet-personal-message.png"
+            target="message-from-spreadsheet.html"
+            topics="gas sheet webapp"
+          >
+            <div slot="description">
+              <p>
+                In this small project, the client had a standalone website that
+                was separate from Google GSuite.
+              </p>
+              <p>
+                The client needed to present a personal message to every
+                logged-in user. Messages were stored in a two-column Google
+                Spreadsheet column containing email addresses and the message
+                for each user.
+              </p>
+              <p>
+                The project requiring fetching the right message as the user
+                accessed the message page.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

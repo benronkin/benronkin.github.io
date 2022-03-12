@@ -46,15 +46,13 @@
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="./index.html"> <i class="material-icons">work</i></a>
+              <a href="./index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="./blog/index.html">
-                <i class="material-icons">rss_feed</i></a
-              >
+              <a href="./blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="./contact.html"> <i class="material-icons">email</i></a>
+              <a href="./contact.html"> CONTACT</a>
             </li>
             <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -82,7 +80,7 @@
         </div>
 
         <div class="summary">
-          <h2>Key Highlights</h2>
+          <h2>SUMMARY</h2>
           <p>
             This Google Apps Script queries the Twitter API, pulling data about
             tweets and followers into a Google Sheet, which is synched with a
@@ -167,6 +165,76 @@
             <div class="chip">eslint</div>
             <div class="chip">prettier</div>
           </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Yahoo Finance API to Google Sheet"
+            subtitle="Google Workspace"
+            image="img/yahoo-finance-summary.png"
+            target="yahoo-finance.html"
+            topics="gas sheet api yahoo"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script pulls daily stock quotes from the Yahoo
+                Finance API. It stores the data in a Google Sheet for historical
+                look-ups. The script updates a summary sheet by calculating
+                today's price change in dollars and percentage.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="YouTube API to Google Sheets"
+            subtitle="Google Workspace"
+            image="img/youtube-to-sheet-channels.png"
+            target="youtube-to-sheet.html"
+            topics="gas api youtube sheet"
+          >
+            <div slot="description">
+              <p>
+                The project involved pulling information about YouTube channels
+                and their videos and playlists, using the YouTube Data API. A
+                Google Apps Script was built to take an arbitrary number of
+                channel IDs, get their metadata, and then iterate through their
+                videos and playlists and get their own metadata.
+              </p>
+              <p>All information is to be pulled into a Google Sheet.</p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Chrome extension for site scraping"
+            subtitle="Google Workspace"
+            image="img/scrape-site-extension-hero.png"
+            target="scrape-site-extension.html"
+            topics="gas doc xml api scraping"
+          >
+            <div slot="description">
+              <p>
+                The client needed a Chrome extension, which his team would use
+                to mark their website pages for scraping. A Google Apps Script
+                accepts the extension's page requests, scrapes the web page, and
+                saves the data in a Google Doc based on a template.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Convert XML to CSV in Google Workspace"
+            subtitle="Google Workspace"
+            image="img/xml-csv-hero.png"
+            target="xml-to-csv.html"
+            topics="gas xml sheet excel csv"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script looks for new XML files in a Google
+                Drive folder. It takes in a customizable mapping of XML entries
+                to CSV headers, and automatically converts the XML to a CSV
+                file. Both input and output files are then automatically moved
+                to different Google Drive folders for subsequent automation.
+              </p>
+            </div>
+          </portfolio-card>
         </div>
       </div>
     </main>

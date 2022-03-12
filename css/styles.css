@@ -309,6 +309,14 @@ textarea:not(.browser-default):focus:not([readonly]) {
   background-color: var(--dark);
 }
 
+.related-cases {
+  margin-top: 75px;
+}
+
+.related-cases .h5-div {
+  margin-bottom: 75px;
+}
+
 .row {
   margin: 100px 0;
 }
@@ -351,7 +359,9 @@ textarea:not(.browser-default):focus:not([readonly]) {
   background-color: var(--white);
 }
 
-.techs .card-title {
+.techs .card-title,
+.related-cases .title
+{
   color: var(--third);
 }
 

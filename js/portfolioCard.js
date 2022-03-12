@@ -14,6 +14,10 @@ template.innerHTML = `
     text-decoration: none;
   }
 
+  h2:hover {
+    color: var(--secondary);
+  }
+
   h2 {
     color: var(--third);
     font-size: 2rem;
@@ -127,7 +131,7 @@ template.innerHTML = `
   </div>
   <div class="card-stacked">
     <div class="card-content">
-      <h2></h2>
+      <a><h2></h2></a>
       <h3></h3>
       <p><slot name="description"</p>
     </div>
