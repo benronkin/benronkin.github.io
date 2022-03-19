@@ -3,7 +3,7 @@
   --primary: #456389;
   --primary-lighter: #859bb8;
   --third: #287078;
-  --forth: #f2acb9;
+  --fourth: #f2acb9;
   --black: #260101;
   --dark: #555555;
   --white: #f0f2f1;
@@ -30,6 +30,10 @@ nav {
   background-color: var(--secondary);
 }
 
+nav ul a:hover {
+  color: var(--fourth);
+}
+
 nav#nav-home {
   background-color: transparent;
   -webkit-box-shadow: none;
@@ -37,8 +41,7 @@ nav#nav-home {
 }
 
 a.brand-logo,
-.text-in-hero
-nav i {
+.text-in-hero nav i {
   color: var(--primary-lighter);
 }
 
@@ -62,7 +65,7 @@ h1 {
   font-size: 2rem;
   margin: 50px 0;
   font-weight: 200;
-  color: var(--secondary)
+  color: var(--secondary);
 }
 
 h2 {
@@ -142,7 +145,6 @@ section#home-hero {
   margin-bottom: 10px;
   color: var(--primary-lighter);
 }
-
 
 #lead-div {
   display: flex;
@@ -360,8 +362,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
 }
 
 .techs .card-title,
-.related-cases .title
-{
+.related-cases .title {
   color: var(--third);
 }
 
@@ -392,7 +393,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
 }
 
 .testimonial-row {
-  margin: -10px; 0 0 0;
+  margin: -10px 0 0 0;
 }
 
 .text-white {
@@ -408,7 +409,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
   position: relative;
 }
 
-[data-tooltip]:hover::after {
+/* [data-tooltip]:hover::after {
   content: attr(data-tooltip);
   display: flex;
   align-items: center;
@@ -422,14 +423,18 @@ textarea:not(.browser-default):focus:not([readonly]) {
   color: var(--third);
   font-size: 0.8rem;
   width: 55px;
-}
+} */
 
 @media only screen and (max-width: 1112px) {
   .testimonial.card .card-content {
     height: 110px;
   }
 
-  h1,h2,h3,h4,h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     text-align: center;
   }
 
