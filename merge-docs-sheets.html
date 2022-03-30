@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-91362999-4");
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unlimited Document Merge | Ben Ronkin</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="./index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="./index.html"> WORK</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="./blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="./contact.html"> CONTACT</a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/ronkin" target="_blank"
+                ><img
+                  src="./img/li-48.png"
+                  alt="LinkedIn"
+                  class="responsive-img"
+                  width="65%"
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1>Unlimited Document Merge</h1>
+        <h5>Google Workspace</h5>
+
+        <div class="row top-image">
+          <img
+            src="img/merge-docs-sheets-sidebar.png"
+            alt="merge-docs-sheets-sidebar"
+            class="responsive-img"
+          />
+        </div>
+
+        <div class="summary">
+          <h2>SUMMARY</h2>
+          <p>
+            My client needed to merge multiple Google Sheet rows into templated
+            Google Docs. He had many source data tabs and document templates to
+            choose from. I created a Google Apps Script that automates data
+            merge, and scales as more data tabs and templates are created.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m5">
+            <h2>Google Docs templates</h2>
+            <p>
+              Users create Google Doc templates with placeholders. The
+              placeholder names match the column names in their Google
+              spreadsheet.
+            </p>
+            <p>
+              Templates are stored in a main Google Drive folder. The folder
+              contains sub-folders that group the templates by category (e.g.
+              "Trusts").
+            </p>
+            <p>
+              Users have complete freedom to create as many sub-folders as they need,
+              and have as many templates in each sub-folders as needed. They can always
+              rename sub-folders and templates.
+            </p>
+            <p>When users launch the sidebar, my automation scans the main folder, and 
+              pulls the names of all sub-folders and all of their respective templates.
+            </p>
+          </div>
+          <div class="col col-r s12 m7">
+            <img
+              src="img/merge-docs-sheets-template.png"
+              alt="merge-docs-sheets-template"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m7">
+            <img
+              src="img/merge-docs-sheets-sidebar.png"
+              alt="merge-docs-sheets-sidebar.png"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col s12 m5">
+            <h2>Custom Google Sheet Sidebar</h2>
+            <p>
+              Users access their Google Sheet that contains the data to merge.
+              The sheet contains multiple tabs, and users navigate to the right
+              tab, and then launch a sidebar from a custom menu.
+            </p>
+            <p>
+              Users enter the Google Drive folder that contains their Google
+              Docs templates. The automation remembers this folder for future
+              use.
+            </p>
+            <p>
+              Templates are stored in sub-folders. Users select the right
+              sub-folder from a dropdown menu. Then they select the right
+              document template located in that sub-folder.
+            </p>
+            <p>
+              Users enter the Google Drive folder in which they want to store
+              their merged document. The automation remembers this folder for
+              future use.
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Merged documents</h2>
+            <p>
+              When the user clicks the "Merge" button in the sidebar, the script
+              inspects the current tab the user is on and pulls all the rows.
+            </p>
+            <p>
+              It duplicates the Google Doc template that the user selected for
+              each row of data.
+            </p>
+            <p>
+              It replaces each placeholder in the document with the data from
+              the row based on the column header.
+            </p>
+            <p>
+              Finally, the script saves the document to the destination Google
+              Drive folder that the user selected. It also creates a PDF file
+              and stores it in the same folder.
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="img/merge-docs-sheets-drive.png"
+              alt="merge-docs-sheets-drive"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">Google Apps Script</div>
+            <div class="chip">Google Spreadsheet Service</div>
+            <div class="chip">Google Document Service</div>
+            <div class="chip">Google Drive Service</div>
+            <div class="chip">eslint</div>
+            <div class="chip">prettier</div>
+          </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Merge Google Sheets"
+            subtitle="Google Workspace"
+            image="img/merge-sheets-dashboard.png"
+            target="merge-sheets.html"
+            topics="gas excel csv sheet drive"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script accepts a URL to a Google Drive folder
+                that contains several source files (Google Sheets, Excel, and
+                CSV). The script duplicates a sheet template, merges the source
+                files based on a common key, and then populates the templated
+                sheet. The output sheet includes a dashboard that summarizes key
+                information in the spreadsheet.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Expand Google Sheet rows"
+            subtitle="Google Workspace"
+            image="img/expand-row-summary.png"
+            target="expand-row.html"
+            topics="gas sheet"
+          >
+            <div slot="description">
+              <p>
+                In this small project, the client had a Google Sheet with two
+                tabs (summary and detail), and required a way to expand summary
+                rows based on date range in each of the rows. I developed a
+                Google Apps Script to enable the client to expand the rows on
+                demand.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Data enrichment workflow"
+            subtitle="Google Workspace"
+            image="img/data-enrichment-lifecycle.png"
+            target="data-enrichment.html"
+            topics="gas drive sheets excel csv email"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a sophisticated
+                workflow system that handles new file submission in Google Apps
+                Script.
+              </p>
+              <p>
+                The system cuts down on the effort to validate and enrich
+                submitted files, while providing stakeholders with a clear
+                picture regarding the status of every submission.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Sheet columns to Docs"
+            subtitle="Google Workspace"
+            image="img/columns-to-docs-cover.png"
+            target="sheet-columns-to-docs.html"
+            topics="gas sheet doc drive"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a simple Google
+                Apps Script that converts Google Sheet columns to a set of
+                Google Docs.
+              </p>
+              <p>
+                The script uses the header row as the name of each file. All
+                rows in each column are populated one after the other into the
+                body of every Google Doc.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Forms to Google Doc"
+            subtitle="Google Workspace"
+            image="img/forms-to-doc-doc.png"
+            target="forms-to-doc.html"
+            topics="gas form sheet doc"
+          >
+            <div slot="description">
+              <p>
+                The client needed to collect signatures and comments on an open
+                letter. A Google Apps Script records each form submission
+                directly into a dedicated table inside a Google Doc.
+              </p>
+              <p></p>
+            </div>
+          </portfolio-card>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2022 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script src="./js/main.js"></script>
+    <script src="./js/portfolioCard.js"></script>
+  </body>
+</html>
