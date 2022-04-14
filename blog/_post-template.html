@@ -2,14 +2,19 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag('config', 'UA-91362999-4');
-  </script>
+      gtag("config", "UA-91362999-4");
+    </script>
     <link rel="shortcut icon" href="/img/favicon.ico" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -20,40 +25,33 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
     <link rel="stylesheet" href="../css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="160 characters" />
-    <title> | Ben Ronkin</title>
+    <title>| Ben Ronkin</title>
   </head>
 
   <body>
     <main>
       <nav>
         <div class="nav-wrapper">
-          <a
-            href="../index.html"
-            class="brand-logo"
-            style="margin-left: 20px;"
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
             >Ben Ronkin</a
           >
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li data-tooltip="Work">
-              <a href="../index.html">
-                WORK</a
-              >
+              <a href="../index.html"> WORK</a>
             </li>
             <li data-tooltip="Blog">
-              <a href="../blog/index.html">
-                BLOG</a
-              >
+              <a href="../blog/index.html"> BLOG</a>
             </li>
             <li data-tooltip="Contact">
-              <a href="../contact.html">
-                CONTACT</a
-              >
+              <a href="../contact.html"> CONTACT</a>
             </li>
             <li>
               <a href="https://www.linkedin.com/in/ronkin" target="_blank"
@@ -67,14 +65,27 @@
           </ul>
         </div>
       </nav>
-  <div class="container blog-post">
-    <h1></h1>
-    <p class="muted"><span style="display: flex; align-items: center;"><i class="material-icons">today</i></p></span>
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1></h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> April 13, 2022
+              </span>
+            </p>
+          </div>
 
-  <div class="blog-post-body">
-  
-  </div>
-</main>
+          <div class="blog-post-body">
+            <p>
+              Please <a href="../contact.html">drop me a line</a> if you have
+              any questions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
 
     <footer class="page-footer">
       <!-- <div class="container">
@@ -111,7 +122,9 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
     <script src="../js/main.js"></script>
     <script src="../js/portfolioCard.js"></script>
   </body>
