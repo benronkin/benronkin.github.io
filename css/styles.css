@@ -205,7 +205,8 @@ section#home-hero {
 .blog-post p,
 .blog-post li,
 .blog-listing p {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  line-height: 1.7rem;
 }
 
 .blog-post .lead {
