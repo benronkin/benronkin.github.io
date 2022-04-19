@@ -9,6 +9,7 @@ https://benronkin.com/blog/how-to-duplicate-drive-folders-automatically.html
 https://benronkin.com/blog/recalculating-custom-functions-in-google-sheets.html
 https://benronkin.com/blog/using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html
 https://benronkin.com/blog/using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html
+https://benronkin.com/photo-checkin.html
 https://benronkin.com/merge-docs-sheets.html
 https://benronkin.com/scrape-site-extension.html
 https://benronkin.com/scrape-website.html
