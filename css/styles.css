@@ -155,6 +155,10 @@ strong {
   margin-top: 100px;
 }
 
+.blog-post-hero {
+  margin: 0
+}
+
 .center-div {
   display: flex;
   justify-content: center;
