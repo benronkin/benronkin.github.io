@@ -120,6 +120,10 @@ section#home-hero {
   );
 }
 
+strong {
+  font-weight: 700 !important;
+}
+
 [type="checkbox"] + span:not(.lever):before {
   border: 2px solid #5a5a5a !important;
 }
@@ -445,5 +449,10 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
   a.brand-logo {
     margin: 0 !important;
+  }
+
+  .muted {
+    display: flex;
+    justify-content: center;
   }
 }
