@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-91362999-4");
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="My home renovation client needed to pull home owner data from his JobNimbus CRM, and create and populate new Google Docs with that information. I created a Google Apps Script that uses the JobNimbus API to pull customer data and automate document merge jobs."
+    />
+    <title>Document Merge with JobNimbus | Ben Ronkin</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="./index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="./index.html"> WORK</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="./blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="./contact.html"> CONTACT</a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/ronkin" target="_blank"
+                ><img
+                  src="./img/li-48.png"
+                  alt="LinkedIn"
+                  class="responsive-img"
+                  width="65%"
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1>Document Merge with JobNimbus</h1>
+        <h5>Google Workspace</h5>
+
+        <div class="row top-image">
+          <img
+            src="img/jobnimbus-merge-log.png"
+            alt="jobnimbus-merge-log"
+            class="responsive-img"
+          />
+        </div>
+
+        <div class="summary">
+          <h2>SUMMARY</h2>
+          <p>
+            My home renovation client needed to pull home owner data from his
+            JobNimbus CRM, and create and populate new Google Docs with that
+            information. I created a Google Apps Script that uses the JobNimbus
+            API to pull customer data and automate document merge jobs.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m5">
+            <h2>Get JobNimbus data</h2>
+            <p>
+              A Google Apps Script contains a function that is triggered every
+              ten minutes. The function contacts the JobNimbus API and pulls all
+              the recent jobs. The script stores the address and contact ID of
+              each job.
+            </p>
+            <p>
+              For every job, the script then triggers a second call to
+              JobNimbus, passing in the contact id. The script stores the
+              contact's name, email, and phone.
+            </p>
+          </div>
+          <div class="col col-r s12 m7">
+            <img
+              src="img/jobnimbus-merge-code.png"
+              alt="jobnimbus-merge-code"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m7">
+            <img
+              src="img/jobnimbus-merge-log.png"
+              alt="jobnimbus-merge-log"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col s12 m5">
+            <h2>Log job data</h2>
+            <p>
+              Once the JobNimbus data is collected, the screen opens a Google
+              Sheet log. It checks that the JobNimbus data isn't already in the
+              sheet, and then appends it to the sheet.
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Automated document creation</h2>
+            <p>
+              Next, the script creates a new Google Drive folder and uses the
+              job address as the name of the folder.
+            </p>
+            <p>
+              The client maintains a set of Google Doc templates inside a Google
+              Drive folder. The client can add, edit, and remove templates as
+              they see fit.
+            </p>
+            <p>
+              Once the job folder is created, the script automatically copies
+              every document in the template folder into the new job folder.
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="img/jobnimbus-merge-drive.png"
+              alt="jobnimbus-merge-drive"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m5">
+            <h2>Doc merge</h2>
+            <p>
+              The document templates contain placeholders for data insertion.
+              When the script duplicates the templates, it takes the JobNimbus
+              data for every job and contact, and pastes them over the
+              placeholders.
+            </p>
+          </div>
+          <div class="col col-r s12 m7">
+            <img
+              src="img/jobnimbus-merge-doc.png"
+              alt="jobnimbus-merge-doc"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">Google Apps Script</div>
+            <div class="chip">Google Spreadsheet Service</div>
+            <div class="chip">Google Drive Service</div>
+            <div class="chip">eslint</div>
+            <div class="chip">prettier</div>
+          </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Merge Google Sheets"
+            subtitle="Google Workspace"
+            image="img/merge-sheets-dashboard.png"
+            target="merge-sheets.html"
+            topics="gas excel csv sheet drive"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script accepts a URL to a Google Drive folder
+                that contains several source files (Google Sheets, Excel, and
+                CSV). The script duplicates a sheet template, merges the source
+                files based on a common key, and then populates the templated
+                sheet. The output sheet includes a dashboard that summarizes key
+                information in the spreadsheet.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Expand Google Sheet rows"
+            subtitle="Google Workspace"
+            image="img/expand-row-summary.png"
+            target="expand-row.html"
+            topics="gas sheet"
+          >
+            <div slot="description">
+              <p>
+                In this small project, the client had a Google Sheet with two
+                tabs (summary and detail), and required a way to expand summary
+                rows based on date range in each of the rows. I developed a
+                Google Apps Script to enable the client to expand the rows on
+                demand.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Data enrichment workflow"
+            subtitle="Google Workspace"
+            image="img/data-enrichment-lifecycle.png"
+            target="data-enrichment.html"
+            topics="gas drive sheets excel csv email"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a sophisticated
+                workflow system that handles new file submission in Google Apps
+                Script.
+              </p>
+              <p>
+                The system cuts down on the effort to validate and enrich
+                submitted files, while providing stakeholders with a clear
+                picture regarding the status of every submission.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Sheet columns to Docs"
+            subtitle="Google Workspace"
+            image="img/columns-to-docs-cover.png"
+            target="sheet-columns-to-docs.html"
+            topics="gas sheet doc drive"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a simple Google
+                Apps Script that converts Google Sheet columns to a set of
+                Google Docs.
+              </p>
+              <p>
+                The script uses the header row as the name of each file. All
+                rows in each column are populated one after the other into the
+                body of every Google Doc.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Forms to Google Doc"
+            subtitle="Google Workspace"
+            image="img/forms-to-doc-doc.png"
+            target="forms-to-doc.html"
+            topics="gas form sheet doc"
+          >
+            <div slot="description">
+              <p>
+                The client needed to collect signatures and comments on an open
+                letter. A Google Apps Script records each form submission
+                directly into a dedicated table inside a Google Doc.
+              </p>
+              <p></p>
+            </div>
+          </portfolio-card>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2022 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script src="./js/main.js"></script>
+    <script src="./js/portfolioCard.js"></script>
+  </body>
+</html>
