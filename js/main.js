@@ -1,3 +1,7 @@
+document.querySelector("h1").innerText = `Portfolio (${
+  document.querySelectorAll("portfolio-card").length
+})`;
+
 const handleContactSubmit = e => {
   e.preventDefault();
   const formEl = e.target;
