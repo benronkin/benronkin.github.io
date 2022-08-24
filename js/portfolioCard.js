@@ -71,10 +71,10 @@ template.innerHTML = `
   }
 
   .card.horizontal .card-image {
-    max-width: 50%;
+    // max-width: 50%;
     position: relative;
-    max-height: 250px;
-    overflow: hidden;
+    // max-height: 325px;
+    // overflow: hidden;
   }
   .card.horizontal .card-image img {
     width: 400px;
