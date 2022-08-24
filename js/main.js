@@ -1,4 +1,4 @@
-document.querySelector("h1").innerText = `Portfolio (${
+document.querySelector("#home-h1-div h1").innerText = `Portfolio (${
   document.querySelectorAll("portfolio-card").length
 })`;
 
