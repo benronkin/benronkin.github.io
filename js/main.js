@@ -1,6 +1,9 @@
-document.querySelector("#home-h1-div h1").innerText = `Portfolio (${
-  document.querySelectorAll("portfolio-card").length
-})`;
+const homepageH1 = document.querySelector("#home-h1-div");
+if (homepageH1) {
+  homepageH1.querySelector("#home-h1-div h1").innerText = `Portfolio (${
+    document.querySelectorAll("portfolio-card").length
+  })`;
+}
 
 const handleContactSubmit = e => {
   e.preventDefault();
