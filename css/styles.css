@@ -232,7 +232,8 @@ strong {
 }
 
 .btn:hover {
-  background-color: var(--forth);
+  color: var(--primary);
+  background-color: var(--secondary);
 }
 
 .chip {
