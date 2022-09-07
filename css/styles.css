@@ -245,6 +245,7 @@ strong {
 }
 
 .btn:hover {
+  color: var(--primary);
   background-color: var(--secondary);
 }
 
