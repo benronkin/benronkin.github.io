@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-91362999-4");
+    </script>
+    <link rel="shortcut icon" href="../img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Automate the creation of banners with dynamic text insertion into a slide and image exporting"
+    />
+    <title>Banner Engine | Create web banners automatically | Ben Ronkin</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="./index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="./index.html"> WORK</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="./blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="./contact.html"> CONTACT</a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/ronkin" target="_blank"
+                ><img
+                  src="../img/li-48.png"
+                  alt="LinkedIn"
+                  class="responsive-img"
+                  width="65%"
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1>Banner Engine</h1>
+        <h5>Create website banners automatically</h5>
+<!-- 
+        <div class="row top-image">
+          <img
+            src="../img/banner-engine-hero.png"
+            alt="banner-engine-hero"
+            class="responsive-img"
+            style="border: none; filter: none; box-shadow: none;"
+          />
+        </div> -->
+
+        <div class="row">
+          <div class="col s12 m9">
+            <img
+              src="../img/banner-engine-hero.png"
+              alt="banner-engine-hero"
+              class="responsive-img"
+              style="border: none; filter: none; box-shadow: none;"
+            />
+          </div>
+          <div class="col s12 m3" style="background-color: #eeeeee; padding: 20px; border-radius: 5px;">
+            <div style="font-size: 2rem; color: green;">$175</div>
+            <p>Digital download</p>
+            <p>Requires a Google account</p>
+            <p>By clicking "Buy on Gumroad" you agree to the Terms of Use.</p>
+            <div style="display: flex; justify-content: center;">
+              <script src="https://gumroad.com/js/gumroad.js"></script>
+<a class="gumroad-button" href="https://benronkin.gumroad.com/l/bannerengine">Buy on</a>
+          </div>
+            </div>
+            
+        </div>
+
+        <div class="summary">
+          <h2>Stop wasting time creating web banners</h2>
+          <p>
+            Banner Engine is a Google Workspace solution that injects text strings into Google Slides
+            and exports the slides as PNG images. Banner Engine creates dozens of banners
+            in seconds. 
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m5">
+            <h2>Easy to set up</h2>
+            <p>
+              Once you purchase Banner Engine, you will receive an email message with links to a Google Sheet and a Google Slide. 
+              The links will enable you to copy these two files. 
+            </p>
+            <p>
+              In your Google Drive, you place the Google slides in a Templates folder. You then create a second folder to house your 
+              output banners.
+            </p>
+          </div>
+          <div class="col col-r s12 m7">
+            <img
+              src="../img/banner-engine-folders.png"
+              alt="banner-engine-folders"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m8">
+            <img
+              src="../img/banner-engine-slide.png"
+              alt="banner-engine-slide"
+              class="responsive-img"
+              style="width: 90%"
+            />
+          </div>
+          <div class="col col-r s12 m4">
+            <div class="">
+              <h2>Customizable layouts</h2>
+
+              <p>
+                Inside the Google Slide file, you define the layouts. Each slide is a banner layout. You add your static
+                images and icons to the slide.
+              </p>
+              <p>
+                You also add one or more textholders that will be replaced with your actual text. In the slide note, you
+                enter the name of the layout.
+              </p>
+              <p>You can create as many layout slides as you want. You can also duplicate the Google Slide file and have 
+                different files for different aspect ratios.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <section class="horizontal-section">
+          <div class="row">
+            <div class="col s12">
+              <h2>Command center</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <img
+              src="../img/banner-engine-sheet.png"
+              alt="banner-engine-sheet"
+              class="responsive-img"
+            />
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col s12 m9">
+ 
+              <p>
+                Use the Google Sheet to manage the creation of banners.
+              </p>
+              <p>
+                Each row in the sheet represents a banner image. Banner Engine goes through your templates
+                folder and collects the names of the files and the names of their layouts automatically, so all you need
+                to do is pick up your layouts from a list.
+              </p>
+              <p>Enter your desired file name, as well as the actual text that will be inserted into the placeholders. 
+                You can have as many placeholders as you want, and you don't have to use all of them in every layout.
+              </p>
+            </div>
+          </div>
+  
+        </section>
+        
+        <div class="row">
+          <div class="col s12 m6">
+            <img
+              src="../img/banner-engine-images.png"
+              alt="banner-engine-images"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m6">
+            <div class="">
+              <h2>Your banners are ready</h2>
+
+              <p>
+                Click the custom menu option to start Banner Engine. It will go through every
+                row of the sheet and create an image for it. The image will be saved in your
+                output folder, and its URL will appear in the Google Sheet.
+              </p>
+              <p>
+                You can simply select the images in your Google Drive folder and download them
+                to your computer.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2022 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

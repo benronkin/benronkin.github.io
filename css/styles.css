@@ -1,7 +1,12 @@
 :root {
-  --primary: #456389;
+  --primary: #6c63ff;
+  --primary-old: #456389;
   --primary-lighter: #859bb8;
-  --secondary: #162d4d;
+  --secondary: #3f3d56;
+  --secondary-old: #162d4d;
+  --grey: #67625e;
+  --light-grey: #cacaca;
+  --pink: #ff6584;
   --third: #287078;
   --fourth: #f2acb9;
   --black: #260101;
@@ -27,22 +32,22 @@ main {
 }
 
 nav {
-  background-color: var(--secondary);
+  background-color: var(--light-grey);
 }
 
-nav ul a:hover {
-  color: var(--fourth);
+nav ul a {
+  color: var(--secondary);
 }
 
 nav#nav-home {
-  background-color: transparent;
+  /* background-color: transparent; */
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
 a.brand-logo,
 .text-in-hero nav i {
-  color: var(--primary-lighter);
+  color: var(--primary);
 }
 
 a:hover,
@@ -110,14 +115,15 @@ li img {
 }
 
 section#home-hero {
-  background-color: var(--secondary);
-  background: linear-gradient(
+  padding-bottom: 20px;
+  background-color: var(--light-grey);
+  /* background: linear-gradient(
     180deg,
     rgba(22, 22, 44, 1) 0%,
     rgba(22, 45, 77, 1) 30%,
     rgb(84, 104, 133) 55%,
     rgba(255, 255, 255, 1) 90%
-  );
+  ); */
 }
 
 strong {
@@ -142,17 +148,24 @@ strong {
 
 #home-h1-div {
   margin: 80px 0 50px 0;
-  border-bottom: 5px solid var(--primary-lighter);
+  border-bottom: 5px solid var(--light-grey);
 }
 
 #home-h1-div h1 {
   margin-bottom: 10px;
-  color: var(--primary-lighter);
+  color: var(--primary);
 }
 
 #lead-div {
   display: flex;
   margin-top: 100px;
+  padding: 0 10px;
+}
+
+#lead-div .lead {
+  color: var(--secondary);
+  font-size: 2rem;
+  margin-bottom: 30px;
 }
 
 .blog-post-hero {
@@ -228,11 +241,11 @@ strong {
 }
 
 .btn {
-  background-color: var(--secondary);
+  background-color: var(--primary) !important;
 }
 
 .btn:hover {
-  background-color: var(--forth);
+  background-color: var(--secondary);
 }
 
 .chip {
@@ -289,6 +302,10 @@ strong {
 
 .hide {
   display: none;
+}
+
+.horizontal-section .row {
+  margin: 20px 0;
 }
 
 input[type="text"]:not(.browser-default):focus:not([readonly]) + label,
