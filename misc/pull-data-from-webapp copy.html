@@ -1,0 +1,38 @@
+<html>
+  <head> </head>
+  <body>
+    <div id="events-list"></div>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <script>
+      fetch(
+        "https://script.google.com/macros/s/AKfycbyBArYoUfAJ6UAdTVHLs88HGM3Z1VuxwfKC_kmvLUACsa9gQ6wYJy4FXc98mzLWMkI/exec?d=events"
+      )
+        .then(response => response.json())
+        .then(events => displayEvents(events));
+
+      function displayEvents(events) {
+        const template = document.querySelector("#template-events");
+        events.forEach(event => {
+          const clone = template.content.cloneNode(true);
+          clone.querySelector("#title-div").innerText = event[0];
+          clone.querySelector("#date-div").innerText = event[1];
+          document.querySelector("#events-list").appendChild(clone);
+        });
+      }
+
+      var elem = window.parent.document.getElementById("userHtmlFrame");
+      elem.style.height = "2000px";
+    </script>
+
+    <template id="template-events">
+      <div class="row">
+        <div class="col s7" id="title-div"></div>
+        <div class="col s5" id="date-div"></div>
+      </div>
+    </template>
+  </body>
+</html>
