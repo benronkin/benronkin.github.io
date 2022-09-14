@@ -55,6 +55,12 @@ a:hover,
   color: var(--secondary);
 }
 
+a.btn:hover,
+.btn:focus {
+  color: white;
+  background-color: var(--secondary);
+}
+
 a.brand-logo:hover {
   color: var(--primary-lighter);
 }
@@ -241,11 +247,11 @@ strong {
 }
 
 .btn {
-  background-color: var(--primary) !important;
+  color: white;
+  background-color: var(--primary);
 }
 
 .btn:hover {
-  color: var(--primary);
   background-color: var(--secondary);
 }
 

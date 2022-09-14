@@ -2,8 +2,8 @@ const template = document.createElement("template");
 template.innerHTML = `
 <style>
   :root {
-    --secondary: #162d4d;
-    --primary: #456389;
+    --primary: #6c63ff;
+    --secondary: #3f3d56;
     --third: #287078;
     --forth: #f2acb9;
     --black: #260101;
@@ -36,7 +36,7 @@ template.innerHTML = `
   .btn {
     text-decoration: none;
     color: #fff;
-    background-color: var(--third);
+    background-color: var(--primary);
     text-align: center;
     letter-spacing: .5px;
 
@@ -53,7 +53,7 @@ template.innerHTML = `
   }
 
   .btn:hover {
-    background-color: var(--primary);
+    background-color: var(--secondary);
   }
   
   .card {
