@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-91362999-4");
+    </script>
+    <link rel="shortcut icon" href="../img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Automate the creation of banners with dynamic text insertion into a slide and image exporting"
+    />
+    <title>Banner Engine | Create web banners automatically | Ben Ronkin</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="./index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="./index.html"> WORK</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="./blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="./contact.html"> CONTACT</a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/ronkin" target="_blank"
+                ><img
+                  src="../img/li-48.png"
+                  alt="LinkedIn"
+                  class="responsive-img"
+                  width="65%"
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1>Buy a Banner Engine license</h1>
+
+        <div class="row">
+          <div class="col s12 m6">
+            <h2>Enter your email address</h2>
+            <p>
+              Once you complete the purchase, you will receive an email receipt
+              that includes the license key for your addon.
+            </p>
+            <p>
+              (I will never sell or share your email address, or send you any
+              marketing materials.)
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m6">
+            <form id="payment-form">
+              <input
+                type="email"
+                name="email-address"
+                id="email-address"
+                placeholder="Enter your email address"
+              />
+              <button class="btn" type="submit">Continue to payment</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2022 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .querySelector("#payment-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            fetch(
+              "https://script.google.com/macros/s/AKfycbxapFdss1pilBqzqG_fxSWAjemUHX3NezbhfX4oNo2eyGArO-lg5AGmk8wMTdLORYAj/exec?d=s",
+              {
+                headers: { "Content-Type": "application/json; charset=utf-8" },
+                method: "POST",
+                body: JSON.stringify({
+                  email: document.querySelector("#email-address").value,
+                }),
+              }
+            );
+          });
+      });
+    </script>
+  </body>
+</html>
