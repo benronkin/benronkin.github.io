@@ -117,16 +117,18 @@
             const url =
               "https://script.google.com/macros/s/AKfycbxapFdss1pilBqzqG_fxSWAjemUHX3NezbhfX4oNo2eyGArO-lg5AGmk8wMTdLORYAj/exec?d=s";
             const headers = new Headers();
-            headers.append("Content-Type", "application/json");
+            headers.append("Content-Type", "text/plain;charset=utf-8");
             const req = new Request(url, {
               method: "POST",
-              mode: "no-cors",
+              redirect: "follow",
               headers,
               body: JSON.stringify({
                 email: document.querySelector("#email-address").value,
               }),
             });
-            fetch(req).catch(err => console.log(err));
+            fetch(req)
+              .then(url => console.log(url))
+              .catch(err => console.log(err));
           });
       });
     </script>
