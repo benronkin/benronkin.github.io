@@ -131,13 +131,9 @@
             fetch(req)
               .then(response => response.json())
               .then(data => {
-                data = JSON.parse(data);
-                if (data.resp.url.startsWith("https://")) {
-                  window.open(data.resp);
-                } else {
-                  console.log("failed");
-                  console.log(data);
-                }
+                const url = JSON.parse(data).resp.url;
+                window.open(url);
+                setTimeout(1000, window.close());
               })
               .catch(err => console.log(err));
           });
