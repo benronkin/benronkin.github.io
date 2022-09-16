@@ -116,9 +116,11 @@
             e.preventDefault();
             const url =
               "https://script.google.com/macros/s/AKfycbxapFdss1pilBqzqG_fxSWAjemUHX3NezbhfX4oNo2eyGArO-lg5AGmk8wMTdLORYAj/exec?d=s";
+            const proxyUrl =
+              "https://script.google.com/macros/s/AKfycbz9aGveNUPcwM44nzT9-FYKpc8gj6Zpip-ikFdzxdXDMghMC-9rAyQTU-Kl5wWHMWjiwQ/exec?d=bed";
             const headers = new Headers();
             headers.append("Content-Type", "text/plain;charset=utf-8");
-            const req = new Request(url, {
+            const req = new Request(proxyUrl, {
               method: "POST",
               redirect: "follow",
               headers,
@@ -127,7 +129,16 @@
               }),
             });
             fetch(req)
-              .then(url => console.log(url))
+              .then(response => response.json())
+              .then(data => {
+                data = JSON.parse(data);
+                if (data.resp.url.startsWith("https://")) {
+                  window.open(data.resp);
+                } else {
+                  console.log("failed");
+                  console.log(data);
+                }
+              })
               .catch(err => console.log(err));
           });
       });
