@@ -62,7 +62,7 @@ a.btn:hover,
 }
 
 a.brand-logo:hover {
-  color: var(--primary-lighter);
+  color: var(--primary);
 }
 
 p {
