@@ -69,6 +69,7 @@
           <div class="col s12 m6">
             <form id="payment-form">
               <input
+                required
                 type="email"
                 name="email-address"
                 id="email-address"
@@ -115,12 +116,12 @@
           .addEventListener("submit", function (e) {
             e.preventDefault();
             const url =
-              "https://script.google.com/macros/s/AKfycbxapFdss1pilBqzqG_fxSWAjemUHX3NezbhfX4oNo2eyGArO-lg5AGmk8wMTdLORYAj/exec?d=s";
+              "https://script.google.com/macros/s/AKfycbwTDsKFeibiPp3wR86ZxObWLJxqQlIkje0BOIFUIsbidiGg_SUo6JnJfDTlJ0WeE8rg4g/exec?d=s";
             const proxyUrl =
               "https://script.google.com/macros/s/AKfycbz9aGveNUPcwM44nzT9-FYKpc8gj6Zpip-ikFdzxdXDMghMC-9rAyQTU-Kl5wWHMWjiwQ/exec?route=be&d=s";
             const headers = new Headers();
             headers.append("Content-Type", "text/plain;charset=utf-8");
-            const req = new Request(proxyUrl, {
+            const req = new Request(url, {
               method: "POST",
               redirect: "follow",
               headers,
@@ -131,9 +132,12 @@
             fetch(req)
               .then(response => response.json())
               .then(data => {
-                const url = JSON.parse(data).resp.url;
-                window.open(url);
-                setTimeout(1000, window.close());
+                if (data.status == "error") {
+                  console.log(data);
+                } else if (data.url) {
+                  window.open(data.url);
+                  setTimeout(1000, window.close());
+                }
               })
               .catch(err => console.log(err));
           });
