@@ -84,8 +84,13 @@
     <footer class="page-footer">
       <div class="footer-copyright">
         <div class="container space-between">
+          <div>
+            <a href="index.html">Banner Engine</a> |
+            <a href="privacy.html">Privacy</a> |
+            <a href="terms.html">Terms</a> |
+            <a href="../contact.html">Contact</a>
+          </div>
           <span>© 2022 Copyright Ben Ronkin</span>
-          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
         </div>
       </div>
     </footer>
@@ -93,8 +98,6 @@
       document.addEventListener("DOMContentLoaded", function () {
         const url =
           "https://script.google.com/macros/s/AKfycbwTDsKFeibiPp3wR86ZxObWLJxqQlIkje0BOIFUIsbidiGg_SUo6JnJfDTlJ0WeE8rg4g/exec?d=vp";
-        const proxyUrl =
-          "https://script.google.com/macros/s/AKfycbz9aGveNUPcwM44nzT9-FYKpc8gj6Zpip-ikFdzxdXDMghMC-9rAyQTU-Kl5wWHMWjiwQ/exec?route=be&d=vp";
         const headers = new Headers();
         headers.append("Content-Type", "text/plain;charset=utf-8");
         const req = new Request(url, {
@@ -128,8 +131,6 @@
           })
           .catch(err => console.log(err));
       });
-
-      // https://benronkin.com/banners/thank-you?session_id=cs_live_a1P3L7ktstDzwuFxLRxsnfCkBvFFS4k2w9eghv23oOu0FxnShcZPkuYm0T
     </script>
   </body>
 </html>
