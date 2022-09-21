@@ -70,41 +70,18 @@
       </nav>
 
       <div class="container">
-        <h1>Thank you!</h1>
+        <h1>Finalizing your order...</h1>
 
         <div class="row">
           <div class="col s12 m6">
-            <h2>Your order was successful</h2>
-            <p>
-              Thank you for purchasing the Banner Engine Add-on. Please save
-              this receipt. Your license key is below.
-            </p>
-            <div id="license-key-div"></div>
+            <h2></h2>
+            <p></p>
           </div>
         </div>
       </div>
     </main>
 
     <footer class="page-footer">
-      <!-- <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Footer Content</h5>
-            <p class="grey-text text-lighten-4">
-              You can use rows and columns here to organize your footer content.
-            </p>
-          </div>
-          <div class="col l4 offset-l2 s12">
-            <h5 class="white-text">Links</h5>
-            <ul>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-            </ul>
-          </div>
-        </div>
-      </div> -->
       <div class="footer-copyright">
         <div class="container space-between">
           <span>© 2022 Copyright Ben Ronkin</span>
@@ -114,9 +91,46 @@
     </footer>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const queryString = window.location.search;
-        console.log(queryString);
+        const url =
+          "https://script.google.com/macros/s/AKfycbxapFdss1pilBqzqG_fxSWAjemUHX3NezbhfX4oNo2eyGArO-lg5AGmk8wMTdLORYAj/exec?d=vp";
+        const proxyUrl =
+          "https://script.google.com/macros/s/AKfycbz9aGveNUPcwM44nzT9-FYKpc8gj6Zpip-ikFdzxdXDMghMC-9rAyQTU-Kl5wWHMWjiwQ/exec?route=be&d=vp";
+        const headers = new Headers();
+        headers.append("Content-Type", "text/plain;charset=utf-8");
+        const req = new Request(proxyUrl, {
+          method: "POST",
+          redirect: "follow",
+          headers,
+          body: JSON.stringify({
+            session_id: window.location.search.split("=")[1],
+          }),
+        });
+        fetch(req)
+          .then(response => response.json())
+          .then(data => {
+            const json = JSON.parse(data);
+            if (json.status == "success") {
+              document.querySelector("h1").innerText = "Order Confirmation";
+              document.querySelector("h2").innerText =
+                "Your order was successful";
+              document.querySelector("p").innerHTML =
+                "<p>Thank you for purchasing the Banner Engine Add-on license." +
+                " Please save this receipt for your records. Your license key is below. Enter the key in the add-on.</p>" +
+                `<p>Your license key:</p> <p>${json.license}</p>` +
+                `<p>Order Number: ${json.transaction_id}</p>` +
+                `<p>Order Date: ${new Date(json.date).toLocaleDateString(
+                  "en-US"
+                )}</p>` +
+                `<p>Order Sub-total: $${json.amount_subtotal}</p>` +
+                `<p>Order Total: $${json.amount_total}</p>`;
+            } else {
+              console.log(json);
+            }
+          })
+          .catch(err => console.log(err));
       });
+
+      // https://benronkin.com/banners/thank-you?session_id=cs_test_a1ndny7CDo4PRUIZmy3fgojTdYNUqjGh2ANMGpB8hl42uq7RwAojlqBNX8
     </script>
   </body>
 </html>
