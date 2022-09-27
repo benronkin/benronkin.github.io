@@ -261,6 +261,15 @@ strong {
   background-color: var(--secondary);
 }
 
+.btn-hero {
+  padding: 20px;
+  width: 150px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .chip {
   background-color: var(--primary);
   color: var(--white);
@@ -473,7 +482,8 @@ textarea:not(.browser-default):focus:not([readonly]) {
   h2,
   h3,
   h4,
-  h5 {
+  h5,
+  p {
     text-align: center;
   }
 
@@ -487,6 +497,14 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
   .muted {
     display: flex;
+    justify-content: center;
+  }
+
+  video {
+    display: none;
+  }
+
+  .mobile-center {
     justify-content: center;
   }
 }
