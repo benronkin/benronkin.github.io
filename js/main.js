@@ -5,6 +5,23 @@ if (homepageH1) {
   })`;
 }
 
+document.querySelectorAll(".info-question").forEach(s =>
+  s.addEventListener("click", function (e) {
+    const toggle = this.querySelector(".toggle");
+    const questionSpan = this.querySelector(".info-question-span");
+    const answer = this.closest("div").nextElementSibling;
+    if (toggle.innerText == "+") {
+      toggle.innerText = "–";
+      questionSpan.style["font-weight"] = 700;
+      answer.classList.remove("hide");
+    } else {
+      toggle.innerText = "+";
+      questionSpan.style["font-weight"] = 400;
+      answer.classList.add("hide");
+    }
+  })
+);
+
 const handleContactSubmit = e => {
   e.preventDefault();
   const formEl = e.target;
