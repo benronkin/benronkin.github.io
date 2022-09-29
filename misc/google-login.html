@@ -27,7 +27,7 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
       function handleCredentialResponse(response) {
-        console.log("Encoded JWT ID token: " + response.credential);
+        console.log(JSON.stringify(response));
       }
       window.onload = function () {
         google.accounts.id.initialize({
@@ -44,10 +44,6 @@
     </script>
     <div id="buttonDiv"></div>
 
-    <p>Press below to order</p>
-    <div class="btn-div">
-      <a href="https://benronkin.com" class="btn">Click me</a>
-    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script></script>
   </body>
