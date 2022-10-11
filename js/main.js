@@ -38,7 +38,7 @@ const handleContactSubmit = e => {
   document.querySelector("#contact-submit").disabled = true;
 
   const url =
-    "https://script.google.com/macros/s/AKfycbwRQpnZjqbIFLP1BYOPcQ5z0fvPdzAZ8Za8rRYKWQKYxCGxX-6p/exec";
+    "https://script.google.com/macros/s/AKfycbzxq082-HQwvCdGDTUnxESz7NVRoYNofMxtfwhHuQ5b7KkABsnoyvhLEzTBDYUdDGPj/exec";
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
 
