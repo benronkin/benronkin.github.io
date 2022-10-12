@@ -74,24 +74,37 @@
         </div>
       </div>
     </main>
-
     <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
       <div class="footer-copyright">
         <div class="container space-between">
-          <div>
-            <a href="index.html">Banner Engine</a> |
-            <a href="privacy.html">Privacy</a> |
-            <a href="terms.html">Terms</a> |
-            <a href="../contact.html">Contact</a>
-          </div>
           <span>© 2022 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
         </div>
       </div>
     </footer>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const url =
-          "https://script.google.com/macros/s/AKfycbwTDsKFeibiPp3wR86ZxObWLJxqQlIkje0BOIFUIsbidiGg_SUo6JnJfDTlJ0WeE8rg4g/exec?d=vp";
+          "https://script.google.com/macros/s/AKfycbxlokB9w4wwfZz6hqr7-4oTtmxl8w-FgFO6Tc_ObEoQQyte-Y5cf-Ygl_rY3wfKeF8HUg/exec?c=1";
         const headers = new Headers();
         headers.append("Content-Type", "text/plain;charset=utf-8");
         const req = new Request(url, {
@@ -104,23 +117,42 @@
         });
         fetch(req)
           .then(response => response.json())
-          .then(data => {
-            if (data.status == "success") {
+          .then(json => {
+            // const data = json.resp;
+            const data = [
+              "",
+              "cs_test_a1skavpCOqQ97HoSMoGTk3iex3vKHcTZM0Ivljtg9Mn0EphkD36vuBB88C",
+              "10/11/2022, 4:32:35 PM",
+              "123abc-sdfsdf",
+              "",
+              "",
+              "Ben Test",
+              "bentest679@gmail.com",
+              "",
+              "complete",
+              "usd",
+              80,
+              "prod_Mb3UlNK7FgtZuP",
+              "Dev sheet to calendar",
+              "https://docs.google.com/spreadsheets/d/1MlwqKH3p4CoSYbBzF8uXLVMnKTtn8r8exYTrhp1FQpQ/copy",
+            ];
+            if (Array.isArray(data)) {
               document.querySelector("h1").innerText = "Order Confirmation";
               document.querySelector("h2").innerText =
                 "Your order was successful";
               document.querySelector("p").innerHTML =
-                "<p>Thank you for purchasing the Banner Engine Add-on license." +
-                " Please save this receipt for your records. Your license key is below. Enter the key in the add-on.</p>" +
-                `<p>Your license key:</p> <p>${data.license}</p>` +
-                `<p>Order Number: ${data.transaction_id}</p>` +
-                `<p>Order Date: ${new Date(data.date).toLocaleDateString(
-                  "en-US"
-                )}</p>` +
-                `<p>Order Sub-total: $${data.amount_subtotal}</p>` +
-                `<p>Order Total: $${data.amount_total}</p>`;
+                `<p>Thank you for purchasing ${data[13]}.` +
+                " Please save this receipt for your records.</p>" +
+                `<p>Use <a href="${data[14]}" target="_blank">this link</a> to copy the Google Apps Script</p>` +
+                `<p>Order ID: ${data[3]}</p>` +
+                `<p>Order Date and time: ${data[2]}</p>` +
+                `<p>Order Total: ${data[10].toUpperCase()} ${data[11]}</p>` +
+                `<p>Product ID: ${data[12]}</p>` +
+                `<p>Product Name: ${data[13]}</p>`;
             } else {
-              console.log(data);
+              document.querySelector("h1").innerText =
+                "We've encountered a problem with your order";
+              document.querySelector("h2").innerText = data;
             }
           })
           .catch(err => console.log(err));

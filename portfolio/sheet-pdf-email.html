@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-91362999-4");
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A Google Sheet contains a summary sheet that aggregates data from 12 monthly sheets. A sidebar enables users to PDF and email a single monthly sheet"
+    />
+    <title>Email Google Sheet as PDF | Ben Ronkin</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+            <!---->
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1>Email Google Sheet as PDF</h1>
+        <h5>Google Workspace</h5>
+
+        <div class="row">
+          <img
+            src="../img/sheet-pdf-email-sidebar.png"
+            alt="email"
+            class="responsive-img"
+          />
+        </div>
+        <div class="summary">
+          <h2>SUMMARY</h2>
+          <p>
+            A Google Sheet contains a summary sheet that aggregates data from 12
+            monthly sheets. A sidebar enables users to PDF and email a single
+            monthly sheet or the entire workbook, with customizable email
+            recipients, subject, and body.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Data aggregation</h2>
+            <p>
+              Users enter sales data in individual monthly sheets. A summary
+              sheet dynamically aggregates the monthly data
+            </p>
+            <p>
+              Team members need to email individual sheets or the entire
+              workbook as PDF attachments.
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="../img/sheet-pdf-email-month.png"
+              alt="email"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m8">
+            <img
+              src="../img/sheet-pdf-email-sidebar.png"
+              alt="sidebar"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m4">
+            <div class="">
+              <h2>Custom data delivery</h2>
+              <p>
+                Users leverage a custom menu to open a sidebar. The sidebar lets
+                users select between emailing a specific monthly sheet or the
+                entire workbook.
+              </p>
+              <p>
+                The sidebar is prepopulated with recipients' email addresses,
+                email subject lines, and email body text. Users can change any
+                of these fields.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Dynamic data delivery</h2>
+            <p>
+              When the user clicks the EMAIL PDF button, a Google Apps Script
+              gets the data from the sidebar fields. Based on the user's
+              selection, the script creates a PDF file.
+            </p>
+            <p>
+              The script ensures that only monthly tabs can be sent as
+              individual PDFs. And if users selects to send the entire workbook,
+              then the script removes unneeded sheets, such as a config sheet
+              and the instructions sheet.
+            </p>
+            <p>
+              The script sends an automated email based on the sidebar
+              information.
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="../img/sheet-pdf-email-email.png"
+              alt="email"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m8">
+            <img
+              src="../img/sheet-pdf-email-pdf.png"
+              alt="GAS"
+              class="responsive-img"
+              style="width: 90%"
+            />
+          </div>
+          <div class="col col-r s12 m4">
+            <div class="">
+              <h2>PDF file</h2>
+              <p>
+                The email contains the PDF file as an attachment. For workbook
+                PDFs, the script ensures that only populated monthly sheets will
+                be included in the PDF. Empty monthly sheets are ignored.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">Google Apps Script</div>
+            <div class="chip">Google Spreadsheet Service</div>
+            <div class="chip">Google Gmail Service</div>
+            <div class="chip">PDF</div>
+            <div class="chip">eslint</div>
+            <div class="chip">prettier</div>
+          </div>
+        </div>
+
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Google Sheet to PDF"
+            subtitle="Google Workspace"
+            image="img/sheet-to-pdf-pdf.png"
+            target="sheet-to-pdf.html"
+            topics="gas sheet pdf doc"
+          >
+            <div slot="description">
+              <p>
+                I needed an invoice generator that takes Google Sheet rows and
+                converts them to formatted PDF files.
+              </p>
+              <p>
+                I created A Google Apps Script that is invoked from a custom
+                menu option in Google Sheet and converts the sheet row into a
+                PDF by populating the row data into a formatted Google Doc
+                template.
+              </p>
+            </div>
+          </portfolio-card>
+
+          <portfolio-card
+            title="Data enrichment workflow"
+            subtitle="Google Workspace"
+            image="img/data-enrichment-lifecycle.png"
+            target="data-enrichment.html"
+            topics="gas drive sheets excel csv email"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a sophisticated
+                workflow system that handles new file submission in Google Apps
+                Script.
+              </p>
+              <p>
+                The system cuts down on the effort to validate and enrich
+                submitted files, while providing stakeholders with a clear
+                picture regarding the status of every submission.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Sheets to Google Cloud Storage"
+            subtitle="Google Cloud"
+            image="img/sheets-to-storage-storage.png"
+            target="sheets-to-storage.html"
+            topics="gcp gas webapp sheet csv email api"
+          >
+            <div slot="description">
+              <p>
+                The project required developing a Node.js app on Google Cloud
+                Platform that processes campaign registrations from Google
+                Sheets. The app reads the sheet via Google Sheets API, groups
+                the registrations by campaign ID, and creates a CSV file for
+                each campaign.
+              </p>
+              <p>
+                The file then gets uploaded to Google Cloud Storage, where the
+                app sets access permission on the file. Finally, the app emails
+                a download link to the CSV file.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Download images automatically"
+            subtitle="Google Workspace"
+            image="img/download-images-files.png"
+            target="download-images.html"
+            topics="gas sheet drive webapp"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script solution downloads images from the web
+                into a Google Drive folder. Users can provide a Google Sheet
+                with a list of image URLs. Or they can specify a web page
+                address that the solution will crawl and fetch its images.
+              </p>
+            </div>
+          </portfolio-card>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2022 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolioCard.js"></script>
+  </body>
+</html>

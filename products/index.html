@@ -29,68 +29,73 @@
       rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
     />
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact | Ben Ronkin</title>
+    <meta
+      name="description"
+      content="Here you can purchase my Google Apps Scripts and add-ons."
+    />
+    <title>Products | Ben Ronkin</title>
   </head>
 
   <body>
     <main>
-      <nav>
-        <div class="nav-wrapper">
-          <a href="./index.html" class="brand-logo" style="margin-left: 20px"
-            >Ben Ronkin</a
-          >
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li data-tooltip="Buy scripts">
-              <a href="../products/index.html">SHOP</a>
-            </li>
-            <li data-tooltip="View work">
-              <a href="../portfolio/index.html">CASE STUDIES</a>
-            </li>
-            <li data-tooltip="Blog">
-              <a href="./blog/index.html"> BLOG</a>
-            </li>
-            <li data-tooltip="Contact">
-              <a href="./contact.html"> CONTACT</a>
-            </li>
-            <!---->
-          </ul>
-        </div>
-      </nav>
+      <section id="home-hero">
+        <nav id="nav-home">
+          <div class="nav-wrapper">
+            <a href="./index.html" class="brand-logo" style="margin-left: 20px"
+              >Ben Ronkin</a
+            >
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li data-tooltip="Buy scripts">
+                <a href="../products/index.html">SHOP</a>
+              </li>
+              <li data-tooltip="View work">
+                <a href="../portfolio/index.html">CASE STUDIES</a>
+              </li>
+              <li data-tooltip="Blog">
+                <a href="./blog/index.html"> BLOG</a>
+              </li>
+              <li data-tooltip="Contact">
+                <a href="./contact.html"> CONTACT</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </section>
+
       <div class="container">
-        <h1>Contact</h1>
-        <p class="lead" style="position: relative; z-index: 100">
-          Please use the form below to contact me. I will respond within 24
-          hours.
-        </p>
-
-        <div class="row">
-          <form id="contact-form" class="col s12 m6" autocomplete="off">
-            <div class="input-field">
-              <input id="name" type="text" name="name" autocomplete="off" />
-              <label for="name">Name</label>
-            </div>
-            <div class="input-field">
-              <input id="email" type="email" name="email" autocomplete="off" />
-              <label for="email">Email</label>
-            </div>
-            <div class="input-field">
-              <textarea
-                id="message"
-                name="message"
-                class="materialize-textarea"
-              ></textarea>
-              <label for="message">Message</label>
-            </div>
-
-            <button type="submit" id="contact-submit" class="btn">Send</button>
-            <p id="alert" class="hidden">
-              Do me a favor and fill out the three fields.
-            </p>
-          </form>
+        <div style="display: flex; justify-content: center; margin-top: 50px">
+          <a href="../banner-engine"
+            ><img
+              class="responsive-img"
+              src="../img/banner-engine-pink.png"
+              alt="Introducing Banner Engine"
+          /></a>
         </div>
+        <div>
+          <div class="">
+            <h1>Products</h1>
+          </div>
+        </div>
+
+        <portfolio-card
+          title="Create calendar Events from Google Sheet"
+          subtitle="Google Workspace"
+          image="../img/sheets-to-calendar-home.png"
+          target="./calendar-from-sheet.html"
+          topics="gas calendar sheet trigger"
+        >
+          <div slot="description">
+            <p>
+              This Google Apps Script tracks meeting requests that are entered
+              into a Google Sheet. The script creates Google Calendar event for
+              every registration, and populates the invite with customizable
+              title, description, guests, and more.
+            </p>
+          </div>
+        </portfolio-card>
       </div>
     </main>
 
@@ -98,13 +103,13 @@
       <!-- <div class="container">
         <div class="row">
           <div class="col l6 s12">
-            <h5 class="white-text">Footer Content</h5>
+            <h5 class="text-white">Footer Content</h5>
             <p class="grey-text text-lighten-4">
               You can use rows and columns here to organize your footer content.
             </p>
           </div>
           <div class="col l4 offset-l2 s12">
-            <h5 class="white-text">Links</h5>
+            <h5 class="text-white">Links</h5>
             <ul>
               <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
               <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
@@ -132,7 +137,7 @@
     <script>
       hljs.initHighlightingOnLoad();
     </script>
-    <script src="./js/main.js"></script>
-    <script src="./js/portfolioCard.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolioCard.js"></script>
   </body>
 </html>

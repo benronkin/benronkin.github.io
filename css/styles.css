@@ -6,6 +6,7 @@
   --secondary-old: #162d4d;
   --grey: #67625e;
   --light-grey: #cacaca;
+  --purple: #ce49ff;
   --pink: #ff6584;
   --third: #287078;
   --fourth: #f2acb9;
@@ -20,7 +21,10 @@ body {
   min-height: 100vh;
   flex-direction: column;
   font-family: Helvetica, Geneva, Tahoma, sans-serif;
-  color: #555555;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+  color: #444444;
 }
 
 label {
@@ -79,14 +83,14 @@ footer a:hover {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   margin: 50px 0;
   font-weight: 200;
   color: var(--secondary);
 }
 
 h2 {
-  color: var(--third);
+  color: var(--primary);
   font-size: 1.8rem;
   font-weight: 100;
   margin-top: 0;
@@ -126,8 +130,13 @@ li img {
   top: 10px;
 }
 
+section {
+  margin: 0;
+  padding: 50px 0;
+}
+
 section#home-hero {
-  padding-bottom: 20px;
+  padding: 0 0 20px 0;
   background-color: var(--light-grey);
   /* background: linear-gradient(
     180deg,
@@ -138,8 +147,56 @@ section#home-hero {
   ); */
 }
 
+section#buy-section {
+  background-color: var(--primary);
+  margin: 100px 0 0 0;
+}
+
+section#buy-section h2 {
+  color: white;
+  text-align: center;
+}
+
+section#buy-section h3 {
+  color: var(--secondary);
+  font-size: 300%;
+  font-weight: 700;
+  text-align: left;
+}
+
+section#buy-section .product-info {
+  background-color: white;
+  border-radius: 5px;
+  padding: 50px;
+  color: var(--grey);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+section#buy-section .btn-hero-single {
+  background-color: var(--secondary) !important;
+}
+
+section#buy-section .product-info p {
+  text-align: left;
+}
+
+section.hero {
+  background-color: var(--primary);
+}
+section.grey {
+  background-color: var(--light-grey) !important;
+}
+
+section .row {
+  margin: 0;
+}
+
 strong {
   font-weight: 700 !important;
+}
+
+video {
+  width: 100%;
 }
 
 [type="checkbox"] + span:not(.lever):before {
@@ -156,6 +213,7 @@ strong {
 #ben-image {
   box-shadow: none;
   position: relative;
+  margin-bottom: -10px;
 }
 
 #home-h1-div {
@@ -261,13 +319,22 @@ strong {
   background-color: var(--secondary);
 }
 
-.btn-hero {
+.btn-hero,
+.btn-hero-single {
   padding: 20px;
   width: 150px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btn-hero-single,
+.btn-hero-single:hover {
+  width: 100%;
+  background-color: var(--purple) !important;
+  color: white;
+  font-size: 1.2rem;
 }
 
 .chip {
@@ -286,6 +353,10 @@ strong {
   background-color: transparent !important;
   color: var(--primary) !important;
   font-size: 0.9rem !important;
+}
+
+.container {
+  width: 85%;
 }
 
 .container img {
@@ -324,6 +395,14 @@ strong {
 
 .hide {
   display: none;
+}
+
+.high-level {
+  text-align: center;
+  margin: auto;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
 }
 
 .horizontal-section .row {
@@ -367,8 +446,14 @@ textarea:not(.browser-default):focus:not([readonly]) {
 }
 
 .lead {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   margin-bottom: 30px;
+}
+
+.lead-center {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: auto;
 }
 
 .muted {
@@ -380,6 +465,25 @@ textarea:not(.browser-default):focus:not([readonly]) {
 .page-footer {
   padding: 10px 0;
   background-color: var(--dark);
+}
+
+.product-header {
+  margin-top: 0;
+}
+
+.product-subheader {
+  color: white;
+  font-size: 1.3rem;
+}
+
+.product-iframe-div {
+  height: 444px;
+}
+.product-ul {
+  margin-left: 20px;
+}
+.product-ul li {
+  list-style-type: square !important;
 }
 
 .related-cases {
@@ -429,12 +533,13 @@ textarea:not(.browser-default):focus:not([readonly]) {
 }
 
 .techs {
-  background-color: var(--white);
+  box-shadow: none;
+  text-align: center;
 }
 
 .techs .card-title,
 .related-cases .title {
-  color: var(--third);
+  color: var(--primary);
 }
 
 .testimonial.card {
@@ -467,6 +572,9 @@ textarea:not(.browser-default):focus:not([readonly]) {
   margin: -10px 0 0 0;
 }
 
+.text-left {
+  text-align: left;
+}
 .text-white {
   color: white;
 }
@@ -529,5 +637,39 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
   .mobile-center {
     justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  section {
+    padding: 30px 0;
+  }
+
+  section#buy-section .product-info {
+    margin-top: 20px;
+  }
+
+  .container {
+    width: 95%;
+  }
+  .high-level {
+    font-size: 1.1rem;
+  }
+  .product-subheader {
+    color: white;
+    font-size: 1.1rem;
+  }
+  .product-iframe {
+    margin: 20px auto;
+    width: 100%;
+    height: 335px;
+  }
+  .product-iframe-div {
+    width: 100%;
+    height: auto;
   }
 }

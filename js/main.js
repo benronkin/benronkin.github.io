@@ -16,7 +16,7 @@ document.querySelectorAll(".info-question").forEach(s =>
       answer.classList.remove("hide");
     } else {
       toggle.innerText = "+";
-      questionSpan.style["font-weight"] = 400;
+      questionSpan.style["font-weight"] = 300;
       answer.classList.add("hide");
     }
   })

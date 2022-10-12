@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-91362999-4");
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="I needed an invoice generator that takes Google Sheet rows and converts them to formatted PDF files. Created A Google Apps Script that is invoked"
+    />
+    <title>Google sheet to PDF | Ben Ronkin</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+            <!---->
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <h1>Google sheet to PDF</h1>
+        <h5>Google Workspace</h5>
+
+        <div class="row">
+          <div class="col s12 m6">
+            <img
+              src="../img/sheet-to-pdf-pdf.png"
+              alt="Final PDF file"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m6">
+            <ul class="collection with-header">
+              <li class="collection-header"><h4>Key highlights</h4></li>
+              <li class="collection-item">
+                Google Apps Script that generates PDF files, such as invoices,
+                from Google Sheet rows
+              </li>
+              <li class="collection-item">
+                Executes on a highlighted row in a Google Sheet
+              </li>
+              <li class="collection-item">
+                Duplicates a Google Doc template file
+              </li>
+              <li class="collection-item">
+                Populates template files with Sheet row data
+              </li>
+              <li class="collection-item">Converts doc to PDF file</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="summary">
+          <h2>Summary</h2>
+          <p>
+            I needed an invoice generator that takes Google Sheet rows and
+            converts them to formatted PDF files. Created A Google Apps Script
+            that is invoked from a custom menu option in Google Sheet and
+            converts the sheet row into a PDF by populating the row data into a
+            formatted Google Doc template.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Tabulated invoice rows</h2>
+            <p>
+              All invoice information is included in a Google Sheet, with one
+              row per invoice.
+            </p>
+            <p>
+              The Google Apps Script is launched via a custom menu while an
+              invoice row is selected.
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="../img/sheet-to-pdf-sheet.png"
+              alt="Invoice sheet"
+              class="responsive-img"
+              style="width: 75%"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-l s12 m8">
+            <img
+              src="../img/sheet-to-pdf-template.png"
+              alt="Invoice template"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m4">
+            <div class="">
+              <h2>Invoice template</h2>
+              <p>
+                An invoice template is formatted as a Google Doc. The template
+                contains placeholders for the invoice information.
+              </p>
+              <p>
+                When the script runs, it copies the template to a new file,
+                collects the row information from the sheet, and enters each
+                data item in its correct place inside the new document.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Formatted PDF file</h2>
+            <p>
+              Finally, the Google Apps Script converts the Google Doc to a PDF,
+              moves the PDF to the right Google Drive, and removes the redundant
+              Google Doc for cleanup.
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="../img/sheet-to-pdf-pdf.png"
+              alt="Invoice PDF file"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">Google Apps Script</div>
+            <div class="chip">Google Spreadsheet Service</div>
+            <div class="chip">Google Document Service</div>
+            <div class="chip">Google Drive Service</div>
+            <div class="chip">eslint</div>
+            <div class="chip">prettier</div>
+          </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Email Google Sheet as PDF"
+            subtitle="Google Workspace"
+            image="img/sheet-pdf-email-sidebar.png"
+            target="sheet-pdf-email.html"
+            topics="gas sheet email pdf"
+          >
+            <div slot="description">
+              <p>
+                A Google Sheet contains a summary sheet that aggregates data
+                from 12 monthly sheets. A sidebar enables users to PDF and email
+                a single monthly sheet or the entire workbook, with customizable
+                email recipients, subject, and body.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Data enrichment workflow"
+            subtitle="Google Workspace"
+            image="img/data-enrichment-lifecycle.png"
+            target="data-enrichment.html"
+            topics="gas drive sheets excel csv email"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a sophisticated
+                workflow system that handles new file submission in Google Apps
+                Script.
+              </p>
+              <p>
+                The system cuts down on the effort to validate and enrich
+                submitted files, while providing stakeholders with a clear
+                picture regarding the status of every submission.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Sheets to Google Cloud Storage"
+            subtitle="Google Cloud"
+            image="img/sheets-to-storage-storage.png"
+            target="sheets-to-storage.html"
+            topics="gcp gas webapp sheet csv email api"
+          >
+            <div slot="description">
+              <p>
+                The project required developing a Node.js app on Google Cloud
+                Platform that processes campaign registrations from Google
+                Sheets. The app reads the sheet via Google Sheets API, groups
+                the registrations by campaign ID, and creates a CSV file for
+                each campaign.
+              </p>
+              <p>
+                The file then gets uploaded to Google Cloud Storage, where the
+                app sets access permission on the file. Finally, the app emails
+                a download link to the CSV file.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Download images automatically"
+            subtitle="Google Workspace"
+            image="img/download-images-files.png"
+            target="download-images.html"
+            topics="gas sheet drive webapp"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script solution downloads images from the web
+                into a Google Drive folder. Users can provide a Google Sheet
+                with a list of image URLs. Or they can specify a web page
+                address that the solution will crawl and fetch its images.
+              </p>
+            </div>
+          </portfolio-card>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2022 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolioCard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-91362999-4");
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="This secured Node.js Express web application on Google Cloud Platform enables ecosystem partners to receive and pursue sales leads, and communicate their progress with their partner manager."
+    />
+    <title>Lead sharing application | Ben Ronkin</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+            <!---->
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <h1>Data management app</h1>
+        <h5>Google Cloud</h5>
+
+        <div class="row">
+          <div class="col s12">
+            <img
+              src="../img/leadsharing-lead.png"
+              alt="Lead sharing"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="summary">
+          <h2>Summary</h2>
+          <p>
+            As a solo developer on the project, I've been designing, developing,
+            releasing, and maintaining a secured Node.js Express web application
+            on Google Cloud Platform. The app enables ecosystem partners to
+            receive and pursue sales leads, and communicate their progress with
+            their partner manager.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Authentication and authorization</h2>
+            <p>
+              The app enables partner managers to register their partners. Each
+              manager sees only their partners' data. Each partner sees only
+              their data.
+            </p>
+            <p>
+              Authentication is implemented by Google Cloud Platform
+              Identity-Aware Proxy. All requests are signed with JWT.
+            </p>
+            <p>
+              Authorization is handled by a roles and permissions system that I
+              built from scratch. Every request is screened for operation
+              permission and data access permission. Users are assigned to
+              roles, and roles have permissions.
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="../img/leadsharing-home.png"
+              alt="Lead sharing"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-l s12 m8">
+            <img
+              src="../img/leadsharing-leads.png"
+              alt="Lead sharing"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m4">
+            <div class="">
+              <h2>Reduced server load</h2>
+              <p>
+                The app stores only pertinent facts in the database and push
+                them to the client. All derived attributes are calculated
+                client-side in real-time.
+              </p>
+              <p>
+                Filtering, for example, is also done client-side, using jQuery
+                to hide and show data rows as needed.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Data persistence</h2>
+            <p>
+              As required by the project's client, the app uses Google Firestore
+              NoSQL database. New leads are fed directly into the database using
+              ETL workflow that I designed and developed using Google Apps
+              Script.
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="../img/leadsharing-database.png"
+              alt="Lead sharing"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">Node.js</div>
+            <div class="chip">ExpressJS</div>
+            <div class="chip">Helmet</div>
+            <div class="chip">jsonwebtoken</div>
+            <div class="chip">EJS</div>
+            <div class="chip">jQuery</div>
+            <div class="chip">MaterializeCSS</div>
+            <div class="chip">Google Cloud Platform</div>
+            <div class="chip">Google Identity-Aware Proxy</div>
+            <div class="chip">Google Firestore</div>
+            <div class="chip">env-cmd</div>
+            <div class="chip">nodemon</div>
+            <div class="chip">eslint</div>
+            <div class="chip">prettier</div>
+          </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Google Sheets to Google Cloud Storage"
+            subtitle="Google Cloud"
+            image="img/sheets-to-storage-storage.png"
+            target="sheets-to-storage.html"
+            topics="gcp gas webapp sheet csv email api"
+          >
+            <div slot="description">
+              <p>
+                The project required developing a Node.js app on Google Cloud
+                Platform that processes campaign registrations from Google
+                Sheets. The app reads the sheet via Google Sheets API, groups
+                the registrations by campaign ID, and creates a CSV file for
+                each campaign.
+              </p>
+              <p>
+                The file then gets uploaded to Google Cloud Storage, where the
+                app sets access permission on the file. Finally, the app emails
+                a download link to the CSV file.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Lead sharing app"
+            subtitle="Google Cloud"
+            image="img/leadsharing2-email.png"
+            target="lead-sharing2.html"
+            topics="gcp webapp gas email csv"
+          >
+            <div slot="description">
+              <p>
+                The client needed to share sales leads with channel partners in
+                a secured way. I implemented a solution that ingests sales leads
+                and assigned partners, builds CSV files on Google Cloud Storage,
+                and routinely emails partners links to the CSV files.
+              </p>
+              <p>
+                Partners must authenticate into their Google account to download
+                the file.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Forms Replacement"
+            subtitle="Google Workspace"
+            image="img/google-forms-replacement-form.png"
+            target="google-forms-replacement.html"
+            topics="gas webapp sheet form applet algorithm"
+          >
+            <div slot="description">
+              <p>
+                The client hit the limits of what Google Forms can offer. I
+                developed a custom form management systems that enables admins
+                to manage form questions and how they are ordered on the form.
+                Included unlimited form branching and dynamic field
+                prepopulation.
+              </p>
+            </div>
+          </portfolio-card>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2022 Copyright Ben Ronkin</span>
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolioCard.js"></script>
+  </body>
+</html>
