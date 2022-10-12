@@ -53,8 +53,8 @@ const handleContactSubmit = e => {
     .then(() => {
       document.querySelector("#contact-form").classList.add("hidden");
       document.querySelector(
-        ".lead"
-      ).innerText = `Your message was recorded successfully. I'll be in touch soon.`;
+        ".message"
+      ).innerText = `Your message was recorded successfully. I'll reply shortly.`;
     })
     .catch(err => console.log(err));
 };

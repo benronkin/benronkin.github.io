@@ -59,37 +59,82 @@
           </ul>
         </div>
       </nav>
+
+      <section class="primary mt0">
+        <div class="container">
+          <h2>Contact</h2>
+          <div class="row" style="margin: 50px 0 0 0">
+            <div class="col s12 l8 offset-l2 product-info">
+              <p class="message text-center">
+                Please use the form below to contact me. I will respond within
+                24 hours.
+              </p>
+              <form id="contact-form" class="col s12" autocomplete="off">
+                <div class="row">
+                  <div class="col s6 input-field">
+                    <input
+                      id="name"
+                      type="text"
+                      name="name"
+                      autocomplete="off"
+                    />
+                    <label for="name">Name</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <input
+                      id="email"
+                      type="email"
+                      name="email"
+                      autocomplete="off"
+                    />
+                    <label for="email">Email</label>
+                  </div>
+                </div>
+
+                <div class="input-field">
+                  <textarea
+                    id="message"
+                    name="message"
+                    class="materialize-textarea"
+                  ></textarea>
+                  <label for="message">Message</label>
+                </div>
+
+                <button type="submit" id="contact-submit" class="btn btn-hero">
+                  Send
+                </button>
+                <p id="alert" class="hidden">
+                  Do me a favor and fill out the three fields.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div class="container">
-        <h1>Contact</h1>
-        <p class="lead" style="position: relative; z-index: 100">
-          Please use the form below to contact me. I will respond within 24
-          hours.
-        </p>
-
         <div class="row">
-          <form id="contact-form" class="col s12 m6" autocomplete="off">
-            <div class="input-field">
-              <input id="name" type="text" name="name" autocomplete="off" />
-              <label for="name">Name</label>
-            </div>
-            <div class="input-field">
-              <input id="email" type="email" name="email" autocomplete="off" />
-              <label for="email">Email</label>
-            </div>
-            <div class="input-field">
-              <textarea
-                id="message"
-                name="message"
-                class="materialize-textarea"
-              ></textarea>
-              <label for="message">Message</label>
-            </div>
-
-            <button type="submit" id="contact-submit" class="btn">Send</button>
-            <p id="alert" class="hidden">
-              Do me a favor and fill out the three fields.
+          <div class="col s12 l8 offset-l2">
+            <h4>HIRE ME</h4>
+            <p>
+              If you need help customizing my Google Apps Scripts or automating
+              your Google Workspace then you can purchase a bucket of service
+              hours.
             </p>
-          </form>
+            <p>
+              Please use the form above to indicate your needs. We can then
+              schedule a call to go over your requirements in detail. After
+              that, I'll send you a payment link for the required number of
+              hours.
+            </p>
+            <p>
+              <a
+                target="_base"
+                href="https://www.upwork.com/freelancers/~014db1979c70e1e9bb?viewMode=1"
+                >View my Upwork reviews</a
+              >
+            </p>
+          </div>
         </div>
       </div>
     </main>
