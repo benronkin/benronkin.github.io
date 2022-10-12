@@ -118,24 +118,7 @@
         fetch(req)
           .then(response => response.json())
           .then(json => {
-            // const data = json.resp;
-            const data = [
-              "",
-              "cs_test_a1skavpCOqQ97HoSMoGTk3iex3vKHcTZM0Ivljtg9Mn0EphkD36vuBB88C",
-              "10/11/2022, 4:32:35 PM",
-              "123abc-sdfsdf",
-              "",
-              "",
-              "Ben Test",
-              "bentest679@gmail.com",
-              "",
-              "complete",
-              "usd",
-              80,
-              "prod_Mb3UlNK7FgtZuP",
-              "Dev sheet to calendar",
-              "https://docs.google.com/spreadsheets/d/1MlwqKH3p4CoSYbBzF8uXLVMnKTtn8r8exYTrhp1FQpQ/copy",
-            ];
+            const data = json.resp;
             if (Array.isArray(data)) {
               document.querySelector("h1").innerText = "Order Confirmation";
               document.querySelector("h2").innerText =
