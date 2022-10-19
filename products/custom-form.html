@@ -34,9 +34,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Create a Google Calendar events from entries in a Google Sheet"
+      content="Create a custom form that writes to a Google Sheet and sends email notifications"
     />
-    <title>Create Google Calendar Events from Google Sheet | Ben Ronkin</title>
+    <title>Custom form to a Google Sheet | Ben Ronkin</title>
   </head>
 
   <body>
@@ -71,11 +71,11 @@
                 class="product-header"
                 style="margin-bottom: 30px; color: white"
               >
-                Create Calendar Events from Google Sheet
+                Custom form to a Google Sheet and email alerts
               </h1>
               <p class="product-subheader">
-                Automatically add events to Google Calendar whenever rows are
-                added to a Google Sheet.
+                Save submissions from a generic form to a Google Sheet and
+                receive notifications.
               </p>
               <div style="margin-top: 30px">
                 <a href="#buy-section" class="btn btn-hero-single"
@@ -86,14 +86,14 @@
             <div class="col m12 l6">
               <div class="product-iframe-div">
                 <iframe
-                  class="product-iframe"
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/-snt4qOo03s?rel=0"
-                  title="Calendar Events from Google Sheet"
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/BIpYqtYIJK0"
+                  title="YouTube video player"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
+                  style="border: 1px solid #eeeeee"
                 ></iframe>
               </div>
             </div>
@@ -105,10 +105,11 @@
           <div class="row">
             <div class="col s12">
               <p class="high-level">
-                This Google Apps Script tracks meeting information that is
-                entered into a Google Sheet. The script creates Google Calendar
-                event for every row, and populates the invite with customizable
-                title, description, guests, and more.
+                This solution package includes a Google Apps Script that you
+                deploy as a web app, Javascript code that submits to the web
+                app, and a Google Sheet that records the submissions. The web
+                app sends you email notifications whenever a submission is
+                received.
               </p>
             </div>
           </div>
@@ -118,25 +119,19 @@
       <div class="container">
         <div class="row">
           <div class="col s12 m4">
-            <h2>Track Sheet updates</h2>
+            <h2>Custom form</h2>
             <p>
-              The script tracks a Google Sheet that aggregates meeting requests.
-              Every row in the sheet captures a single event.
+              Use my vanilla HTML and Javascript code to deploy your form in any
+              environment.
             </p>
-            <p>
-              Information for each event includes name, email, and company of
-              the requester, as well as desired date, start time, and end time.
-            </p>
-            <p>
-              After creating a calendar event, the script adds an event ID to
-              the sheet that can be used to track the event.
-            </p>
+            <p>No frameworks or special coding knowledge is required.</p>
           </div>
           <div class="col col-r s12 m8">
             <img
-              src="../img/sheets-to-calendar-events.png"
-              alt="Requests"
+              src="../img/custom-form-form.png"
+              alt="Lead sharing"
               class="responsive-img"
+              style="width: 75%"
             />
           </div>
         </div>
@@ -144,23 +139,18 @@
         <div class="row">
           <div class="col s12 m8">
             <img
-              src="../img/sheets-to-calendar-config.png"
-              alt="Config"
+              src="../img/custom-form-sheet.png"
+              alt="Lead sharing"
               class="responsive-img"
             />
           </div>
           <div class="col col-r s12 m4">
             <div class="">
-              <h2>Easy to use</h2>
+              <h2>Store submissions in a Google Sheet</h2>
               <p>
-                Business users can customize the operation of the script on
-                their own directly in the sheet. A configuration tab captures
-                the name of the calendar to use, the default title of the event,
-                the description of the event, and guests.
-              </p>
-              <p>
-                The script reads this information every time it needs to create
-                new events.
+                You deploy the spreadsheet-bound Google Apps Script as a web
+                app, and enter its URL in the supplied client-side Javascript
+                code. Form submissions are stored in the sheet.
               </p>
             </div>
           </div>
@@ -168,20 +158,17 @@
 
         <div class="row">
           <div class="col s12 m4">
-            <h2>Calendar events</h2>
+            <h2>Real-time email notifications</h2>
             <p>
-              The final result of the script is a new Google Calendar event. The
-              event includes all the information from the sheet registration row
-              and the configuration tab.
+              The web app will send you an email whenever a submission is
+              entered.
             </p>
-            <p>
-              The script uses the event ID to prevent duplication of events.
-            </p>
+            <p>This will enable you to respond quickly to every contact.</p>
           </div>
           <div class="col col-r s12 m8">
             <img
-              src="../img/sheets-to-calendar-calendar.png"
-              alt="Calendar"
+              src="../img/custom-form-email.png"
+              alt="Lead sharing"
               class="responsive-img"
             />
           </div>
@@ -194,9 +181,9 @@
             >
             <br />
             <div class="chip">Google Apps Script</div>
-            <div class="chip">GAS Triggers</div>
+            <div class="chip">Web app</div>
+            <div class="chip">Gmail Service</div>
             <div class="chip">Google Spreadsheet Service</div>
-            <div class="chip">Google Calendar Service</div>
           </div>
         </div>
       </div>
@@ -218,7 +205,7 @@
                 <li>Free email support for 30 days</li>
               </ul>
               <a
-                href="https://buy.stripe.com/eVadU7aDsfcR0yQ144"
+                href="https://buy.stripe.com/dR69DRfXM9Sx95m3cd"
                 class="btn btn-hero-single"
                 >pay with stripe</a
               >
@@ -245,7 +232,8 @@
               </div>
               <div class="info-answer hide">
                 You will receive a link to copy the Google Sheet that contains
-                the script, and add it to your Google Drive.
+                the script, and add it to your Google Drive. You'll also receive
+                implementation instructions.
               </div>
             </div>
             <div class="info-box">

@@ -11,8 +11,11 @@ https://benronkin.com/blog/recalculating-custom-functions-in-google-sheets.html
 https://benronkin.com/blog/using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html
 https://benronkin.com/blog/using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html
 https://benronkin.com/banner-engine/index.html
-https://benronkin.com/banner-engine/privacy.html
-https://benronkin.com/banner-engine/terms.html
+https://benronkin.com/products/privacy.html
+https://benronkin.com/products/terms.html
+https://benronkin.com/products/calendar-from-sheet.html
+https://benronkin.com/products/custom-form.html
+https://benronkin.com/products/youtube-to-sheet.html
 https://benronkin.com/portfolio/paypal-api-sheets.html
 https://benronkin.com/portfolio/jobnimbus-merge.html
 https://benronkin.com/portfolio/photo-checkin.html
@@ -29,11 +32,9 @@ https://benronkin.com/portfolio/geo-lookup.html
 https://benronkin.com/portfolio/yahoo-finance.html
 https://benronkin.com/portfolio/sheet-pdf-email.html
 https://benronkin.com/portfolio/sheet-zapier-asana.html
-https://benronkin.com/portfolio/sheets-to-calendar.html
 https://benronkin.com/portfolio/google-forms-replacement.html
 https://benronkin.com/portfolio/form-file-validation.html
 https://benronkin.com/portfolio/sheets-to-storage.html
-https://benronkin.com/portfolio/youtube-to-sheet.html
 https://benronkin.com/portfolio/map-in-sheets.html
 https://benronkin.com/portfolio/forms-to-doc.html
 https://benronkin.com/portfolio/gmail-to-sheets.html
@@ -45,7 +46,6 @@ https://benronkin.com/portfolio/crm-in-sheets.html
 https://benronkin.com/portfolio/survey-in-survey.html
 https://benronkin.com/portfolio/sheet-columns-to-docs.html
 https://benronkin.com/portfolio/sheet-to-pdf.html
-https://benronkin.com/portfolio/custom-form.html
 https://benronkin.com/portfolio/expand-row.html
 https://benronkin.com/portfolio/message-from-spreadsheet.html
 https://benronkin.com/portfolio/static-site-generator.html
