@@ -1,2 +1,9 @@
 deploy.sh
-blog/_post-template.html
+blog/_post-temp
+node_modules
+config
+workspace.code-workspace
+.vscode
+.prettierrc
+.gitignore
+.eslintrc.json

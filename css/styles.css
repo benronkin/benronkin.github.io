@@ -202,11 +202,11 @@ video {
   width: 100%;
 }
 
-[type="checkbox"] + span:not(.lever):before {
+[type='checkbox'] + span:not(.lever):before {
   border: 2px solid #5a5a5a !important;
 }
 
-[type="checkbox"]:checked + span:not(.lever):before {
+[type='checkbox']:checked + span:not(.lever):before {
   border-top: 1px solid transparent !important;
   border-left: 1px solid transparent !important;
   border-right: 1px solid var(--primary) !important;
@@ -345,6 +345,10 @@ video {
   color: var(--white);
 }
 
+.card-title-over-image {
+  font-size: 30px !important;
+}
+
 .col-r {
   display: flex !important;
   justify-content: flex-end !important;
@@ -435,14 +439,14 @@ video {
   align-items: center;
 }
 
-input[type="text"]:not(.browser-default):focus:not([readonly]) + label,
-input[type="email"]:not(.browser-default):focus:not([readonly]) + label,
+input[type='text']:not(.browser-default):focus:not([readonly]) + label,
+input[type='email']:not(.browser-default):focus:not([readonly]) + label,
 textarea:not(.browser-default):focus:not([readonly]) + label {
   color: var(--third);
 }
 
-input[type="text"]:not(.browser-default):focus:not([readonly]),
-input[type="email"]:not(.browser-default):focus:not([readonly]),
+input[type='text']:not(.browser-default):focus:not([readonly]),
+input[type='email']:not(.browser-default):focus:not([readonly]),
 textarea:not(.browser-default):focus:not([readonly]) {
   border-bottom: 1px solid var(--third);
   box-shadow: none;
@@ -469,6 +473,11 @@ textarea:not(.browser-default):focus:not([readonly]) {
   line-height: 1rem;
 }
 
+.outer-card-link,
+.outer-card-link:hover {
+  color: var(--secondary);
+}
+
 .page-footer {
   padding: 10px 0;
   background-color: var(--dark);
@@ -476,6 +485,8 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
 .product-header {
   margin-top: 0;
+  margin-bottom: 30px;
+  color: white;
 }
 
 .product-subheader {
@@ -483,9 +494,13 @@ textarea:not(.browser-default):focus:not([readonly]) {
   font-size: 1.3rem;
 }
 
-.product-iframe-div {
-  height: 459px;
+.product-iframe {
+  border: 1px solid #eeeeee;
+  width: 99%;
+  max-width: 560px;
+  height: 315px;
 }
+
 .product-ul {
   margin-left: 20px;
 }
@@ -585,6 +600,9 @@ textarea:not(.browser-default):focus:not([readonly]) {
 .text-left {
   text-align: left;
 }
+.text-primary {
+  color: var(--primary);
+}
 .text-white {
   color: white;
 }
@@ -641,12 +659,14 @@ textarea:not(.browser-default):focus:not([readonly]) {
     justify-content: center;
   }
 
-  video {
-    display: none;
-  }
-
   .mobile-center {
     justify-content: center;
+  }
+
+  .product-iframe {
+    margin-top: 20px;
+    height: 242px;
+    width: 420px;
   }
 }
 
@@ -672,14 +692,5 @@ textarea:not(.browser-default):focus:not([readonly]) {
   .product-subheader {
     color: white;
     font-size: 1.1rem;
-  }
-  .product-iframe {
-    margin: 20px auto;
-    width: 100%;
-    height: 335px;
-  }
-  .product-iframe-div {
-    width: 100%;
-    height: auto;
   }
 }

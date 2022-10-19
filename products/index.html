@@ -11,9 +11,9 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
+      gtag('js', new Date());
 
-      gtag("config", "UA-91362999-4");
+      gtag('config', 'UA-91362999-4');
     </script>
     <link rel="shortcut icon" href="/img/favicon.ico" />
     <link
@@ -40,46 +40,49 @@
   </head>
 
   <body>
-    <main>
-      <section id="home-hero">
-        <nav id="nav-home">
-          <div class="nav-wrapper">
-            <a href="./index.html" class="brand-logo" style="margin-left: 20px"
-              >Ben Ronkin</a
+    <nav>
+      <div class="nav-wrapper">
+        <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+          >Ben Ronkin</a
+        >
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li data-tooltip="Work">
+            <a href="./index.html">SHOP</a>
+          </li>
+          <li data-tooltip="Work">
+            <a href="../portfolio/index.html">CASE STUDIES</a>
+          </li>
+          <li data-tooltip="Blog">
+            <a href="../blog/index.html"> BLOG</a>
+          </li>
+          <li data-tooltip="Contact">
+            <a href="../contact.html"> CONTACT</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="container" style="margin-top: 0">
+        <div class="row">
+          <div class="col s12">
+            <h1
+              class="product-header text-center"
+              style="margin-bottom: 30px; color: white"
             >
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-              <li data-tooltip="Buy scripts">
-                <a href="../products/index.html">SHOP</a>
-              </li>
-              <li data-tooltip="View work">
-                <a href="../portfolio/index.html">CASE STUDIES</a>
-              </li>
-              <li data-tooltip="Blog">
-                <a href="./blog/index.html"> BLOG</a>
-              </li>
-              <li data-tooltip="Contact">
-                <a href="./contact.html"> CONTACT</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </section>
-
-      <div class="container">
-        <div style="display: flex; justify-content: center; margin-top: 50px">
-          <a href="../banner-engine"
-            ><img
-              class="responsive-img"
-              src="../img/banner-engine-pink.png"
-              alt="Introducing Banner Engine"
-          /></a>
-        </div>
-        <div>
-          <div class="">
-            <h1>Products</h1>
+              Shop Google Apps Scripts
+            </h1>
+            <p class="product-subheader text-center" style="margin: auto">
+              Automate your Google Workspace operation with customizable scripts
+              for Google Sheets, Forms, Gmail, Drive, and more.
+            </p>
           </div>
         </div>
+      </div>
+    </section>
 
+    <main>
+      <div class="container" style="margin-top: 5rem">
         <portfolio-card
           title="Create calendar Events from Google Sheet"
           subtitle="Google Workspace"
@@ -113,9 +116,10 @@
           </div>
         </portfolio-card>
         <portfolio-card
+          hidden
           title="YouTube API to Google Sheets"
           subtitle="Google Workspace"
-          image="img/youtube-to-sheet-home.png"
+          image="../img/youtube-to-sheet-home.png"
           target="portfolio/youtube-to-sheet.html"
           topics="gas api youtube sheet"
         >

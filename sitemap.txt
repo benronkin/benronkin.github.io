@@ -11,11 +11,13 @@ https://benronkin.com/blog/recalculating-custom-functions-in-google-sheets.html
 https://benronkin.com/blog/using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html
 https://benronkin.com/blog/using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html
 https://benronkin.com/banner-engine/index.html
+https://benronkin.com/products/index.html
 https://benronkin.com/products/privacy.html
 https://benronkin.com/products/terms.html
 https://benronkin.com/products/calendar-from-sheet.html
 https://benronkin.com/products/custom-form.html
 https://benronkin.com/products/youtube-to-sheet.html
+https://benronkin.com/portfolio/index.html
 https://benronkin.com/portfolio/paypal-api-sheets.html
 https://benronkin.com/portfolio/jobnimbus-merge.html
 https://benronkin.com/portfolio/photo-checkin.html
