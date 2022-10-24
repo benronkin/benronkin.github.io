@@ -11,9 +11,9 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
+      gtag('js', new Date());
 
-      gtag("config", "UA-91362999-4");
+      gtag('config', 'UA-91362999-4');
     </script>
     <link rel="shortcut icon" href="../img/favicon.ico" />
     <link
@@ -87,43 +87,44 @@
       </div>
     </footer>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener('DOMContentLoaded', async function () {
         const url =
-          "https://script.google.com/macros/s/AKfycbxlokB9w4wwfZz6hqr7-4oTtmxl8w-FgFO6Tc_ObEoQQyte-Y5cf-Ygl_rY3wfKeF8HUg/exec?c=1";
+          'https://script.google.com/macros/s/AKfycbxlokB9w4wwfZz6hqr7-4oTtmxl8w-FgFO6Tc_ObEoQQyte-Y5cf-Ygl_rY3wfKeF8HUg/exec?c=1';
         const headers = new Headers();
-        headers.append("Content-Type", "text/plain;charset=utf-8");
+        headers.append('Content-Type', 'text/plain;charset=utf-8');
         const req = new Request(url, {
-          method: "POST",
-          redirect: "follow",
+          method: 'POST',
+          redirect: 'follow',
           headers,
           body: JSON.stringify({
-            session_id: window.location.search.split("=")[1],
+            session_id: window.location.search.split('=')[1],
           }),
         });
-        fetch(req)
-          .then(response => response.json())
-          .then(json => {
-            const data = json.resp;
-            if (Array.isArray(data)) {
-              document.querySelector("h1").innerText = "Order Confirmation";
-              document.querySelector("h2").innerText =
-                "Your order was successful";
-              document.querySelector("p").innerHTML =
-                `<p>Thank you for purchasing ${data[13]}.` +
-                " Please save this receipt for your records.</p>" +
-                `<p>Use <a href="${data[14]}" target="_blank">this link</a> to copy the Google Apps Script</p>` +
-                `<p>Order ID: ${data[3]}</p>` +
-                `<p>Order Date and time: ${data[2]}</p>` +
-                `<p>Order Total: ${data[10].toUpperCase()} ${data[11]}</p>` +
-                `<p>Product ID: ${data[12]}</p>` +
-                `<p>Product Name: ${data[13]}</p>`;
-            } else {
-              document.querySelector("h1").innerText =
-                "We've encountered a problem with your order";
-              document.querySelector("h2").innerText = data;
-            }
-          })
-          .catch(err => console.log(err));
+        try {
+          const res = await fetch(req);
+          const json = await res.json();
+          const data = json.resp;
+          if (Array.isArray(data)) {
+            document.querySelector('h1').innerText = 'Order Confirmation';
+            document.querySelector('h2').innerText =
+              'Your order was successful';
+            document.querySelector('p').innerHTML =
+              `<p>Thank you for purchasing ${data[13]}.` +
+              ' Please save this receipt for your records.</p>' +
+              `<p>Use <a href="${data[14]}" target="_blank">this link</a> to copy the Google Apps Script</p>` +
+              `<p>Order ID: ${data[3]}</p>` +
+              `<p>Order Date and time: ${data[2]}</p>` +
+              `<p>Order Total: ${data[10].toUpperCase()} ${data[11]}</p>` +
+              `<p>Product ID: ${data[12]}</p>` +
+              `<p>Product Name: ${data[13]}</p>`;
+          } else {
+            document.querySelector('h1').innerText =
+              "We've encountered a problem with your order";
+            document.querySelector('h2').innerText = data;
+          }
+        } catch (error) {
+          console.log(error);
+        }
       });
     </script>
   </body>
