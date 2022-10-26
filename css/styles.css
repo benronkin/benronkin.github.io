@@ -20,11 +20,11 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  font-family: Helvetica, Geneva, Tahoma, sans-serif;
-  font-size: 16px;
+  font-family: sans-serif, Helvetica, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
   line-height: 1.5;
   font-weight: 300;
-  color: #444444;
+  color: #333333;
 }
 
 label {
@@ -267,8 +267,9 @@ video {
   max-width: 620px;
 }
 
-.blog-listing p a {
-  color: var(--third);
+.blog-listing a,
+.blog-post a {
+  color: var(--primary);
 }
 
 .blog-listing:not(:last-of-type) {
@@ -284,12 +285,19 @@ video {
 }
 
 .blog-post h1 {
+  font-size: 2rem;
   margin: 20px 0 10px 0;
 }
 
 .blog-post-body,
 .blog-post h2 {
   margin-top: 50px;
+}
+
+.blog-post h3 {
+  margin-top: 30px;
+  font-size: 1.5rem;
+  color: var(--primary-lighter);
 }
 
 .blog-post h5 {
@@ -299,18 +307,25 @@ video {
 .blog-post p,
 .blog-post li,
 .blog-listing p {
-  font-size: 1.2rem;
-  line-height: 1.7rem;
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  font-size: 17px;
+  line-height: 2rem;
+  font-weight: 400;
+}
+
+.blog-post li {
+  list-style-type: square !important;
+  margin-left: 30px;
 }
 
 .blog-post .lead {
   font-size: 1.3rem;
   font-weight: 300;
-  font-style: italic;
-  color: white;
-  background: #260101;
-  padding: 10px;
-  text-align: center;
+}
+
+.blog-post .muted {
+  color: var(--primary-lighter);
+  line-height: 1rem;
 }
 
 .btn {
@@ -650,6 +665,15 @@ textarea:not(.browser-default):focus:not([readonly]) {
   h5,
   p {
     text-align: center;
+  }
+
+  .blog-post h1,
+  .blog-post h2,
+  .blog-post h3,
+  .blog-post h4,
+  .blog-post h5,
+  .blog-post p {
+    text-align: left;
   }
 
   #ben-image {
