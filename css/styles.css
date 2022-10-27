@@ -27,6 +27,10 @@ body {
   color: #333333;
 }
 
+a {
+  color: var(--primary);
+}
+
 label {
   color: var(--third);
 }
@@ -243,6 +247,19 @@ video {
 
 .blog-post-hero {
   margin: 0;
+}
+
+.buy-this-script {
+  background-color: var(--secondary);
+  color: white;
+  font-size: 1.2rem;
+  line-height: 3rem;
+  padding-left: 20px !important;
+  border-radius: 10px;
+}
+
+.buy-this-script a {
+  color: var(--purple);
 }
 
 .center-div {
@@ -484,8 +501,24 @@ textarea:not(.browser-default):focus:not([readonly]) {
   margin: auto;
 }
 
+.mb0 {
+  margin-bottom: 0 !important;
+}
+
+.mb10 {
+  margin-bottom: 10px !important;
+}
+
+.ml20 {
+  margin-left: 20px !important;
+}
+
 .mt0 {
   margin-top: 0 !important;
+}
+
+.mt30 {
+  margin-top: 30px !important;
 }
 
 .muted {
