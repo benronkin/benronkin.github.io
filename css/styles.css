@@ -249,17 +249,27 @@ video {
   margin: 0;
 }
 
-.buy-this-script {
+.buy-this-script,
+.buy-this-script-lower {
   background-color: var(--secondary);
   color: white;
   font-size: 1.2rem;
   line-height: 3rem;
   padding-left: 20px !important;
   border-radius: 10px;
+  text-align: center;
+}
+
+.buy-this-script-lower {
+  border-radius: 0 0 10px 10px;
 }
 
 .buy-this-script a {
-  color: var(--purple);
+  background-color: white;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: var(--primary);
 }
 
 .center-div {
@@ -520,6 +530,9 @@ textarea:not(.browser-default):focus:not([readonly]) {
 .mt30 {
   margin-top: 30px !important;
 }
+.mt50 {
+  margin-top: 50px !important;
+}
 
 .muted {
   color: var(--third);
@@ -652,7 +665,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
   text-align: center;
 }
 .text-left {
-  text-align: left;
+  text-align: left !important;
 }
 .text-primary {
   color: var(--primary);
@@ -721,6 +734,10 @@ textarea:not(.browser-default):focus:not([readonly]) {
     margin: auto;
   }
 
+  .hide-small {
+    display: none;
+  }
+
   .muted {
     display: flex;
     justify-content: center;
@@ -751,6 +768,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
   .container {
     width: 95%;
   }
+
   .high-level {
     font-size: 1.1rem;
   }

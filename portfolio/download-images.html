@@ -34,9 +34,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="This Google Apps Script solution downloads images from the web into a Google Drive folder. Users can provide a Google Sheet with a list"
+      content="This Google Apps Script solution downloads images from URL list in Google Sheets into a Google Drive folder. Users can provide a Google Sheet with a list"
     />
-    <title>Download images automatically to Google Drive | Ben Ronkin</title>
+    <title>Download images from URL list in Google Sheets | Ben Ronkin</title>
   </head>
 
   <body>
@@ -64,30 +64,38 @@
       </nav>
 
       <div class="container">
-        <h1>Download images automatically to Google Drive</h1>
+        <h1>Download images from URL list in Google Sheets</h1>
         <h5>Google Apps Script</h5>
 
-        <div class="row top-image">
-          <img
-            src="../img/download-images-files.png"
-            alt="download images files"
-            class="responsive-img"
-          />
-        </div>
-
-        <div class="summary">
-          <h2>SUMMARY</h2>
-          <p>
-            This Google Apps Script solution downloads images from the web into
-            a Google Drive folder. Users can provide a Google Sheet with a list
-            of image URLs. Or they can specify a web page address that the
-            solution will crawl and fetch its images.
-          </p>
+        <div
+          class="row"
+          style="background-color: var(--primary); padding: 30px; color: white"
+        >
+          <div class="col s12 l10">
+            <p>
+              This Google Apps Script solution downloads images from URL list in
+              Google Sheets into a Google Drive folder. Use a Google Sheet with
+              a list of image URLs, or use an interface to specify a web page
+              address that the script will crawl and fetch its images.
+            </p>
+            <p class="col s12 buy-this-script mt30">
+              <span> Interested in purchasing this script? </span>
+              <a class="ml20" href="../contact.html"> Contact me</a>
+            </p>
+          </div>
+          <div class="col s12 l2 hide-small">
+            <img
+              src="../img/gas.png"
+              alt="Google Apps Script"
+              class="responsive-img"
+              style="box-shadow: none; width: 100%"
+            />
+          </div>
         </div>
 
         <div class="row">
           <div class="col s12 m7">
-            <h2>Automated image download</h2>
+            <h2>Download from a list of URLs</h2>
             <p>
               The script can run automatically by observing a Google Drive
               folder, waiting for a new sheet with a list of image URLs.
@@ -167,10 +175,16 @@
             <div class="chip">Google Spreadsheet Service</div>
             <div class="chip">Google Drive Service</div>
             <div class="chip">URL Fetch Service</div>
-            <div class="chip">eslint</div>
-            <div class="chip">prettier</div>
           </div>
         </div>
+
+        <div class="row mt30">
+          <div class="col s12 buy-this-script">
+            <span> Interested in purchasing this script? </span>
+            <a class="ml20" href="../contact.html"> Contact me</a>
+          </div>
+        </div>
+
         <div class="related-cases">
           <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
           <portfolio-card
