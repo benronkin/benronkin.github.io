@@ -395,6 +395,9 @@ video {
 
 .card-title-over-image {
   font-size: 30px !important;
+  background-color: var(--secondary);
+  opacity: 90%;
+  width: 100%;
 }
 
 .col-r {
