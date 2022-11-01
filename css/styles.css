@@ -4,7 +4,7 @@
   --primary-lighter: #859bb8;
   --secondary: #3f3d56;
   --secondary-old: #162d4d;
-  --grey: #67625e;
+  --grey: #515066;
   --light-grey: #cacaca;
   --purple: #ce49ff;
   --pink: #ff6584;
@@ -190,6 +190,11 @@ section#buy-section .product-info p {
 section.hero {
   background-color: var(--primary);
 }
+
+section.hero .container {
+  margin-top: 0;
+  padding: 100px 0;
+}
 section.grey {
   background-color: var(--light-grey) !important;
 }
@@ -249,24 +254,25 @@ video {
   margin: 0;
 }
 
-.buy-this-script,
-.buy-this-script-lower {
+.prompt,
+.prompt-lower {
   background-color: var(--secondary);
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 3rem;
   padding-left: 20px !important;
   border-radius: 10px;
   text-align: center;
 }
 
-.buy-this-script-lower {
-  border-radius: 0 0 10px 10px;
+.prompt-lower {
+  border-radius: 0;
 }
 
-.buy-this-script a {
+.prompt a,
+.prompt-lower a {
   background-color: white;
-  font-weight: 700;
+  font-weight: 500;
   padding: 5px 10px;
   border-radius: 20px;
   color: var(--primary);
@@ -550,7 +556,7 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
 .page-footer {
   padding: 10px 0;
-  background-color: var(--dark);
+  background-color: var(--grey);
 }
 
 .product-header {
@@ -584,6 +590,24 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
 .related-cases .h5-div {
   margin-bottom: 75px;
+}
+
+.review-card {
+  background-color: var(--light-grey);
+  font-weight: 500;
+}
+
+.review-card p {
+  margin: 5px 0 !important;
+}
+
+.reviewer {
+  display: flex;
+  align-items: center;
+}
+
+.reviewer i {
+  margin-right: 7px;
 }
 
 .row {
@@ -662,6 +686,10 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
 .testimonial-row {
   margin: -10px 0 0 0;
+}
+
+.text-bold {
+  font-weight: 700;
 }
 
 .text-center {
@@ -766,6 +794,10 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
   section#buy-section .product-info {
     margin-top: 20px;
+  }
+
+  section.hero .container {
+    padding: 20px 0 !important;
   }
 
   .container {

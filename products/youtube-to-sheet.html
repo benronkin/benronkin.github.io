@@ -53,6 +53,9 @@
             <li data-tooltip="Work">
               <a href="../index.html">CASE STUDIES</a>
             </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
             <li data-tooltip="Blog">
               <a href="../blog/index.html"> BLOG</a>
             </li>
@@ -121,126 +124,83 @@
           <div class="col s12 m4">
             <h2>Easy to use</h2>
             <p>
-              An instructions tab explains how to configure the Google Apps
-              Script. The instructions show the various data elements pulled for
-              channels, videos, and playlists.
+              The script uses an initialization object that centralizes the
+              names of the tabs, as well as the data keys to pull from YouTube.
+              This makes it easy to make changes in the data you want to pull
+              and store for channels, videos, and playlists.
             </p>
             <p>
               You can configure a time-based trigger to have the script pull
-              data periodically, or run it manually via a custom menu item.
+              data periodically, or run it manually via a custom menu item or
+              directly from the editor.
             </p>
           </div>
           <div class="col col-r s12 m8">
-            <img
-              src="../img/youtube-to-sheet-instructions.png"
-              class="responsive-img"
-            />
+            <img src="../img/youtube-data-code.png" class="responsive-img" />
           </div>
         </div>
 
         <div class="row">
-          <div class="col col-l s12 m8">
-            <img
-              src="../img/youtube-to-sheet-config.png"
-              class="responsive-img"
-            />
-          </div>
-          <div class="col col-r s12 m4">
-            <div class="">
-              <h2>Configurable script execution</h2>
-              <p>
-                A configuration sheet is included in the spreadsheet where you
-                specify key information for the script. You enter the names of
-                the sheets that will house channel, video, and playlist
-                information.
-              </p>
-              <p>
-                You also specify the various data elements you want to pull for
-                channels, videos, and playlists. These will appear as metadata
-                columns inside the output sheet.
-              </p>
-              <p>
-                Finally, You enter the series of YouTube channel IDs that the
-                script will run through. This makes it easy to change the data
-                that gets pulled out of the API and where it is stored.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col s12 m4">
-            <h2>YouTube channel data</h2>
-            <p>
-              When the script runs, it pulls the channel IDs from the
-              Configuration sheet and writes the metadata of each channel.
-            </p>
-            <p>
-              The metadata is determined based on the columns that you enter in
-              the Configuration sheet.
-            </p>
-          </div>
-          <div class="col col-r s12 m8">
+          <div class="col s12 m8">
             <img
               src="../img/youtube-to-sheet-channels.png"
               class="responsive-img"
             />
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col col-l s12 m8">
-            <img
-              src="../img/youtube-to-sheet-videos.png"
-              class="responsive-img"
-            />
-          </div>
-          <div class="col col-r s12 m4">
-            <div class="">
-              <h2>YouTube video data</h2>
-              <p>
-                For each channel ID in the configuration tab, the script pulls
-                all the uploaded videos. It then displays the video metadata
-                based on the columns specified in the Configuration sheet.
-              </p>
-              <p>
-                The script makes subsequent API calls to fetch more videos using
-                "nextPage" tokens, similar to how search result pages work.
-              </p>
-              <p>
-                The script ensures that each video shows up only once. To
-                improve performance, the script stops pulling video information
-                the moment it encounters an older video that was previously
-                pulled and stored in this sheet.
-              </p>
-            </div>
+          <div class="col s12 m4">
+            <h2>YouTube channel data</h2>
+            <p>
+              When the script runs, it pulls the channel IDs from the "Channel
+              IDs" tab and writes the metadata of each channel.
+            </p>
+            <p>
+              You can see in the code the various data elements that are
+              available, and make modifications as you need.
+            </p>
           </div>
         </div>
 
         <div class="row">
           <div class="col s12 m4">
+            <div class="">
+              <h2>YouTube video data</h2>
+              <p>
+                For each channel ID, the script pulls all the uploaded videos.
+                It then displays the video metadata based on the columns
+                specified in the code.
+              </p>
+              <p>
+                The script makes subsequent API calls to fetch more videos using
+                "nextPage" tokens, similar to how search result pages work.
+              </p>
+            </div>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="../img/youtube-to-sheet-videos.png"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m8">
+            <img
+              src="../img/youtube-to-sheet-playlists.png"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col s12 m4">
             <h2>YouTube playlist data</h2>
             <p>
-              For each channel ID in the configuration tab, the script pulls all
-              of the channel's playlists. It then displays the playlist metadata
-              based on the columns specified in the Configuration sheet.
+              For each channel ID, the script also pulls all of the channel's
+              playlists. It then displays the playlist metadata based on the
+              columns specified in the code.
             </p>
             <p>
               The script makes subsequent API calls to fetch more playlists
               using "nextPage" tokens, similar to how search result pages work.
             </p>
-            <p>
-              The script ensures that each playlist shows up only once. To
-              improve performance, the script stops pulling playlist information
-              the moment it encounters an older playlist that was previously
-              pulled and stored in this sheet.
-            </p>
-          </div>
-          <div class="col col-r s12 m8">
-            <img
-              src="../img/youtube-to-sheet-playlists.png"
-              class="responsive-img"
-            />
           </div>
         </div>
 
@@ -262,7 +222,7 @@
           <h2>Buy this script</h2>
           <div class="row" style="margin: 50px 0 0 0">
             <div class="col s12 l6 offset-l3 product-info">
-              <h3>$80</h3>
+              <h3>$45</h3>
               <p class="text-left">
                 The price is a one-time fee for the purchase of a script.
               </p>
@@ -274,7 +234,7 @@
                 <li>Free email support for 30 days</li>
               </ul>
               <a
-                href="https://buy.stripe.com/eVadU7aDsfcR0yQ144"
+                href="https://buy.stripe.com/dR6cQ39zod4Ja9qaEG"
                 class="btn btn-hero-single"
                 >pay with stripe</a
               >

@@ -1,6 +1,7 @@
 https://benronkin.com
 https://benronkin.com/index.html
 https://benronkin.com/contact.html
+https://benronkin.com/reviews.html
 https://benronkin.com/blog/index.html
 https://benronkin.com/blog/deploying-stripe-payments-with-google-apps-script.html
 https://benronkin.com/blog/importing-data-from-google-drive-files.html
