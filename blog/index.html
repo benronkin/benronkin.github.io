@@ -2,14 +2,19 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
 
-    gtag('config', 'UA-91362999-4');
-  </script>
+      gtag('config', 'UA-91362999-4');
+    </script>
     <link rel="shortcut icon" href="/img/favicon.ico" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -20,8 +25,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+    />
     <link rel="stylesheet" href="../css/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -55,125 +62,254 @@
         </div>
       </nav>
 
-<div class="container blog-container">
-  <h1>Google Workspace Automation</h1>
-  <h5>Increasing productivity one post at a time</h5>
+      <div class="container blog-container">
+        <h1>Google Workspace Automation</h1>
+        <h5>Increasing productivity one post at a time</h5>
+        <div class="blog-listing">
+          <h2>
+            <a href="how-to-extract-youtube-stats.html"
+              >How to extract YouTube stats automatically and at scale</a
+            >
+          </h2>
+          <p class="muted">
+            <span style="display: flex; align-items: center"
+              ><i class="material-icons">today</i> November 1, 2022</span
+            >
+          </p>
+          <p>
+            There's often a need to extract statistics about YouTube channels;
+            specifically, data about the channels themselves, as well as their
+            videos and playlists. While it's possible to extract this data
+            manually by visiting various YouTube pages and doing a lot of
+            copying and pasting, this approach does not scale well.
+          </p>
+          <p>
+            Luckily, Google offers an API (application programming interface) to
+            extract this very information. The Google Data API offers a
+            consistent way for developers to pull data about YouTube channels,
+            videos, and playlists. Developers can write programs or scripts that
+            call the different endpoints (URLs) of the API to extract the
+            information.
 
+            <a href="how-to-extract-youtube-stats.html"
+              >Continue reading [...]</a
+            >
+          </p>
+        </div>
 
+        <div class="blog-listing">
+          <h2>
+            <a href="deploying-stripe-payments-with-google-apps-script.html"
+              >Deploying Stripe payments with Google Apps Script</a
+            >
+          </h2>
+          <p class="muted">
+            <span style="display: flex; align-items: center"
+              ><i class="material-icons">today</i>October 26, 2022</span
+            >
+          </p>
 
-  <div class="blog-listing">
-    <h2><a href="deploying-stripe-payments-with-google-apps-script.html">Deploying Stripe payments with Google Apps Script</a></h2>
-    <p class="muted"><span style="display: flex; align-items: center;"><i class="material-icons">today</i>October 26, 2022</p></span>
-      
-    <p>
-      This post details my experience in deploying Stripe payments using
-      Google Apps Script (GAS) in three different projects. The Stripe
-      platform is easy to use, and when it's combined with GAS,
-      launching a payment system is straightforward.
-    </p>
-    
-      <a href="deploying-stripe-payments-with-google-apps-script.html">Continue reading [...]</a></p>
-  </div>
+          <p>
+            This post details my experience in deploying Stripe payments using
+            Google Apps Script (GAS) in three different projects. The Stripe
+            platform is easy to use, and when it's combined with GAS, launching
+            a payment system is straightforward.
 
-  <div class="blog-listing">
-    <h2><a href="how-to-duplicate-drive-folders-automatically.html">How to duplicate Google Drive folders automatically</a></h2>
-    <p class="muted"><span style="display: flex; align-items: center;"><i class="material-icons">today</i>March 4, 2021</p></span>
-      
-    <p>As a Google Workspace developer, I live in Google Drive all day long. It's often the case that I 
-      need to duplicate a complex structure of Drive folders and files.</p>
-    
-    <p>Unfortunately, there is no easy way in Google Drive right now to duplicate folders quickly like you can 
-      do with a Google Sheet, for example. You have to copy stuff manually one by one, which is very annoying.</p>
-    
-    <p>In this blog post I'll walk you though the process of creating a Google Apps Script web app that will automate 
-      the folder duplication process.
-      </p>
-    
-      <a href="how-to-duplicate-drive-folders-automatically.html">Continue reading [...]</a></p>
-  </div>
+            <a href="deploying-stripe-payments-with-google-apps-script.html"
+              >Continue reading [...]</a
+            >
+          </p>
+        </div>
 
-  <div class="blog-listing">
-    <h2><a href="filtering-a-nested-array-with-another-nested-array.html">Filtering a nested array with another nested array</a></h2>
-    <p class="muted"><span style="display: flex; align-items: center;"><i class="material-icons">today</i>February 26, 2021</p></span>
-      
-    <p>I often write code that operates on Google Sheets, which means that I have to deal with nested arrays a lot.
-      One of the things I have to do is to find rows in one array that don't have corresponding rows in another nested
-      array.
-      </p>
-      <p>For instance, I may have a Google Sheet with some user information, and another sheet with file information. 
-        Files are created for unique combinations of user departments and user roles. As more users are added to the 
-        users sheet, I need to find department-role combinations that don't already have a corresponding file.
-      </p>
-      <a href="filtering-a-nested-array-with-another-nested-array.html">Continue reading [...]</a></p>
-  </div>
+        <div class="blog-listing">
+          <h2>
+            <a href="how-to-duplicate-drive-folders-automatically.html"
+              >How to duplicate Google Drive folders automatically</a
+            >
+          </h2>
+          <p class="muted">
+            <span style="display: flex; align-items: center"
+              ><i class="material-icons">today</i>March 4, 2021</span
+            >
+          </p>
 
-  <div class="blog-listing">
-    <h2><a href="dynamic-data-validation-in-google-sheets.html">Dynamic data validation in Google Sheets</a></h2>
-    <p class="muted"><span style="display: flex; align-items: center;"><i class="material-icons">today</i>February 18, 2021</p></span>
-      
-    <p>I have a Google Sheet with a column for company names. To ensure data quality, I prefer to select the company name in each row from a dropdown list 
-      so that the company is always spelled the same way. I could use the standard data validation in Google Sheet, but my list of companies contains over 
-      35,000 names, and adding all of them into a data validation rule slows down Google Sheets considerably.</p>
-    <p>
-      <a href="dynamic-data-validation-in-google-sheets.html">Continue reading [...]</a></p>
-  </div>
+          <p>
+            As a Google Workspace developer, I live in Google Drive all day
+            long. It's often the case that I need to duplicate a complex
+            structure of Drive folders and files.
+          </p>
 
-  <div class="blog-listing">
-    <h2><a href="recalculating-custom-functions-in-google-sheets.html">Recalculating custom functions in Google Sheets</a></h2>
-    <p class="muted"><span style="display: flex; align-items: center;"><i class="material-icons">today</i>August 2, 2020</p></span>
-      
-    <p>I use Google Sheets to track my stock investments. Sure, there are plenty of online tools that
-    can do this for you, but I use Sheets because I like to develop my own metrics and see if they 
-    help me make smarter buy/sell decisions in the long run.</p>
-    <p>Having custom metrics means developing custom functions in Google Apps Script and then 
-      applying them inside Google Sheet cells.
-      <a href="recalculating-custom-functions-in-google-sheets.html">Continue reading [...]</a></p>
-  </div>
+          <p>
+            Unfortunately, there is no easy way in Google Drive right now to
+            duplicate folders quickly like you can do with a Google Sheet, for
+            example. You have to copy stuff manually one by one, which is very
+            annoying.
+          </p>
 
-  <div class="blog-listing">
-    <h2><a href="using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html">Using a single environment variables file for both Google cloud function and local dev</a></h2>
-    <p class="muted"><span style="display: flex; align-items: center;"><i class="material-icons">today</i>July 11, 2020</p></span>
-      
-    <p>Whenever I need to write a cloud function for a Google Cloud Platform (GCP) project, I prefer to develop and test my code locally and deploy it as a cloud function only when it's done. It's often the case that I need to use environment variables to store important and sensitive information. For instance, if my code needs to access a Google Sheet via the Google Sheet API, then I prefer to store the sheet ID in an environment variable, instead of hard-coding it in the code.
-      <a href="using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html">Continue reading [...]</a></p>
-  </div>
+          <p>
+            In this blog post I'll walk you though the process of creating a
+            Google Apps Script web app that will automate the folder duplication
+            process.
 
-  <div class="blog-listing">
-    <h2><a href="using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html">Using the Google Sheets API in a Cloud Function on Google Cloud Platform</a></h2>
-    <p class="muted"><span style="display: flex; align-items: center;"><i class="material-icons">today</i>July 2, 2020</p></span>
-    <p>Cloud functions on Google Cloud Platform (GCP) are a great way to ship production code quickly and efficiently. I often use them to take advantage of the services that GCP offers, such as Google Sheets API.</p>
-    <p>This post details the process of using Google Cloud Platform (GCP) to deploy a cloud function that uses the Sheets API. I use the code included in this article as a template for all my GCP projects. This speeds up the process of creating new projects. 
-      <a href="using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html">Continue reading [...]</a></p>
-    </p>
-  </div>
-  
-</div>
-</main>
+            <a href="how-to-duplicate-drive-folders-automatically.html"
+              >Continue reading [...]</a
+            >
+          </p>
+        </div>
+
+        <div class="blog-listing">
+          <h2>
+            <a href="filtering-a-nested-array-with-another-nested-array.html"
+              >Filtering a nested array with another nested array</a
+            >
+          </h2>
+          <p class="muted">
+            <span style="display: flex; align-items: center"
+              ><i class="material-icons">today</i>February 26, 2021</span
+            >
+          </p>
+
+          <p>
+            I often write code that operates on Google Sheets, which means that
+            I have to deal with nested arrays a lot. One of the things I have to
+            do is to find rows in one array that don't have corresponding rows
+            in another nested array.
+          </p>
+          <p>
+            For instance, I may have a Google Sheet with some user information,
+            and another sheet with file information. Files are created for
+            unique combinations of user departments and user roles. As more
+            users are added to the users sheet, I need to find department-role
+            combinations that don't already have a corresponding file.
+
+            <a href="filtering-a-nested-array-with-another-nested-array.html"
+              >Continue reading [...]</a
+            >
+          </p>
+        </div>
+
+        <div class="blog-listing">
+          <h2>
+            <a href="dynamic-data-validation-in-google-sheets.html"
+              >Dynamic data validation in Google Sheets</a
+            >
+          </h2>
+          <p class="muted">
+            <span style="display: flex; align-items: center"
+              ><i class="material-icons">today</i>February 18, 2021</span
+            >
+          </p>
+
+          <p>
+            I have a Google Sheet with a column for company names. To ensure
+            data quality, I prefer to select the company name in each row from a
+            dropdown list so that the company is always spelled the same way. I
+            could use the standard data validation in Google Sheet, but my list
+            of companies contains over 35,000 names, and adding all of them into
+            a data validation rule slows down Google Sheets considerably.
+
+            <a href="dynamic-data-validation-in-google-sheets.html"
+              >Continue reading [...]</a
+            >
+          </p>
+        </div>
+
+        <div class="blog-listing">
+          <h2>
+            <a href="recalculating-custom-functions-in-google-sheets.html"
+              >Recalculating custom functions in Google Sheets</a
+            >
+          </h2>
+          <p class="muted">
+            <span style="display: flex; align-items: center"
+              ><i class="material-icons">today</i>August 2, 2020</span
+            >
+          </p>
+
+          <p>
+            I use Google Sheets to track my stock investments. Sure, there are
+            plenty of online tools that can do this for you, but I use Sheets
+            because I like to develop my own metrics and see if they help me
+            make smarter buy/sell decisions in the long run.
+          </p>
+          <p>
+            Having custom metrics means developing custom functions in Google
+            Apps Script and then applying them inside Google Sheet cells.
+
+            <a href="recalculating-custom-functions-in-google-sheets.html"
+              >Continue reading [...]</a
+            >
+          </p>
+        </div>
+
+        <div class="blog-listing">
+          <h2>
+            <a
+              href="using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html"
+              >Using a single environment variables file for both Google cloud
+              function and local dev</a
+            >
+          </h2>
+          <p class="muted">
+            <span style="display: flex; align-items: center"
+              ><i class="material-icons">today</i>July 11, 2020</span
+            >
+          </p>
+
+          <p>
+            Whenever I need to write a cloud function for a Google Cloud
+            Platform (GCP) project, I prefer to develop and test my code locally
+            and deploy it as a cloud function only when it's done. It's often
+            the case that I need to use environment variables to store important
+            and sensitive information. For instance, if my code needs to access
+            a Google Sheet via the Google Sheet API, then I prefer to store the
+            sheet ID in an environment variable, instead of hard-coding it in
+            the code.
+
+            <a
+              href="using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html"
+              >Continue reading [...]</a
+            >
+          </p>
+        </div>
+
+        <div class="blog-listing">
+          <h2>
+            <a
+              href="using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html"
+              >Using the Google Sheets API in a Cloud Function on Google Cloud
+              Platform</a
+            >
+          </h2>
+          <p class="muted">
+            <span style="display: flex; align-items: center"
+              ><i class="material-icons">today</i>July 2, 2020</span
+            >
+          </p>
+          <p>
+            Cloud functions on Google Cloud Platform (GCP) are a great way to
+            ship production code quickly and efficiently. I often use them to
+            take advantage of the services that GCP offers, such as Google
+            Sheets API.
+          </p>
+          <p>
+            This post details the process of using Google Cloud Platform (GCP)
+            to deploy a cloud function that uses the Sheets API. I use the code
+            included in this article as a template for all my GCP projects. This
+            speeds up the process of creating new projects.
+            <a
+              href="using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html"
+              >Continue reading [...]</a
+            >
+          </p>
+        </div>
+      </div>
+    </main>
 
     <footer class="page-footer">
-      <!-- <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Footer Content</h5>
-            <p class="grey-text text-lighten-4">
-              You can use rows and columns here to organize your footer content.
-            </p>
-          </div>
-          <div class="col l4 offset-l2 s12">
-            <h5 class="white-text">Links</h5>
-            <ul>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-            </ul>
-          </div>
-        </div>
-      </div> -->
       <div class="footer-copyright">
         <div class="container space-between">
           <span>© 2022 Copyright Ben Ronkin</span>
-          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
         </div>
       </div>
     </footer>
@@ -185,7 +321,9 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
     <script src="../js/main.js"></script>
     <script src="../js/portfolioCard.js"></script>
   </body>
