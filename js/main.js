@@ -1,79 +1,81 @@
-const homepageH1 = document.querySelector("#home-h1-div");
+/* global document */
+
+const homepageH1 = document.querySelector('#home-h1-div');
 if (homepageH1) {
-  homepageH1.querySelector("#home-h1-div h1").innerText = `Portfolio (${
-    document.querySelectorAll("portfolio-card").length
+  homepageH1.querySelector('#home-h1-div h1').innerText = `Portfolio (${
+    document.querySelectorAll('portfolio-card').length
   })`;
 }
 
-document.querySelectorAll(".info-question").forEach(s =>
-  s.addEventListener("click", function (e) {
-    const toggle = this.querySelector(".toggle");
-    const questionSpan = this.querySelector(".info-question-span");
-    const answer = this.closest("div").nextElementSibling;
-    if (toggle.innerText == "+") {
-      toggle.innerText = "–";
-      questionSpan.style["font-weight"] = 700;
-      answer.classList.remove("hide");
+document.querySelectorAll('.info-question').forEach((s) =>
+  s.addEventListener('click', function (e) {
+    const toggle = this.querySelector('.toggle');
+    const questionSpan = this.querySelector('.info-question-span');
+    const answer = this.closest('div').nextElementSibling;
+    if (toggle.innerText == '+') {
+      toggle.innerText = '–';
+      questionSpan.style['font-weight'] = 700;
+      answer.classList.remove('hide');
     } else {
-      toggle.innerText = "+";
-      questionSpan.style["font-weight"] = 300;
-      answer.classList.add("hide");
+      toggle.innerText = '+';
+      questionSpan.style['font-weight'] = 300;
+      answer.classList.add('hide');
     }
   })
 );
 
-const handleContactSubmit = e => {
+const handleContactSubmit = (e) => {
   e.preventDefault();
   const formEl = e.target;
   const formData = new FormData(formEl);
 
-  const name = formData.get("name");
-  const email = formData.get("email");
-  const message = formData.get("message");
+  const name = formData.get('name');
+  const email = formData.get('email');
+  const message = formData.get('message');
   if (!name || !email || !message) {
-    document.querySelector("#alert").classList.remove("hidden");
+    document.querySelector('#alert').classList.remove('hidden');
     return false;
   }
 
-  document.querySelector("#contact-submit").disabled = true;
+  document.querySelector('#contact-submit').disabled = true;
 
   const url =
-    "https://script.google.com/macros/s/AKfycbzxq082-HQwvCdGDTUnxESz7NVRoYNofMxtfwhHuQ5b7KkABsnoyvhLEzTBDYUdDGPj/exec";
+    'https://script.google.com/macros/s/AKfycbzxq082-HQwvCdGDTUnxESz7NVRoYNofMxtfwhHuQ5b7KkABsnoyvhLEzTBDYUdDGPj/exec';
   const headers = new Headers();
-  headers.append("Content-Type", "application/json");
+  headers.append('Content-Type', 'application/json');
 
   const req = new Request(url, {
-    method: "POST",
-    mode: "no-cors",
+    method: 'POST',
+    mode: 'no-cors',
     headers,
     body: JSON.stringify([new Date(), name, email, message]),
   });
 
   fetch(req)
     .then(() => {
-      document.querySelector("#contact-form").classList.add("hidden");
+      document.querySelector('#contact-form').classList.add('hidden');
       document.querySelector(
-        ".message"
+        '.message'
       ).innerText = `Your message was recorded successfully. I'll reply shortly.`;
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
-const handleSelect = e => {
+const handleSelect = (e) => {
   // const instance = M.FormSelect.getInstance($("#case-filter"));
   // const userSelection = instance.val();
-  const userSelection = document.querySelector("#case-filter").value;
-  const cards = document.querySelectorAll("portfolio-card");
-  if (userSelection == "all") {
-    cards.forEach(card => card.classList.remove("hide"));
+  const userSelection = document.querySelector('#case-filter').value;
+  const cards = document.querySelectorAll('portfolio-card');
+  if (userSelection == 'all') {
+    cards.forEach((card) => card.classList.remove('hide'));
     return;
   }
-  cards.forEach(card => card.classList.add("hide"));
+  cards.forEach((card) => card.classList.add('hide'));
   document
     .querySelectorAll(
       `portfolio-card[data-topics*="${userSelection.toLowerCase()}"]`
     )
-    .forEach(elem => elem.classList.remove("hide"));
+    .forEach((elem) => elem.classList.remove('hide'));
 };
 
 // Handle multi type select
@@ -102,13 +104,13 @@ const handleSelect = e => {
  * Logs a list of URLs for a given topic
  */
 function showUrlsByTopic(topic) {
-  const allCards = document.querySelectorAll("portfolio-card");
+  const allCards = document.querySelectorAll('portfolio-card');
   console.log(
-    "\u001b[" +
+    '\u001b[' +
       31 +
-      "m" +
+      'm' +
       `Remember to update sitemap.txt by running this function without an argument.` +
-      "\u001b[0m"
+      '\u001b[0m'
   );
   console.log(`Total case studies: ${allCards.length}`);
   const cards = topic
@@ -121,8 +123,8 @@ function showUrlsByTopic(topic) {
     console.log(`No cards found containing ${topic}`);
     return;
   }
-  cards.forEach(card => {
-    const url = card.getAttribute("data-url");
+  cards.forEach((card) => {
+    const url = card.getAttribute('data-url');
     // log to console w/o file/line no. on the right
     // for easy copy/paste
     setTimeout(
@@ -132,45 +134,44 @@ function showUrlsByTopic(topic) {
 }
 
 // this is for query param
-// const toggleSelect = (value) => {
-//   switch (value) {
-//     case 'node':
-//       $('#type-filter').val(' Cloud').change().formSelect();
-//       handleSelect();
-//       break;
-//     case 'gas':
-//       $('#type-filter').val('Google Apps').change().formSelect();
-//       handleSelect();
-//       break;
-//     default:
-//       return;
-//   }
-// };
+const toggleSelect = (value) => {
+  const caseFilter = document.querySelector('#case-filter');
+  switch (value) {
+    case 'api':
+      caseFilter.value = 'api';
+      break;
+    default:
+      return;
+  }
+  M.FormSelect.init(caseFilter, {});
+  // in some cases, this is also required:
+  caseFilter.dispatchEvent(new Event('change'));
+};
 
 const ready = () => {
   // Contact form
-  const contactForm = document.querySelector("#contact-form");
+  const contactForm = document.querySelector('#contact-form');
   if (contactForm) {
-    contactForm.addEventListener("submit", handleContactSubmit);
+    contactForm.addEventListener('submit', handleContactSubmit);
   }
   // Portfolio filter
-  const selectors = document.querySelectorAll("select");
+  const selectors = document.querySelectorAll('select');
   let instances;
   if (selectors) {
     instances = M.FormSelect.init(selectors, {});
-    selectors.forEach(selector =>
-      selector.addEventListener("change", handleSelect)
+    selectors.forEach((selector) =>
+      selector.addEventListener('change', handleSelect)
     );
   }
   // Query param for portfolio filter
   const searchParams = new URLSearchParams(window.location.search);
-  if (searchParams.has("p")) {
-    toggleSelect(searchParams.get("p"));
+  if (searchParams.has('p')) {
+    toggleSelect(searchParams.get('p'));
   }
 };
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", ready);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', ready);
 } else {
   ready();
 }
