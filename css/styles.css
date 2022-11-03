@@ -258,7 +258,6 @@ video {
 .prompt-lower {
   background-color: var(--secondary);
   color: white;
-  font-size: 1.1rem;
   line-height: 3rem;
   padding-left: 20px !important;
   border-radius: 10px;
@@ -272,10 +271,14 @@ video {
 .prompt a,
 .prompt-lower a {
   background-color: white;
-  font-weight: 700;
   padding: 5px 10px;
-  border-radius: 20px;
+  border-radius: 3px;
   color: var(--secondary) !important;
+
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  line-height: 20px;
 }
 
 .center-div {
