@@ -1,4 +1,4 @@
-/* global document */
+/* global console document FormData */
 
 const homepageH1 = document.querySelector('#home-h1-div');
 if (homepageH1) {
@@ -8,19 +8,12 @@ if (homepageH1) {
 }
 
 document.querySelectorAll('.info-question').forEach((s) =>
-  s.addEventListener('click', function (e) {
-    const toggle = this.querySelector('.toggle');
-    const questionSpan = this.querySelector('.info-question-span');
-    const answer = this.closest('div').nextElementSibling;
-    if (toggle.innerText == '+') {
-      toggle.innerText = '–';
-      questionSpan.style['font-weight'] = 700;
-      answer.classList.remove('hide');
-    } else {
-      toggle.innerText = '+';
-      questionSpan.style['font-weight'] = 300;
-      answer.classList.add('hide');
-    }
+  s.addEventListener('click', function () {
+    const t = this.querySelector('.toggle');
+    t.innerText = t.innerText == '–' ? '+' : '–';
+    const q = this.querySelector('.info-question-span');
+    q.style['font-weight'] = q.style['font-weight'] == 700 ? 300 : 700;
+    this.closest('div').nextElementSibling.classList.toggle('hide');
   })
 );
 
