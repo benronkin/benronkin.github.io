@@ -1,4 +1,4 @@
-/* global console document FormData */
+/* global console document Event fetch FormData Headers M Request setTimeout URLSearchParams window */
 
 const homepageH1 = document.querySelector('#home-h1-div');
 if (homepageH1) {
@@ -54,9 +54,7 @@ const handleContactSubmit = (e) => {
     .catch((err) => console.log(err));
 };
 
-const handleSelect = (e) => {
-  // const instance = M.FormSelect.getInstance($("#case-filter"));
-  // const userSelection = instance.val();
+const handleSelect = () => {
   const userSelection = document.querySelector('#case-filter').value;
   const cards = document.querySelectorAll('portfolio-card');
   if (userSelection == 'all') {
@@ -71,31 +69,10 @@ const handleSelect = (e) => {
     .forEach((elem) => elem.classList.remove('hide'));
 };
 
-// Handle multi type select
-// const handleSelect = e => {
-//   const instance = M.FormSelect.getInstance($("#type-filter"));
-
-//   document
-//     .querySelectorAll("portfolio-card")
-//     .forEach(portfolioCard => portfolioCard.classList.add("hide"));
-
-//   instance.getSelectedValues().forEach(value => {
-//     // Materialize doesn't seem to like multi-token option values
-//     // (e.g 'Google Workspace'), so the filter now includes a single
-//     // token (Workspace, Cloud, Other), so we need to add 'Google' back in
-//     if (value !== "Other") {
-//       value = `Google ${value}`;
-//     }
-
-//     document
-//       .querySelectorAll(`portfolio-card[subtitle="${value}"]`)
-//       .forEach(elem => elem.classList.remove("hide"));
-//   });
-// };
-
 /**
  * Logs a list of URLs for a given topic
  */
+// eslint-disable-next-line no-unused-vars
 function showUrlsByTopic(topic) {
   const allCards = document.querySelectorAll('portfolio-card');
   console.log(
@@ -129,13 +106,14 @@ function showUrlsByTopic(topic) {
 // this is for query param
 const toggleSelect = (value) => {
   const caseFilter = document.querySelector('#case-filter');
-  switch (value) {
-    case 'api':
-      caseFilter.value = 'api';
-      break;
-    default:
-      return;
+  const isValidValue = Array.from(caseFilter.options)
+    .filter((option) => option.attributes)
+    .map((option) => option.attributes.value.nodeValue.toLowerCase())
+    .some((option) => option.includes(value));
+  if (!isValidValue) {
+    return;
   }
+  caseFilter.value = value;
   M.FormSelect.init(caseFilter, {});
   // in some cases, this is also required:
   caseFilter.dispatchEvent(new Event('change'));
@@ -149,9 +127,8 @@ const ready = () => {
   }
   // Portfolio filter
   const selectors = document.querySelectorAll('select');
-  let instances;
   if (selectors) {
-    instances = M.FormSelect.init(selectors, {});
+    M.FormSelect.init(selectors, {});
     selectors.forEach((selector) =>
       selector.addEventListener('change', handleSelect)
     );
@@ -160,6 +137,7 @@ const ready = () => {
   const searchParams = new URLSearchParams(window.location.search);
   if (searchParams.has('p')) {
     toggleSelect(searchParams.get('p'));
+  } else {
   }
 };
 
