@@ -254,6 +254,39 @@ video {
   margin: 0;
 }
 
+.cookie-choice {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  background-color: var(--grey);
+  color: white;
+  padding: 20px;
+}
+
+.cookie-choice .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cookie-buttons {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin: 0 10px;
+  text-transform: uppercase;
+}
+
+.cookie-buttons a {
+  color: white;
+}
+
+.cookie-buttons a {
+  margin-left: 20px;
+}
+
 .prompt,
 .prompt-lower {
   background-color: var(--secondary);

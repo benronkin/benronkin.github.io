@@ -119,6 +119,44 @@ const toggleSelect = (value) => {
   caseFilter.dispatchEvent(new Event('change'));
 };
 
+function displayCookieBanner() {
+  const cookieBanner = document.createElement('div');
+  cookieBanner.classList.add('cookie-choice');
+  const container = document.createElement('div');
+  container.classList.add('container');
+  const buttons = document.createElement('div');
+  buttons.classList.add('cookie-buttons');
+  const ok = document.createElement('a');
+  ok.setAttribute('id', 'cookie-ok');
+  ok.setAttribute('href', '');
+  ok.innerText = 'OK';
+  const learnMore = document.createElement('a');
+  learnMore.setAttribute(
+    'href',
+    'https://policies.google.com/technologies/cookies'
+  );
+  learnMore.setAttribute('target', 'blank_');
+  learnMore.innerText = 'Learn more';
+
+  const message = document.createTextNode(
+    `This site uses cookies from Google to deliver its services and to analyze traffic. Your IP address and user-agent are shared with Google along with performance and security metrics to ensure quality of service, generate usage statistics, and to detect and address abuse.`
+  );
+  buttons.appendChild(learnMore);
+  buttons.appendChild(ok);
+  container.appendChild(message);
+  container.appendChild(buttons);
+  cookieBanner.appendChild(container);
+  const main = document.querySelector('main');
+  document.body.insertBefore(cookieBanner, main);
+
+  document.querySelector('#cookie-ok').addEventListener('click', function (e) {
+    e.preventDefault();
+    document.cookie =
+      'BenRonkinCookie=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/; Secure';
+    document.querySelector('.cookie-choice').hidden = true;
+  });
+}
+
 const ready = () => {
   // Contact form
   const contactForm = document.querySelector('#contact-form');
@@ -138,6 +176,10 @@ const ready = () => {
   if (searchParams.has('p')) {
     toggleSelect(searchParams.get('p'));
   } else {
+  }
+  // Cookies banner
+  if (document.cookie.indexOf('BenRonkinCookie') == -1) {
+    displayCookieBanner();
   }
 };
 
