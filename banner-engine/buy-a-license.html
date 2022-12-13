@@ -11,9 +11,9 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
+      gtag('js', new Date());
 
-      gtag("config", "UA-91362999-4");
+      gtag('config', 'UA-91362999-4');
     </script>
     <link rel="shortcut icon" href="../img/favicon.ico" />
     <link
@@ -27,7 +27,7 @@
     />
     <link
       rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
     />
     <link rel="stylesheet" href="../css/styles.css" />
 
@@ -228,34 +228,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="../js/main.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener('DOMContentLoaded', function () {
         document
-          .querySelector("#payment-form")
-          .addEventListener("submit", function (e) {
+          .querySelector('#payment-form')
+          .addEventListener('submit', function (e) {
             e.preventDefault();
             const url =
-              "https://script.google.com/macros/s/AKfycbwTDsKFeibiPp3wR86ZxObWLJxqQlIkje0BOIFUIsbidiGg_SUo6JnJfDTlJ0WeE8rg4g/exec?d=s";
+              'https://script.google.com/macros/s/AKfycbwTDsKFeibiPp3wR86ZxObWLJxqQlIkje0BOIFUIsbidiGg_SUo6JnJfDTlJ0WeE8rg4g/exec?d=s';
             const headers = new Headers();
-            headers.append("Content-Type", "text/plain;charset=utf-8");
+            headers.append('Content-Type', 'text/plain;charset=utf-8');
             const req = new Request(url, {
-              method: "POST",
-              redirect: "follow",
+              method: 'POST',
+              redirect: 'follow',
               headers,
               body: JSON.stringify({
-                email: document.querySelector("#email-address").value,
+                email: document.querySelector('#email-address').value,
               }),
             });
             fetch(req)
-              .then(response => response.json())
-              .then(data => {
-                if (data.status == "error") {
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status == 'error') {
                   console.log(data);
                 } else if (data.url) {
                   window.open(data.url);
                   setTimeout(1000, window.close());
                 }
               })
-              .catch(err => console.log(err));
+              .catch((err) => console.log(err));
           });
       });
     </script>

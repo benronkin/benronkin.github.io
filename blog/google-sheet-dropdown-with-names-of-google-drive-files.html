@@ -31,10 +31,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
-    />
+    <link rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css">
     <link rel="stylesheet" href="../css/styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -174,7 +172,7 @@
               through its documents, get their names, and create a validation
               rule for the B3 cell that will populate the names.
             </p>
-            <pre><code>const g = {
+            <pre><code class="language-javascript">const g = {
   templatesFolderId: 'abc1213...',
   adminSheetName: 'Admin',
   dataSheetName: 'Registrations',
@@ -205,7 +203,7 @@
               Now we will add code to retrieve the file names and populate the
               dropdown:
             </p>
-            <pre><code>function updateTemplateDropdown() {
+            <pre><code class="language-javascript">function updateTemplateDropdown() {
   // Message start of script
   notifyUser_('Updating dropdown...');
   // Get a reference to our dropdown cell using
@@ -267,7 +265,7 @@
               Next, we modify our notifyUser_ function to display messages in
               our admin sheet:
             </p>
-            <pre><code>function notifyUser_(msg) {
+            <pre><code class="language-javascript">function notifyUser_(msg) {
   console.log(msg);
   g.ss.getSheetByName(g.adminSheetName)
     .getRange(g.messageRange).setValue(msg);
@@ -279,7 +277,7 @@
               option to run the mail merge since we are going to use a button to
               do that:
             </p>
-            <pre><code>function onOpen(e) {
+            <pre><code class="language-javascript">function onOpen(e) {
   const ui = SpreadsheetApp.getUi();
   ui.createMenu('🟢 Mail Merge')
     .addItem('Update template dropdown', 'updateTemplateDropdown')
@@ -326,10 +324,8 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-    <script>
-      hljs.initHighlightingOnLoad();
-    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <script src="../js/main.js"></script>
   </body>
 </html>

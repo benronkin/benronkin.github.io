@@ -11,9 +11,9 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
+      gtag('js', new Date());
 
-      gtag("config", "UA-91362999-4");
+      gtag('config', 'UA-91362999-4');
     </script>
     <link rel="shortcut icon" href="../img/favicon.ico" />
     <link
@@ -27,7 +27,7 @@
     />
     <link
       rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
     />
     <link rel="stylesheet" href="../css/styles.css" />
 
@@ -89,33 +89,33 @@
       </div>
     </footer>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener('DOMContentLoaded', function () {
         const url =
-          "https://script.google.com/macros/s/AKfycbwTDsKFeibiPp3wR86ZxObWLJxqQlIkje0BOIFUIsbidiGg_SUo6JnJfDTlJ0WeE8rg4g/exec?d=vp";
+          'https://script.google.com/macros/s/AKfycbwTDsKFeibiPp3wR86ZxObWLJxqQlIkje0BOIFUIsbidiGg_SUo6JnJfDTlJ0WeE8rg4g/exec?d=vp';
         const headers = new Headers();
-        headers.append("Content-Type", "text/plain;charset=utf-8");
+        headers.append('Content-Type', 'text/plain;charset=utf-8');
         const req = new Request(url, {
-          method: "POST",
-          redirect: "follow",
+          method: 'POST',
+          redirect: 'follow',
           headers,
           body: JSON.stringify({
-            session_id: window.location.search.split("=")[1],
+            session_id: window.location.search.split('=')[1],
           }),
         });
         fetch(req)
-          .then(response => response.json())
-          .then(data => {
-            if (data.status == "success") {
-              document.querySelector("h1").innerText = "Order Confirmation";
-              document.querySelector("h2").innerText =
-                "Your order was successful";
-              document.querySelector("p").innerHTML =
-                "<p>Thank you for purchasing the Banner Engine Add-on license." +
-                " Please save this receipt for your records. Your license key is below. Enter the key in the add-on.</p>" +
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status == 'success') {
+              document.querySelector('h1').innerText = 'Order Confirmation';
+              document.querySelector('h2').innerText =
+                'Your order was successful';
+              document.querySelector('p').innerHTML =
+                '<p>Thank you for purchasing the Banner Engine Add-on license.' +
+                ' Please save this receipt for your records. Your license key is below. Enter the key in the add-on.</p>' +
                 `<p>Your license key:</p> <p>${data.license}</p>` +
                 `<p>Order Number: ${data.transaction_id}</p>` +
                 `<p>Order Date: ${new Date(data.date).toLocaleDateString(
-                  "en-US"
+                  'en-US'
                 )}</p>` +
                 `<p>Order Sub-total: $${data.amount_subtotal}</p>` +
                 `<p>Order Total: $${data.amount_total}</p>`;
@@ -123,7 +123,7 @@
               console.log(data);
             }
           })
-          .catch(err => console.log(err));
+          .catch((err) => console.log(err));
       });
     </script>
   </body>

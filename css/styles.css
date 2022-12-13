@@ -319,10 +319,6 @@ video {
   justify-content: center;
 }
 
-.hljs {
-  background: #dddddd;
-}
-
 .select-wrapper input.select-dropdown:focus {
   border-bottom: 1px solid var(--primary);
 }
