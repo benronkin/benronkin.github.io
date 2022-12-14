@@ -3,6 +3,7 @@ https://benronkin.com/index.html
 https://benronkin.com/contact.html
 https://benronkin.com/reviews.html
 https://benronkin.com/blog/index.html
+https://benronkin.com/blog/using-google-doc-text-in-google-apps-script.html
 https://benronkin.com/blog/google-sheet-dropdown-with-names-of-google-drive-files.html
 https://benronkin.com/blog/create-mail-merge-for-gmail-with-google-apps-script.html
 https://benronkin.com/blog/how-to-extract-youtube-stats.html
