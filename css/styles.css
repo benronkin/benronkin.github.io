@@ -204,7 +204,9 @@ section .row {
 }
 
 strong {
-  font-weight: 700 !important;
+  background-color: var(--secondary);
+  color: white;
+  padding: 0 1px;
 }
 
 video {
