@@ -220,7 +220,7 @@
     &lt;body>
       &lt;label for="templates">Select an email template&lt;/label>
       &lt;select name="templates" id="templates">&lt;/select>
-      &lt;button id="update-templates">Refresh&lt;/button>
+      &lt;button id="refresh-templates">Refresh&lt;/button>
       &lt;button id="preview">Preview&lt;/button>
       &lt;button id="send">Send&lt;/button>
     &lt;/body>
@@ -236,6 +236,7 @@
 
             <pre><code class="language-html">&lt;script>
   const refreshTemplates = document.querySelector('#refresh-templates');
+  const select = document.querySelector('#templates');
           
   refreshTemplates.addEventListener('click', function () {
     google.script.run
@@ -313,17 +314,18 @@
             </p>
 
             <pre><code class="language-javascript">document.querySelector('#preview').addEventListener('click', function () {
-    google.script.run.previewEmails();
+    google.script.run.previewEmails(select.value);
   });
       
   document.querySelector('#send').addEventListener('click', function () {
-    google.script.run.sendEmails();
+    google.script.run.sendEmails(select.value);
   });</code></pre>
             <p>
               This code adds two event listeners to our two buttons. When
               clicked, we once again use the
               <strong>google.script.run</strong> approach to execute the two
-              server-side functions that we defined in the previous posts.
+              server-side functions that we defined in the previous posts,
+              passing to them the name of the selected template.
             </p>
             <p>
               We can add styling to our Sidebar. Inside Admin.html just before
