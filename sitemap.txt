@@ -36,7 +36,7 @@ https://benronkin.com/portfolio/scrape-site-extension.html
 https://benronkin.com/portfolio/scrape-website.html
 https://benronkin.com/portfolio/twitter-to-datastudio.html
 https://benronkin.com/portfolio/xml-to-csv.html
-https://benronkin.com/portfolio/calendly-form-sheet.html
+https://benronkin.com/products/calendly-to-sheets.html
 https://benronkin.com/portfolio/duplicate-folders.html
 https://benronkin.com/portfolio/download-images.html
 https://benronkin.com/portfolio/merge-sheets.html
