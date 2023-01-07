@@ -3,6 +3,7 @@ https://benronkin.com/index.html
 https://benronkin.com/contact.html
 https://benronkin.com/reviews.html
 https://benronkin.com/blog/index.html
+https://benronkin.com/blog/validate-user-files-with-apps-script.html
 https://benronkin.com/blog/display-google-sheet-sidebar.html
 https://benronkin.com/blog/display-html-page-inside-google-sheet.html
 https://benronkin.com/blog/send-sms-messages-with-app-script.html
@@ -24,6 +25,7 @@ https://benronkin.com/banner-engine/index.html
 https://benronkin.com/products/index.html
 https://benronkin.com/products/privacy.html
 https://benronkin.com/products/terms.html
+https://benronkin.com/products/calendly-to-sheets.html
 https://benronkin.com/products/calendar-from-sheet.html
 https://benronkin.com/products/custom-form.html
 https://benronkin.com/products/youtube-to-sheet.html
@@ -36,7 +38,6 @@ https://benronkin.com/portfolio/scrape-site-extension.html
 https://benronkin.com/portfolio/scrape-website.html
 https://benronkin.com/portfolio/twitter-to-datastudio.html
 https://benronkin.com/portfolio/xml-to-csv.html
-https://benronkin.com/products/calendly-to-sheets.html
 https://benronkin.com/portfolio/duplicate-folders.html
 https://benronkin.com/portfolio/download-images.html
 https://benronkin.com/portfolio/merge-sheets.html
