@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Increase coding productivity with Apps Script macros | Ben Ronkin
+    </title>
+    <meta
+      property="og:title"
+      content="Increase coding productivity with Apps Script macros"
+    />
+    <meta name="description" content="" />
+    <meta property="og:description" content="" />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/gas-macros-menu.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/increase-productivity-with-google-apps-script-macros.html"
+    />
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Increase coding productivity with Apps Script macros</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> January 8, 2023
+              </span>
+            </p>
+          </div>
+
+          <div class="blog-post-hero">
+            <img
+              class="responsive-img"
+              src="../img/gas-macros-menu.png"
+              alt="blog post hero"
+            />
+          </div>
+
+          <div class="blog-post-body">
+            <p>
+              Google Apps Script is all about increasing work productivity
+              through automation. But the road to automation involves a lot of
+              mental and manual work. When we're developing scripts, we are
+              often asked to make changes in Google Sheets or Google Drive
+              items. Since we don't always get the scripts to make the right
+              changes right away, we often have to undo the script changes
+              manually, as we develop and enhance the script. And there's only
+              so much we can do with the UNDO button in google sheets.
+            </p>
+
+            <p>
+              Let me show you how I use macros in Apps Script to cut down on the
+              manual undoing, and make my work as a developer more efficient.
+              I'll be covering four areas of changes:
+            </p>
+            <ul>
+              <li>Adding content to a google sheet</li>
+              <li>Changing the format of cells in a sheet</li>
+              <li>Adding new tabs to a sheet</li>
+              <li>Adding new files to a Google Drive</li>
+            </ul>
+            <p>
+              I'll show you how to write the macros and how to include them in
+              Google Sheet.
+            </p>
+
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+
+            <p>
+              I've set up a Google Drive folder with a sub-folder and a Google
+              Sheet. Open the Google Sheet and then the Apps Script editor.
+              We'll leave Code.gs empty – you'll use that for the actual
+              automation. Create a new script file called "Macros.gs" where we
+              will write our macros code. We will use the sub-folder later to
+              undo file additions into the sub-folder.
+            </p>
+            <p>
+              Let's write the code for our first macro: undoing the addition of
+              content into a Google Sheet:
+            </p>
+
+            <pre><code class="language-javascript">function deleteData() {
+  const ss = SpreadsheetApp.getActive();
+  const sh = ss.getActiveSheet();
+  sh.clearContents();
+  SpreadsheetApp.flush();
+}</code></pre>
+            <p>
+              In the code above, we get the active Google Sheet and its active
+              sheet. We use <strong>clearContents()</strong> to clear the
+              contents (but not the formatting) of the active sheet. We then
+              flush the pending changes.
+            </p>
+            <p>
+              In order to register the function as a macro, we need to add some
+              content to our manifest file. Open the "appsscript.json" file. If
+              the file isn't available in the file list then head to the Project
+              Settings window by click on the gear icon on the left side. Tick
+              the box 'Show "appsscript.json" manifest file in editor.' Add the
+              following code:
+            </p>
+
+            <pre><code class="language-json">{
+  "timeZone": "...",
+  "dependencies": {},
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "sheets": {
+    "macros": [
+      {
+        "menuName": "Delete content",
+        "functionName": "deleteData",
+        "defaultShortcut": "Ctrl+Alt+Shift+1"
+      }
+    ]
+  }
+}</code></pre>
+
+            <p>
+              Essentially, we're adding a new "sheets" section to our file,
+              which is an object containing "macros". The latter points to an
+              array of object, each of which represents one macro. You define
+              the name of the macro in the menu, the function to run, and the
+              optional keyboard shortcut. Once you save the file, the macro
+              should appear inside the Extensions > Macros menu.
+            </p>
+
+            <p>
+              I've had situations where my automation inserted new rows to the
+              sheet. I wanted to be able to delete the inserted rows instead of
+              deleting their content. In that case, use the following code:
+            </p>
+
+            <pre><code class="language-javascript">function deleteData() {
+  const ss = SpreadsheetApp.getActive();
+  const sh = ss.getActiveSheet();
+  sh.clearContents();
+  sh.deleteRows(2, sh.getMaxRows() - 1);
+  SpreadsheetApp.flush();
+}</code></pre>
+            <p>
+              Undoing formatting changes is super easy. The function looks
+              similar to the first one with just a different method
+              <strong>clearFormats</strong> being used:
+            </p>
+
+            <pre><code class="language-javascript">function deleteData() {
+  const ss = SpreadsheetApp.getActive();
+  const sh = ss.getActiveSheet();
+  sh.clearFormats();
+  SpreadsheetApp.flush();
+}</code></pre>
+
+            <p>
+              Another useful undo macro is the ability to remove any tab that's
+              to the right of the active tab. Again, I've written several
+              automation projects that inserted new sheets to a Google Sheet. In
+              order to remove them with code, use:
+            </p>
+            <pre><code class="language-javascript">function deleteTabs() {
+  const ss = SpreadsheetApp.getActive();
+  const sh = ss.getActiveSheet();
+  const activeName = sh.getName();
+  const sheets = ss.getSheets();
+  const activePosition = sheets.findIndex(
+    (sheet) => sheet.getName() === activeName
+  );
+  for (let i = sheets.length - 1; i > activePosition; i--) {
+    ss.deleteSheet(sheets[i]);
+  }
+}</code></pre>
+
+            <p>
+              Above, we get the name of the active sheet, and the collection of
+              sheets. We iterate over the collection, starting at the end, and
+              delete any sheet, until we arrive at the active sheet. This is
+              super helpful in situations where you have tabs to the left of the
+              active sheet that you don't want to delete. Only tabs to the right
+              of the active sheet will be deleted.
+            </p>
+
+            <p>
+              For the last macro, we need the ID of the subfolder. Open it and
+              copy its ID from the end of its URL in the address bar. Then add
+              it to the following code:
+            </p>
+
+            <pre><code class="language-javascript">function deleteFiles() {
+  const folderId = 'your-folder-id';
+  const fileRefs = DriveApp.searchFiles(`"${folderId}" in parents`);
+  while (fileRefs.hasNext()) {
+    const file = fileRefs.next();
+    file.setTrashed(true);
+  }
+}</code></pre>
+            <p>
+              Above, we search Google Drive for all files that reside in the
+              subfolder. We get each file and set it to trashed. Google Drive
+              will move it to the Trash automatically.
+            </p>
+
+            <p>
+              The final version of the manifest file, containing all four macro
+              declarations:
+            </p>
+
+            <pre><code class="language-json">{
+  "timeZone": "",
+  "dependencies": {},
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "sheets": {
+    "macros": [
+      {
+        "menuName": "Delete content",
+        "functionName": "deleteData",
+        "defaultShortcut": "Ctrl+Alt+Shift+1"
+      },
+      {
+        "menuName": "Clear formats",
+        "functionName": "clearFormats",
+        "defaultShortcut": "Ctrl+Alt+Shift+2"
+      },
+      {
+        "menuName": "Delete tabs",
+        "functionName": "deleteTabs",
+        "defaultShortcut": "Ctrl+Alt+Shift+3"
+      },
+      {
+        "menuName": "Delete files",
+        "functionName": "deleteFiles",
+        "defaultShortcut": "Ctrl+Alt+Shift+4"
+      }
+    ]
+  }
+}</code></pre>
+            <p>
+              I hope this helps increase your productivity. Happy GAS coding!
+            </p>
+
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
