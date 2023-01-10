@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Take your GAS to the next level with higher-order functions | Ben Ronkin
+    </title>
+    <meta
+      property="og:title"
+      content="Take your GAS to the next level with higher-order functions"
+    />
+    <meta
+      name="description"
+      content="How to use higher-order functions like filter, map, and reduce with Google Apps Script "
+    />
+    <meta
+      property="og:description"
+      content="How to use higher-order functions like filter, map, and reduce with Google Apps Script "
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/higher-order-functions-in-google-apps-script.html"
+    />
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Take your GAS to the next level with higher-order functions</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> January 9, 2023
+              </span>
+            </p>
+          </div>
+
+          <div class="blog-post-body">
+            <p>
+              Imagine you have a Google Sheet with tabular sales data, such as
+              this:
+            </p>
+            <table>
+              <tr>
+                <td></td>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+                <td>E</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Month</td>
+                <td>North</td>
+                <td>South</td>
+                <td>East</td>
+                <td>West</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>22-01</td>
+                <td>120</td>
+                <td>140</td>
+                <td>160</td>
+                <td>180</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>22-01</td>
+                <td>220</td>
+                <td>240</td>
+                <td>260</td>
+                <td>280</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>22-01</td>
+                <td>320</td>
+                <td>340</td>
+                <td>360</td>
+                <td>380</td>
+              </tr>
+            </table>
+            <p>
+              The table contains sales data from four regions, represented in
+              columns, and monthly sales volumes represented in rows. Let's also
+              say that you are developing a Google Apps Script that needs to do
+              a few things, including summing up the sales in the East region.
+            </p>
+            <p>How would you go about coding that?</p>
+            <p>
+              Well, the easiest thing to do is to pull the values out of the
+              East column one by one and add them together. Something like this
+              would do the job:
+            </p>
+            <pre><code class="language-javascript">function calcSales() {
+  // Get the current spreadsheet
+  const ss = SpreadsheetApp.getActive();
+  // Get the active sheet
+  const sh = ss.getActiveSheet();
+  // Get the values from the three cells
+  const east1 = sh.getRange('D2').getValue();
+  const east2 = sh.getRange('D3').getValue();
+  const east3 = sh.getRange('D4').getValue();
+  // Sump up the values
+  const total = east1 + east2 + east3;
+  // Log the total
+  console.log(total);
+}</code></pre>
+            <p>
+              While the code above gets the job done, we can easily see that it
+              isn't really scalable: what if new monthly sales rows are added to
+              the sheet and we need to include them in our total? The script in
+              its current form will not account for these rows.
+            </p>
+
+            <p>
+              Luckily, we can improve on things by using higher-order functions.
+              Think of these functions as utility functions that were added to
+              the Javascript language. Instead of you having to write a bunch of
+              code, you can use these functions to speed things up and make your
+              code more readable.
+            </p>
+
+            <p>
+              We'll look at three higher-order functions: filter, map, and
+              reduce. Our code starts as follows:
+            </p>
+
+            <pre><code class="language-javascript">function calcSales() {
+  // Get the current spreadsheet
+  const ss = SpreadsheetApp.getActive();
+  // Get the active sheet
+  const sh = ss.getActiveSheet();
+  // Get the values from the entire East column
+  let east = sh.getRange('D2:D').getValues();
+  console.log(east);
+}</code></pre>
+
+            <p>
+              When we run the script, we see in the console a nested array where
+              each array member is a sub-array containing the values from the
+              column: both our number values and the empty cells below them.
+            </p>
+
+            <p>
+              We can get rid of the empty cells by using the
+              <strong>filter</strong> method. The method takes in a functions,
+              which it uses to evaluate each member of the array. If the result
+              of the function is TRUE then the member will be kept; otherwise,
+              the member will be discarded. <strong>Filter</strong> returns a
+              new array.
+            </p>
+
+            <pre><code class="language-javascript">function calcSales() {
+  // Get the current spreadsheet
+  const ss = SpreadsheetApp.getActive();
+  // Get the active sheet
+  const sh = ss.getActiveSheet();
+  // Get the values from the entire East column
+  let east = sh.getRange('D2:D').getValues();
+  east = east.filter(row => row[0] > 0);
+  console.log(east);
+}</code></pre>
+
+            <p>
+              I'm using the arrow function form to make things shorter. Inside
+              the filter function we check whether the first value in the
+              sub-arrays is bigger than 0. If not then we discard the value.
+            </p>
+            <p>
+              If you run the code with the new line included, then the console
+              will log only the rows that contain our values. We're making
+              progress!
+            </p>
+
+            <p>
+              The data is still showing up as a nested array, which make things
+              a bit tricky. Let's flatten the nested array to a simple array
+              using the <strong>map</strong> method. This method takes in an
+              array, and applies a user-supplied function on every member of the
+              array, returning a new array. Our function will simply extract the
+              first value of the sub-array and return an array of values:
+            </p>
+
+            <pre><code class="language-javascript">function calcSales() {
+  // Get the current spreadsheet
+  const ss = SpreadsheetApp.getActive();
+  // Get the active sheet
+  const sh = ss.getActiveSheet();
+  // Get the values from the entire East column
+  let east = sh.getRange('D2:D').getValues();
+  east = east.filter(row => row[0] > 0);
+  east = east.map(row => row[0]);
+  console.log(east);
+}</code></pre>
+            <p>
+              Logging the updated function results in a single array of the
+              values. Now we can use the <strong>reduce</strong> method to total
+              them. This method takes in two inputs: the accumulator and the
+              current value. The method applies a function on each member of the
+              array to reduce it to the accumulator. In our case, the
+              accumulator is simply incremented with the value of the current
+              value:
+            </p>
+
+            <pre><code class="language-javascript">function calcSales() {
+  // Get the current spreadsheet
+  const ss = SpreadsheetApp.getActive();
+  // Get the active sheet
+  const sh = ss.getActiveSheet();
+  // Get the values from the entire East column
+  let east = sh.getRange('D2:D').getValues();
+  east = east.filter(row => row[0] > 0);
+  east = east.map(row => row[0]);
+  const total = east.reduce((t, c) => t+=c, 0);
+  console.log(total);
+}</code></pre>
+
+            <p>
+              The zero at the end of the reduce method initializes the
+              accumulator to zero.
+            </p>
+            <p>
+              Ok, so we used the three higher-order functions to generate the
+              total for the East column. What if we need our script to calculate
+              a grand total for all four regions? Our modified script would look
+              like this:
+            </p>
+            <pre><code class="language-javascript">function calcSales() {
+  const ss = SpreadsheetApp.getActive();
+  const sh = ss.getSheetByName('Regions');
+  // Get a nested array of data from all rows for the four regions
+  let sales = sh.getRange('B2:E').getValues();
+  // Remove rows with empty cells
+  sales = sales.filter((row) => row[0] > 0);
+  // Use the map method to return a new array. 
+  // The method takes in the sub-array of the four regions
+  // and reduces it to a total for the row
+  sales = sales.map((row) => row.reduce((t, c) => t + c, 0));
+  // Now we have a simple array that we can reduce to a grand total, as we saw earlier.
+  const total = sales.reduce((t, c) => (t += c), 0);
+  console.log(total);
+}</code></pre>
+            <p>
+              In the code above, we implement a <strong>reduce</strong> function
+              inside a <strong>map</strong> function. The map function uses
+              reduce to calculate a sum of every row. Then we implement another
+              reduce to get the total of all rows.
+            </p>
+            <p>
+              I'm hoping that this gives you an idea of how to implement
+              higher-order functions with Apps Script.
+            </p>
+            <p>
+              Please <a href="../contact.html">drop me a line</a> if you have
+              any questions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
