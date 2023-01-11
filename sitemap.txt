@@ -3,6 +3,7 @@ https://benronkin.com/index.html
 https://benronkin.com/contact.html
 https://benronkin.com/reviews.html
 https://benronkin.com/blog/index.html
+https://benronkin.com/blog/exchange-data-between-two-apps-scripts-with-webapp.html
 https://benronkin.com/blog/higher-order-functions-in-google-apps-script.html
 https://benronkin.com/blog/increase-productivity-with-google-apps-script-macros.html
 https://benronkin.com/blog/validate-user-files-with-apps-script.html
