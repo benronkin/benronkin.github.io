@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Handle column changes in Google Sheets with Apps Script | Ben Ronkin
+    </title>
+    <meta
+      property="og:title"
+      content="Handle column changes in Google Sheets with Apps Script | Ben Ronkin"
+    />
+    <meta name="description" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="//benronkin.com/img/" />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/handle-column-changes-in-google-sheets-with-app-script.html"
+    />
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>
+              Handle column changes in Google Sheets with Apps Script | Ben
+              Ronkin
+            </h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> January 12, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/nLgxQclNxAs"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="blog-post-body">
+            <div class="row mt30 mb0">
+              <p>
+                A client of mine recently asked for my help in automating the
+                data pulls they were doing. They wanted me to use the system's
+                REST API to fetch new data and write it to a Google Sheet. The
+                response payload of the API was pretty easy to navigate:
+                essentially an array with a bunch of objects, where each object
+                represented a user with certain keys for first and last names,
+                phone, email -- that sort of thing. All I had to do was call the
+                API periodically, get back new user objects, and them to a
+                nested array so that I can append the data to Google Sheets.
+              </p>
+              <p>
+                Easy enough, but there was one wrinkle: The client informed me
+                that the team would like to be able to change the structure of
+                the Google Sheet from time ti time; mainly, to rename column
+                headers, and move columns around (i.e, change the order of the
+                columns in the sheet.
+              </p>
+              <p>
+                Clearly, my script would not be able to generate new rows based
+                on the current headers, because those headers would change and
+                subsequent data appends would put the wrong values in the wrong
+                columns: suddenly an email columns would contain phone numbers –
+                that sort of thing.
+              </p>
+              <p>
+                So how do we solve this? Well, one way is to create a map of API
+                keys to column headers. We can create a new tab in the Google
+                Sheet with two columns: one column represents the API, the other
+                represents the sheet. We can ask the client to update the
+                mapping every time they change their main spreadsheet. This way,
+                the script can get the new API data, find the position of every
+                key in the map, and construct the new rows based on the current
+                order of the headers.
+              </p>
+              <p>
+                While some clients are open to such an idea – heck, many times
+                clients have explicitly asked to maintain a mapper – I don't
+                think it's cool to impose this extra responsibility on them if
+                we don't have to. And we really don't: We can build and maintain
+                the mapping ourselves. Let's see how.
+              </p>
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+
+            <p>
+              Before creating the mapper, we need to be able to handle the
+              column changes that users will make. Open the Apps Script IDE, and
+              in the Code.gs file, enter the code below:
+            </p>
+
+            <pre><code class="language-javascript">function onEdit(e) {
+  const thisSheet = e.source.getActiveSheet();
+  const thisName = thisSheet.getName();
+  if (thisName === 'Log') {
+    const thisRow = e.range.getRow();
+    const thisValue = e.range.getValue();
+    const oldValue = e.oldValue;
+    if (thisRow === 1 && oldValue && thisValue) {
+      // TODO: renameHeader(oldValue, thisValue);
+    } else {
+      // TODO: reorderHeaders();
+    }
+  }
+}</code></pre>
+
+            <p>
+              <strong>onEdit</strong> is the name of the function that Apps
+              Script will call whenever users make changes in the Google Sheet,
+              so it must be named exactly that. <strong>e</strong> represents
+              the event object that holds information about the change.
+            </p>
+
+            <p>
+              We get the name of the sheet and check if it's named "Log" (or
+              whatever the sheet is named.) If so, then we get the row number of
+              the change, the new value of the cell and the old value of the
+              cell, from before the change.
+            </p>
+            <p>
+              If the change happens in the first row and there are an old value
+              and a new value then we know that we're handling a cell edit, and
+              will therefore need to update the name of the header in our map.
+              Otherwise, we may be looking at a column shuffling, in which case
+              we need to update the position of each header in our map.
+            </p>
+            <p>Ok, it's time to create our mapper. Here goes:</p>
+
+            <pre><code class="language-javascript">function createMap() {
+  const headers = {
+    id: { p: 0, n: 'ID' },
+    fn: { p: 1, n: 'First Name' },
+    ln: { p: 2, n: 'Last Name' },
+    ad: { p: 3, n: 'Address' },
+    em: { p: 4, n: 'Email' },
+    ph: { p: 5, n: 'Phone' },
+    jt: { p: 6, n: 'Occupation' },
+    co: { p: 7, n: 'Company' },
+  };
+  setHeaders(headers);
+}</code></pre>
+            <p>
+              We have a "headers" object with keys that correspond with the API
+              keys. For each API key, I have a position "p" and a name "n" of
+              the corresponding header in the spreadsheet. For instance, "fn"
+              represents the "First Name" header that is currently in column B
+              (position 1).
+            </p>
+            <p>
+              <strong>setHeaders</strong> is a function that I will create next
+              to persist the map and make sure it's available every time I write
+              new rows to the spreadsheet. I need to run
+              <strong>createMap</strong> only once. From there on, the map will
+              be updated according to the <strong>onEdit</strong> events.
+            </p>
+
+            <p>Let's handle setting and getting the map:</p>
+
+            <pre><code class="language-javascript">function setHeaders(headers) {
+  const scriptProps = PropertiesService.getScriptProperties();
+  scriptProps.setProperty('headers', JSON.stringify(headers));
+}
+
+function getHeaders() {
+  const scriptProps = PropertiesService.getScriptProperties();
+  const headers = JSON.parse(scriptProps.getProperty('headers'));
+  console.log(headers);
+  return headers;
+}</code></pre>
+            <p>
+              <strong>setHeaders</strong> uses PropertiesService, which is a
+              terrific Apps Script feature to persist data that the script
+              needs, without writing the data to the sheet. Think of it as
+              environment variables: you can store and read these variables
+              during the normal run of the script (you can also manage the
+              properties manually in the "Project Settings" tab of the GAS IDE.
+            </p>
+            <p>
+              We take the headers and stringify them. Then we create a property
+              named headers, with the stringified map as the value. We also have
+              a <strong>getHeaders</strong> function to pull the string from
+              script properties, parse it, log it and return it. if you run
+              createMap and then getHeaders, you should see the map logged in
+              the console, just as we defined it.
+            </p>
+            <p>
+              Let's create the functions to update the map (our two to-dos
+              inside "onEdit".)
+            </p>
+
+            <pre><code class="language-javascript">function renameHeader(oldValue, thisValue) {
+  const headers = getHeaders();
+  for (const [k, v] of Object.entries(headers)) {
+    if (v.n === oldValue) {
+      headers[k].n = thisValue;
+      setHeaders(headers);
+      break;
+    }
+  }
+}
+
+function reorderHeaders() {
+  const headers = getHeaders();
+  const ss = SpreadsheetApp.getActive();
+  const sh = ss.getSheetByName('Log');
+  const headerRow = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues().flat();
+  headerRow.forEach((h, i) => {
+    for (const [k, v] of Object.entries(headers)) {
+      if (v.n === h) {
+        headers[k].p = i;
+        break;
+      }
+    }
+  });
+  setHeaders(headers);
+}</code></pre>
+
+            <p>
+              <strong>renameHeader</strong> accepts the old value and new value
+              from "onEdit." It gets the map, and then iterates over the map's
+              entries. when it finds a key with the name of the old value, it
+              updates to the new value. It then persists the map and breaks.
+            </p>
+            <p>
+              <strong>reorderHeaders</strong> pulls the header row from the
+              sheet, and, going header by header, it updates the position of the
+              header in the map. It too persists the map.
+            </p>
+
+            <p>
+              We now have the code necessary for the map to keep up with the
+              changes that users make in the structure of the sheet. Let's take
+              advantage of the map to insert new rows correctly:
+            </p>
+
+            <pre><code class="language-javascript">function appendDataToSheet() {
+  let newData = fetchNewDataFromAPI();
+  const headers = getHeaders();
+  newData = newData.map((obj) => {
+    const row = [];
+    for (const [k, v] of Object.entries(obj)) {
+      const p = headers[k].p;
+      row[p] = v;
+    }
+    return row;
+  });
+  const ss = SpreadsheetApp.getActive();
+  const sh = ss.getSheetByName('Log');
+  const newRow = sh.getLastRow() + 1;
+  sh.getRange(newRow, 1, newData.length, newData[0].length)
+    .setValues(newData);
+  SpreadsheetApp.flush();
+}</code></pre>
+
+            <p>
+              in the code above, we get the new data from the API. We then get
+              our headers map. We change our array of objects to a nested array.
+              We go over the objects one by one, create a new row for each, get
+              the set of keys and values from the object, get the position of
+              the API key from the map and insert the value into the right
+              position in "row." Finally, we return the row. We then get the
+              "Log" sheet and append the data to the end of the sheet.
+            </p>
+
+            <p>
+              I hope this gives an idea on how to keep up with changes that
+              users make to spreadsheets that your script works with.
+            </p>
+
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
