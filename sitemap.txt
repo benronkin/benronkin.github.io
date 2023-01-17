@@ -3,6 +3,7 @@ https://benronkin.com/index.html
 https://benronkin.com/contact.html
 https://benronkin.com/reviews.html
 https://benronkin.com/blog/index.html
+https://benronkin.com/blog/improve-user-experience-with-custom-menus-in-google-sheets.html
 https://benronkin.com/blog/handle-column-changes-in-google-sheets-with-app-script.html
 https://benronkin.com/blog/exchange-data-between-two-apps-scripts-with-webapp.html
 https://benronkin.com/blog/higher-order-functions-in-google-apps-script.html

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Improve user experience with custom menus in Google Sheets using Apps
+      Script | Ben Ronkin
+    </title>
+    <meta
+      property="og:title"
+      content="Improve user experience with custom menus in Google Sheets using Apps Script"
+    />
+    <meta
+      name="description"
+      content="Learn how to handle issues that custom menus create for first-time script users."
+    />
+    <meta
+      property="og:description"
+      content="Learn how to handle issues that custom menus create for first-time script users."
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/first-run-alert1.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/improve-user-experience-with-custom-menus-in-google-sheets.html"
+    />
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>
+              Improve user experience with custom menus in Google Sheets using
+              Apps Script
+            </h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> January 16, 2023
+              </span>
+            </p>
+          </div>
+
+          <!-- <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/aGOgYXLIvls"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div> -->
+
+          <div class="blog-post-body">
+            <p>
+              Custom menus in Google Sheets are a terrific way to let users kick
+              off automation functions on their own terms. When we empower users
+              to decide when and what automation to run, we improve the
+              effectiveness of our automation code.
+            </p>
+            <p>
+              But custom menus have two issues when they're part of scripts that
+              require access to sensitive or restricted scopes:
+            </p>
+            <ul>
+              <li>
+                Google requires the user to authorize the script the first time
+                a user attempts to run it.
+              </li>
+              <li>
+                Due to a current issue with the Apps Script engine, the function
+                that the user selected to run from a custom menu will not run if
+                an authorization is first required. The user will have to select
+                the menu option again following successful authorization.
+              </li>
+            </ul>
+            <p>
+              While these issues are not a big deal for experienced users,
+              first-time users might find them daunting. In this post, we look
+              at one implementation that can somehow alleviate these issues for
+              first-time users.
+            </p>
+            <p>
+              At the core of this solution is the use of Apps Script's
+              properties service. We'll use this service to check for the
+              existence of a specific property. If we don't it then we know that
+              the script wasn't authorized in a prior session, and we can change
+              the user experience of the custom menu to be more supportive of
+              the user.
+            </p>
+
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+
+            <p>
+              First, let's create a standard function that displays a custom
+              menu in a Google Sheet. Open a spreadsheet and access Apps Script.
+              Inside Code.gs, insert the following code:
+            </p>
+
+            <pre><code class="language-javascript">function onOpen(e) {
+  const ui = SpreadsheetApp.getUi();
+  const menu = ui.createMenu("🟢 Automation");
+  menu.addItem("Start automation", "start").addToUi();
+}
+
+function start() {
+  DriveApp.getFiles();
+}</code></pre>
+
+            <p>
+              The code above will insert a custom menu. The function
+              <strong>start</strong> doesn't do anything visible, but it forces
+              Apps Script to ask the user to authorize the script first:
+            </p>
+
+            <img
+              class="responsive"
+              src="../img/first-run-authorization-needed.png"
+              alt="First run authorization"
+              width="100%"
+            />
+
+            <p>
+              We can make things easier for first-time users. We can use
+              <strong>PropertiesService</strong> of Apps Script to check if
+              we've set a specific property in the past. If not, then we can
+              change the custom menu, as well as display an alert as soon as the
+              spreadsheet opens for the first time by the user. Modify
+              <strong>onOpen</strong> as follows:
+            </p>
+
+            <pre><code class="language-javascript">function onOpen(e) {
+  const userProps = PropertiesService.getUserProperties();
+  const repeatUser = userProps.getProperty('repeatUser')  
+  const ui = SpreadsheetApp.getUi();
+  const menu = ui.createMenu("🟢 Automation")
+  if (!repeatUser) {
+    menu.addItem("Authorize", "authorize")
+      .addSeparator()
+      .addItem("Start automation", "start")
+      .addToUi()
+    ui.alert(`Select "Authorize" from the automation menu, and click 
+    through the authorization flow. Once you are done, select "Start automation."`)
+  } else {
+    menu.addItem("Start automation", "start").addToUi();
+  } 
+}</code></pre>
+
+            <p>
+              Above, we first look for a user property named "repeatUser" (it
+              can be called whatever you want). we use
+              <strong>getUserProperties</strong> instead of
+              <strong>getScriptProperties</strong> because we want to replace
+              this experience for every user of the spreadsheet: not just with
+              the first person who uses the custom menu.
+            </p>
+
+            <p>
+              If we don't have a "repeatUser" in place then we set the custom
+              menu with an option to authorize the script, followed by a
+              separator line, followed by the actual automation option. We also
+              display an alert that instructs the user:
+            </p>
+
+            <img
+              class="responsive"
+              src="../img/first-run-alert1.png"
+              alt="First run alert1"
+              width="100%"
+            />
+
+            <p>
+              Once the user oks the alert and clicks the Automation menu, they
+              see two options:
+            </p>
+
+            <img
+              class="responsive"
+              src="../img/first-run-double-menu.png"
+              alt="First run double menu"
+              width="100%"
+            />
+
+            <p>
+              The <strong>authorize</strong> function doesn't do much but merely
+              attempts to set the property and display an alert in case the user
+              clicks "Authorize" multiple times. But the first time the user
+              clicks the option, the function will not run because of the Apps
+              Script issue mentioned above:
+            </p>
+
+            <img
+              class="responsive"
+              src="../img/first-run-already-authorized.png"
+              alt="First run already authorized"
+              width="100%"
+            />
+
+            <pre><code class="language-javascript">function authorize() {
+  setRepeatUser();
+  const ui = SpreadsheetApp.getUi();
+  ui.alert(`This script is already authorized. Select "Start automation."`);
+}
+
+function start() {
+  setRepeatUser();
+  DriveApp.getFiles();
+}</code></pre>
+            <p>
+              If the property does exist then no alert will be shown and the
+              menu will have only one option:
+            </p>
+
+            <img
+              class="responsive"
+              src="../img/first-run-single-menu.png"
+              alt="First run single menu"
+              width="100%"
+            />
+
+            <p>
+              We're adding a call to <strong>setRepeatUser</strong> to both
+              <strong>authorize</strong> and <strong>start</strong>. This
+              function is straightforward: Check for the existence of the
+              property, and if it doesn't exist then set it in place:
+            </p>
+
+            <pre><code class="language-javascript">function setRepeatUser() {
+  const userProps = PropertiesService.getUserProperties();
+  const repeatUser = userProps.getProperty('repeatUser');
+  if (repeatUser) {
+    return
+  }
+  userProps.setProperty('repeatUser', 'set');
+}</code></pre>
+            <p>
+              This solution isn't perfect, but at least it gives you an idea how
+              to use properties service to make the experience of first-time
+              users a bit clearer.
+            </p>
+
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
