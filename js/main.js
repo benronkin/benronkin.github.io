@@ -158,6 +158,9 @@ function displayCookieBanner() {
 }
 
 const ready = () => {
+  // Mobile sidenav
+  const elems = document.querySelectorAll('.sidenav');
+  M.Sidenav.init(elems, {});
   // Contact form
   const contactForm = document.querySelector('#contact-form');
   if (contactForm) {
