@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" >
+    <channel>
+        <title>BenRonkin.com Blog</title>
+        <atom:link href="https://benronkin.com/blog/rss.xml" rel="self" type="application/rss+xml" />
+        <description>I am Ben, an automation developer. I enjoy sharing my knowledge with Google Apps Script and Javascript in general.</description>
+        <link>https://benronkin.com/blog</link>
+        <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
+        <item>
+            <title>Add a form to an email and save responses in a Google Sheet</title>
+            <description>Let's pretend that you run a home-improvement store, with lots of products on the shelves. Every day or so, you pick a bunch of products and note them in a Google Sheet. You'd like to have your loyal employee run an inventory check and note the quantity of each product. There's only one wrinkle: as loyal as the employee is, you don't want to give them access to the Google Sheet itself; who knows what they'd do with it? How can we automate our way around this pickle?</description>
+            <link>https://benronkin.com/blog/add-form-to-email-with-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/add-form-to-email-with-google-apps-script.html</guid>
+            <pubDate>Wed, 25 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Sync Gmail and Google Calendar recipients to Google Contacts - Part 2</title>
+            <description>In the previous post we looked at how to populate a Google Sheet with names and email addresses from our Gmail and Google Calendar accounts. In this post we'll see how to push this information into Google Contacts using the Google People API.</description>
+            <link>https://benronkin.com/blog/sync-gmail-calendar-contacts-part2.html</link> 
+            <guid>https://benronkin.com/blog/sync-gmail-calendar-contacts-part2.html</guid>
+            <pubDate>Mon, 23 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Sync Gmail and Google Calendar recipients to Google Contacts</title>
+            <description>I interact with a lot of people using Gmail messages and Google Calendar events. I'd like to collect the contact info of these individuals in Google Contacts as my de-facto CRM. Adding these records manually takes too much time: I'd like this done programmatically. Thing is, I don't want to mine every email and invite: some of these are transactional emails or one-off meetings. Instead, I'd like to have the contact info aggregated into a Google Sheet where I can visually inspect the rows, mark which ones to save and which ones to ignore.</description>
+            <link>https://benronkin.com/blog/sync-gmail-calendar-contacts.html</link> 
+            <guid>https://benronkin.com/blog/sync-gmail-calendar-contacts.html</guid>
+            <pubDate>Thu, 19 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Improve user experience with custom menus in Google Sheets</title>
+            <description>Custom menus in Google Sheets are a terrific way to let users kick off automation functions on their own terms. When we empower users to decide when and what automation to run, we improve the effectiveness of our automation code. But custom menus have two issues when they're part of scripts that require access to sensitive or restricted scopes...</description>
+            <link>https://benronkin.com/blog/improve-user-experience-with-custom-menus-in-google-sheets.html</link> 
+            <guid>https://benronkin.com/blog/improve-user-experience-with-custom-menus-in-google-sheets.html</guid>
+            <pubDate>Mon, 16 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Handle column changes in Google Sheets with Apps Script</title>
+            <description>A client of mine recently asked for my help in automating the data pulls they were doing. They wanted me to use the system's REST API to fetch new data and write it to a Google Sheet. The response payload of the API was pretty easy to navigate: essentially an array with a bunch of objects, where each object represented a user with certain keys for first and last names, phone, email -- that sort of thing. All I had to do was call the API periodically, get back new user objects, and them to a nested array so that I can append the data to Google Sheets. Easy enough, but there was one wrinkle...</description>
+            <link>https://benronkin.com/blog/handle-column-changes-in-google-sheets-with-app-script.html</link> 
+            <guid>https://benronkin.com/blog/handle-column-changes-in-google-sheets-with-app-script.html</guid>
+            <pubDate>Thu, 12 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Exchange data between two Apps Scripts using a webapp</title>
+            <description>We use Apps Script to increase our productivity when we use google sheets or google docs. But did you know that apps script can communicate with another apps script? We can exchange data between sheets that have their own scripts without having the user in the middle. One way to accomplish that is with the use of apps script web apps. A web app provides a url that users can access via a browser, but the url can also be used by another script.</description>
+            <link>https://benronkin.com/blog/exchange-data-between-two-apps-scripts-with-webapp.html</link> 
+            <guid>https://benronkin.com/blog/exchange-data-between-two-apps-scripts-with-webapp.html</guid>
+            <pubDate>Tue, 10 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Take your GAS to the next level with higher-order functions</title>
+            <description>Imagine you have a Google Sheet with tabular sales data. The table contains sales volumes from four regions, represented in columns, and monthly sales volume represented in rows. Let's also say that you are developing a Google Apps Script that needs to do a few things, including summing up the sales in the East region. How would you go about coding that? Well, the easiest thing to do is to pull the values out of the East column one by one and...</description>
+            <link>https://benronkin.com/blog/higher-order-functions-in-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/higher-order-functions-in-google-apps-script.html</guid>
+            <pubDate>Mon, 9 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Increase coding productivity with Apps Script macros</title>
+            <description>Google Apps Script is all about increasing work productivity through automation. But the road to automation involves a lot of mental and manual work. When we're developing scripts, we are often asked to make changes in Google Sheets or Google Drive items. Since we don't always get the scripts to make the right changes right away, we often have to undo the script changes manually, as we develop and enhance the script. And there's only so much we can do with the UNDO button in google sheets.</description>
+            <link>https://benronkin.com/blog/increase-productivity-with-google-apps-script-macros.html</link> 
+            <guid>https://benronkin.com/blog/increase-productivity-with-google-apps-script-macros.html</guid>
+            <pubDate>Sun, 8 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Validate user files with Google Apps Script</title>
+            <description>Let's say that you have a Google Apps Script that processes files that are generated by other people. Maybe it's your clients, or your team members, or your channel partners who provide the files – whatever the case may be, you build your script to operate on other people's files. In such a scenario I would assume that as a good developer, you would reach out to these people and agree with them on how they should populate and handle those files. Maybe you even give them a file template and ask them not to change its structure, but merely to duplicate it and fill out the information and then submit it to your script.</description>
+            <link>https://benronkin.com/blog/validate-user-files-with-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/validate-user-files-with-apps-script.html</guid>
+            <pubDate>Fri, 6 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Display a sidebar inside Google Sheet</title>
+            <description>A Google Sheet sidebar is an extra pane that you can open alongside your sheets. It lets you manipulate the contents of the sheets from a centralized place. I'll review the sidebar in the context of mail merge, a solution that I covered in previous posts. Mail merge has an admin sheet where the user can select an email template, preview the campaign, and launch the campaign. In this post, I'll migrate this functionality to a sidebar.</description>
+            <link>https://benronkin.com/blog/display-google-sheet-sidebar.html</link> 
+            <guid>https://benronkin.com/blog/display-google-sheet-sidebar.html</guid>
+            <pubDate>Wed, 4 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Display HTML page inside Google Sheets</title>
+            <description>Happy New Year! Here's to a calmer and saner year! Displaying HTML pages inside a spreadsheet is quite common and useful when you do automation stuff. The HTML resides inside a popup that we can easily show when the user clicks on a button or selects from a custom menu. The HTML inside a popup supports CSS and Javascript, so you can offer really beautiful and useful HTML experiences inside a spreadsheet.</description>
+            <link>https://benronkin.com/blog/display-html-page-inside-google-sheet.html</link> 
+            <guid>https://benronkin.com/blog/display-html-page-inside-google-sheet.html</guid>
+            <pubDate>Sun, 1 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Send SMS Messages automatically from Google Sheets</title>
+            <description>Sending SMS messages directly from a Google Sheet is both easy and useful. Let's assume that we have a Google Sheet that gets populated with phone numbers of people that we'd like to contact via an SMS message. In this post we will see how to implement a solution using Google Apps Script.</description>
+            <link>https://benronkin.com/blog/send-sms-messages-with-app-script.html</link> 
+            <guid>https://benronkin.com/blog/send-sms-messages-with-app-script.html</guid>
+            <pubDate>Thu, 29 Dec 2022 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Using Google Docs text in Apps Script</title>
+            <description>In the previous post, we looked at how to scan a Google Drive folder in order to collect the names of its files, and use them to populate a dropdown in Google Sheet. We will now see how to access the text inside these Google Docs in order to use them as email templates in our mail-merge solution.</description>
+            <link>https://benronkin.com/blog/using-google-doc-text-in-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/using-google-doc-text-in-google-apps-script.html</guid>
+            <pubDate>Wed, 14 Dec 2022 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Populate Google Sheet dropdown with names of Google Drive files</title>
+            <description>In the previous post we looked at a rudimentary mail merge for Gmail using Apps Script. The script used a global object that housed the default subject line and body for our emails. We incorporated placeholders into the text that the script replaced with recipients' data. There are, however, a couple of issues with this approach. So, instead, we are going to store the email templates in a Google Docs. We will populate a dropdown with the names of the files, so that we can choose the email template with a single mouse click.</description>
+            <link>https://benronkin.com/blog/google-sheet-dropdown-with-names-of-google-drive-files.html</link> 
+            <guid>https://benronkin.com/blog/google-sheet-dropdown-with-names-of-google-drive-files.html</guid>
+            <pubDate>Sat, 10 Dec 2022 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Create mail merge for Gmail using Apps Script</title>
+            <description>In this post I offer a short and sweet Google Apps Script for creating mail merge in Gmail. The script is very basic, merely meant to introduce the topic. In future posts I'll add more features and capabilities. Mail merge is essentially the ability to send multiple emails in one operation, yet personalize the email to each recipient. It saves you the time and energy to compose multiple emails to multiple recipients that say the same thing. With mail merge, you take an email template, and a list of recipients. You then replace placeholders in the template with the data of each recipients. Like I said, pretty simple stuff.</description>
+            <link>https://benronkin.com/blog/create-mail-merge-for-gmail-with-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/create-mail-merge-for-gmail-with-google-apps-script.html</guid>
+            <pubDate>Fri, 9 Dec 2022 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Create an email auto-responder with Apps Script</title>
+            <description>Having a system that automatically responds to incoming email messages can be a great time saver. In this post you will learn how to create such a system for Gmail, using Google Apps Script.</description>
+            <link>https://benronkin.com/blog/create-email-auto-responder-with-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/create-email-auto-responder-with-apps-script.html</guid>
+            <pubDate>Fri, 18 Nov 2022 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>How to extract YouTube stats automatically and at scale</title>
+            <description>There's often a need to extract statistics about YouTube channels; specifically, data about the channels themselves, as well as their videos and playlists. While it's possible to extract this data manually by visiting various YouTube pages and doing a lot of copying and pasting, this approach does not scale well. Luckily, Google offers an API (application programming interface) to extract this very information. The Google Data API offers a consistent way for developers to pull data about YouTube channels, videos, and playlists. Developers can write programs or scripts that call the different endpoints (URLs) of the API to extract the information.</description>
+            <link>https://benronkin.com/blog/how-to-extract-youtube-stats.html</link> 
+            <guid>https://benronkin.com/blog/how-to-extract-youtube-stats.html</guid>
+            <pubDate>Tue, 1 Nov 2022 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Deploying Stripe payments with Google Apps Script</title>
+            <description>This post details my experience in deploying Stripe payments using Google Apps Script (GAS) in three different projects. The Stripe platform is easy to use, and when it's combined with GAS, launching a payment system is straightforward.</description>
+            <link>https://benronkin.com/blog/deploying-stripe-payments-with-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/deploying-stripe-payments-with-google-apps-script.html</guid>
+            <pubDate>Wed, 26 Oct 2022 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>How to duplicate Google Drive folders automatically</title>
+            <description>As a Google Workspace developer, I live in Google Drive all day long. It's often the case that I need to duplicate a complex structure of Drive folders and files. Unfortunately, there is no easy way in Google Drive right now to duplicate folders quickly like you can do with a Google Sheet, for example. You have to copy stuff manually one by one, which is very annoying. In this blog post I'll walk you though the process of creating a Google Apps Script web app that will automate the folder duplication process.</description>
+            <link>https://benronkin.com/blog/how-to-duplicate-drive-folders-automatically.html</link> 
+            <guid>https://benronkin.com/blog/how-to-duplicate-drive-folders-automatically.html</guid>
+            <pubDate>Thu, 4 Mar 2021 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Filtering a nested array with another nested array</title>
+            <description>I often write code that operates on Google Sheets, which means that I have to deal with nested arrays a lot. One of the things I have to do is to find rows in one array that don't have corresponding rows in another nested array. For instance, I may have a Google Sheet with some user information, and another sheet with file information. Files are created for unique combinations of user departments and user roles. As more users are added to the users sheet, I need to find department-role combinations that don't already have a corresponding file.</description>
+            <link>https://benronkin.com/blog/filtering-a-nested-array-with-another-nested-array.html</link> 
+            <guid>https://benronkin.com/blog/filtering-a-nested-array-with-another-nested-array.html</guid>
+            <pubDate>Fri, 26 Feb 2021 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Dynamic data validation in Google Sheets</title>
+            <description>I have a Google Sheet with a column for company names. To ensure data quality, I prefer to select the company name in each row from a dropdown list so that the company is always spelled the same way. I could use the standard data validation in Google Sheet, but my list of companies contains over 35,000 names, and adding all of them into a data validation rule slows down Google Sheets considerably.</description>
+            <link>https://benronkin.com/blog/dynamic-data-validation-in-google-sheets.html</link> 
+            <guid>https://benronkin.com/blog/dynamic-data-validation-in-google-sheets.html</guid>
+            <pubDate>Thu, 18 Feb 2021 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Recalculating custom functions in Google Sheets</title>
+            <description>I use Google Sheets to track my stock investments. Sure, there are plenty of online tools that can do this for you, but I use Sheets because I like to develop my own metrics and see if they help me make smarter buy/sell decisions in the long run. Having custom metrics means developing custom functions in Google Apps Script and then applying them inside Google Sheet cells.</description>
+            <link>https://benronkin.com/blog/recalculating-custom-functions-in-google-sheets.html</link> 
+            <guid>https://benronkin.com/blog/recalculating-custom-functions-in-google-sheets.html</guid>
+            <pubDate>Sun, 2 Aug 2020 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Using a single environment variables file for both Google cloud function and local dev</title>
+            <description>Whenever I need to write a cloud function for a Google Cloud Platform (GCP) project, I prefer to develop and test my code locally and deploy it as a cloud function only when it's done. It's often the case that I need to use environment variables to store important and sensitive information. For instance, if my code needs to access a Google Sheet via the Google Sheet API, then I prefer to store the sheet ID in an environment variable, instead of hard-coding it in the code.</description>
+            <link>https://benronkin.com/blog/using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html</link> 
+            <guid>https://benronkin.com/blog/using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html</guid>
+            <pubDate>Sat, 11 Jul 2020 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Using the Google Sheets API in a Cloud Function on Google Cloud Platform</title>
+            <description>Cloud functions on Google Cloud Platform (GCP) are a great way to ship production code quickly and efficiently. I often use them to take advantage of the services that GCP offers, such as Google Sheets API. This post details the process of using Google Cloud Platform (GCP) to deploy a cloud function that uses the Sheets API. I use the code included in this article as a template for all my GCP projects. This speeds up the process of creating new projects</description>
+            <link>https://benronkin.com/blog/using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html</link> 
+            <guid>https://benronkin.com/blog/using-the-google-sheets-api-in-a-cloud-function-on-google-cloud-platform.html</guid>
+            <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
+        </item>
+    </channel>
+</rss>
