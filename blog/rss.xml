@@ -7,6 +7,13 @@
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
         <item>
+            <title>Download web images to Google Drive automatically using Apps Script</title>
+            <description>Your team keeps a large storage of high-quality images on some web server, but the guy who manages the server was caught in the latest round of layoffs, and now nobody knows how to access and get these images. Luckily, Apps Script can automatically download these images to Google Drive, so no need to fret.</description>
+            <link>https://benronkin.com/blog/download-images-automatically.html</link> 
+            <guid>https://benronkin.com/blog/download-images-automatically.html</guid>
+            <pubDate>Wed, 1 Feb 2023 14:50:00 -0800</pubDate>
+        </item>
+        <item>
             <title>Insert form submissions into Google Docs automatically</title>
             <description>All good things, as the saying goes, come to an end. After letting us work fully remote for past couple of years, management at our fledging startup has recently announced that it expected everyone back at the office five days a week. Goodbye work flexibility, and hello (again) insane commutes. You, dear reader, and I – AKA The OGs on the company's Slack – are of course not going to put up with that. After all, our fellow employees are looking to us to take a stand, and, darn it, we will. We are going to write a petition in a Google Doc that we will share with management, letting them know exactly how we feel about their inane decision. But it's not just you and I to do the writing: we'll get the troops to contribute their thoughts as well. We'll collect comments from colleagues and embed them in the document using a simple Google Form with two questions: "Enter your comment" and "Enter your name."</description>
             <link>https://benronkin.com/blog/insert-form-submissions-into-google-docs.html</link> 
@@ -166,13 +173,6 @@
             <link>https://benronkin.com/blog/recalculating-custom-functions-in-google-sheets.html</link> 
             <guid>https://benronkin.com/blog/recalculating-custom-functions-in-google-sheets.html</guid>
             <pubDate>Sun, 2 Aug 2020 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Using a single environment variables file for both Google cloud function and local dev</title>
-            <description>Whenever I need to write a cloud function for a Google Cloud Platform (GCP) project, I prefer to develop and test my code locally and deploy it as a cloud function only when it's done. It's often the case that I need to use environment variables to store important and sensitive information. For instance, if my code needs to access a Google Sheet via the Google Sheet API, then I prefer to store the sheet ID in an environment variable, instead of hard-coding it in the code.</description>
-            <link>https://benronkin.com/blog/using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html</link> 
-            <guid>https://benronkin.com/blog/using-a-single-environment-variables-file-for-both-google-cloud-function-and-local-dev.html</guid>
-            <pubDate>Sat, 11 Jul 2020 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>

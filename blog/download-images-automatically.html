@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Download web images to Google Drive automatically using Apps Script| Ben
+      Ronkin
+    </title>
+    <meta
+      property="og:title"
+      content="Download web images to Google Drive automatically using Apps Script"
+    />
+    <meta
+      name="description"
+      content="Use Google Apps Script to parse HTML code for image URLs and download those to Google Drive."
+    />
+    <meta
+      property="og:description"
+      content="Use Google Apps Script to parse HTML code for image URLs and download those to Google Drive."
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/download-images-automatically-hero.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/download-images-automatically.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7012737165381891"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7012737165381891"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>
+              Download web images to Google Drive automatically using Apps
+              Script
+            </h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> February 1, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/Ao2lH9VHPEE"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="blog-post-body">
+            <p>
+              Your team keeps a large storage of high-quality images on some web
+              server, but the guy who manages the server was caught in the
+              latest round of layoffs, and now nobody knows how to access and
+              get these images. Luckily, Apps Script can automatically download
+              these images to Google Drive, so no need to fret. But before we
+              get into the code, I must make three disclaimers:
+            </p>
+            <p class="lead">
+              Disclaimer #1: Abide by copyright information. If you use the
+              script below to download images from websites that you do not own
+              then please ascertain that the website owners are ok with you
+              doing so. Look for copyright or download information on the site
+              first.
+            </p>
+            <p class="lead">
+              Disclaimer #2: Respect the robots.txt file. If you intend to
+              download images from a website that you don't own then first
+              inspect the robots.txt file that usually lives at the root of the
+              website. The file contains information about which sections of the
+              site bots such as the upcoming script are allowed or disallowed to
+              access. Ensure that the website owners are ok with you crawling
+              their site with a script.
+            </p>
+            <p class="lead">
+              Disclaimer #3: The script below uses Regular Expressions to find
+              image URLs in the HTML code. Plain regular expressions are
+              notoriously bad at parsing different HTML formats. A formal web
+              parser will do a much better job.
+            </p>
+            <p>
+              Now that we got this out of the way, let's jump into the code.
+              You'll need to create a Google Apps Script file and a Google Drive
+              folder that will store the images. The script file will cover the
+              following actions:
+            </p>
+            <ol>
+              <li>Fetch the web page HTML that contains the images</li>
+              <li>Get all image URLs</li>
+              <li>Standardize image URLs</li>
+              <li>Download image resources</li>
+              <li>Inspect file size</li>
+              <li>Save files to Google Drive folder</li>
+            </ol>
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+
+            <p>
+              Let's create a global object with key information that we will
+              refer to throughout the script:
+            </p>
+
+            <pre><code class="language-javascript">const g = {
+  PAGE_URL: 'https://mywebsite.com/path/my-page.html',
+  FOLDER_ID: 'my_folder_id',
+  MIN_KB: 30,
+};</code></pre>
+
+            <p>
+              Above, we store references to the web page URL from which we want
+              to download the image files. We also note the ID of the Google
+              Drive folder that will store the image files. Lastly, we note the
+              minimum file size to download (in kilobytes), since we don't want
+              to download 1x1 pixels or tiny icon files.
+            </p>
+
+            <p>
+              Next, we'll define the function that we will execute the script
+              with. First, the function will fetch the web page HTML and then
+              use Regular Expressions to get the image URLs:
+            </p>
+
+            <pre><code class="language-javascript">function downloadImages() {
+  const html = UrlFetchApp.fetch(g.PAGE_URL).getContentText();
+    const re = /&lt;img[^>]+src="([^"]+(?:png|gif|jpg|jpeg|svg))"[^>]*>/g;
+  let match;
+  let sources = [];
+  while ((match = re.exec(html)) !== null) {
+    sources.push(match[1]);
+  }
+}</code></pre>
+
+            <p>
+              Above we use <strong>UrlFetchApp</strong> to fetch the web page.
+              <strong>getContextText</strong> converts it to an HTML string that
+              we can parse. Next we define a regular expression: We are looking
+              for strings inside the HTML that contain image tags, and we
+              extract the src value of each image.
+            </p>
+
+            <p>
+              You may find that with the web pages you access, you might need to
+              modify the regex. By all means do so: this script is for
+              educational purposes only.
+            </p>
+            <p>
+              Next, we need to standardize the image URLs, since those can
+              either have absolute paths or relative paths. By that I mean, a
+              URL can be of the following forms:
+            </p>
+            <ul>
+              <li>https://www.mysite.com/img/image1.png</li>
+              <li>image.png</li>
+              <li>/image.png</li>
+              <li>./image.png</li>
+              <li>../image.png</li>
+              <li>../../image.png</li>
+            </ul>
+            <p>
+              Web browsers do a great job in handling relative path URLs, but we
+              need to make them absolute so that we can fetch their resources.
+              Let's create the function to do so:
+            </p>
+
+            <pre><code class="language-javascript">function formatUrl_(url) {
+  if (url.startsWith('http')) {
+    return url;
+  }
+  let pageUrl = g.PAGE_URL;
+  if (pageUrl.endsWith('/')) {
+    pageUrl = pageUrl.slice(0, -1);
+  }
+  if (/^[a-zA-Z]/.test(url)) {
+    url = './' + url;
+  }
+  if (url.startsWith('/')) {
+    url = '.' + url;
+  }
+  pageUrl = pageUrl.split('/');
+  url = url.split('/');
+  if (pageUrl[pageUrl.length - 1].includes('.')) {
+    pageUrl.pop();
+  }
+  while (url[0] == '..' || url[0] == '.') {
+    pageUrl.pop();
+    url.shift();
+  }
+  url = pageUrl.concat(url).join('/');
+
+  return url;
+}</code></pre>
+
+            <p>
+              In the <strong>formatUrl_</strong> function above, we first check
+              if the url has an absolute path: if it does then we return it
+              as-is. Next, we copy the page url to its own variable so that we
+              can turn it into the base URL. We strip off a trailing slash if
+              there is one. We then standardize the file url: we want it to
+              begin with "./".
+            </p>
+            <p>
+              Next, we split both URLs into arrays. If the base URL ends with a
+              file name (which includes a period) then we remove that part. We
+              create a loop to inspect the first array element of the file URL:
+              if it contains './' or '../' then we delete it and remove the last
+              sub-directory from the base URL. Finally, we concat the two arrays
+              and join them with a slash before returning the URL.
+            </p>
+
+            <p>
+              We can create a test function to ensure that the code works as
+              expected for any type of file URL:
+            </p>
+
+            <pre><code class="language-javascript">function dev() {
+  let url = 'https://mysite.com/img/image1.png';
+  console.log(formatUrl_(url));
+  url = 'image1.png';
+  console.log(formatUrl_(url));
+  url = '/img/image1.png';
+  console.log(formatUrl_(url));
+  url = './image1.png';
+  console.log(formatUrl_(url));
+  url = '../image1.png';
+  console.log(formatUrl_(url));
+  url = '../../image1.png';
+  console.log(formatUrl_(url));
+}</code></pre>
+            <p>When we run it, we get an absolute URL for any variation.</p>
+            <p>
+              Back in our <strong>downloadImages</strong> function, we can now
+              standardize our URLs using the new function:
+            </p>
+
+            <pre><code class="language-javascript">let imageUrls = sources.map((url) => formatUrl_(url));
+imageUrls = [...new Set(imageUrls)];</code></pre>
+            <p>
+              We could have a situation where the page includes a given image
+              more than once. Since we don't want to download duplciate images,
+              we can use "set" to de-dup the list of image URLs.
+            </p>
+            <p>
+              Next, I want to use the "fetchAll" method of "UrlFetchApp." You
+              can execute the fetches individually, but I prefer to do so in one
+              time. So, I need to convert the URLs to request objects, and wrap
+              the requests in a try/catch:
+            </p>
+
+            <pre><code class="language-javascript">let requests = imageUrls.map((url) => ({
+    url,
+    muteHttpExceptions: true,
+  }));
+  let resp;
+  try {
+    resp = UrlFetchApp.fetchAll(requests);
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(`Found ${resp.length} total images`);</code></pre>
+            <p>
+              Above, we use "map" to convert each URL string to an object with
+              the URL, and with muteHttpExceptions so that I can inspect any
+              error. Lastly, I log the number of images that were fetched.
+            </p>
+            <p>
+              Next, I want to remove any images that are smaller in file size
+              than the threshold I had specified in my global object:
+            </p>
+
+            <pre><code class="language-javascript">  for (let i = resp.length - 1; i >= 0; i--) {
+    const fileSize = resp[i].getAllHeaders()['Content-Length'];
+    if (fileSize / 1000 < g.MIN_KB) {
+      resp.splice(i, 1);
+    }
+  }
+  console.log(`Will save ${resp.length} image files`);</code></pre>
+            <p>
+              I iterate over the responses backwards. For each one, I get the
+              headers and look at the 'Content-Length', which provides the file
+              size in bytes. I divide the number by 1000 and compare it to
+              g.MIN_KB. If it's smaller than I splice out the file. Finally, I
+              log the number of actual files that will be stored. So, let's
+              store the files:
+            </p>
+
+            <pre><code class="language-javascript">resp.forEach((r, i) => {
+  const blob = r.getBlob();
+  const file = folder.createFile(blob);
+  console.log(`Saved file ${++i} ${file.getName()}`);
+});</code></pre>
+            <p>
+              Above, we iterate over the responses. For each one we get its blob
+              and create a file from it. We log the number of file saved and its
+              name. That's all there's to it.
+            </p>
+
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
