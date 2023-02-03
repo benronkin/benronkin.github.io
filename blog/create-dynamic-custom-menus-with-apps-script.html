@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Create dynamic custom menus with Apps Script | Ben Ronkin</title>
+    <meta
+      property="og:title"
+      content="Create dynamic custom menus with Apps Script"
+    />
+    <meta
+      name="description"
+      content="Use Google Apps Script to create dynamic custom menus based on data in a Google Sheet"
+    />
+    <meta
+      property="og:description"
+      content="Use Google Apps Script to create dynamic custom menus based on data in a Google Sheet"
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/dynamic-custom-menu-hero.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/create-dynamic-custom-menus-with-apps-script.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7012737165381891"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Create dynamic custom menus with Apps Script</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> February 2, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/7NA4AI5F8MA"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="blog-post-body">
+            <p>
+              Remember the petition
+              <a href="insert-form-submissions-into-google-docs.html"
+                >you and I wrote</a
+              >
+              to the management team at our company regarding their recent
+              decision to discontinue the work-from-home policy and have
+              everyone back at the office? Well, I have bad news and good news:
+              The bad news is that management would not relent: all employees
+              must return to the office full-time. But the good news is that
+              management has decided to institute a new performance-based bonus
+              program!
+            </p>
+            <p>
+              Now, our payroll manager needs our help in automating parts of the
+              bonus program. She has a Google sheet where all the employees are
+              listed with their names, email addresses, and other data. The
+              manager is asking us to create a custom menu in the spreadsheet
+              that will list all the employees alphabetically. She wants to be
+              able to choose an employee in the menu and have our automation
+              kick-off a bonus payment for that employee.
+            </p>
+            <p>
+              The custom menu must list all the employees that are in the
+              spreadsheet, when the spreadsheet is opened. The custom menu
+              options must all trigger the same bonus payment function for the
+              chosen employee.
+            </p>
+
+            <p>
+              You and I think that what she wants makes sense, but there's a
+              catch: Apps Script doesn't let us pass arguments to the function
+              that we name in the custom menu. So how can we possibly help our
+              payroll manager? Well, a bit of Javascript magic will take care of
+              that.
+            </p>
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+            <p>
+              To get started, create a new Google Sheet with a tab named
+              'Employees'. In the tab, list a few employees – one per row. The
+              column order is: First name, Last name, Job title, Email address,
+              and Hire date.
+            </p>
+
+            <p>
+              To orient ourselves, let's create a generic onOpen function to add
+              a static custom menu to our sheet:
+            </p>
+
+            <pre><code class="language-javascript">function onOpen(e) {
+  const ui = SpreadsheetApp.getUi();
+  const menu = ui.createMenu('🟢 Automation');
+  menu.addItem('Example option', 'exampleFunction').addSeparator();
+  menu.addToUi();
+}</code></pre>
+            <p>
+              Above, we get the UI, create a menu, and add an item with a
+              separator, and add the menu to the UI. We won't actually work with
+              this menu option – we enter it merely to demonstrate our problem:
+              We can see that "exampleFunction" is specified as a string:
+              there's no way to pass an argument like an employee's information
+              to it.
+            </p>
+            <p>
+              Let's break this problem into parts. The first thing we need to do
+              is to extract the employees' information from the sheet. Well,
+              that's easy enough:
+            </p>
+
+            <pre><code class="language-javascript">function getEmployees() {
+ const ss = SpreadsheetApp.getActive();
+ const sh = ss.getSheetByName('Employees');
+ let employees = sh.getDataRange().getValues();
+ employees.splice(0, 1);
+ employees.sort();
+ employees = employees.map((row) => [`${row[0]} ${row[1]}`, row[3]]);
+ return employees;
+}</code></pre>
+
+            <p>
+              Above, we get the spreadsheet and the Employees tab. We pull out
+              the data and splice out the header row, since we don't need it. We
+              sort the list alphabetically for the menu. Then we merge the first
+              name and the last name of each employee and get their email
+              address by using a map to get the data in the format that we need.
+              Finally, we return the modified data array.
+            </p>
+            <p>
+              The solution to our pesky menu problem is to create menu functions
+              dynamically. Each function, when invoked, will call our
+              bonus-payment function, passing to it the employee's information.
+              We'll build these functions dynamically by iterating over our data
+              array, creating a menu option for each employee, and associating
+              the menu option with the newly created function.
+            </p>
+
+            <p>
+              First, we'll create a global object that will hold the functions,
+              since we don't want them to pollute the global scope. Then we'll
+              create the functions and attach them to our object:
+            </p>
+
+            <pre><code class="language-javascript">const g = {};
+
+function createFunctions() {
+ const employees = getEmployees();
+ employees.forEach((employee) => {
+   const funcName = employee[1].replace(/[@\.]/g, '_');
+   g[funcName] = function () {
+     startBonus(employee);
+   };
+ });
+}
+
+createFunctions();</code></pre>
+
+            <p>
+              Inside <strong>createFunctions</strong>, we get the employees
+              data. Since email addresses are unique, we use them as the basis
+              of our functions. But we need to remove the @ sign and the periods
+              in the address to have valid function names. To do so, we use a
+              regular expression to look for an at sign or a period globally and
+              replace them with underscores. We attach the function name to the
+              global object, and have it point to an anonymous function that is
+              going to call our upcoming bonus payment function. We pass both
+              columns of the employee information to the bonus function.
+            </p>
+
+            <p>
+              Finally, we invoke <strong>createFunctions</strong>. It's
+              super-duper important that the function executes in the global
+              scope. It basically needs to run every time the script does
+              something: whether when the spreadsheet opens or when the menu
+              item is selected, this function needs to run in order for Google
+              Apps Script to have the functions that were created in memory.
+              Otherwise, you will get a "Function not found" error message.
+            </p>
+
+            <p>
+              Now we can go back to our <strong>onOpen</strong> function and
+              have it dynamically populate the custom menu with our employees:
+            </p>
+
+            <pre><code class="language-javascript">function onOpen(e) {
+ const ui = SpreadsheetApp.getUi();
+ const menu = ui.createMenu('🟢 Automation');
+ menu.addItem('Example option', 'abc').addSeparator();
+ const subMenu = ui.createMenu('Bonus program');
+ const employees = getEmployees();
+ employees.forEach(([option, email]) => {
+   subMenu.addItem(
+     `Pay bonus to ${option}`,
+     `g.${email.replace(/[@\.]/g, '_')}`
+   );
+ });
+ menu.addSubMenu(subMenu).addToUi();
+}</code></pre>
+
+            <p>
+              Above, we create a Sub menu with a "Bonus program" option. We get
+              the employee information and iterate over it. We pull out the name
+              as "option" and email. We add an item to the sub menu using the
+              option, and the email-turned-function pattern that we saw before.
+              Note that it's super important to reference the "g" object in the
+              function name so that Apps Script can find it. We add the sub-menu
+              to the menu, and add the menu to the UI.
+            </p>
+
+            <p>Let's create our bonus payment function:</p>
+
+            <pre><code class="language-javascript">function startBonus([name, email]) {
+ const ui = SpreadsheetApp.getUi();
+ const result = ui.alert(
+   'Please confirm',
+   `Are you sure you want to give bonus to ${name} (${email})`,
+   ui.ButtonSet.YES_NO
+ );
+ if (result == ui.Button.YES) {
+   // Do the actual bonus payment for the given employee...
+ } else {
+   ui.alert('Bonus payment canceled');
+ }
+}</code></pre>
+
+            <p>
+              In the function above, we unpack the employee argument. We get the
+              UI. We display a confirmation dialog that includes the employee
+              information. If the payroll manager clicks YES then whatever code
+              is needed to dole out the bonus will execute.
+            </p>
+            <p>
+              Reload the spreadsheet and select the custom menu options a few
+              times. Then head to the Executions tab in the Apps Script IDE.
+              You'll notice that the functions that we created dynamically are
+              showing up there, including the "g." and the underscores.
+            </p>
+
+            <p>
+              Now this is just an example of how to achieve custom menu options.
+              You could speed things up and make this script more efficient by
+              caching the details of the employees so that the script is not
+              reading from the Google Sheets every time it runs. There are other
+              things that you could do, but at least this gives you an idea of
+              how to build the custom menu dynamically, and how to call the same
+              function with different arguments, so that you can execute the
+              function for different menu items.
+            </p>
+
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

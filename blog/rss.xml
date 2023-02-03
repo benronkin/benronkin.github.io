@@ -7,6 +7,13 @@
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
         <item>
+            <title>Create dynamic custom menus with Apps Script</title>
+            <description>Remember the petition you and I wrote to the management team at our company regarding their recent decision to discontinue the work-from-home policy and have everyone back at the office? Well, I have bad news and good news: The bad news is that management would not relent: all employees must return to the office full-time. But the good news is that management has decided to institute a new performance-based bonus program!</description>
+            <link>https://benronkin.com/blog/create-dynamic-custom-menus-with-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/create-dynamic-custom-menus-with-apps-script.html</guid>
+            <pubDate>Thu, 2 Feb 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
             <title>Download web images to Google Drive automatically using Apps Script</title>
             <description>Your team keeps a large storage of high-quality images on some web server, but the guy who manages the server was caught in the latest round of layoffs, and now nobody knows how to access and get these images. Luckily, Apps Script can automatically download these images to Google Drive, so no need to fret.</description>
             <link>https://benronkin.com/blog/download-images-automatically.html</link> 
@@ -166,13 +173,6 @@
             <link>https://benronkin.com/blog/dynamic-data-validation-in-google-sheets.html</link> 
             <guid>https://benronkin.com/blog/dynamic-data-validation-in-google-sheets.html</guid>
             <pubDate>Thu, 18 Feb 2021 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Recalculating custom functions in Google Sheets</title>
-            <description>I use Google Sheets to track my stock investments. Sure, there are plenty of online tools that can do this for you, but I use Sheets because I like to develop my own metrics and see if they help me make smarter buy/sell decisions in the long run. Having custom metrics means developing custom functions in Google Apps Script and then applying them inside Google Sheet cells.</description>
-            <link>https://benronkin.com/blog/recalculating-custom-functions-in-google-sheets.html</link> 
-            <guid>https://benronkin.com/blog/recalculating-custom-functions-in-google-sheets.html</guid>
-            <pubDate>Sun, 2 Aug 2020 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
