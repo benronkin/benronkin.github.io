@@ -7,6 +7,13 @@
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
         <item>
+            <title>Get the function caller</title>
+            <description>Let's say that you have a bunch of functions that do different things, but at the end, they all call the same function. Let's call that function "wrapUp." Each time wrapUp gets called, you want it to log the name of its caller. How can you do that?</description>
+            <link>https://benronkin.com/blog/get-the-function-caller.html</link> 
+            <guid>https://benronkin.com/blog/get-the-function-caller.html</guid>
+            <pubDate>Tue, 7 Feb 2023 12:00:00 -0800</pubDate>
+        </item>
+        <item>
             <title>Aggregate newsletter emails with a Google Apps Script webapp</title>
             <description>I don't know about you, but I have a love-hate relationship with newsletter emails. On one hand, newsletters have terrific content: I get new, in-depth information directly from the source. Newsletters keep me informed about the subjects I care about the most. But I really, really dislike emails. For starters, I'm a zero-inbox kind of guy: I don't like emails sitting in my inbox. As soon as an email comes in, I'd like to process it and get rid of it right there and then. But I'm also very busy which means that I usually don't have the time to read newsletter emails when they decide to pop in.</description>
             <link>https://benronkin.com/blog/aggregate-newsletters-with-apps-script.html</link> 
@@ -166,13 +173,6 @@
             <link>https://benronkin.com/blog/how-to-duplicate-drive-folders-automatically.html</link> 
             <guid>https://benronkin.com/blog/how-to-duplicate-drive-folders-automatically.html</guid>
             <pubDate>Thu, 4 Mar 2021 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Filtering a nested array with another nested array</title>
-            <description>I often write code that operates on Google Sheets, which means that I have to deal with nested arrays a lot. One of the things I have to do is to find rows in one array that don't have corresponding rows in another nested array. For instance, I may have a Google Sheet with some user information, and another sheet with file information. Files are created for unique combinations of user departments and user roles. As more users are added to the users sheet, I need to find department-role combinations that don't already have a corresponding file.</description>
-            <link>https://benronkin.com/blog/filtering-a-nested-array-with-another-nested-array.html</link> 
-            <guid>https://benronkin.com/blog/filtering-a-nested-array-with-another-nested-array.html</guid>
-            <pubDate>Fri, 26 Feb 2021 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
