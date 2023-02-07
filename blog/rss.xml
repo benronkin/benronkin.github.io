@@ -7,6 +7,13 @@
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
         <item>
+            <title>Aggregate newsletter emails with a Google Apps Script webapp</title>
+            <description>I don't know about you, but I have a love-hate relationship with newsletter emails. On one hand, newsletters have terrific content: I get new, in-depth information directly from the source. Newsletters keep me informed about the subjects I care about the most. But I really, really dislike emails. For starters, I'm a zero-inbox kind of guy: I don't like emails sitting in my inbox. As soon as an email comes in, I'd like to process it and get rid of it right there and then. But I'm also very busy which means that I usually don't have the time to read newsletter emails when they decide to pop in.</description>
+            <link>https://benronkin.com/blog/aggregate-newsletters-with-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/aggregate-newsletters-with-apps-script.html</guid>
+            <pubDate>Mon, 6 Feb 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
             <title>Create dynamic custom menus with Apps Script</title>
             <description>Remember the petition you and I wrote to the management team at our company regarding their recent decision to discontinue the work-from-home policy and have everyone back at the office? Well, I have bad news and good news: The bad news is that management would not relent: all employees must return to the office full-time. But the good news is that management has decided to institute a new performance-based bonus program!</description>
             <link>https://benronkin.com/blog/create-dynamic-custom-menus-with-apps-script.html</link> 
@@ -166,13 +173,6 @@
             <link>https://benronkin.com/blog/filtering-a-nested-array-with-another-nested-array.html</link> 
             <guid>https://benronkin.com/blog/filtering-a-nested-array-with-another-nested-array.html</guid>
             <pubDate>Fri, 26 Feb 2021 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Dynamic data validation in Google Sheets</title>
-            <description>I have a Google Sheet with a column for company names. To ensure data quality, I prefer to select the company name in each row from a dropdown list so that the company is always spelled the same way. I could use the standard data validation in Google Sheet, but my list of companies contains over 35,000 names, and adding all of them into a data validation rule slows down Google Sheets considerably.</description>
-            <link>https://benronkin.com/blog/dynamic-data-validation-in-google-sheets.html</link> 
-            <guid>https://benronkin.com/blog/dynamic-data-validation-in-google-sheets.html</guid>
-            <pubDate>Thu, 18 Feb 2021 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>

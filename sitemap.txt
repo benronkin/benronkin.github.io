@@ -3,6 +3,7 @@ https://benronkin.com/index.html
 https://benronkin.com/contact.html
 https://benronkin.com/reviews.html
 https://benronkin.com/blog/index.html
+https://benronkin.com/blog/aggregate-newsletters-with-apps-script.html
 https://benronkin.com/blog/create-dynamic-custom-menus-with-apps-script.html
 https://benronkin.com/blog/download-images-automatically.html
 https://benronkin.com/blog/insert-form-submissions-into-google-docs.html
