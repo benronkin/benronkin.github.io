@@ -7,6 +7,19 @@
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
         <item>
+            <title>Fetch YouTube subscribers and comments with Apps Script</title>
+            <description>YouTube has a terrific user interface that provides channel
+              managers and owners like you and me with valuable statistics about
+              the performance of our channels and their videos. But YouTube also
+              has rich APIs that enable us to pull the data out of the system to
+              anywhere we to consume it. So lets build a Google Apps Script
+              webapp that will respond to GET requests and send over subscriber
+              and comment information.</description>
+            <link>https://benronkin.com/blog/fetch-youtube-subscribers-comments-with-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/fetch-youtube-subscribers-comments-with-apps-script.html</guid>
+            <pubDate>Thu, 9 Feb 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
             <title>Get the function caller</title>
             <description>Let's say that you have a bunch of functions that do different things, but at the end, they all call the same function. Let's call that function "wrapUp." Each time wrapUp gets called, you want it to log the name of its caller. How can you do that?</description>
             <link>https://benronkin.com/blog/get-the-function-caller.html</link> 
@@ -166,13 +179,6 @@
             <link>https://benronkin.com/blog/deploying-stripe-payments-with-google-apps-script.html</link> 
             <guid>https://benronkin.com/blog/deploying-stripe-payments-with-google-apps-script.html</guid>
             <pubDate>Wed, 26 Oct 2022 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>How to duplicate Google Drive folders automatically</title>
-            <description>As a Google Workspace developer, I live in Google Drive all day long. It's often the case that I need to duplicate a complex structure of Drive folders and files. Unfortunately, there is no easy way in Google Drive right now to duplicate folders quickly like you can do with a Google Sheet, for example. You have to copy stuff manually one by one, which is very annoying. In this blog post I'll walk you though the process of creating a Google Apps Script web app that will automate the folder duplication process.</description>
-            <link>https://benronkin.com/blog/how-to-duplicate-drive-folders-automatically.html</link> 
-            <guid>https://benronkin.com/blog/how-to-duplicate-drive-folders-automatically.html</guid>
-            <pubDate>Thu, 4 Mar 2021 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
