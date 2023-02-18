@@ -3,6 +3,7 @@ https://benronkin.com/index.html
 https://benronkin.com/contact.html
 https://benronkin.com/reviews.html
 https://benronkin.com/blog/index.html
+https://benronkin.com/blog/print-labels-with-mail-merge-using-google-apps-script.html
 https://benronkin.com/blog/fetch-youtube-subscribers-comments-with-apps-script.html
 https://benronkin.com/blog/get-the-function-caller.html
 https://benronkin.com/blog/aggregate-newsletters-with-apps-script.html

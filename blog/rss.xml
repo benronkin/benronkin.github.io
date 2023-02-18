@@ -7,6 +7,19 @@
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
         <item>
+            <title>Print labels with mail-merge using Apps Script</title>
+            <description>            Are people still printing labels these days? I guess they are. Well,
+            we can help those poor souls with some good-old Apps Script magic.
+            Let's build a system that lets the user select a label type. The
+            script will create a template that corresponds with the user's
+            selection. The user will then paste a set of placeholders inside the
+            template, and our Apps Script will take some fake recipients' data
+            and mail-merge it into the labels. Sounds good? Lovely!</description>
+            <link>https://benronkin.com/blog/print-labels-with-mail-merge-using-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/print-labels-with-mail-merge-using-google-apps-script.html</guid>
+            <pubDate>Sat, 18 Feb 2023 11:00:00 -0800</pubDate>
+        </item>
+        <item>
             <title>Fetch YouTube subscribers and comments with Apps Script</title>
             <description>YouTube has a terrific user interface that provides channel
               managers and owners like you and me with valuable statistics about
@@ -172,13 +185,6 @@
             <link>https://benronkin.com/blog/how-to-extract-youtube-stats.html</link> 
             <guid>https://benronkin.com/blog/how-to-extract-youtube-stats.html</guid>
             <pubDate>Tue, 1 Nov 2022 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Deploying Stripe payments with Google Apps Script</title>
-            <description>This post details my experience in deploying Stripe payments using Google Apps Script (GAS) in three different projects. The Stripe platform is easy to use, and when it's combined with GAS, launching a payment system is straightforward.</description>
-            <link>https://benronkin.com/blog/deploying-stripe-payments-with-google-apps-script.html</link> 
-            <guid>https://benronkin.com/blog/deploying-stripe-payments-with-google-apps-script.html</guid>
-            <pubDate>Wed, 26 Oct 2022 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
