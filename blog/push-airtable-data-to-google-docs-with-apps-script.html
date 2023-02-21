@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Push Airtable data to Google Docs| Ben Ronkin</title>
+    <meta property="og:title" content="Push Airtable data to Google Docs" />
+    <meta
+      name="description"
+      content="Populate a Google Doc with data from an Airtable base. Learn how to filter and sort the data, limit the number of returned columns, and iterate over large Airtable bases."
+    />
+    <meta
+      property="og:description"
+      content="Populate a Google Doc with data from an Airtable base. Learn how to filter and sort the data, limit the number of returned columns, and iterate over large Airtable bases."
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/airtable-to-docs-hero.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/push-airtable-data-to-google-docs-with-apps-script.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7012737165381891"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Push Airtable data to Google Docs</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> February 21, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/KTeuJZy9Uhk"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="blog-post-body">
+            <p>
+              Airtable is a great solution for storing data of all kinds, and
+              many people are using it for different use cases. Let's learn how
+              to push Airtable data to a Google Doc. We'll use a simple Airtable
+              base with a single Products table that has three columns: Name,
+              SKU, and Quantity. We want to push to Google Doc all of the
+              out-of-stock products whose quantity equals zero.
+            </p>
+            <h2>Set up</h2>
+            <p>
+              To get things started, create an Airtable account. Then create a
+              base with a table. Name the columns Name, SKU, and Quantity. Add a
+              few rows so that you have data to work with. My table looks like
+              this:
+            </p>
+            <img
+              class="responsive-img"
+              src="../img/airtable-to-docs-airtable.png"
+              alt="Airtable docs airtable"
+            />
+            <p>
+              To pull data out of Airtable, we need to use its API. We need to
+              authorize the API requests with an access token, so let's create
+              one. In Airtable, click on your profile icon, then on "Developer
+              hub." Click the blue "Create token." Enter some name. Under
+              "Scopes," click "Add a scope" and select "data.records: read."
+              Under "Access," click "Add a base," and select "All current and
+              future bases in all current and future workspaces." Click "Create
+              token."
+            </p>
+            <p>
+              You'll be provided with your access token. Copy and save it in a
+              safe space. Do NOT share this token with anyone you don't trust!
+            </p>
+            <p>
+              Next, create a new Google Doc. You can add an "Out-of-stock
+              Products" header. Underneath, insert a 1x1 table. We'll use it as
+              the target of our data writes. You can set the table border to
+              white, so that it doesn't look like a table. From the "Extensions"
+              menu, select "Apps Script." We'll create a script that is bound to
+              the Google Doc.
+            </p>
+            <h2>Pull the data</h2>
+            <p>
+              Getting the data out of Airtable is very easy. Here's the basic
+              function to do so:
+            </p>
+
+            <pre><code class="language-javascript">function updateInventory() {
+  const airtableApiKey = 'paste_your_access_key_here';
+  const baseId = 'paste_your_base_ID_here';
+  const tableId = 'paste_your_table_ID_here';
+  const options = {
+    headers: {
+      Authorization: `Bearer ${airtableApiKey}`
+    },
+    muteHttpExceptions: true
+  };
+  const url = `https://api.airtable.com/v0/${baseId}/${tableId}`;
+  const resp = UrlFetchApp.fetch(url, options);
+  const content = resp.getContentText();
+  const jsn = JSON.parse(content)
+  console.log(jsn)
+}</code></pre>
+
+            <p>
+              To use this function, paste your Airtable access token above. You
+              also need to copy and paste the base ID and the table ID. These
+              reside in the Airtable URL. Just go back to Airtable, open the
+              base, and select the IDs from the URL. The base ID is the first
+              one after the domain. The url structure is:
+            </p>
+
+            <pre><code class="language-text">https://airtable.com/baseId/tableId/viewId</code></pre>
+
+            <p>
+              In the function, we create an "options" object to include our
+              Authorization header. We also mute HTTP exceptions so that we can
+              log them. We construct our API URL and use "UrlFetchApp" to fetch
+              the data, passing the URL and the options object. We get the
+              content back from the response, and parse it. Finally we log the
+              response.
+            </p>
+            <p>
+              If you run the function then you should see a response object that
+              includes a "records" key with all of your data. The values are
+              contained in a "fields" key.
+            </p>
+
+            <h2>Writing the data</h2>
+            <p>Updating the table inside the Google Doc is super easy:</p>
+
+            <pre><code class="language-javascript">const products = jsn.records.map(record => record.fields.Name);              
+const doc = DocumentApp.getActiveDocument();
+const body = doc.getBody();
+const table = body.getTables()[0];
+const cell = table.getCell(0,0);
+cell.clear();
+cell.setText(products.join('\n'));
+doc.saveAndClose();</code></pre>
+
+            <p>
+              Above, we iterate over the "records" attribute of our "jsn"
+              object, and pull out the "Name" field from each record. We then
+              get the active Google Doc, get its body, its first table, and the
+              first (and only) cell in the table. We clear the cell (in case we
+              execute multiple API calls), join the product names using a line
+              break, and setting them as text in the cell. Finally we save and
+              close the document.
+            </p>
+
+            <h2>Filter and sort the data</h2>
+
+            <p>
+              Currently, our code pulls out all the products from Airtable. We
+              want to pull only the items that have zero quantities. We also
+              want to sort the products by name alphabetically. To do that, we
+              need to add query parameters to our API call. We can store the
+              parameters in an object, and then convert the object to an encoded
+              string:
+            </p>
+            <pre><code class="language-javascript">const paramsObj = {
+  filterByFormula: 'Quantity=0'
+  'sort[0][field]': 'Name',
+  'sort[0][direction]': 'asc',
+};
+const params = Object.entries(paramsObj).map(([k,v])=> 
+  `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');
+const url = `https://api.airtable.com/v0/${baseId}/${tableId}?${params}`;
+const resp = UrlFetchApp.fetch(url, options);</code></pre>
+
+            <p>
+              Above, we create our parameters object. We set up a filtering
+              attribute with the formula to use (Quantity=0). We also include
+              our sorting directive. You can have multiple sorting criteria, so
+              we specify our first criteria ([0]) with the field to sort: Name,
+              and the direction as ascending.
+            </p>
+            <p>
+              Next, we convert the object to a string by iterating over the keys
+              and values of the object. We convert each entry to an encoded
+              string. Finally, we join all the strings using an ampersand.
+            </p>
+            <p>
+              Finally, we modify the API URL to include our query parameters.
+            </p>
+            <p>
+              If you run the function now then your Google Doc should list only
+              items with zero quantities, if there are any.
+            </p>
+            <h2>Handling large datasets</h2>
+            <p>
+              The code so far works great for small datasets. What do you do
+              when your data includes many rows and columns? It's impossible to
+              get all the data back in one API request. Luckily there are (at
+              least) two things we can do to improve things: limit the columns
+              we bring back, and iterate over the results with multiple calls.
+            </p>
+            <p>
+              Since we save only the Name field in our Google Doc, we don't need
+              to bring back "SKU" and "Quantity." We can limit the fields to
+              bring back in our parameters object:
+            </p>
+            <pre><code class="language-javascript">const paramsObj = {
+  'fields[0]': 'Name',
+  filterByFormula: 'Quantity=0'
+  'sort[0][field]': 'Name',
+  'sort[0][direction]': 'asc',
+};</code></pre>
+            <p>
+              We added a "fields" key with a "Name" value. If we wanted to bring
+              back "SKU" as well then we would add a second attribute:
+              'fields[1]': 'SKU'. If you log "jsn" now then you'll see only the
+              "Name" field showing up.
+            </p>
+            <p>
+              By default, Airtable will return upto 100 results. If our data is
+              larger than that then we need to page through the results, using
+              an "offset" attribute that lets Airtable know which page of data
+              to bring back next. We can change our function to include a loop
+              to issue multiple requests as long as the "jsn" response includes
+              the offset. If the offset doesn't exist on the response object
+              then we break out of our loop and update the Google Doc. Here's
+              our updated function:
+            </p>
+            <pre><code class="language-javascript">function updateInventory() {
+  const airtableApiKey = 'paste_your_access_key_here';
+  const baseId = 'paste_your_base_ID_here';
+  const tableId = 'paste_your_table_ID_here';
+  const options = {
+    headers: {
+      Authorization: `Bearer ${airtableApiKey}`
+    },
+    muteHttpExceptions: true
+  };
+  const paramsObj = {
+    filterByFormula: 'Quantity=0'
+    'fields[0]': 'Name',
+    'sort[0][field]': 'Name',
+    'sort[0][direction]': 'asc',
+    offset: '0',
+    pageSize: '100'
+  };
+  const products = [];
+  do {
+    const params = Object.entries(paramsObj).map(([k,v])=> 
+      `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');
+    const url = `https://api.airtable.com/v0/${baseId}/${tableId}?${params}`;
+    const resp = UrlFetchApp.fetch(url, options);
+    const content = resp.getContentText();
+    const jsn = JSON.parse(content)
+    if (!jsn.records) {
+      console.log(jsn);
+      return;
+    }
+    const productNames = jsn.records.map(record => record.fields.Name);
+    products.push(...productNames);
+    paramsObj.offset = jsn.offset;
+  } while (paramsObj.offset)
+  
+  const doc = DocumentApp.getActiveDocument();
+  const body = doc.getBody();
+  const table = doc.getTables()[0];
+  const cell = table.getCell(0,0);
+  cell.clear();
+  cell.setText(products.join('\n'));
+  doc.saveAndClose();
+}</code></pre>
+
+            <p>
+              For demo purposes, we include an optional "pageSize" query
+              parameter. If you set it up to 1 then you can see how the function
+              issues multiple requests until all the data is sent back.
+            </p>
+            <p>Happy Airtabling!</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

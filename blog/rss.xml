@@ -7,8 +7,20 @@
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
         <item>
+            <title>Push Airtable data to Google Docs</title>
+            <description>Airtable is a great solution for storing data of all kinds, and
+              many people are using it for different use cases. Let's learn how
+              to push Airtable data to a Google Doc. We'll use a simple Airtable
+              base with a single Products table that has three columns: Name,
+              SKU, and Quantity. We want to push to Google Doc all of the
+              out-of-stock products whose quantity equals zero.</description>
+            <link>https://benronkin.com/blog/push-airtable-data-to-google-docs-with-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/push-airtable-data-to-google-docs-with-apps-script.html</guid>
+            <pubDate>Tue, 21 Feb 2023 13:00:00 -0800</pubDate>
+        </item>
+        <item>
             <title>Print labels with mail-merge using Apps Script</title>
-            <description>            Are people still printing labels these days? I guess they are. Well,
+            <description>Are people still printing labels these days? I guess they are. Well,
             we can help those poor souls with some good-old Apps Script magic.
             Let's build a system that lets the user select a label type. The
             script will create a template that corresponds with the user's
@@ -178,13 +190,6 @@
             <link>https://benronkin.com/blog/create-email-auto-responder-with-apps-script.html</link> 
             <guid>https://benronkin.com/blog/create-email-auto-responder-with-apps-script.html</guid>
             <pubDate>Fri, 18 Nov 2022 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>How to extract YouTube stats automatically and at scale</title>
-            <description>There's often a need to extract statistics about YouTube channels; specifically, data about the channels themselves, as well as their videos and playlists. While it's possible to extract this data manually by visiting various YouTube pages and doing a lot of copying and pasting, this approach does not scale well. Luckily, Google offers an API (application programming interface) to extract this very information. The Google Data API offers a consistent way for developers to pull data about YouTube channels, videos, and playlists. Developers can write programs or scripts that call the different endpoints (URLs) of the API to extract the information.</description>
-            <link>https://benronkin.com/blog/how-to-extract-youtube-stats.html</link> 
-            <guid>https://benronkin.com/blog/how-to-extract-youtube-stats.html</guid>
-            <pubDate>Tue, 1 Nov 2022 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
