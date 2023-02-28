@@ -7,6 +7,25 @@
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
         <item>
+            <title>Prevent CSS overwrites with iFrames</title>
+            <description>In a
+            &lt;a href="https://benronkin.com/blog/aggregate-newsletters-with-apps-script.html"
+              &gt;previous post&lt;/a
+            &gt;
+            we saw how to aggregate email messages on a web page, so that we
+            could read our newsletters on a single page, as opposed to fetching
+            them from our overflowing inbox. One problem with injecting external
+            HTML into your page is that the HTML can come with its own styling
+            rules, and those rules can conflict with and overwrite other rules,
+            whether in other HTML snippets or in your own page. This is
+            happening because as the web browser renders the injected HTML, it
+            processes any styling it encounters, and applies it – if relevant –
+            to other snippets or to the containing page.</description>
+            <link>https://benronkin.com/blog/prevent-css-overwrites-with-iframes.html</link> 
+            <guid>https://benronkin.com/blog/prevent-css-overwrites-with-iframes.html</guid>
+            <pubDate>Mon, 27 Feb 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
             <title>Push Airtable data to Google Docs</title>
             <description>Airtable is a great solution for storing data of all kinds, and
               many people are using it for different use cases. Let's learn how

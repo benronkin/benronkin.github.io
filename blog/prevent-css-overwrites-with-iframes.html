@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Prevent CSS overwrites with iFrames| Ben Ronkin</title>
+    <meta property="og:title" content="Prevent CSS overwrites with iFrames" />
+    <meta
+      name="description"
+      content="Learn how to prevent CSS of an injected HTML from overwriting other CSS definitions."
+    />
+    <meta
+      property="og:description"
+      content="Learn how to prevent CSS of an injected HTML from overwriting other CSS definitions."
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/css-overwrites-hero.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/prevent-css-overwrites-with-iframes.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7012737165381891"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Prevent CSS overwrites with iFrames</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> February 27, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/oTST0hB2UOI"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="blog-post-body">
+            <p>
+              In a
+              <a href="aggregate-newsletters-with-apps-script.html"
+                >previous post</a
+              >
+              we saw how to aggregate email messages on a web page, so that we
+              could read our newsletters on a single page, as opposed to
+              fetching them from our overflowing inbox. One problem with
+              injecting external HTML into your page is that the HTML can come
+              with its own styling rules, and those rules can conflict with and
+              overwrite other rules, whether in other HTML snippets or in your
+              own page. This is happening because as the web browser renders the
+              injected HTML, it processes any styling it encounters, and applies
+              it – if relevant – to other snippets or to the containing page.
+            </p>
+            <p>
+              To prevent CSS from being overwritten, we could inject the HTML
+              snippets into iFrames, which encapsulate and sandbox the inner
+              code, so that it cannot impact any other code outside of the
+              iFrame. Let's see how to accomplish that.
+            </p>
+            <p>
+              To get going, let's replicate the problem, so that we understand
+              what we're dealing with here. All we need is a simple HTML page
+              that references a simple Javascript file.
+            </p>
+            <pre><code class="language-html">&lt;!DOCTYPE html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;title>Document&lt;/title>
+    &lt;style>
+      body {
+        background-color: #cccccc;
+      }
+      #messages-div {
+        margin-top: 20px;
+      }
+      .container {
+        width: 90%;
+        margin: 10px auto;
+      }
+    &lt;/style>
+  &lt;/head>
+  &lt;body>
+    &lt;div class="container">
+      &lt;h1>Load messages&lt;/h1>
+      &lt;button id="load">Load&lt;/button>
+      &lt;div id="messages-div">&lt;/div>
+    &lt;/div>
+    &lt;script src="index.js">&lt;/script>
+  &lt;/body>
+&lt;/html></code></pre>
+
+            <p>
+              In the HTML markup above, we define styling for our background
+              color, which we will have overwritten by the HTML snippets that we
+              will inject into "messages-div." We also have a button to trigger
+              the injection.
+            </p>
+            <p>Now, let's look at the accompanying Javascript:</p>
+
+            <pre><code class="language-javascript">document.addEventListener('DOMContentLoaded', () => {
+  const messages = [];
+  
+  document.querySelector('#load').addEventListener('click', loadMessages);
+
+  function loadMessages() {
+    const messagesDiv = document.querySelector('#messages-div');
+    messages.forEach((message) => {
+      const htmlDiv = document.createElement('div');
+      htmlDiv.innerHTML = message;
+      messagesDiv.appendChild(htmlDiv);
+    });
+  }
+});
+</code></pre>
+
+            <p>
+              In the Javascript code above, we define an empty messages array,
+              which we will populate momentarily with HTML strings. We then
+              define an event listener for our button, where a click will
+              trigger the <strong>loadMessages</strong> function. That function
+              simply gets the messages-div, iterates over the "messages" array,
+              creates a Div element that contains the message, and finally
+              appends the new div to the messages-div.
+            </p>
+
+            <p>
+              Here is the code for our HTML snippets, containing two HTML
+              strings:
+            </p>
+
+            <pre><code class="language-javascript">const messages = [
+              `&lt;!DOCTYPE html>
+              &lt;html lang="en">
+                &lt;head>
+                  &lt;meta charset="UTF-8" />
+                  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                  &lt;title>CSS Overwrites&lt;/title>
+                  &lt;style>
+                    body {
+                      background-color: red;
+                    }
+                  &lt;/style>
+                &lt;/head>
+                &lt;body>
+                  &lt;div class="container">
+                    &lt;h1>Message 1&lt;/h1>
+                    &lt;p>This is the first message&lt;/p>
+                    &lt;p>This is the first message&lt;/p>
+                    &lt;p>This is the first message&lt;/p>
+                    &lt;p>This is the first message&lt;/p>
+                    &lt;p>This is the first message&lt;/p>
+                  &lt;/div>
+                &lt;/body>
+              &lt;/html>
+              `,
+              `&lt;!DOCTYPE html>
+              &lt;html lang="en">
+                &lt;head>
+                  &lt;meta charset="UTF-8" />
+                  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                  &lt;title>CSS Overwrites&lt;/title>
+                  &lt;style>
+                    body {
+                      background-color: blue;
+                    }
+                  &lt;/style>
+                &lt;/head>
+                &lt;body>
+                  &lt;div class="container">
+                    &lt;h1>Message 2&lt;/h1>
+                    &lt;p>This is the second message&lt;/p>
+                    &lt;p>This is the second message&lt;/p>
+                    &lt;p>This is the second message&lt;/p>
+                    &lt;p>This is the second message&lt;/p>
+                    &lt;p>This is the second message&lt;/p>
+                  &lt;/div>
+                &lt;/body>
+              &lt;/html>
+              `,
+            ];</code></pre>
+
+            <p>
+              You'll notice that the HTML strings are similar; the only
+              noticeable difference is the background color: one is red and the
+              other is blue.
+            </p>
+            <p>
+              If you now view the HTML page in your browser, you'll see that the
+              light-grey background color that we defined for our page is
+              overwritten to blue. That is because the last HTML snippets
+              contains blue color styling for its body. That generic definition
+              impacts our own page's background color.
+            </p>
+
+            <p>
+              To overcome this problem, let's inject the HTML snippets into
+              iFrames that will isolate their styling:
+            </p>
+
+            <pre><code class="language-javascript">  function loadMessages() {
+    const messagesDiv = document.querySelector('#messages-div');
+    messages.forEach((message) => {
+      const iframe = document.createElement('iFrame');
+      iframe.scrolling = 'no';
+      iframe.style = 'width: 100%; border: none;';
+      iframe.onload = function () {
+        var doc = this.contentWindow.document;
+        doc.body.innerHTML = message;
+        iframe.height = '';
+        iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+      };
+      messagesDiv.appendChild(iframe);
+    });
+  }</code></pre>
+            <p>
+              In the revised function above, we create an iFrame element for
+              each message. We prevent its own scrolling, and set its width to
+              100% and no borders. We then define the "onload" function that
+              sets the message HTML to the iFrame's doc's body. We set the
+              iFrame height to its content's height and append the iFrame to the
+              "messages-div."
+            </p>
+            <p>
+              If you reload the HTML page, you'll notice that the parent page
+              retains its light-grey background color, and the two HTML snippets
+              have their own background colors. Now everything is well isolated.
+            </p>
+            <p>Happy HTML injection!</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
