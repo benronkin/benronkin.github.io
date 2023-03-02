@@ -2,10 +2,27 @@
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" >
     <channel>
         <title>BenRonkin.com Blog</title>
-        <atom:link href="https://benronkin.com/blog/rss.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://benronkin.com/blog/rss.xml" type="application/rss+xml" rel="self"  />
         <description>I am Ben, an automation developer. I enjoy sharing my knowledge with Google Apps Script and Javascript in general.</description>
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
+
+        <item>
+            <title>Use ChatGPT API with Google Apps Script</title>
+            <description>ChatGPT! It's on everyone's mind these days. Luckily, the OpenAI
+              company offers a public API for ChatGPT, which means that we can
+              connect to ChatGPT from Google Apps Script. Hooray!
+              To understand how to use the API, let's imagine that we work in a
+              real-estate agency, where our agents tour new properties, take
+              notes about each property, and compose property overviews with the
+              notes from their tours to be posted on the MLS. We can use the
+              ChatGPT API to feed the agent notes and receive a compelling
+              overview automatically.</description>
+            <link>https://benronkin.com/blog/use-chatgpt-api-with-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/use-chatgpt-api-with-google-apps-script.html</guid>
+            <pubDate>Wed, 1 Mar 2023 18:00:00 -0800</pubDate>
+        </item>
+        
         <item>
             <title>Prevent CSS overwrites with iFrames</title>
             <description>In a
@@ -202,13 +219,6 @@
             <link>https://benronkin.com/blog/create-mail-merge-for-gmail-with-google-apps-script.html</link> 
             <guid>https://benronkin.com/blog/create-mail-merge-for-gmail-with-google-apps-script.html</guid>
             <pubDate>Fri, 9 Dec 2022 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Create an email auto-responder with Apps Script</title>
-            <description>Having a system that automatically responds to incoming email messages can be a great time saver. In this post you will learn how to create such a system for Gmail, using Google Apps Script.</description>
-            <link>https://benronkin.com/blog/create-email-auto-responder-with-apps-script.html</link> 
-            <guid>https://benronkin.com/blog/create-email-auto-responder-with-apps-script.html</guid>
-            <pubDate>Fri, 18 Nov 2022 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
