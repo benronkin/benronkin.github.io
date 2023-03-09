@@ -6,7 +6,29 @@
         <description>I am Ben, an automation developer. I enjoy sharing my knowledge with Google Apps Script and Javascript in general.</description>
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
-
+        <item>
+            <title>Build a Telegram chat bot for ChatGPT with Google Apps Script</title>
+            <description><![CDATA[
+            <p>
+              In my
+              <a href="https://benronkin.com/blog/use-chatgpt-api-with-google-apps-script.html"
+                >previous post</a
+              >, we saw how to use Google Apps Script to read real-estate
+              property highlights from a Google Sheet, feed them to ChatGPT, and
+              store the property summaries that ChatGPT wrote for us in Google
+              Docs. Subsequently, I received a request on my
+              <a href="https://www.youtube.com/channel/UCWMIUw-t9xoiqZXJg-GJ9pg"
+                >YouTube channel</a
+              >
+              to do a follow-up tutorial on how to build a Telegram chat bot
+              that interacts with ChatGPT using Apps Script. Well, I think that
+              it's a great idea, so let's see how to do that.
+            </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/build-telegram-chat-bot-for-chatgpt-with-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/build-telegram-chat-bot-for-chatgpt-with-google-apps-script.html</guid>
+            <pubDate>Thu, 9 Mar 2023 12:00:00 -0800</pubDate>
+        </item>
         <item>
             <title>Use ChatGPT API with Google Apps Script</title>
             <description>ChatGPT! It's on everyone's mind these days. Luckily, the OpenAI
@@ -212,13 +234,6 @@
             <link>https://benronkin.com/blog/google-sheet-dropdown-with-names-of-google-drive-files.html</link> 
             <guid>https://benronkin.com/blog/google-sheet-dropdown-with-names-of-google-drive-files.html</guid>
             <pubDate>Sat, 10 Dec 2022 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Create mail merge for Gmail using Apps Script</title>
-            <description>In this post I offer a short and sweet Google Apps Script for creating mail merge in Gmail. The script is very basic, merely meant to introduce the topic. In future posts I'll add more features and capabilities. Mail merge is essentially the ability to send multiple emails in one operation, yet personalize the email to each recipient. It saves you the time and energy to compose multiple emails to multiple recipients that say the same thing. With mail merge, you take an email template, and a list of recipients. You then replace placeholders in the template with the data of each recipients. Like I said, pretty simple stuff.</description>
-            <link>https://benronkin.com/blog/create-mail-merge-for-gmail-with-google-apps-script.html</link> 
-            <guid>https://benronkin.com/blog/create-mail-merge-for-gmail-with-google-apps-script.html</guid>
-            <pubDate>Fri, 9 Dec 2022 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
