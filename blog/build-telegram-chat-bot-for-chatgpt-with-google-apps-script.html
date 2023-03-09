@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Build a Telegram chat bot for ChatGPT with Google Apps Script| Ben Ronkin
+    </title>
+    <meta
+      property="og:title"
+      content="Build a Telegram chat bot for ChatGPT with Google Apps Script"
+    />
+    <meta
+      name="description"
+      content="Learn how to use a Google Apps Script web app as a Telegram webhook to send chat messages to ChatGPT and communicate its responses back to Telegram."
+    />
+    <meta
+      property="og:description"
+      content="Learn how to use a Google Apps Script web app as a Telegram webhook to send chat messages to ChatGPT and communicate its responses back to Telegram."
+    />
+    <meta property="og:image" content="//benronkin.com/img/telegram-hero.png" />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/build-telegram-chat-bot-for-chatgpt-with-google-apps-script.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7012737165381891"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>
+              Build a Telegram chat bot for ChatGPT with Google Apps Script
+            </h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> March 9, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/zIy_rMNC8Bg"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="blog-post-body">
+            <p>
+              In my
+              <a href="use-chatgpt-api-with-google-apps-script.html"
+                >previous post</a
+              >, we saw how to use Google Apps Script to read real-estate
+              property highlights from a Google Sheet, feed them to ChatGPT, and
+              store the property summaries that ChatGPT wrote for us in Google
+              Docs. Subsequently, I received a request on my
+              <a href="https://www.youtube.com/channel/UCWMIUw-t9xoiqZXJg-GJ9pg"
+                >YouTube channel</a
+              >
+              to do a follow-up tutorial on how to build a Telegram chat bot
+              that interacts with ChatGPT using Apps Script. Well, I think that
+              it's a great idea, so let's see how to do that.
+            </p>
+            <p>Here are the tasks we need to accomplish:</p>
+            <ul>
+              <li>Register a Telegram bot and obtain its API token</li>
+              <li>Get an OpenAI API key</li>
+              <li>Accept incoming chat updates</li>
+              <li>Send response message</li>
+              <li>Deploy the web app</li>
+              <li>Register the web app as a Telegram webhook</li>
+              <li>Integrate ChatGPT</li>
+            </ul>
+            <h2>Register a Telegram bot</h2>
+            <p>
+              This step is easy and doesn't require any coding. Telegram offers
+              a very nice way to register new bots using their own "botFather"
+              bot. Once you've created your free Telegram account, all you need
+              to do is access
+              <a href="https://t.me/botFather" target="_blank"
+                >https://t.me/botFather</a
+              >
+              and issue a couple of updates: first, type "/newbot". This will
+              prompt you to enter a name for bot. Next, you will be prompted to
+              enter a user name. Once you do that, you wil receive an API token
+              that you will incorporate later in the script when making REST API
+              calls to Telegram. For now, save the token in a safe place and
+              don't share it with anyone.
+            </p>
+            <h2>Get an OpenAI API key</h2>
+            <p>
+              Next, you need to create an account with OpenAI and get a key for
+              its own API. See my
+              <a href="use-chatgpt-api-with-google-apps-script.html"
+                >previous post</a
+              >
+              for instructions on how to do that.
+            </p>
+            <h2>Accept incoming chat updates</h2>
+            <p>
+              Time to write some code. For this project, all you need is one
+              Google Apps Script file. Once created, access the
+              <a href="how-to-use-script-properties-in-google-apps-script.html"
+                >Script properties</a
+              >
+              and add two properties, one for the Telegram key and the other for
+              openAi. I named mine "telegramApiKey" and "telegramApiKey". Paste
+              the two keys you received from Telegram and OpenAI.
+            </p>
+            <pre><code class="language-javascript">// class="language-javascript"</code></pre>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
