@@ -32,7 +32,7 @@ a {
 }
 
 label {
-  color: var(--third);
+  color: var(--secondary);
 }
 
 main {
@@ -287,6 +287,10 @@ video {
 
 .cookie-buttons a {
   margin-left: 20px;
+}
+
+.margin-auto {
+  margin: 0 auto;
 }
 
 .prompt,
@@ -570,6 +574,10 @@ textarea:not(.browser-default):focus:not([readonly]) {
 
 .mt0 {
   margin-top: 0 !important;
+}
+
+.mt10 {
+  margin-top: 10px !important;
 }
 
 .mt30 {
