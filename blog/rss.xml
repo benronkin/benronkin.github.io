@@ -6,6 +6,35 @@
         <description>I am Ben, an automation developer. I enjoy sharing my knowledge with Google Apps Script and Javascript in general.</description>
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
+
+        <item>
+            <title>Get more customer reviews with ChatGPT and Apps Script</title>
+            <description><![CDATA[
+            <p>I have a
+            <a href="https://benronkin.com/reviews.html">reviews page</a> on my site where I list
+            client testimonials. I have a simple review submission form that
+            clients populate with their review text, name, and email. When the
+            form is submitted, I receive its information in a simple email
+            message. I then copy/paste the information to my reviews page.
+            Everything works fine except for one issue: often, clients don't
+            know what to say in the review or how to structure their message.
+            They want to help me but they are not sure what the review should
+            say.
+          </p>
+          <p>
+            Luckily, ChatGPT can assist clients in drafting their personalized
+            reviews. In this post, we'll see how to build a Google Apps
+            Script-based system that accepts talking points from clients,
+            converts them to a ChatGPT prompt, get a review draft from the AI,
+            and enables the clients to edit and post their reviews. We'll get
+            their review in an email message.
+          </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/get-more-reviews-with-chatgpt-and-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/get-more-reviews-with-chatgpt-and-google-apps-script.html</guid>
+            <pubDate>Wed, 15 Mar 2023 11:00:00 -0800</pubDate>
+        </item>
+
         <item>
             <title>Build a Telegram chat bot for ChatGPT with Google Apps Script</title>
             <description><![CDATA[
@@ -227,13 +256,6 @@
             <link>https://benronkin.com/blog/using-google-doc-text-in-google-apps-script.html</link> 
             <guid>https://benronkin.com/blog/using-google-doc-text-in-google-apps-script.html</guid>
             <pubDate>Wed, 14 Dec 2022 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Populate Google Sheet dropdown with names of Google Drive files</title>
-            <description>In the previous post we looked at a rudimentary mail merge for Gmail using Apps Script. The script used a global object that housed the default subject line and body for our emails. We incorporated placeholders into the text that the script replaced with recipients' data. There are, however, a couple of issues with this approach. So, instead, we are going to store the email templates in a Google Docs. We will populate a dropdown with the names of the files, so that we can choose the email template with a single mouse click.</description>
-            <link>https://benronkin.com/blog/google-sheet-dropdown-with-names-of-google-drive-files.html</link> 
-            <guid>https://benronkin.com/blog/google-sheet-dropdown-with-names-of-google-drive-files.html</guid>
-            <pubDate>Sat, 10 Dec 2022 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
