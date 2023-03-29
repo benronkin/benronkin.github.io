@@ -3,6 +3,7 @@ https://benronkin.com/index.html
 https://benronkin.com/contact.html
 https://benronkin.com/reviews.html
 https://benronkin.com/blog/index.html
+https://benronkin.com/blog/use-dall-e-with-google-apps-script-to-convert-text-to-images-automatically.html
 https://benronkin.com/blog/get-more-reviews-with-chatgpt-and-google-apps-script.html.html
 https://benronkin.com/blog/build-telegram-chat-bot-for-chatgpt-with-google-apps-script.html
 https://benronkin.com/blog/how-to-use-script-properties-in-google-apps-script.html
