@@ -6,6 +6,27 @@
         <description>I am Ben, an automation developer. I enjoy sharing my knowledge with Google Apps Script and Javascript in general.</description>
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
+
+        <item>
+            <title>Automate image edits and variations with Dall-E API and Google Apps Script</title>
+            <description><![CDATA[
+            <p>
+              In my
+              <a
+                href="https://benronkin.com/blog/use-dall-e-with-google-apps-script-to-convert-text-to-images-automatically.html"
+                >previous post</a
+              >
+              we saw how to use the OpenAI Dall-E API to convert text prompts to
+              images programmatically, using Google Apps Script. In this post we
+              will see how to use the API to manipulate existing images. We will
+              edit areas of an image, as well as create whole variations of an
+              image. Let's get going with Apps Script.
+            </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/automate-image-edits-and-variations-with-dall-e-api-and-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/automate-image-edits-and-variations-with-dall-e-api-and-apps-script.html</guid>
+            <pubDate>Tue, 4 Apr 2023 08:00:00 -0800</pubDate>
+        </item>
         
         <item>
             <title>Use Dall-E and ChatGPT APIs with Google Apps Script to convert text to images automatically</title>
@@ -24,9 +45,8 @@
             ]]></description>
             <link>https://benronkin.com/blog/use-dall-e-with-google-apps-script-to-convert-text-to-images-automatically.html</link> 
             <guid>https://benronkin.com/blog/use-dall-e-with-google-apps-script-to-convert-text-to-images-automatically.html</guid>
-            <pubDate>Wed, 14 Dec 2022 18:00:00 -0800</pubDate>
+            <pubDate>Wed, 29 Mar 2023 18:00:00 -0800</pubDate>
         </item>
-
         <item>
             <title>Get more customer reviews with ChatGPT and Apps Script</title>
             <description><![CDATA[
@@ -262,13 +282,6 @@
             <link>https://benronkin.com/blog/display-html-page-inside-google-sheet.html</link> 
             <guid>https://benronkin.com/blog/display-html-page-inside-google-sheet.html</guid>
             <pubDate>Sun, 1 Jan 2023 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Send SMS Messages automatically from Google Sheets</title>
-            <description>Sending SMS messages directly from a Google Sheet is both easy and useful. Let's assume that we have a Google Sheet that gets populated with phone numbers of people that we'd like to contact via an SMS message. In this post we will see how to implement a solution using Google Apps Script.</description>
-            <link>https://benronkin.com/blog/send-sms-messages-with-app-script.html</link> 
-            <guid>https://benronkin.com/blog/send-sms-messages-with-app-script.html</guid>
-            <pubDate>Thu, 29 Dec 2022 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
