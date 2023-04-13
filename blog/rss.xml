@@ -6,7 +6,35 @@
         <description>I am Ben, an automation developer. I enjoy sharing my knowledge with Google Apps Script and Javascript in general.</description>
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
-
+        <item>
+            <title>Add a timer to a Google Form with Apps Script</title>
+            <description>
+            <![CDATA[
+            <p>
+              Adding a timer to a form is a great way to limit the time alloted
+              to fill out and submit the form. If you run online quizzes, for
+              instance, a timer mapped to a form can go a long way. Google Form
+              doesn't allow us to embed a timer inside a form, but luckily we
+              can use Google Apps Script to build a web app that has a timer and
+              embeds a form.
+            </p>
+            <p>
+              In this tutorial we will build such a web app. In addition to the
+              timer, the web app will allow the form user to pause the timer
+              once, and then resume filling out the form (in case they need a
+              bathroom break, for example).
+            </p>
+            <p>
+              But wait, there's more: our web app will also collect data on how
+              users interact with the form: when they access it, pause it,
+              resume it, run out of time, or submit the form.
+            </p>
+            ]]>
+            </description>
+            <link>https://benronkin.com/blog/add-timer-to-google-form-with-google-apps-script.html.html</link> 
+            <guid>https://benronkin.com/blog/add-timer-to-google-form-with-google-apps-script.html.html</guid>
+            <pubDate>Thu, 13 Apr 2023 11:00:00 -0800</pubDate>
+        </item>
         <item>
             <title>Automate image edits and variations with Dall-E API and Google Apps Script</title>
             <description><![CDATA[
@@ -275,13 +303,6 @@
             <link>https://benronkin.com/blog/display-google-sheet-sidebar.html</link> 
             <guid>https://benronkin.com/blog/display-google-sheet-sidebar.html</guid>
             <pubDate>Wed, 4 Jan 2023 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Display HTML page inside Google Sheets</title>
-            <description>Happy New Year! Here's to a calmer and saner year! Displaying HTML pages inside a spreadsheet is quite common and useful when you do automation stuff. The HTML resides inside a popup that we can easily show when the user clicks on a button or selects from a custom menu. The HTML inside a popup supports CSS and Javascript, so you can offer really beautiful and useful HTML experiences inside a spreadsheet.</description>
-            <link>https://benronkin.com/blog/display-html-page-inside-google-sheet.html</link> 
-            <guid>https://benronkin.com/blog/display-html-page-inside-google-sheet.html</guid>
-            <pubDate>Sun, 1 Jan 2023 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>

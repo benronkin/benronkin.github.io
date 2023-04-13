@@ -289,6 +289,11 @@ video {
   margin-left: 20px;
 }
 
+.alert-notice {
+  background-color: var(--primary);
+  color: white;
+}
+
 .margin-auto {
   margin: 0 auto;
 }
@@ -596,6 +601,10 @@ textarea:not(.browser-default):focus:not([readonly]) {
 .outer-card-link,
 .outer-card-link:hover {
   color: var(--secondary);
+}
+
+.p5 {
+  padding: 5px;
 }
 
 .page-footer {
