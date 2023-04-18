@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-Z3RDBR33MX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-Z3RDBR33MX');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Create a widget to add an event calendar that you can paste in emails or on web pages"
+    />
+    <title>Create "Add Event" widget | Ben Ronkin</title>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7012737165381891"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="../blog/index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="./index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+            <!---->
+          </ul>
+        </div>
+      </nav>
+      <section id="top">
+        <div class="container">
+          <h1>Add-an-Event widget</h1>
+          <p class="lead">
+            Use the form below to create an HTML widget that you can paste in
+            appointment confirmation emails or website pages. The widget will
+            allow your users to add your event to their favorite calendar.
+            Simply fill out the form below with information about your event and
+            click the "COPY WIDGET" button.
+          </p>
+          <p>Note that this website does NOT save your event information.</p>
+        </div>
+      </section>
+
+      <section id="input">
+        <div class="container" style="border: 1px solid #eeeeee; padding: 10px">
+          <form>
+            <div class="row">
+              <div class="col s6 input-field">
+                <input id="title" type="text" />
+                <label for="title">Add title</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s2 input-field">
+                <input
+                  id="fromDate"
+                  name="from-date"
+                  type="text"
+                  class="datepicker cursorPointer"
+                />
+              </div>
+              <div class="col s2 input-field">
+                <input
+                  id="fromTime"
+                  name="from-time"
+                  type="text"
+                  class="text"
+                />
+              </div>
+              <div class="col s1" style="margin-top: 25px">to</div>
+              <div class="col s2 input-field">
+                <input
+                  id="toDate"
+                  name="to-date"
+                  type="text"
+                  class="datepicker cursorPointer"
+                />
+              </div>
+              <div class="col s2 input-field">
+                <input id="toTime" name="to-time" type="text" class="text" />
+              </div>
+              <div class="input-field col s2">
+                <select id="timezone">
+                  <option selected value="America/Los_Angeles">Pacific</option>
+                  <option value="America/Chicago">Central</option>
+                  <option value="America/New_York">Eastern</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s6 input-field">
+                <input id="location" type="text" />
+                <label for="location">Add location</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s9 input-field">
+                <textarea
+                  id="description"
+                  class="materialize-textarea"
+                ></textarea>
+                <label for="description">Add description</label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+      <div class="container">
+        <h2>Your widget</h2>
+      </div>
+
+      <section id="widget">
+        <div class="container">
+          <div class="row">
+            <div class="col s6">
+              <div id="widget-container">
+                <div
+                  style="
+                    border: 1px solid #cccccc;
+                    background-color: #f5f5f5;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 20px;
+                  "
+                >
+                  <div style="text-align: center">Add to calendar</div>
+                  <div style="display: flex; justify-content: space-around">
+                    <a href="">Google</a>
+                    <a href="">Outlook.com</a>
+                    <a href="">Office365</a>
+                    <a href="">Yahoo</a>
+                    <a href="">ics file</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s2 input-field" style="margin-left: 10px">
+              <button class="btn-small blue">Copy Widget</button>
+            </div>
+            <div
+              class="col s8"
+              style="margin: 20px 0 0 -20px; font-style: italic"
+            >
+              <span id="message"
+                >Widget links update automatically when you edit the
+                fields.</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Globals
+        const title = document.querySelector('#title');
+        const fromDate = document.querySelector('#fromDate');
+        const fromTime = document.querySelector('#fromTime');
+        const toDate = document.querySelector('#toDate');
+        const toTime = document.querySelector('#toTime');
+        const timezone = document.querySelector('#timezone');
+        const location = document.querySelector('#location');
+        const description = document.querySelector('#description');
+        const widget = document.querySelector('#widget-container');
+        const button = document.querySelector('button');
+        const message = document.querySelector('#message');
+
+        let from = new Date();
+        let to = new Date();
+        let fromUtc;
+        let toUtc;
+        let utcOffsets = {
+          'America/Los_Angeles': '-07:00',
+        };
+
+        function initForm() {
+          const minutesNow = from.getMinutes();
+          if (minutesNow <= 15) {
+            from.setMinutes(15);
+          } else if (minutesNow <= 30) {
+            from.setMinutes(30);
+          } else if (minutesNow <= 45) {
+            from.setMinutes(45);
+          } else {
+            from.setHours(from.getHours() + 1, 0);
+          }
+          const today = from.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          });
+          fromDate.value = today;
+          toDate.value = today;
+          fromTime.value = from.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+          to.setHours(from.getHours() + 1, from.getMinutes());
+          toTime.value = to.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+        }
+
+        function pad(x, digits = 2) {
+          return String(x).padStart(digits, 0);
+        }
+
+        function getUtcString(date) {
+          const dateWithTimeZoneString =
+            String(date.getFullYear()) +
+            '-' +
+            String(date.getMonth() + 1).padStart(2, 0) +
+            '-' +
+            String(date.getDate()).padStart(2, 0) +
+            'T' +
+            String(date.getHours()).padStart(2, 0) +
+            ':' +
+            String(date.getMinutes()).padStart(2, 0) +
+            ':00.000' +
+            utcOffsets[timezone.value];
+          const dateWithTimezone = new Date(dateWithTimeZoneString);
+          let utcString = dateWithTimezone.toISOString();
+          // Remove milliseconds before returning.
+          utcString = utcString.split('.')[0] + 'Z';
+          // Remove dashes and colons
+          utcString = utcString.replace(/[-:]/g, '');
+          return utcString;
+        }
+
+        async function setUtcOffset(timezone) {
+          if (!utcOffsets[timezone]) {
+            const resp = await fetch(
+              `http://worldtimeapi.org/api/timezone/${timezone}`
+            );
+            const { utc_offset } = await resp.json();
+            utcOffsets[timezone] = utc_offset;
+          }
+        }
+
+        function updateLinks() {
+          from = new Date(fromDate.value);
+          let [hh, mm] = fromTime.value.split(/[^\d]/).map((e) => parseInt(e));
+          if (fromTime.value.toLowerCase().includes('p') && hh < 12) {
+            hh += 12;
+          }
+          from.setHours(hh, mm);
+          to = new Date(toDate.value);
+          [hh, mm] = toTime.value.split(/[^\d]/).map((e) => parseInt(e));
+          if (toTime.value.toLowerCase().includes('p') && hh < 12) {
+            hh += 12;
+          }
+          to.setHours(hh, mm);
+          const anchorEls = widget.querySelectorAll('a');
+
+          anchorEls[0].href = genGoogle();
+          anchorEls[1].href = genOutlook();
+          anchorEls[2].href = genOffice365();
+          anchorEls[3].href = genYahoo();
+          anchorEls[4].href = genIcs();
+        }
+
+        function genGoogle() {
+          const url =
+            'https://www.google.com/calendar/render?action=TEMPLATE' +
+            '&text=' +
+            title.value.replace(/\s/g, '+') +
+            '&dates=' +
+            getUtcString(from) +
+            '/' +
+            getUtcString(to) +
+            '&location=' +
+            location.value.replace(/\s/g, '+') +
+            '&details=' +
+            description.value.replace(/\s/g, '+');
+          return url;
+        }
+
+        function genOutlook() {
+          return genMicrosoft('https://outlook.live.com');
+        }
+
+        function genOffice365() {
+          return genMicrosoft('https://outlook.office.com/');
+        }
+
+        function genMicrosoft(domain) {
+          const url =
+            domain +
+            '/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent' +
+            '&subject=' +
+            title.value.replace(/\s/g, '+') +
+            '&startdt=' +
+            String(from.getFullYear()) +
+            '-' +
+            pad(from.getMonth() + 1) +
+            '-' +
+            pad(from.getDate()) +
+            'T' +
+            pad(from.getHours()) +
+            '%3A' +
+            pad(from.getMinutes()) +
+            '%3A' +
+            '00' +
+            utcOffsets[timezone.value] +
+            '&enddt=' +
+            String(to.getFullYear()) +
+            '-' +
+            pad(to.getMonth() + 1) +
+            '-' +
+            pad(to.getDate()) +
+            'T' +
+            pad(to.getHours()) +
+            '%3A' +
+            pad(to.getMinutes()) +
+            '%3A' +
+            '00' +
+            utcOffsets[timezone.value] +
+            '&location=' +
+            location.value.replace(/\s/g, '+') +
+            '&body=' +
+            description.value.replace(/\s/g, '+');
+          return url;
+        }
+
+        function genYahoo() {
+          const url =
+            'https://calendar.yahoo.com/?v=60' +
+            '&title=' +
+            title.value.replace(/\s/g, '+') +
+            '&st=' +
+            getUtcString(from) +
+            '&et=' +
+            getUtcString(to) +
+            '&in_loc=' +
+            location.value.replace(/\s/g, '+') +
+            '&desc=' +
+            description.value.replace(/\s/g, '+');
+          return url;
+        }
+
+        function genIcs() {
+          const now = new Date();
+          const ics =
+            'BEGIN:VCALENDAR\n' +
+            'PRODID:-//benronkin.com//EN\n' +
+            'VERSION:2.0\n' +
+            'CALSCALE:GREGORIAN\n' +
+            'METHOD:PUBLISH\n' +
+            'BEGIN:VEVENT\n' +
+            'DTSTAMP:' +
+            getUtcString(now) +
+            '\n' +
+            'DTSTART:' +
+            getUtcString(from) +
+            '\n' +
+            'DTEND:' +
+            getUtcString(to) +
+            '\n' +
+            'UID:' +
+            now.getTime() +
+            '@benronkin.com\n' +
+            'SUMMARY:' +
+            title.value +
+            '\n' +
+            'DESCRIPTION:' +
+            description.value +
+            '\n' +
+            'LOCATION:' +
+            location.value +
+            '\n' +
+            'END:VEVENT\n' +
+            'END:VCALENDAR\n';
+          return 'data:text/calendar;charset=utf8,' + encodeURIComponent(ics);
+        }
+
+        function copyWidget() {
+          navigator.clipboard.writeText(widget.innerHTML);
+          message.innerText = 'Widget copied to clipboard.';
+        }
+
+        async function init() {
+          await setUtcOffset(timezone.value);
+          let els = document.querySelectorAll('.datepicker');
+          M.Datepicker.init(els, {});
+          els = document.querySelectorAll('select'); // required here
+          M.FormSelect.init(els, {});
+          title.addEventListener('change', updateLinks);
+          fromDate.addEventListener('change', updateLinks);
+          fromTime.addEventListener('change', updateLinks);
+          toDate.addEventListener('change', updateLinks);
+          toTime.addEventListener('change', updateLinks);
+          location.addEventListener('change', updateLinks);
+          description.addEventListener('change', updateLinks);
+          timezone.addEventListener('change', async function (e) {
+            await setUtcOffset(e.target.value);
+            updateLinks();
+          });
+          button.addEventListener('click', copyWidget);
+
+          initForm();
+          updateLinks();
+        }
+
+        init();
+      }); // End of DOMContentLoaded
+    </script>
+  </body>
+</html>
