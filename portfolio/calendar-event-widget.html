@@ -309,6 +309,7 @@
               utcOffsets[timezone] = jsn.utc_offset;
             }
           }
+          console.log(utcOffsets);
         }
 
         function updateLinks() {
@@ -362,7 +363,7 @@
             domain +
             '/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent' +
             '&subject=' +
-            title.value.replace(/\s/g, '+') +
+            title.value.replace(/\s/g, '%20') +
             '&startdt=' +
             String(from.getFullYear()) +
             '-' +
@@ -390,9 +391,9 @@
             '00' +
             utcOffsets[timezone.value] +
             '&location=' +
-            location.value.replace(/\s/g, '+') +
+            location.value.replace(/\s/g, '%20') +
             '&body=' +
-            description.value.replace(/\s/g, '+');
+            description.value.replace(/\s/g, '%20');
           return url;
         }
 
@@ -400,15 +401,15 @@
           const url =
             'https://calendar.yahoo.com/?v=60' +
             '&title=' +
-            title.value.replace(/\s/g, '+') +
+            title.value.replace(/\s/g, '%20') +
             '&st=' +
             getUtcString(from) +
             '&et=' +
             getUtcString(to) +
             '&in_loc=' +
-            location.value.replace(/\s/g, '+') +
+            location.value.replace(/\s/g, '%20') +
             '&desc=' +
-            description.value.replace(/\s/g, '+');
+            description.value.replace(/\s/g, '%20');
           return url;
         }
 
