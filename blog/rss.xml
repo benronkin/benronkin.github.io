@@ -6,6 +6,30 @@
         <description>I am Ben, an automation developer. I enjoy sharing my knowledge with Google Apps Script and Javascript in general.</description>
         <link>https://benronkin.com/blog</link>
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
+
+        <item>
+            <title>Create an Add-to-Calendar widget with a form</title>
+            <description>
+            <![CDATA[
+          <p>
+            Are you familiar with the Add-to-Calendar widget that shows up in
+            confirmation emails and web pages after a user registers to an event
+            or a meeting? the widget enables the user to quickly add the event
+            to their favorite calendar.
+          </p>
+          <p>
+            If you'd like to have the ability to quickly create such widgets for
+            your own audiences, then you're in luck, because today I'll be
+            sharing the code for an online form that you can use to generate
+            these widgets.
+          </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/create-add-to-calendar-widget-with-form.html</link> 
+            <guid>https://benronkin.com/blog/create-add-to-calendar-widget-with-form.html</guid>
+            <pubDate>Thu, 20 Apr 2023 15:00:00 -0800</pubDate>
+        </item>
+
+
         <item>
             <title>Add a timer to a Google Form with Apps Script</title>
             <description>
@@ -296,13 +320,6 @@
             <link>https://benronkin.com/blog/validate-user-files-with-apps-script.html</link> 
             <guid>https://benronkin.com/blog/validate-user-files-with-apps-script.html</guid>
             <pubDate>Fri, 6 Jan 2023 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Display a sidebar inside Google Sheet</title>
-            <description>A Google Sheet sidebar is an extra pane that you can open alongside your sheets. It lets you manipulate the contents of the sheets from a centralized place. I'll review the sidebar in the context of mail merge, a solution that I covered in previous posts. Mail merge has an admin sheet where the user can select an email template, preview the campaign, and launch the campaign. In this post, I'll migrate this functionality to a sidebar.</description>
-            <link>https://benronkin.com/blog/display-google-sheet-sidebar.html</link> 
-            <guid>https://benronkin.com/blog/display-google-sheet-sidebar.html</guid>
-            <pubDate>Wed, 4 Jan 2023 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
