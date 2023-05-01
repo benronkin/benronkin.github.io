@@ -3,6 +3,7 @@ https://benronkin.com/index.html
 https://benronkin.com/contact.html
 https://benronkin.com/reviews.html
 https://benronkin.com/blog/index.html
+https://benronkin.com/blog/google-search-console-to-chat-gpt-using-apps-script.html
 https://benronkin.com/blog/create-add-to-calendar-widget-with-form.html
 https://benronkin.com/blog/add-timer-to-google-form-with-google-apps-script.html
 https://benronkin.com/blog/automate-image-edits-and-variations-with-dall-e-api-and-apps-script.html
