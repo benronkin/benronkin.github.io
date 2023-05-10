@@ -8,6 +8,32 @@
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
 
         <item>
+            <title>Build a Chrome extension for DeepL translator API</title>
+            <description><![CDATA[
+            <p>
+            <a href="https://www.deepl.com/translator">DeepL Translator</a> is a
+            great service for translating content between different languages.
+            The company offers a Chrome extension to use the service in the
+            browser, but we can build our own extension. Let's see how!
+          </p>
+          <p>
+            This tutorial deals only with the development of the extension, not
+            with getting it published in the Chrome Web Store.
+          </p>
+          <p>
+            In this tutorial we will store the DeepL API key in the extension
+            code. THIS IS NOT A BEST PRACTICE! Anyone who uses the extension can
+            access the key and abuse it. If you want to offer the extension
+            commercially then you should consider using a proxy server to issue
+            API requests, or a similar solution.
+          </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/create-chrome-extension-for-deepl-translator.html</link> 
+            <guid>https://benronkin.com/blog/create-chrome-extension-for-deepl-translator.html</guid>
+            <pubDate>Tue, 9 May 2023 17:00:00 -0800</pubDate>
+        </item>
+
+        <item>
             <title>Send Google Search Console data to ChatGPT</title>
             <description><![CDATA[<p>
               Artificial Intelligence is getting into new business workflows by
@@ -21,8 +47,6 @@
             <guid>https://benronkin.com/blog/google-search-console-to-chat-gpt-using-apps-script.html</guid>
             <pubDate>Sun, 30 Apr 2023 18:00:00 -0800</pubDate>
         </item>
-
-
         <item>
             <title>Create an Add-to-Calendar widget with a form</title>
             <description>
@@ -320,13 +344,6 @@
             <link>https://benronkin.com/blog/higher-order-functions-in-google-apps-script.html</link> 
             <guid>https://benronkin.com/blog/higher-order-functions-in-google-apps-script.html</guid>
             <pubDate>Mon, 9 Jan 2023 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Increase coding productivity with Apps Script macros</title>
-            <description>Google Apps Script is all about increasing work productivity through automation. But the road to automation involves a lot of mental and manual work. When we're developing scripts, we are often asked to make changes in Google Sheets or Google Drive items. Since we don't always get the scripts to make the right changes right away, we often have to undo the script changes manually, as we develop and enhance the script. And there's only so much we can do with the UNDO button in google sheets.</description>
-            <link>https://benronkin.com/blog/increase-productivity-with-google-apps-script-macros.html</link> 
-            <guid>https://benronkin.com/blog/increase-productivity-with-google-apps-script-macros.html</guid>
-            <pubDate>Sun, 8 Jan 2023 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
