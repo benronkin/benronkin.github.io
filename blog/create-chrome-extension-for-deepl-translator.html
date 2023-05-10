@@ -406,13 +406,16 @@ async function callDeepL(text, source_lang, target_lang) {
 
   const req = new Request(API_URL, options);
 
-  const resp = await fetch(req);
-  console.log(resp);
-  const jsn = await resp.json();
-  if (jsn.message) {
-    return `DeepL message: ${jsn.message}`;
+  try {
+    const resp = await fetch(req);
+    const jsn = await resp.json();
+    if (jsn.message) {
+      return `DeepL message: ${jsn.message}`;
+    }
+    return jsn.translations[0].text;
+  } catch (err) {
+    return `DeepL message: ${err.message}`;
   }
-  return jsn.translations[0].text;
 }
 
 // Respond to translation requests
