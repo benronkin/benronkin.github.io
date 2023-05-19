@@ -8,6 +8,35 @@
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
 
         <item>
+            <title>Create a Google Drive AddOn for Stability.ai</title>
+            <description><![CDATA[
+            <p>
+              <a href="https://stability.ai/" target="_blank">Stability.ai</a>
+              offers a publicly-available service to create and edit images
+              using artificial intelligence. The service is very intuitive to
+              use and yields great results. It is similar to the Dall-E service
+              from OpenAI, which I've previously written about
+              <a
+                href="https://benronkin.com/blog/use-dall-e-with-google-apps-script-to-convert-text-to-images-automatically.html"
+                >here</a
+              >
+              and
+              <a
+                href="https://benronkin.com/blog/automate-image-edits-and-variations-with-dall-e-api-and-apps-script.html"
+                >here</a
+              >.
+            </p>
+            <p>
+              In this post, we will create a Google Drive AddOn that will
+              interact with the Stability.AI API to create and edit images.
+            </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/create-google-drive-addon-for-stability-ai.html</link> 
+            <guid>https://benronkin.com/blog/create-google-drive-addon-for-stability-ai.html</guid>
+            <pubDate>Thu, 18 May 2023 18:00:00 -0800</pubDate>
+        </item>
+
+        <item>
             <title>Build a Chrome extension for DeepL translator API</title>
             <description><![CDATA[
             <p>
@@ -337,13 +366,6 @@
             <link>https://benronkin.com/blog/exchange-data-between-two-apps-scripts-with-webapp.html</link> 
             <guid>https://benronkin.com/blog/exchange-data-between-two-apps-scripts-with-webapp.html</guid>
             <pubDate>Tue, 10 Jan 2023 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Take your GAS to the next level with higher-order functions</title>
-            <description>Imagine you have a Google Sheet with tabular sales data. The table contains sales volumes from four regions, represented in columns, and monthly sales volume represented in rows. Let's also say that you are developing a Google Apps Script that needs to do a few things, including summing up the sales in the East region. How would you go about coding that? Well, the easiest thing to do is to pull the values out of the East column one by one and...</description>
-            <link>https://benronkin.com/blog/higher-order-functions-in-google-apps-script.html</link> 
-            <guid>https://benronkin.com/blog/higher-order-functions-in-google-apps-script.html</guid>
-            <pubDate>Mon, 9 Jan 2023 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
