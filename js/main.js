@@ -33,7 +33,7 @@ const handleContactSubmit = (e) => {
   document.querySelector('#contact-submit').disabled = true;
 
   const url =
-    'https://script.google.com/macros/s/AKfycbzxq082-HQwvCdGDTUnxESz7NVRoYNofMxtfwhHuQ5b7KkABsnoyvhLEzTBDYUdDGPj/exec';
+    'https://script.google.com/macros/s/AKfycbzf_XjU6hRiLN8v_HPo9-_3iiBV2lxDOfydW48irVE7QUmKcZqr43iT0SlNEkdz6H0/exec';
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');
 
