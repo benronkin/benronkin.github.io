@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Infinity scroll with Google Apps Script | Ben Ronkin</title>
+    <meta
+      property="og:title"
+      content="Infinity scroll with Google Apps Script"
+    />
+    <meta
+      name="description"
+      content="Fetch incremental data from a Google Sheet as the user scrolls down a web page"
+    />
+    <meta
+      property="og:description"
+      content="Fetch incremental data from a Google Sheet as the user scrolls down a web page"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/infinity-scroll-with-google-apps-script.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Infinity scroll with Google Apps Script</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> Sep 7, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <!-- <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/aGOgYXLIvls"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe> -->
+          </div>
+          <div class="blog-post-body">
+            <p>
+              In this post, we will create a small Google Apps Script web app
+              that receives data requests. The app will fetch rows from a Google
+              Sheet. A client side web page will execute calls to the apps
+              script for new data as the user scrolls down the page.
+            </p>
+            <p>
+              For the purpose of this tutorial, I created a simple Google Sheet
+              with thousands of rows of fake data. The rows are sorted by column
+              A, "Date Joined".
+            </p>
+            <img
+              class="responsive-img"
+              src="../img/infinity-gas-sheet.png"
+              alt="Infinity GAS Sheet"
+              style="width: 60%"
+            />
+
+            <h2>The web app</h2>
+
+            <p>
+              The first thing we need to do is create a simple function in
+              Google Apps Script that will receive two arguments: the page
+              number and the page size. These arguments will inform the function
+              from which row to start pulling data, and how many rows of data to
+              pull:
+            </p>
+
+            <pre><code class="language-javascript">function getData(page, pageSize = 20) {
+  const spreadsheet = SpreadsheetApp.getActive();
+  const sheet = spreadsheet.getSheetByName('Users');
+
+  // TODO: Add data validations as needed...
+
+  const data = sheet.getRange(page * pageSize + 2, 1, pageSize, 4).getValues();
+  return data;
+}</code></pre>
+
+            <p>
+              In the code above we access our users sheet and pull out the
+              number of rows as defined by pageSize, starting from position page
+              * pageSize + 2.
+            </p>
+
+            <p>We can write a simple test function:</p>
+
+            <pre><code class="language-javascript">function test() {
+  console.log(getData(1, 10));
+}</code></pre>
+
+            <p>
+              Above we call the function, passing into it page 1 and page size
+              of 10. Since paging starts at zero, we will log rows 12 through
+              21.
+            </p>
+
+            <p>
+              Now we need to write a simple doGet function that once we deploy
+              the script as a web app will respond to GET requests:
+            </p>
+
+            <pre><code class="language-javascript">function doGet(e) {
+  const page = e?.parameter?.page || 0;
+  const pageSize = e?.parameter?.pageSize || 20;
+
+  const data = getData(page, pageSize);
+
+  return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(
+    ContentService.MimeType.JSON
+  );
+}</code></pre>
+
+            <p>
+              Above, we pull out the page and pageSize query parameters that we
+              will pass from the browser when calling the web app. We use
+              optional chaining to check that the parameters exist; otherwise,
+              we use default values. We then call our
+              <strong>getData</strong> function with these arguments. Finally,
+              we use ContentService to push the data rows back to the browser.
+            </p>
+
+            <p>
+              Deploy the script as a web app. Under Execute as, select "Me", and
+              under Who has access, select "Anyone". Copy the web app URL and
+              paste it in a browser window. The browser will display the first
+              20 rows of data. You can now add "?page=1&pageSize=20" to the end
+              of the web app URL to get the next set of rows in your browser.
+            </p>
+
+            <img
+              class="responsive-img"
+              src="../img/infinity-gas-doget.png"
+              alt="Infinity GAS doGet"
+              style="width: 100%"
+            />
+
+            <p>
+              That's all we need for our web app. Now we can work on our
+              client-side web page.
+            </p>
+
+            <h2>Web page</h2>
+
+            <p>Let's create a simple HTML page to contain our user list:</p>
+
+            <pre><code class="language-html">&lt;!DOCTYPE html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="UTF-8" />
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    &lt;title>Users&lt;/title>
+    &lt;style>
+      html,
+      body {
+        font-family: sans-serif;
+        color: white;
+      }
+      h1 {
+        color: #3c5030;
+      }
+      .container {
+        width: 90%;
+        margin: auto;
+      }
+      .name {
+        display: flex;
+      }
+      .firstName,
+      .lastName {
+        font-size: 150%;
+      }
+      .firstName {
+        margin-right: 5px;
+      }
+      .user-div {
+        margin: 50px 0;
+        padding: 20px;
+        background-color: lightseagreen;
+      }
+    &lt;/style>
+  &lt;/head>
+  &lt;body>
+    &lt;div class="container">
+      &lt;h1>Users&lt;/h1>
+      &lt;div id="users">&lt;/div>
+    &lt;/div>
+    &lt;template id="template-user">
+      &lt;div class="user-div">
+        &lt;div class="name">
+          &lt;div class="firstName">&lt;/div>
+          &lt;div class="lastName">&lt;/div>
+        &lt;/div>
+        &lt;div class="dateJoined">&lt;/div>
+        &lt;div class="country">&lt;/div>
+      &lt;/div>
+    &lt;/template>
+  &lt;/body>
+&lt;/html>
+</code></pre>
+
+            <p>
+              Currently, the page doesn't contain any user info. It has only a
+              header, a template that we will use to programmatically populate
+              the user information, and basic CSS.
+            </p>
+
+            <p>
+              Inside the HTML, right before the closing &lt;/body> tag, add a
+              &lt;script>&lt;/script> tag.
+            </p>
+
+            <p>
+              Let's write a function that will receive a single user information
+              and populate it to the page using the template. We'll then invoke
+              the function statically:
+            </p>
+
+            <pre><code class="language-javascript">function appendUser(firstName, lastName, dateJoined, country) {
+  const template = document.querySelector('#template-user');
+  const clone = template.content.cloneNode(true);
+  clone.querySelector('.firstName').innerText = firstName;
+  clone.querySelector('.lastName').innerText = lastName;
+  clone.querySelector('.dateJoined').innerText = dateJoined;
+  clone.querySelector('.country').innerText = country;
+  document.querySelector('#users').appendChild(clone);
+}
+      
+appendUser('John', 'Smith', '10/10/2013', 'United States');</code></pre>
+
+            <p>
+              Above we clone the template, populate its divs with the function
+              parameters, and append the clone to the DOM. The page looks like
+              this:
+            </p>
+
+            <img
+              class="responsive-img"
+              src="../img/infinity-gas-dummy.png"
+              alt="Infinity GAS dummy"
+            />
+
+            <p>
+              Now we can call the server requesting the initial batch of data.
+              Remove the standalone invocation of appendUser, and replace it
+              with the following:
+            </p>
+
+            <pre><code class="language-javascript">let page = 0;
+const pageSize = 20;
+let dataRequested = false;
+
+async function fetchServerData() {
+  dataRequested = true;
+  const webappUrl = `url-of-your-webapp`;
+
+  const headers = new Headers();
+  headers.append('Content-Type', 'text/plain;charset=utf-8');
+  
+  const req = new Request(
+    `${webappUrl}?page=${page}&pageSize=${pageSize}`,
+    {
+      redirect: 'follow',
+      headers,
+    }
+  );
+
+  const res = await fetch(req);
+  const jsn = await res.json();
+  if (jsn.length > 0) {
+    jsn.forEach((row) => appendUser(...row));
+    page++;
+  }
+  dataRequested = false;
+}
+
+fetchServerData();</code></pre>
+
+            <p>
+              Above, we do several things. First, we declare global variables
+              for page and page size. We also define a dataRequested variable
+              which we will use to prevent the user from sending multiple data
+              requests to the server in one time. Next, we create a function to
+              call our web app. You'll need to enter the URL to your own web
+              app. We then execute the request, update the page with the data,
+              and increment our page number for future calls. Lastly we invoke
+              the function to populate the page, which now has the actual data
+              from our sheet:
+            </p>
+
+            <img
+              class="responsive-img"
+              src="../img/infinity-gas-live.png"
+              alt="Infinity GAS live"
+            />
+
+            <h2>Infinity scroll</h2>
+
+            <p>
+              The last step of our tutorial is to create a function that will
+              fire when the user scrolls the pages:
+            </p>
+
+            <pre><code class="language-javascript">function handleScroll() {
+  if (dataRequested) {
+    return;
+  }
+
+  const atBottom =
+    window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+  if (!atBottom) {
+    return;
+  }
+
+  fetchServerData();
+}
+
+document.addEventListener('scroll', handleScroll);</code></pre>
+
+            <p>
+              In the simple event handler function above we check if a data
+              request is already in progress, and if so then we exit so as not
+              to make redundant requests. Next, we check if the user has
+              scrolled all the way to the bottom of the page. If they haven't
+              then again we exit. Finally we make the data request. The last
+              line adds the function as a handler for the scroll event.
+            </p>
+
+            <p>
+              That's all there is to it. Now if you scroll to the bottom of the
+              page, additional users will be appended and the scroll bar will
+              jump up.
+            </p>
+
+            <!-- <div class="card-panel alert-notice"></div> -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

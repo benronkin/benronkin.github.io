@@ -8,6 +8,22 @@
         <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
 
         <item>
+            <title>Infinity scroll with Google Apps Script</title>
+            <description><![CDATA[
+            <p>
+              In this post, we will create a small Google Apps Script web app
+              that receives data requests. The app will fetch rows from a Google
+              Sheet. A client side web page will execute calls to the apps
+              script for new data as the user scrolls down the page.
+            </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/infinity-scroll-with-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/infinity-scroll-with-google-apps-script.html</guid>
+            <pubDate>Thu, 7 Sep 2023 13:00:00 -0800</pubDate>
+        </item>
+
+
+        <item>
             <title>Create a Google Drive AddOn for Stability.ai</title>
             <description><![CDATA[
             <p>
@@ -359,13 +375,6 @@
             <link>https://benronkin.com/blog/handle-column-changes-in-google-sheets-with-app-script.html</link> 
             <guid>https://benronkin.com/blog/handle-column-changes-in-google-sheets-with-app-script.html</guid>
             <pubDate>Thu, 12 Jan 2023 18:00:00 -0800</pubDate>
-        </item>
-        <item>
-            <title>Exchange data between two Apps Scripts using a webapp</title>
-            <description>We use Apps Script to increase our productivity when we use google sheets or google docs. But did you know that apps script can communicate with another apps script? We can exchange data between sheets that have their own scripts without having the user in the middle. One way to accomplish that is with the use of apps script web apps. A web app provides a url that users can access via a browser, but the url can also be used by another script.</description>
-            <link>https://benronkin.com/blog/exchange-data-between-two-apps-scripts-with-webapp.html</link> 
-            <guid>https://benronkin.com/blog/exchange-data-between-two-apps-scripts-with-webapp.html</guid>
-            <pubDate>Tue, 10 Jan 2023 18:00:00 -0800</pubDate>
         </item>
     </channel>
 </rss>
