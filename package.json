@@ -1,0 +1,24 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate",
+  "main": "Code.js",
+  "scripts": {
+    "install": "npm i eslint-plugin-prettier && npm i -D nodemon eslint eslint-config-airbnb-base eslint-config-prettier eslint-plugin-import prettier prettier-eslint"
+  },
+  "keywords": [],
+  "author": "Ben Ronkin",
+  "license": "ISC",
+  "dependencies": {
+    "eslint-plugin-prettier": "^4.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.2",
+    "prettier-eslint": "^15.0.1"
+  }
+}

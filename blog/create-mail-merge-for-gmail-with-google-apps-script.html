@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Create a mail merge for Gmail to send bulk emails using a template."
+    />
+    <meta`
+      property="og:title"
+      content="Create mail merge for Gmail using Apps Script"
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/mail-merge-sheet.png"
+    />
+    <meta
+      property="og:description"
+      content="Create a mail merge for Gmail to send bulk emails using a template."
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/create-mail-merge-for-gmail-with-google-apps-script.html"
+    />
+    <title>Create mail merge for Gmail using Apps Script| Ben Ronkin</title>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Create mail merge for Gmail using Apps Script</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> December 9, 2022
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/Mu4DKbhsqyE
+              "
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="blog-post-body">
+            <p>
+              In this post I offer a short and sweet Google Apps Script for
+              creating mail merge in Gmail. The script is very basic, merely
+              meant to introduce the topic. In future posts I'll add more
+              features and capabilities.
+            </p>
+            <p>
+              Mail merge is essentially the ability to send multiple emails in
+              one operation, yet personalize the email to each recipient. It
+              saves you the time and energy to compose multiple emails to
+              multiple recipients that say the same thing. With mail merge, you
+              take an email template, and a list of recipients. You then replace
+              placeholders in the template with the data of each recipients.
+              Like I said, pretty simple stuff.
+            </p>
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+            <p>
+              The first thing we need is a Google Sheet with our recipients'
+              data, like the one in the image below.
+            </p>
+            <img
+              class="responsive-img"
+              src="../img/mail-merge-sheet.png"
+              alt="Mail merge recipient list"
+              width="75%"
+            />
+
+            <p>
+              The first row in the sheet, aka the header row, contains our
+              placeholders. We will embed these placeholders in the template and
+              instruct our little script to replace them with each recipient's
+              data.
+            </p>
+            <p>
+              You can name the headers however you want. If a header contains
+              multiple words then you don't have to connect them into a compound
+              word like in the example above. It's just an idea.
+            </p>
+            <p>
+              To write the script, open Google Apps Script from the "Extensions"
+              menu, and add the code below to Code.gs.
+            </p>
+            <pre><code>const g = {
+  subject: '{{firstName}}, how do you like your {{productName}}?',
+  body: `Hi {{firstName}},
+            
+  I am following up to see how things are going with the {{productName}} that 
+  you purchased on {{purchaseDate}}.
+            
+  {{firstName}}, please let me know if you have any questions.
+             
+  Thank you,
+  Ben`,
+};</code></pre>
+            <p>
+              The "g" object holds our email template. I do this in code just to
+              make this post brief. In future posts I'll show how to store these
+              templates in files that business users can maintain without
+              handling code.
+            </p>
+            <p>
+              The "g" object has two keys for the email subject and body. Inside
+              the template content I include the placeholders from our sheet
+              headers, spelled exactly as they appear in the sheet. I surround
+              them with {{}} just so that the script will know how to find them.
+              You can identify your placeholders in any other way that works for
+              you.
+            </p>
+            <p>Next, we have the main function that runs our automation:</p>
+            <pre><code>const automate = () => {
+  const ss = SpreadsheetApp.getActive();
+  const sh = ss.getSheets()[0];
+  let [headers, ...data] = sh.getDataRange().getValues();
+  data = data.filter((row) => row[0].toString().trim().length > 0);
+};</code></pre>
+            <p>
+              The first thing we need to do is get our recipients' data from the
+              sheet. "ss" points to our active spreadsheet and "sh" to its first
+              sheet. We get the data out of the sheet and assign the first row
+              to the "headers" variable. The rest of the rows go to the "data"
+              variable. Finally, we filter out any empty rows that may reside in
+              our data.
+            </p>
+            <pre><code>try {
+  data.forEach((row) => {
+    let subject = g.subject;
+    let body = g.body;
+    let email;
+    headers.forEach((header, i) => {
+      const re = new RegExp(`{{${header}}}`, 'g');
+      subject = subject.replace(re, row[i]);
+      body = body.replace(re, row[i]);
+      if (header === 'email') {
+        email = row[i];
+      }
+    });
+    GmailApp.sendEmail(email, subject, body);
+  });
+  console.log('Mail merge completed');
+} catch (err) {
+  console.log(err.message);
+  return;
+}</code></pre>
+            <p>
+              We iterate through our recipients' data row by row. For each row
+              we duplicate the template subject and body.
+            </p>
+            <p>
+              We then iterate through the headers. We create a regular
+              expression with a global flag that wraps each header with our {{}}
+              identifier. We then replace the placeholder with the row data in
+              the "i" column.
+            </p>
+            <p>
+              As we iterate through the headers, we look for the "email" header.
+              If we find it then we assign it to the "email" variable.
+            </p>
+            <p>
+              Once the header iteration is complete, we use
+              "GmailApp.sendEmail()" to send out our emails, passing in the
+              recipient's email and their personalized subject line and email
+              body. GmailApp takes care of sending the email for us.
+            </p>
+            <p>
+              Once we're done with the data iteration, we log a message that the
+              automation is done.
+            </p>
+            <p>
+              The "try/catch" enables us to catch any error and log it to the
+              console.
+            </p>
+            <p>We have one utility function:</p>
+            <pre><code>function onOpen(e) {
+  const ui = SpreadsheetApp.getUi();
+  ui.createMenu('🟢 Run').addItem('Start Mail Merge', 'start').addToUi();
+}</code></pre>
+            <p>
+              This function will create a custom menu that we can use to run the
+              automation directly from the sheet.
+            </p>
+            <p>The actual email that the recipient receives looks like this:</p>
+            <img
+              class="responsive-img"
+              src="../img/mail-merge-email.png"
+              alt="Mail merge email"
+              width="75%"
+            />
+            <p>
+              The first time you run this script Google will ask you to
+              authorize it. It's best to test the mail merge with your own email
+              address before you send out emails to your recipients.
+            </p>
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

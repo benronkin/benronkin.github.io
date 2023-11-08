@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css">
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Create a dropdown in Google Sheet with names of files in Google Drive using Google Apps Script"
+    />
+    <meta
+      property="og:title"
+      content="Create a Google Sheet dropdown with names of Google Drive files"
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/dropdown-files-hero.png"
+    />
+    <meta
+      property="og:description"
+      content="Create a dropdown in Google Sheet with names of files in Google Drive using Google Apps Script"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/google-sheet-dropdown-with-names-of-google-drive-files.html"
+    />
+    <title>
+      Create a Google Sheet dropdown with names of Google Drive files| Ben
+      Ronkin
+    </title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+     crossorigin="anonymous"></script>
+</head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+          ><i class="material-icons black-text">menu</i></a
+        >
+        <ul class="sidenav" id="mobile">
+          <li><a href="../products/index.html">Shop scripts</a></li>
+          <li><a href="../portfolio/index.html">Case studies</a></li>
+          <li><a href="../reviews.html">Client reviews</a></li>
+          <li><a href="./index.html">Blog</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>
+              Create Google Sheet dropdown with names of Google Drive files
+            </h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> December 10, 2022
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/Je8qOzd6MvY
+              "
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="blog-post-body">
+            In the
+            <a href="./create-mail-merge-for-gmail-with-google-apps-script.html"
+              >previous post</a
+            > we looked at a rudimentary mail merge for Gmail using Apps Script.
+              The script used a global object that housed the default subject
+              line and body for our emails. We incorporated placeholders into
+              the text that the script replaced with recipients' data. There
+              are, however, a couple of issues with this approach:
+            </p>
+            <ul>
+              <li>
+                Email text is built into the code, which means that business
+                users will likely not be able to change on their own without
+                risking breaking the script.
+              </li>
+              <li>
+                There is only one email template. If we want to use mail merge
+                with different types of messages (e.g, follow-up, special offer,
+                membership invitation) then we will have to change the code
+                every time we want a different template.
+              </li>
+            </ul>
+            <p>
+              To address these shortcomings, we are going to store the email
+              templates in a Google Docs. We will populate a dropdown with the
+              names of the files, so that we can choose the email template with
+              a single mouse click.
+            </p>
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+            <p>
+              To get started, we need to add a new sheet to our spreadsheet.
+              I'll call it "Admin".
+            </p>
+            <img
+              class="responsive-img"
+              src="../img/dropdown-files-admin.png"
+              alt="Dropdown files admin"
+            />
+            <p>
+              This sheet should contain an empty cell in B3, and a button that
+              will trigger the mail merge. We also need to create a new folder
+              on Google Drive that will store our email templates. Inside the
+              folder we can place one or more empty Google Docs and give each a
+              unique name.
+            </p>
+            <img
+              class="responsive-img"
+              src="../img/dropdown-files-folder.png"
+              alt="Dropdown files folder"
+            />
+            <p>
+              Now we need to write some code to inspect the folder, iterate
+              through its documents, get their names, and create a validation
+              rule for the B3 cell that will populate the names.
+            </p>
+            <pre><code class="language-javascript">const g = {
+  templatesFolderId: 'abc1213...',
+  adminSheetName: 'Admin',
+  dataSheetName: 'Registrations',
+  dropdownRange: 'B3',
+  messageRange: 'B4',
+  ss: SpreadsheetApp.getActive(),
+ };</code></pre>
+            <p>
+              I've made some changes in the global object that we saw in the
+              <a
+                href="./create-mail-merge-for-gmail-with-google-apps-script.html"
+                >previous post</a
+              >. "templatesFolderId" stores the ID of the Google Drive folder we
+              created. You get the folder ID from the end of the folder URL in
+              your web browser.
+            </p>
+            <p>
+              I'm storing the names of the two sheets in the global object, so
+              that they're easy to find in case I want to change them in the
+              future.
+            </p>
+            <p>
+              I also have the ranges for both the dropdown cell and another cell
+              that will be used to communicate messages (instead of using alerts
+              like we did in the previous post).
+            </p>
+            <p>
+              Now we will add code to retrieve the file names and populate the
+              dropdown:
+            </p>
+            <pre><code class="language-javascript">function updateTemplateDropdown() {
+  // Message start of script
+  notifyUser_('Updating dropdown...');
+  // Get a reference to our dropdown cell using
+  // the name of our admin sheet and the cell range
+  const cell = g.ss.getSheetByName(g.adminSheetName)
+    .getRange(g.dropdownRange);
+  // Create an array to store the file names  
+  const fileNames = [];
+  // Create a query to look for a file that are stored 
+  // in our templates folder
+  const query = `"${g.templatesFolderId}" in parents`
+  // Get a reference to our files
+  const files = DriveApp.searchFiles(query);
+  // Loop through our file references as long as the list
+  // has not been exhausted
+  while (files.hasNext()) {
+    // Get the actual file
+    const file = files.next();
+    // Populate our array with the file name
+    fileNames.push(file.getName());
+  }
+  // It's possible that the folder might be empty. In that case,
+  // our array will be empty:
+  if (fileNames.length == 0) {
+    // Remove any validation that our script created in prior runs
+    cell.clearDataValidations();
+    // Empty the cell
+    cell.setValue('');
+    // Inform the user that no templates were found
+    notifyUser_('No email templates found');
+    // End the function execution
+    return;
+  }
+  // Use SpreadsheetApp to define a new data validation rule.
+  // Sort the file names and use them as values in a list
+  const rule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(fileNames.sort())
+    .setAllowInvalid(false)
+    .setHelpText('Select a template name from the dropdown menu')
+    .build();
+  // Once the rule is built, attach it to our cell.
+  cell.setDataValidation(rule);
+  // Notify the user
+  notifyUser_('Dropdown updated');
+}</code></pre>
+            <p>
+              We build a query to look for files in our folder. We then use
+              DriveApp.searchFiles to look for files that match our query. The
+              result of this operation gives us references to all the files
+              found in the folder (if there are any).
+            </p>
+            <p>
+              We then use SpreadsheetApp to create a new data validation
+              builder. We chain a bunch of methods together to pass in the list
+              of file names (sorted) that will populate the dropdown. We build
+              the rule and set it on our dropdown cell.
+            </p>
+            <p>
+              Next, we modify our notifyUser_ function to display messages in
+              our admin sheet:
+            </p>
+            <pre><code class="language-javascript">function notifyUser_(msg) {
+  console.log(msg);
+  g.ss.getSheetByName(g.adminSheetName)
+    .getRange(g.messageRange).setValue(msg);
+  SpreadsheetApp.flush();
+}</code></pre>
+            <p>
+              Finally, we update the "onOpen" function to display a menu item to
+              update the dropdown. We no longer need the custom menu to offer an
+              option to run the mail merge since we are going to use a button to
+              do that:
+            </p>
+            <pre><code class="language-javascript">function onOpen(e) {
+  const ui = SpreadsheetApp.getUi();
+  ui.createMenu('🟢 Mail Merge')
+    .addItem('Update template dropdown', 'updateTemplateDropdown')
+    .addToUi();
+}</code></pre>
+            <p>
+              To connect the button to the sendEmails function, right-click on
+              the button, click on the three dots icon, then select "Assign
+              Script" and type in the name of the function:
+            </p>
+            <img
+              class="responsive-img"
+              src="../img/dropdown-files-button.png"
+              alt="Dropdown files button"
+            />
+            <p>
+              At this point, when you select "Update template dropdown" from the
+              custom menu, the dropdown will be populated with the names of the
+              files in your folder. The script currently ignores anything you
+              place in those files though – I'll address that in the next post.
+            </p>
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

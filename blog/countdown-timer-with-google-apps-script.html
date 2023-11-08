@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Countdown timer with Google Apps Script | Ben Ronkin</title>
+    <meta
+      property="og:title"
+      content="Countdown timer with Google Apps Script"
+    />
+    <meta name="description" content="" />
+    <meta property="og:description" content="" />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/timer-gas-hero.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/countdown-timer-with-google-apps-script.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Countdown timer with Google Apps Script</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> September 8, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          ></div>
+          <div class="blog-post-body">
+            <!-- <img
+              class="responsive-img"
+              src="../img/timer-gas-hero.png"
+              alt="Timer GAS hero"
+            /> -->
+            <p>
+              In this tutorial we will use vanilla Javascript to create a
+              countdown timer that we will host in a Google Apps Script web app.
+              We will make the web app available to any user who has the URL to
+              our app, even anonymous users.
+            </p>
+            <p>
+              Below is the fully functional timer. You can interact with it by
+              simply clicking on the time and typing the amount of time you want
+              to set, like "3000" for thirty minutes and zero seconds. Once you
+              click the 'Start' button, the countdown will commence. The timer
+              will update the time remaining in the title of the page, so that
+              if you have another browser tab open then you can see
+            </p>
+            <div class="container">
+              <style>
+                button {
+                  width: 100px;
+                  cursor: pointer;
+                }
+
+                #countdown-timer {
+                  background-color: #3a3a3a;
+                  padding: 0;
+                  margin: 20px 0;
+                }
+                #timer-buttons {
+                  background-color: #4c4c4c;
+                  padding: 15px;
+                }
+                #timer-display {
+                  cursor: pointer;
+                  text-align: center;
+                  font-size: 150%;
+                  padding: 30px;
+                  width: 50%;
+                  margin: auto;
+                }
+                #body {
+                  background: #232323;
+                }
+                .hidden {
+                  display: none;
+                }
+                .timer-display-focused {
+                  color: #999999;
+                  border-bottom: 3px solid rgb(108, 99, 255);
+                }
+                .timer-display-unfocused {
+                  color: white;
+                  border-bottom: 3px solid #3a3a3a;
+                }
+                .timer-button {
+                  padding: 7px 10px;
+                }
+              </style>
+              <div id="countdown-timer">
+                <div
+                  tabindex="0"
+                  id="timer-display"
+                  class="timer-display-unfocused"
+                >
+                  <span id="hours">
+                    <span id="h2">0</span><span id="h1">0</span>h
+                  </span>
+                  <span id="minutes">
+                    <span id="m2">0</span><span id="m1">0</span>m
+                  </span>
+                  <span id="seconds">
+                    <span id="s2">0</span><span id="s1">0</span>s
+                  </span>
+                </div>
+                <div id="timer-buttons">
+                  <div>
+                    <button
+                      type="button"
+                      id="btn-start"
+                      class="timer-button"
+                      disabled
+                    >
+                      START
+                    </button>
+                    <button type="button" id="btn-reset" class="timer-button">
+                      RESET
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <script>
+                const chimeString =
+                  'data:audio/wav;base64,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qJrx4KOQjahZxWbcZgztj2c49nKmkId44S71j0c8eV9yDK6uPRzx5X18eDvjvQ6yKo9ZSS6l//8elePK/Lf//IInrOF/FvDoADYAGBMGb7FtErm5MXMlmPAJQVgWta7Zx2go+8xJ0UiCb8LHHdftWyLJE0QIAIsI+UbXu67dZMjmgDGCGl1H+vpF4NSDckSIkk7Vd+sxEhBQMRU8j/12UIRhzSaUdQ+rQU5kGeFxm+hb1oh6pWWmv3uvmReDl0UnvtapVaIzo1jZbf/pD6ElLqSX+rUmOQNpJFa/r+sa4e/pBlAABoAAAAA3CUgShLdGIxsY7AUABPRrgCABdDuQ5GC7DqPQCgbbJUAoRSUj+NIEig0YfyWUho1VBBBA//uQZB4ABZx5zfMakeAAAAmwAAAAF5F3P0w9GtAAACfAAAAAwLhMDmAYWMgVEG1U0FIGCBgXBXAtfMH10000EEEEEECUBYln03TTTdNBDZopopYvrTTdNa325mImNg3TTPV9q3pmY0xoO6bv3r00y+IDGid/9aaaZTGMuj9mpu9Mpio1dXrr5HERTZSmqU36A3CumzN/9Robv/Xx4v9ijkSRSNLQhAWumap82WRSBUqXStV/YcS+XVLnSS+WLDroqArFkMEsAS+eWmrUzrO0oEmE40RlMZ5+ODIkAyKAGUwZ3mVKmcamcJnMW26MRPgUw6j+LkhyHGVGYjSUUKNpuJUQoOIAyDvEyG8S5yfK6dhZc0Tx1KI/gviKL6qvvFs1+bWtaz58uUNnryq6kt5RzOCkPWlVqVX2a/EEBUdU1KrXLf40GoiiFXK///qpoiDXrOgqDR38JB0bw7SoL+ZB9o1RCkQjQ2CBYZKd/+VJxZRRZlqSkKiws0WFxUyCwsKiMy7hUVFhIaCrNQsKkTIsLivwKKigsj8XYlwt/WKi2N4d//uQRCSAAjURNIHpMZBGYiaQPSYyAAABLAAAAAAAACWAAAAApUF/Mg+0aohSIRobBAsMlO//Kk4soosy1JSFRYWaLC4qZBYWFRGZdwqKiwkNBVmoWFSJkWFxX4FFRQWR+LsS4W/rFRb/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////VEFHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU291bmRib3kuZGUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMjAwNGh0dHA6Ly93d3cuc291bmRib3kuZGUAAAAAAAAAACU=';
+                let chime;
+                let timeoutId;
+                const timerDisplay = document.querySelector('#timer-display');
+                const btnStart = document.querySelector('#btn-start');
+                const btnReset = document.querySelector('#btn-reset');
+                const hh = document.querySelector('#hours');
+                const mm = document.querySelector('#minutes');
+                const ss = document.querySelector('#seconds');
+                const s1 = document.querySelector('#s1');
+                const s2 = document.querySelector('#s2');
+                const m1 = document.querySelector('#m1');
+                const m2 = document.querySelector('#m2');
+                const h1 = document.querySelector('#h1');
+                const h2 = document.querySelector('#h2');
+
+                timerDisplay.addEventListener('click', function () {
+                  hh.classList.remove('hidden');
+                  mm.classList.remove('hidden');
+                  timerDisplay.classList.remove('timer-display-unfocused');
+                  timerDisplay.classList.add('timer-display-focused');
+                });
+
+                timerDisplay.addEventListener('keydown', function (e) {
+                  let n = e.keyCode;
+                  if (n === 8 && getSecondsRemaining() > 0) {
+                    deleteDigit();
+                  } else if (n >= 48 && n <= 57 && h2.innerText === '0') {
+                    addDigit(String.fromCharCode(n));
+                  }
+                  if (getSecondsRemaining() > 0) {
+                    btnStart.disabled = false;
+                  } else {
+                    btnStart.disabled = true;
+                  }
+                });
+
+                btnStart.addEventListener('click', function () {
+                  if (btnStart.innerText === 'START') {
+                    btnStart.innerText = 'PAUSE';
+                    chime = new Audio(chimeString);
+                    chime.loop = true;
+                    const secondsLeft = getSecondsRemaining();
+                    const { hours, minutes, seconds } =
+                      convertSeconds(secondsLeft);
+                    updateDigits(hours, minutes, seconds);
+                    timeoutId = setTimeout(decrementCounter, 1000);
+                  } else if (btnStart.innerText === 'PAUSE') {
+                    btnStart.innerText = 'START';
+                    clearTimeout(timeoutId);
+                  } else {
+                    // User is stopping the chime
+                    chime.pause();
+                    chime.loop = false;
+                    btnStart.innerText = 'START';
+                    btnStart.disabled = true;
+                  }
+                });
+
+                btnReset.addEventListener('click', function () {
+                  if (timeoutId) {
+                    clearTimeout(timeoutId);
+                    chime.pause();
+                  }
+                  btnStart.innerText = 'START';
+                  btnStart.disabled = true;
+                  updateDigits(0, 0, 0);
+                });
+
+                function getSecondsRemaining() {
+                  return (
+                    parseInt(s1.innerText) +
+                    10 * parseInt(s2.innerText) +
+                    60 *
+                      (parseInt(m1.innerText) + 10 * parseInt(m2.innerText)) +
+                    3600 *
+                      (parseInt(h1.innerText) + 10 * parseInt(h2.innerText))
+                  );
+                }
+
+                function addDigit(n) {
+                  h2.innerText = h1.innerText;
+                  h1.innerText = m2.innerText;
+                  m2.innerText = m1.innerText;
+                  m1.innerText = s2.innerText;
+                  s2.innerText = s1.innerText;
+                  s1.innerText = '' + n;
+                }
+
+                function deleteDigit() {
+                  s1.innerText = s2.innerText;
+                  s2.innerText = m1.innerText;
+                  m1.innerText = m2.innerText;
+                  m2.innerText = h1.innerText;
+                  h1.innerText = h2.innerText;
+                  h2.innerText = '0';
+                }
+
+                function updateDigits(hours, minutes, seconds) {
+                  s1.innerText = seconds % 10;
+                  s2.innerText = Math.floor(seconds / 10);
+                  m1.innerText = minutes % 10;
+                  m2.innerText = Math.floor(minutes / 10);
+                  h1.innerText = hours % 10;
+                  h2.innerText = Math.floor(hours / 10);
+                  if (hours === 0) {
+                    hh.classList.add('hidden');
+                  }
+                  if (minutes === 0) {
+                    mm.classList.add('hidden');
+                  }
+                  document.title = `${hours
+                    .toString()
+                    .padStart(2, '0')}:${minutes
+                    .toString()
+                    .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+
+                function convertSeconds(seconds) {
+                  const hours = Math.floor(seconds / 3600);
+                  seconds = seconds % 3600;
+                  const minutes = Math.floor(seconds / 60);
+                  seconds = seconds % 60;
+                  return { hours, minutes, seconds };
+                }
+
+                function decrementCounter() {
+                  if (btnStart.innerText === 'START') {
+                    // User pressed 'pause'
+                    return;
+                  }
+                  let secondsLeft = getSecondsRemaining();
+                  secondsLeft--;
+                  const { hours, minutes, seconds } =
+                    convertSeconds(secondsLeft);
+                  updateDigits(hours, minutes, seconds);
+                  if (secondsLeft === 0) {
+                    chime.play();
+                    btnStart.innerText = 'OK';
+                  } else {
+                    timeoutId = setTimeout(decrementCounter, 1000);
+                  }
+                }
+              </script>
+            </div>
+
+            <pre><code class="language-javascript">// class="language-javascript"</code></pre>
+
+            <div class="card-panel alert-notice"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

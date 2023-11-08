@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Cloud functions on Google Cloud Platform (GCP) are a great way to ship production code quickly and efficiently. I often use them to take advantage of the services"
+    />
+    <title>
+      Using the Google Sheets API in a Cloud Function on Google Cloud Platform |
+      Ben Ronkin
+    </title>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <h5>BLOG</h5>
+          <h1>
+            Using the Google Sheets API in a Cloud Function on Google Cloud
+            Platform
+          </h1>
+          <p class="muted">
+            <span style="display: flex; align-items: center"
+              ><i class="material-icons">today</i>July 2, 2020</span
+            >
+          </p>
+
+          <div class="blog-post-body">
+            Cloud functions on Google Cloud Platform (GCP) are a great way to
+            ship production code quickly and efficiently. I often use them to
+            take advantage of the services that GCP offers, such as Google
+            Sheets API.
+          </div>
+          <div><br /></div>
+          This post details the process of using Google Cloud Platform (GCP) to
+          deploy a cloud function that uses the Sheets API. I use the code
+          included in this article as a template for all my GCP projects. This
+          speeds up the process of creating new projects.
+          <div><br /></div>
+          <div>
+            The post covers the following topics:
+            <div>
+              <ul style="text-align: left">
+                <li>Create a new GCP project</li>
+                <li>Set up a local development environment</li>
+                <li>Leverage the Google Sheets API</li>
+                <li>Deploy the code as a Cloud Function</li>
+              </ul>
+              <h2 style="text-align: left">Some notes about my setup</h2>
+              <div>
+                I'm using the Visual Studio Code editor on a Mac, so please make
+                the necessary adjustments if your setup is different.&nbsp;
+              </div>
+              <div><br /></div>
+              <div>
+                To push the local code to GCP, you need to download and install
+                the
+                <a
+                  href="https://cloud.google.com/sdk/docs/downloads-versioned-archives"
+                  rel="nofollow"
+                  target="_blank"
+                  >gcloud CLI SDK</a
+                >. The page lists installation instructions. You'll then need to
+                initialize the environment:
+              </div>
+              <div>
+                <pre style="text-align: left"><code>gcloud init</code></pre>
+              </div>
+              <h2 style="text-align: left">New GCP project</h2>
+              <div>
+                Create a new folder on your machine and CD into it.&nbsp;
+              </div>
+              <div><br /></div>
+              <div>
+                Clone my
+                <a
+                  href="https://github.com/benronkin/gcp-boilerplate"
+                  rel="nofollow"
+                  target="_blank"
+                  >gcp-boilerplate</a
+                >
+                GitHub repo. You can use the code as a boilerplate for all your
+                GCP projects.
+              </div>
+              <div><br /></div>
+              <div>
+                Once you've downloaded the code, you can install the
+                dependencies using the <b>install </b>script in the package.json
+                file:
+              </div>
+              <div>
+                <pre style="text-align: left"><code>npm run install</code></pre>
+              </div>
+              <div><br /></div>
+              <div>
+                Next, create a new GCP project. You can always do that via the
+                GCP Console, but the command line&nbsp; is faster:
+              </div>
+              <div>
+                <pre
+                  style="text-align: left"
+                ><code>gcloud projects create &lt;project_id&gt; &lt;options&gt;</code></pre>
+                <div>
+                  <b><br /></b>
+                </div>
+                <div>
+                  <b>&lt;project_id&gt;</b>&nbsp;can be whatever you want as
+                  long as it's unique. <b>&lt;options&gt;</b> can include&nbsp;
+                  --organization=&lt;org_id&gt; or --folder=&lt;folder_id&gt;
+                </div>
+                <div><br /></div>
+                Depending on the GCP services you want to consume, you may need
+                to enable billing for the project. I typically do that via the
+                Console, by associating my billing account with the project.
+              </div>
+              <div><br /></div>
+              <div>
+                Now you can authenticate for the new project. Entering the code
+                below will open a web browser window where you can enter your
+                Google credentials.
+              </div>
+              <div>
+                <pre
+                  style="text-align: left"
+                ><code>gcloud auth login</code></pre>
+                <div><br /></div>
+                You can now associate the folder with the project you've just
+                created:
+              </div>
+            </div>
+          </div>
+          <div>
+            <pre
+              style="text-align: left"
+            ><code>gcloud config set project &lt;project_id&gt;</code></pre>
+            <div><br /></div>
+            <div>
+              If you ever need to check what is the default project, use:
+            </div>
+            <div>
+              <pre
+                style="text-align: left"
+              ><code>gcloud config list --format 'value(core.project)' 2&gt;/dev/null</code></pre>
+              <h2 style="text-align: left">Local development</h2>
+              Although you can develop your cloud function directly in the GCP
+              Console, it's better to do so locally. This makes it easy to
+              quickly iterate through development and testing.&nbsp;
+            </div>
+          </div>
+          <div><br /></div>
+          <div>
+            To get this done, we need to create a GCP service account, generate
+            an authorization key for it, download the key, and use it in our
+            project.
+          </div>
+
+          <br />First, create a sub-folder inside your project folder. I name
+          this subfolder as <b>config</b>.
+
+          <br />Next, create a GCP service account for the project:
+
+          <pre><code>gcloud iam service-accounts create &lt;service_account_name&gt;</code></pre>
+
+          <br />You need to grant permissions to the service account. The
+          command below assigns an owner permission. It's recommended to set a
+          more restrictive permission, depending on your project needs:
+
+          <pre><code>gcloud projects add-iam-policy-binding [PROJECT_ID] --member 
+"serviceAccount:[NAME]@[PROJECT_ID].iam.gserviceaccount.com" --role "roles/owner"</code></pre>
+
+          <br />Next, generate and download the authorization key. I typically
+          name it as <b>key.json</b> and store it in the "config" folder. The
+          folder is alreay called out in the .gitignore file. You should not
+          check your key into your source code.
+
+          <pre><code>gcloud iam service-accounts keys create key.json
+--iam-account [NAME]@[PROJECT_ID].iam.gserviceaccount.com</code></pre>
+
+          <h2>Using the Google Sheets API</h2>
+
+          In this section, we'll create a YAML file to hold our spreadsheet ID.
+          We'll install the Google API dependency in our project. We'll add the
+          code to read the Google Sheet. And finally, we will run our project
+          locally.
+
+          <br /><br />Before we get going, we need a Google Sheet to read from.
+          Create a Google Sheet and put some dummy data in columns A to C. Copy
+          the sheet ID.
+
+          <br /><br />Inside, the "config" subfolder, create a
+          <b>.env.yaml</b> file. This file will hold our environment variables,
+          since we don't want to store the sheet ID directly in our code. The
+          file name is important because the GCP cloud function will look for
+          this file.
+
+          <div class="note">
+            Check out my blog post about
+            <a
+              href="https://easy-js-with-ben.blogspot.com/2020/06/using-single-environment-variables-file.html"
+              >using an environment variables file for local and cloud</a
+            >.
+          </div>
+
+          <br />Inside .env.yaml, enter the single line below along with your
+          spreadsheet ID:
+
+          <pre><code>SPREADSHEETID: paste-your-spreadsheet-id-here</code></pre>
+
+          <br />To use the Google API, install the dependency:
+
+          <pre><code>npm i googleapis@39</code></pre>
+
+          <br />Inside index.js, paste the code below to access and read the
+          Google Sheet:
+
+          <pre><code>const { google } = require('googleapis');
+const key = require('./config/key.json');
+
+exports.readGoogleSheet = (event, context) => {
+  const client = new google.auth.JWT(key.client_email, null, key.private_key, [
+    'https://www.googleapis.com/auth/spreadsheets.readonly'
+  ]);
+
+  const readSheet = async auth => {
+    const gsapi = google.sheets({
+      version: 'v4',
+      auth
+    });
+
+    const options = {
+      spreadsheetId: process.env.SPREADSHEETID,
+      range: 'sheet1!A:C'
+    };
+    const { data } = await gsapi.spreadsheets.values.get(options);
+    console.log(data.values);
+  };
+
+  client.authorize((err, tokens) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    readSheet(client);
+  });
+};
+
+exports.readGoogleSheet();
+</code></pre>
+
+          <br />To run the code locally, simply issue the following command:
+
+          <pre><code>npm run dev</code></pre>
+
+          <br />You can
+          <a
+            href="https://easy-js-with-ben.blogspot.com/2020/06/using-single-environment-variables-file.html"
+            >read here</a
+          >
+          about how the utility in this project works to set up the environment
+          variable and execute index.js.
+
+          <h2>Deploy to the cloud</h2>
+
+          To run the code as a cloud function, comment out the last line in the
+          code (exports.readGoogleSheet). Then, deploy as follows:
+
+          <pre><code>gcloud functions deploy readGoogleSheet --runtime nodejs8 \
+--trigger-topic some_topic_name \
+--env-vars-file config/.env.yaml</code></pre>
+
+          You can trigger the function using GCP Pub/Sub.
+
+          <br />– Ben
+          <!--
+<pre><code></code></pre>
+-->
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolioCard.js"></script>
+  </body>
+</html>

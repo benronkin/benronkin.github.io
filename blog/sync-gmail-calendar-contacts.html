@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Sync Gmail and Google Calendar recipients to Google Contacts | Ben Ronkin
+    </title>
+    <meta
+      property="og:title"
+      content="Sync Gmail and Google Calendar recipients to Google Contacts "
+    />
+    <meta
+      name="description"
+      content="Push names and email addresses from Gmail messages and calendar events to Google Contacts automatically"
+    />
+    <meta
+      property="og:description"
+      content="Push names and email addresses from Gmail messages and calendar events to Google Contacts automatically"
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/sync-google-contacts.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/sync-gmail-calendar-contacts.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>
+              Sync Gmail and Google Calendar recipients to Google Contacts
+            </h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> January 19, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/tx-3igBnY4U"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="blog-post-body">
+            <p>
+              I interact with a lot of people using Gmail messages and Google
+              Calendar events. I'd like to collect the contact info of these
+              individuals in Google Contacts as my de-facto CRM. Adding these
+              records manually takes too much time: I'd like this done
+              programmatically. Thing is, I don't want to mine
+              <b>every</b> email and invite: some of these are transactional
+              emails or one-off meetings. Instead, I'd like to have the contact
+              info aggregated into a Google Sheet where I can visually inspect
+              the rows, mark which ones to save and which ones to ignore.
+            </p>
+            <p>
+              This post will show you how to create such a system using Google
+              Apps Script.
+            </p>
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+
+            <p>
+              To get started, create a new Google Sheet. Rename its tab to "New
+              users." Add two more tabs: "Ignored users" and "Ignored domains."
+              The second tab will contain email addresses of users we don't want
+              to save and don't want to pull again from messages and events. The
+              third tab will contain domains for which we don't want to capture
+              any email address.
+            </p>
+            <p>
+              Open Apps Script and rename "Code.gs" to "Common.gs." Here we will
+              write a few utilities that we will use in our other script files.
+              In Common.gs, add the followning code:
+            </p>
+
+            <pre><code class="language-javascript">const g = {
+  nuSheetName: 'New users',
+  iuSheetName: 'Ignored users',
+  idSheetName: 'Ignored domains',
+  DAYS_BACK: 3,
+  CALENDAR_NAME: 'your-calendar-name',
+};
+
+function init_() {
+  if (g.ss) {
+    return;
+  }
+  g.ss = SpreadsheetApp.getActive();
+  g.nuSh = g.ss.getSheetByName(g.nuSheetName);
+  g.iuSh = g.ss.getSheetByName(g.iuSheetName);
+  g.idSh = g.ss.getSheetByName(g.idSheetName);
+}
+
+function onOpen(e) {
+  const ui = SpreadsheetApp.getUi();
+  ui.createMenu('🟢 Automation')
+    .addItem('Fetch Gmail/Calendar contacts', 'fetchNewContacts')
+    .addSeparator()
+    .addItem('Sync contacts', 'syncContacts')
+    .addToUi();
+}
+
+function c_(text) {
+  return text.toString().toLowerCase().trim();
+}</code></pre>
+            <p>
+              The global <strong>g</strong> object holds a few pieces of info
+              that our functions will reference time and again: the names of our
+              sheet tabs, the numbers of days back we want to search for
+              messages and events (this helps the script execute faster), and
+              your calendar name.
+            </p>
+
+            <p>
+              The <strong>init_</strong> function will be called from our
+              different functions to initialize the script and avail the
+              different tabs.
+            </p>
+
+            <p>
+              <strong>onOpen</strong> creates two custom menu options: one to
+              fetch new contacts to the "New users" tab, and the other to
+              process any row in the tab whose "Action" dropdown has been
+              selected (more on that later).
+            </p>
+
+            <p>
+              Finally, <strong>c_</strong> will simply standardize our strings
+              so that we can make apples-to-apples comparisons.
+            </p>
+
+            <p>
+              Next, create a new script file inside the IDE (let's call it
+              Fetch.gs). Inside the file, define the
+              <strong>fetchNewContacts</strong> function that we specified
+              inside our onOpen function when creating the custom menu. This
+              function is a heavy-lifter; it's supposed to perform the
+              following:
+            </p>
+            <ol>
+              <li>Pull contacts from Gmail</li>
+              <li>Pull contacts from Google Calendar</li>
+              <li>Remove duplicates</li>
+              <li>
+                Get the emails and domains we previously stored in the sheet
+              </li>
+              <li>Remove new users that were previously ignored</li>
+              <li>Remove new users that have ignored domains</li>
+              <li>Get existing connections from Google Contacts</li>
+              <li>
+                Remove these connections from the new users so we don't
+                duplicate 'em
+              </li>
+              <li>Save the new contacts to the "New users" tab</li>
+              <li>Add "Action" dropdown for every new user</li>
+            </ol>
+            <p>
+              Like I said, heavy lifting. Let's create the individual functions
+              that perform some of the above actions and then reference them
+              inside <strong>fetchNewContacts</strong>.
+            </p>
+
+            <pre><code class="language-javascript">function getGmailContacts_() {
+  let after = new Date();
+  after.setDate(after.getDate() - g.DAYS_BACK);
+  after = after.toLocaleDateString('en-US');
+  const query = `after: ${after}`;
+  const threads = GmailApp.search(query);
+  const messages = threads.flatMap((thread) => thread.getMessages());
+  let users = messages.flatMap((message) => {
+    const from = [message.getFrom()];
+    const to = message.getTo().split(',');
+    const cc = message.getCc().split(',');
+    const bcc = message.getBcc().split(',');
+    return from.concat(to, cc, bcc);
+  });
+  users = users.filter(Boolean);
+  users = users.map((user) => splitNameEmail_(user));
+  return users;
+}</code></pre>
+
+            <p>
+              Above, we search GmailApp for any email messages sent after today
+              - g.DAYS_BACK; in our case three days ago. We get back thread
+              objects, where each thread can contain multiple messages, so we
+              flatMap the threads into messages, by calling
+              <strong>getMessages</strong> on each thread. We then pull out all
+              the contacts: sender and recipients (including to, cc, and bcc).
+              We filter out empty rows and then we split the name and email. Add
+              the <strong>splitNameEmail_</strong> function to the "Common.gs"
+              file:
+            </p>
+
+            <pre><code class="language-javascript">function splitNameEmail_(text) {
+  let name = '';
+  let email;
+  if (text.includes('<')) {
+    [name, email] = text.split('<');
+    email = email.slice(0, -1);
+  } else {
+    email = text;
+  }
+  name = name.replace(/"/g, '');
+  return [name, email];
+}</code></pre>
+            <p>
+              An email address can appear either as "john.smith@mysite.com" or
+              as "John Smith &lt;john.smith@mysite.com&gt;. So we split the text
+              if it includes the &lt; sign. Otherwise, name is an empty string
+              and email gets the entire text. We clean out any quotes as wll as
+              the &gt; sign from the end of the email.
+            </p>
+
+            <p>Back in "Fetch.gs", let's get the event recipients:</p>
+
+            <pre><code class="language-javascript">function getCalendarContacts_() {
+  let after = new Date();
+  const before = new Date(after.getTime() + 1000 * 60 * 60 * 24 * 7);
+  after.setDate(after.getDate() - g.DAYS_BACK);
+  const calendar = CalendarApp.getCalendarsByName(g.CALENDAR_NAME)[0];
+  const events = calendar.getEvents(after, before);
+  const guests = events.flatMap((event) => event.getGuestList(true));
+  const users = guests.map((guest) => [guest.getName(), guest.getEmail()]);
+  return users;
+}</code></pre>
+
+            <p>
+              We're doing a similar exercise here: we get the calendar by name,
+              and then pull out the events that are scheduled inside the window
+              of three days ago and seven days from now. We flatmap the guests
+              out of the events using <strong>event.getGuestList</strong>, which
+              accepts true to include the event owner. We then convert the array
+              of guests to users by pulling their names and email addresses.
+            </p>
+
+            <p>
+              Next on the agenda is to pull out all the email addresses and
+              domains that are stored in our Google Sheet. We don't want to list
+              those in our New users tab. So we will extract the email addresses
+              from the three tabs and return them:
+            </p>
+
+            <pre><code class="language-javascript">function getSaved_() {
+  const nuData = g.nuSh
+    .getRange('B2:B')
+    .getValues()
+    .flat()
+    .filter(Boolean)
+    .map((email) => c_(email));
+  const iuData = g.iuSh
+    .getRange('B2:B')
+    .getValues()
+    .flat()
+    .filter(Boolean)
+    .map((email) => c_(email));
+  const idData = g.idSh
+    .getRange('A2:A')
+    .getValues()
+    .flat()
+    .filter(Boolean)
+    .map((email) => c_(email));
+  return {
+    savedUsers: nuData.concat(iuData),
+    savedDomains: idData,
+  };
+}</code></pre>
+            <p>
+              Let's get the email addresses from our existing Google Contacts
+              connections; we will later remove new users that have these
+              addresses, so we don't create duplicate connections.
+              <b>
+                Note that you must enable the "People" Advanced Service in the
+                Google Apps Script IDE in order to use it below:</b
+              >
+            </p>
+
+            <pre><code class="language-javascript">function getGoogleContacts_() {
+  let gContacts = [];
+  let nextPageToken = null;
+  do {
+    const resp = People.People.Connections.list('people/me', {
+      personFields: 'emailAddresses',
+      pageSize: 100,
+      pageToken: nextPageToken,
+    });
+    const connections = resp.connections;
+    if (connections) {
+      const emailArrays = connections.flatMap(
+        (connection) => connection.emailAddresses
+      );
+      const emailAddresses = emailArrays.flatMap((emailArray) => {
+        if (emailArray) {
+          return c_(emailArray.value);
+        }
+      });
+      gContacts = gContacts.concat(emailAddresses);
+      nextPageToken = resp.nextPageToken;
+    }
+  } while (nextPageToken);
+  gContacts = gContacts.filter(Boolean);
+  gContacts = [...new Set(gContacts)];
+  return gContacts;
+}</code></pre>
+
+            <p>
+              We use a do/while loop to iterate over the contacts requests, each
+              time pushing a page token that tells Google which page of the
+              results we're interested in. We request 100 results at a time, so
+              if there are more than 100 connections then the loop will repeat
+              itself, sending a new token until no new token is available on the
+              response object. We traverse the array of connections, get the
+              email array out of each connection, and get the email addresses
+              that are held in the value keys. Outside the loop we de-dup the
+              addresses using a set.
+            </p>
+            <p>
+              Now that we have all of the functions, we can go back into
+              <strong>fetchNewContacts</strong> and collate our new users:
+            </p>
+
+            <pre><code class="language-javascript">init_();
+// Pull contacts from Gmail
+const gmailContacts = getGmailContacts_();
+// Pull contacts from Calendar
+const calendarContacts = getCalendarContacts_();
+let newUsers = gmailContacts.concat(calendarContacts);</code></pre>
+
+            <p>
+              We want to remove duplicates now, but we want to do it in a way
+              that captures the name of the user if it exists. Sometimes the
+              email will not have a corresponding name, so we want to iterate
+              through the users to get the name if it's there:
+            </p>
+
+            <pre><code class="language-javascript">// remove duplicates
+const userObj = {};
+newUsers.forEach(([newName, newEmail]) => {
+  if (!userObj[newEmail]) {
+    userObj[newEmail] = newName;
+  } else {
+    if (newName) {
+      userObj[newEmail] = newName;
+    }
+  }
+});
+newUsers = Object.entries(userObj).map(([email, name]) => [name, email]);</code></pre>
+
+            <p>
+              Now can we get the data from the three tabs – as well as from
+              Google Contacts – and de-dup:
+            </p>
+
+            <pre><code class="language-javascript">// Get saved users from sheet
+const { savedDomains, savedUsers } = getSaved_();
+// Remove new users with ignored domains
+if (savedDomains.length > 0) {
+  newUsers = newUsers.filter((newUser) => {
+    const email = c_(newUser[1]);
+    return !savedDomains.some((savedDomain) => email.includes(savedDomain));
+  });
+}
+// Remove new users previously ignored
+if (savedUsers.length > 0) {
+  newUsers = newUsers.filter((newUser) => {
+    const email = c_(newUser[1]);
+    return !savedUsers.includes(email);
+  });
+}
+// Get saved users from Google Contacts
+const googleContacts = getGoogleContacts_();
+// Remove new users previously stored in Contacts
+if (googleContacts.length > 0) {
+  newUsers = newUsers.filter((newUser) => {
+    const email = c_(newUser[1]);
+    return !googleContacts.includes(email);
+  });
+}</code></pre>
+
+            <p>
+              We iterate over new users and if we find a saved domain that
+              appears in the user's email address then we filter the user out.
+              Same goes with ignored users and Google Contacts: if they math
+              then they're out.
+            </p>
+            <p>
+              Last but not least: we can write the new users to the tab if there
+              are any left after all the de-duping:
+            </p>
+
+            <pre><code class="language-javascript">  // Save new contacts to the sheet
+  if (newUsers.length === 0) {
+    return;
+  }
+  const nextRow = g.nuSh.getLastRow() + 1;
+  g.nuSh.getRange(nextRow, 1, newUsers.length, 2).setValues(newUsers);
+  // Add action dropdowns
+  const rule = getValidationRule_();
+  const ruleArr = new Array(newUsers.length).fill([rule]);
+  g.nuSh
+    .getRange(`C${nextRow}:C${nextRow + newUsers.length - 1}`)
+    .setDataValidations(ruleArr);
+  SpreadsheetApp.flush();</code></pre>
+
+            <p>
+              We're adding the users, as well as the dropdown selectors for each
+              of them. We have a quick
+              <strong>getValidationRule_</strong> function that we can add to
+              "Common.gs":
+            </p>
+
+            <pre><code class="language-javascript">function getValidationRule_() {
+  return SpreadsheetApp.newDataValidation()
+    .requireValueInList(['Save user', 'Ignore user', 'Ignore domain'])
+    .setAllowInvalid(false)
+    .build();
+}</code></pre>
+
+            <p>
+              We now have everything we need to pull net-new contacts into our
+              Google Sheet. In the next post I'll review how to push the data to
+              Google Contacts and how to update the latter two tabs with ignored
+              users and domains.
+            </p>
+
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

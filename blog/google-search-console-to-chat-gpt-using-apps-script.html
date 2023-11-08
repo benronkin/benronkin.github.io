@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Send Google Search Console data to ChatGPT | Ben Ronkin</title>
+    <meta
+      property="og:title"
+      content="Send Google Search Console data to ChatGPT"
+    />
+    <meta
+      name="description"
+      content="Get search queries for your domain and generate blog post titles with ChatGPT"
+    />
+    <meta
+      property="og:description"
+      content="Get search queries for your domain and generate blog post titles with ChatGPT"
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/search-console-chatgpt-hero.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/google-search-console-to-chat-gpt-using-apps-script.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Send Google Search Console data to ChatGPT</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> April 30, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/CzE3leHhGmg"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="blog-post-body">
+            <!-- <img
+            class="responsive-img"
+            src="../img/docs-text-template.png"
+            alt="docs text template"
+          /> -->
+            <p>
+              Artificial Intelligence is getting into new business workflows by
+              the day. One way we can increase work productivity, as well as the
+              Search Engine Optimization (SEO) of our websites is by connecting
+              AI with Google Search Console. Let's see how to pull search
+              queries out of GSC and have OpenAI's ChatGPT create blog post
+              titles for these queries – all using Google Apps Script.
+            </p>
+
+            <div class="card-panel alert-notice">
+              <p>
+                Note: In order to successfully use the Google Search Console,
+                the user of your Google Apps Script must be authorized to access
+                your Google Search Console account. Without such access, the
+                script will generate an error and will not work.
+              </p>
+            </div>
+
+            <h2>Setup</h2>
+
+            <p>
+              For this tutorial, all you need is a Google Sheet with one tab (I
+              call mine "SEO"). The tab contains three columns: Queries,
+              Impressions, and Titles. We'll populate the first two columns with
+              data from GSC, and then feed the queries into ChatGPT, and write
+              its title suggestions into column C.
+            </p>
+
+            <p>
+              To get going with this project, you'll also need to obtain an
+              OpenAI API key and store it in Script Properties. If you don't
+              know how to do that then please read
+              <a href="use-chatgpt-api-with-google-apps-script.html"
+                >this post.</a
+              >
+            </p>
+
+            <p>
+              You also need to declare three OAuth scopes in your Google Apps
+              Script manifest file, which you can access by opening Apps Script
+              from within the Google Sheet. Click on the gear icon, and under
+              General settings, tick the box for Show "appsscript.json" manifest
+              file in editor. Click the code icon, and then click on
+              appsscript.json. Add the following:
+            </p>
+
+            <pre><code class="language-json">  "oauthScopes": [
+    "https://www.googleapis.com/auth/webmasters.readonly",
+    "https://www.googleapis.com/auth/script.external_request",
+    "https://www.googleapis.com/auth/spreadsheets.currentonly"
+  ]</code></pre>
+
+            <h2>Utility functions</h2>
+            <p>
+              Because we are going to be using two different APIs, which will
+              both interact Google Sheet, we can create some utility code that
+              we will use multiple times. In Code.gs, enter:
+            </p>
+            <pre><code class="language-javascript">const g = { sheetName: 'SEO' };</code></pre>
+            <p>
+              We'll use the "g" global object to hold key pieces of info for us,
+              like the name of our tab inside the sheet. Now let's create a
+              utility function to call a supplied API endpoint and return its
+              response:
+            </p>
+            <pre><code class="language-javascript">function callApi(apiUrl, apiKey, payload) {
+  const options = {
+    method: 'POST',
+    muteHttpExceptions: true,
+    headers: { Authorization: 'Bearer ' + apiKey },
+    contentType: 'application/json',
+    payload: JSON.stringify(payload),
+  };
+  const resp = UrlFetchApp.fetch(apiUrl, options);
+  const jsn = JSON.parse(resp.getContentText());
+  return jsn;
+}</code></pre>
+            <p>
+              The function above receives the API url, the API authorization
+              token, and the API payload. It constructs an options object, which
+              includes the supplied payload as a string, to the API. It stores
+              the response in "resp", parses out the JSON object and returns it.
+            </p>
+            <p>
+              Le'ts write a second utility function to store the API data in the
+              Google Sheet:
+            </p>
+            <pre><code class="language-javascript">function saveToSheet(cols, colNumber) {
+  if (cols.length < 1 || cols[0].length < 1)
+    throw new Error('Insufficient data to save to sheet');
+  g.sh.getRange(2, colNumber, cols.length, cols[0].length).setValues(cols);
+  SpreadsheetApp.flush();
+}</code></pre>
+
+            <p>
+              The function above receives the data as a nested array, as well as
+              the column number from which to enter the data. It uses "g.sh"
+              that we will define momentarily to write the data into the sheet.
+            </p>
+            <p>
+              Our final utility function is to set the "g" object and invoke the
+              two functions that will handle the APIs:
+            </p>
+            <pre><code class="language-javascript">function automate() {
+  g.ss = SpreadsheetApp.getActive();
+  g.sh = g.ss.getSheetByName(g.sheetName);
+  getSearchConsoleQueries();
+  genPostTitles();
+}</code></pre>
+
+            <h2>Get Search Console data</h2>
+
+            <pre><code class="language-javascript">function getSearchConsoleQueries() {
+  const url = 'your-domain.com';
+  const from = new Date();
+  from.setDate(1);
+  from.setMonths(from.getMonths() - 1);
+  const to = new Date();
+  const startDate = Utilities.formatDate(
+    from,
+    Session.getScriptTimeZone(),
+    'YYYY-MM-dd'
+  );
+  const endDate = Utilities.formatDate(
+    to,
+    Session.getScriptTimeZone(),
+    'YYYY-MM-dd'
+  );
+  const apiUrl = `https://www.googleapis.com/webmasters/v3/sites/sc-domain:${url}/searchAnalytics/query`;
+  const apiToken = ScriptApp.getOAuthToken();
+  const payload = {
+    startDate,
+    endDate,
+    dimensions: ['query'],
+  };
+  const jsn = callApi(apiUrl, apiToken, payload);
+  if (!jsn.rows) {
+    throw new Error('No Search Console data available for the selected date range.')l
+  }
+  if (jsn.error) {
+    console.error(jsn.error.message);
+    return;
+  }
+  var { rows } = jsn;
+  let keys = rows.map((row) => [row.keys[0], row.impressions]);
+  // , row.clicks
+  keys = keys.sort((a, b) => b[1] - a[1]);
+  keys = keys.slice(0, 10);
+  saveToSheet(keys, 1);
+}</code></pre>
+
+            <p>
+              In the above function, set up the "url" variable to point to your
+              own domain name. The function then creates the start and end dates
+              for the period for which we want to get the data. We then set up
+              the apiURL with our own website URL. The security token is
+              generated for us by Apps Script using
+              <strong>ScriptApp.getOAuthToken()</strong>. We set up the payload
+              to bring back "query"-related data.
+            </p>
+            <p>
+              Next, we call our utility function supplying to it the necessary
+              API data. We check that we get "rows" back. If we don't then GSC
+              didn't provide data for our date period. Otherwise, we pull out
+              the query texts and impressions, sort them by impression count in
+              a descending order, and take the first 10, which we write to the
+              sheet starting at column 1.
+            </p>
+
+            <div class="card-panel alert-notice">
+              <p>
+                If you comment out genPostTitles(); and run "automate()", you
+                are likely to receive an error message. This is because you need
+                to enable the Google Search Console API in the Apps Script's
+                Google Cloud Project. Watch the video above for information on
+                how to enable the API in your Cloud Platform project.
+              </p>
+            </div>
+
+            <p>
+              If you enabled the API and ran "automate" then you should see your
+              Google Sheet populated with query data. We can now feed these
+              queries to ChatGPT:
+            </p>
+
+            <pre><code class="language-javascript">function genPostTitles() {
+  const scriptProps = PropertiesService.getScriptProperties();
+  const apiToken = scriptProps.getProperty('openAIKey');
+  if (!apiToken) {
+    throw new Error(`OpenAI API token script property is missing.`);
+  }
+  const apiUrl = 'https://api.openai.com/v1/chat/completions';
+  const terms = g.sh.getRange(2, 1, g.sh.getLastRow(), 1).getValues().flat();
+  const content =
+    'Generate an SEO-rich blog post title for each of the search queries provided below. ' +
+    'Separate the titles with commas. Do not enumerate the titles.' +
+    'My search terms are: ' +
+    terms;
+  const payload = {
+    model: 'gpt-3.5-turbo',
+    messages: [{ role: 'assistant', content }],
+  };
+  const jsn = callApi(apiUrl, apiToken, payload);
+  // console.log(JSON.stringify(jsn, null, 2));
+  if (jsn.error) {
+    console.error(jsn.error.message);
+    return;
+  }
+  if (!jsn.choices && jsn.choices.length === 0) {
+    return;
+  }
+  const titlesString = jsn.choices[0].message.content;
+  const titles = titlesString.split(',').map((title) => [title]);
+  saveToSheet(titles, 3);
+}</code></pre>
+
+            <p>
+              Above, we pull the OpenAI token from the Properties Service, set
+              up the API URL, and get the queries out of the sheet. We form a
+              prompt that includes our queries. We set the payload with the
+              model and prompt of ChatGPT. We call our function and parse out
+              the results from the response. We convert the text into an array,
+              and save it to our Google Sheet. And that's all there is to it.
+            </p>
+            <p>Happy SEOing!</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

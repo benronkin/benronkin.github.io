@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="../img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Automate the creation of banners with dynamic text insertion into a slide and image exporting"
+    />
+    <title>Banner Engine | Create web banners automatically | Ben Ronkin</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+        </div>
+      </nav>
+
+      <section style="background-color: var(--primary)">
+        <div class="container" style="padding: 100px 0">
+          <h1 style="margin: 0; color: white">Buy a Banner Engine license</h1>
+          <div class="row" style="margin: 50px 0 0 0">
+            <div
+              class="col s12 m6"
+              style="
+                background-color: white;
+                border-radius: 5px;
+                padding: 50px;
+                color: var(--grey);
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+              "
+            >
+              <h2
+                style="
+                  color: var(--secondary);
+                  font-size: 300%;
+                  font-weight: 700;
+                "
+              >
+                $175
+              </h2>
+              <p>
+                The price is a one-time fee for a perpetual license for one
+                Google account
+              </p>
+              <form id="payment-form">
+                <input
+                  required
+                  type="email"
+                  name="email-address"
+                  id="email-address"
+                  placeholder="Enter your email address"
+                />
+                <button class="btn" type="submit">Continue to payment</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="row" style="margin-bottom: 20px">
+          <div class="col s12">
+            <h2 style="color: var(--secondary)">More information</h2>
+          </div>
+        </div>
+        <div class="row" id="information" style="margin-top: 20px">
+          <div class="col s12 l6">
+            <div class="info-box">
+              <div class="info-question">
+                <span class="info-question-span"
+                  >Why do you need my email address?</span
+                >
+                <span class="toggle">+</span>
+              </div>
+              <div class="info-answer hide">
+                Once you complete the purchase, you will receive an email
+                receipt that includes the license key for the Banner Engine
+                Add-on. I will never sell or share your email address, or send
+                you any marketing materials.
+              </div>
+            </div>
+            <div class="info-box">
+              <div class="info-question">
+                <span class="info-question-span"
+                  >What do I receive after I complete my purchase?</span
+                >
+                <span class="toggle">+</span>
+              </div>
+              <div class="info-answer hide">
+                You will receive a unique license key that you can enter inside
+                the add-on to unlock it.
+              </div>
+            </div>
+            <!---->
+            <div class="info-box">
+              <div class="info-question">
+                <span class="info-question-span"
+                  >What is your refund policy?</span
+                >
+                <span class="toggle">+</span>
+              </div>
+              <div class="info-answer hide">
+                At this time there is no refund, unless you experience a
+                technical problem that I am unable to resolve.
+              </div>
+            </div>
+            <!---->
+          </div>
+
+          <div class="col s12 l6">
+            <!---->
+            <div class="info-box">
+              <div class="info-question">
+                <span class="info-question-span"
+                  >What if I need technical support?</span
+                >
+                <span class="toggle">+</span>
+              </div>
+              <div class="info-answer hide">
+                Please use the <a href="../contact.html">contact form</a> to
+                submit your issue. You will receive a response within 24 hours
+                Mon-Fri 9am-5pm PT. Please note that support does not include
+                any customizations or new features.
+              </div>
+            </div>
+            <!---->
+            <!---->
+            <div class="info-box">
+              <div class="info-question">
+                <span class="info-question-span"
+                  >What are the requirements for using this add-on?</span
+                >
+                <span class="toggle">+</span>
+              </div>
+              <div class="info-answer hide">
+                You need to have a Gmail account or a Google Workspace account.
+                The add-on is installed inside Google Sheets. You will need to
+                create two Google Drive folders for the layouts and the
+                resulting banner images. You will need to place a Google Slide
+                file in the layouts folder. The add-on will guide you through
+                the setup process.
+              </div>
+            </div>
+            <!---->
+            <!---->
+            <div class="info-box">
+              <div class="info-question">
+                <span class="info-question-span"
+                  >How do I use this add-on?</span
+                >
+                <span class="toggle">+</span>
+              </div>
+              <div class="info-answer hide">
+                <p>
+                  You enter banner information in the tracking sheet that the
+                  add-on creates for you. Each row in the sheet represents one
+                  banner file. Select the layout that you want for the banner,
+                  enter your desired banner file name, and enter the text
+                  strings that will replace the placeholders. Click on Create
+                  Banners.
+                </p>
+                <p>
+                  The add-on will create a banner image for any row that does
+                  not contain an existing file URL. If you want to recreate the
+                  image then simply delete its file URL.
+                </p>
+              </div>
+            </div>
+            <!---->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <div>
+            <a href="index.html">Banner Engine</a> |
+            <a href="privacy.html">Privacy</a> |
+            <a href="terms.html">Terms</a> |
+            <a href="../contact.html">Contact</a>
+          </div>
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        document
+          .querySelector('#payment-form')
+          .addEventListener('submit', function (e) {
+            e.preventDefault();
+            const url =
+              'https://script.google.com/macros/s/AKfycbwTDsKFeibiPp3wR86ZxObWLJxqQlIkje0BOIFUIsbidiGg_SUo6JnJfDTlJ0WeE8rg4g/exec?d=s';
+            const headers = new Headers();
+            headers.append('Content-Type', 'text/plain;charset=utf-8');
+            const req = new Request(url, {
+              method: 'POST',
+              redirect: 'follow',
+              headers,
+              body: JSON.stringify({
+                email: document.querySelector('#email-address').value,
+              }),
+            });
+            fetch(req)
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status == 'error') {
+                  console.log(data);
+                } else if (data.url) {
+                  window.open(data.url);
+                  setTimeout(1000, window.close());
+                }
+              })
+              .catch((err) => console.log(err));
+          });
+      });
+    </script>
+  </body>
+</html>

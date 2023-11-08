@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Get the function's caller | Ben Ronkin</title>
+    <meta property="og:title" content="Get the function's caller" />
+    <meta
+      name="description"
+      content="Log the name of the function that calls another function in Google Apps Script"
+    />
+    <meta
+      property="og:description"
+      content="Log the name of the function that calls another function in Google Apps Script"
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/function-caller-hero.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/get-the-function-caller.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Get the function's caller</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> February 7, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/DK-Q1cgGckw"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="blog-post-body">
+            <p>
+              Let's say that you have a bunch of functions that do different
+              things, but at the end, they all call the same function. Let's
+              call that function "wrapUp." Each time wrapUp gets called, you
+              want it to log the name of its caller. How can you do that?
+            </p>
+            <p>
+              Well, the easiest thing would be to have each of the calling
+              functions pass strings containing their names to wrapUp and have
+              the latter log those parameters. But what if you don't or can't
+              have the functions pass such strings?
+            </p>
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+
+            <p>
+              Well, back in the olden days, we used to be able to use the
+              "caller" property of the function's prototype. Something like
+              this:
+            </p>
+
+            <pre><code class="language-javascript">function walk() {
+  // Do some walking
+  wrapUp();
+}
+
+function bark() {
+  // Do some barking
+  wrapUp();
+}
+
+function wag() {
+  // Do some wagging
+  wrapUp();
+}
+
+function wrapUp() {
+  // Do some wrapping
+  // Then log who called me
+  console.log(wrapUp.caller);
+}
+
+function test() {
+  walk(); // [Function: walk]
+  bark(); // [Function: bark]
+  wag(); // [Function: wag]
+}</code></pre>
+
+            <p>
+              But now, according to
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/caller"
+                >MDN</a
+              >, this feature is no longer recommended and is, in fact,
+              deprecated. So long, good friend. What are we now to do?
+            </p>
+            <p>
+              Well, one solution, albeit a tad hacky, is to glean the caller's
+              name from the stack trace:
+            </p>
+
+            <pre><code class="language-javascript">function wrapUp() {
+  // Do some wrapping
+  // Then log who called me
+  try {
+    throw new Error('Woof!')
+  } catch(e) {
+    const lines = e.stack.split('\n');
+    const thirdLine = lines[2];
+    const funcName = thirdLine.match(/at (.*?) \(/)[1];
+    console.log(`${funcName} called me.`);
+  }
+}
+
+function test() {
+  walk(); // walk called me.
+  bark(); // bark called me.
+  wag(); // wag called me.
+}</code></pre>
+
+            <p>
+              Above, we purposefully throw an error, but we wrap it in try/catch
+              so as to not disrupt the operation and have access to the stack.
+              We split the trace into lines using the line breaks, and then
+              access the third line. Using a regular expression, we isolate the
+              function name from the string and voila, we have our caller
+              logged. Happy times!
+            </p>
+
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

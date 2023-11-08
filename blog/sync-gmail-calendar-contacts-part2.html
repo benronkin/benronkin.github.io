@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Sync Gmail and Google Calendar recipients to Google Contacts - Part 2| Ben
+      Ronkin
+    </title>
+    <meta
+      property="og:title"
+      content="Sync Gmail and Google Calendar recipients to Google Contacts - Part 2"
+    />
+    <meta
+      name="description"
+      content="Use the Google People API to push names and email addresses to Google Contacts"
+    />
+    <meta
+      property="og:description"
+      content="Use the Google People API to push names and email addresses to Google Contacts"
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/sync-google-contacts-part2.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/sync-gmail-calendar-contacts-part2.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>
+              Sync Gmail and Google Calendar recipients to Google Contacts -
+              Part 2
+            </h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> January 23, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/ERS5UrZMn98"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="blog-post-body">
+            <p>
+              In the
+              <a href="./sync-gmail-calendar-contacts.html">previous post</a> we
+              looked at how to populate a Google Sheet with names and email
+              addresses from our Gmail and Google Calendar accounts. In this
+              post we'll see how to push this information into Google Contacts
+              using the Google People API.
+            </p>
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+
+            <p>
+              To get started, you can create a new file in the Apps Script IDE
+              (I called mine "Sync.gs". The file will contain the code we need
+              to update Google Contacts:
+            </p>
+
+            <pre><code class="language-javascript">function syncContacts() {
+  init_();
+  const rows = g.nuSh.getRange(`A2:C${g.nuSh.getLastRow()}`).getValues();
+  const saveUsers = rows
+    .filter((row) => row[2] === 'Save user')
+    .map((row) => [row[0], row[1]]);
+  if (saveUsers.length > 0) {
+    const contacts = saveUsers.map((user) => {
+      let [givenName, ...familyName] = user[0].split(' ');
+      familyName = familyName.join(' ');
+      return {
+        contactPerson: {
+          names: [{ givenName, familyName }],
+          emailAddresses: [{ value: user[1] }],
+        },
+      };
+    });
+    const resp = People.People.batchCreateContacts({
+      contacts,
+      readMask: 'names,emailAddresses',
+    });
+  }</code></pre>
+
+            <p>
+              Above, we initialize the script using the
+              <strong>init_</strong> function we defined in the previous post.
+              We then use the global variable "g" to access the New users sheet.
+              We extract the data from all the cells. We then filter the rows to
+              only those that have the "Save user" action selected. We use "map"
+              to extract the name and email from each row.
+            </p>
+            <p>
+              We check whether there are any such rows. If so, then we convert
+              the whole name to a given name and a last name, by splitting the
+              name on spaces. We then create an object with a "contactPerson"
+              key that points to an object with the name and email address. We
+              then use the
+              <strong>People.People.batchCreateContacts</strong> method to
+              create the new entry in Google Contacts.
+            </p>
+
+            <p>
+              We now need to copy any row with "Ignored user" or "Ignored
+              domain" action to its respective tab:
+            </p>
+
+            <pre><code class="language-javascript">const ignoredUsers = rows
+    .filter((row) => row[2] === 'Ignore user')
+    .map((row) => [row[0], row[1]]);
+  let nextRow = 2;
+  if (ignoredUsers.length > 0) {
+    nextRow = g.iuSh.getLastRow() + 1;
+    g.iuSh.getRange(nextRow, 1, ignoredUsers.length, 2).setValues(ignoredUsers);
+  }
+
+  const ignoredDomains = rows
+    .filter((row) => row[2] === 'Ignore domain')
+    .map((row) => [row[1].slice(row[1].indexOf('@') + 1)]);
+  if (ignoredDomains.length > 0) {
+    nextRow = g.idSh.getLastRow() + 1;
+    g.idSh
+      .getRange(nextRow, 1, ignoredDomains.length, 1)
+      .setValues(ignoredDomains);
+  }</code></pre>
+
+            <p>
+              The logic is similar to Google Contacts: Filter "New users" on the
+              two actions. If there are such rows then get the next row from the
+              destination tab, and paste the rows there.
+            </p>
+            <p>
+              Now we need to clean up the "New users" tab. After we pushed
+              contacts into Google Contacts and into the two other tabs we need
+              to remove them from New users to avoid duplications. So the only
+              rows that should remain on the tab are those that don't have any
+              action selected. We'll filter these rows, empty the sheet, and add
+              back the rows and their dropdown menus:
+            </p>
+            <pre><code class="language-javascript">const unselectedRows = rows.filter((row) => row[2] === '');
+  g.nuSh.getRange('A2:C').clearContent().clearDataValidations();
+  if (unselectedRows.length > 0) {
+    g.nuSh.getRange(2, 1, unselectedRows.length, 3).setValues(unselectedRows);
+    const rule = getValidationRule_();
+    const ruleArr = new Array(unselectedRows.length).fill([rule]);
+    g.nuSh
+      .getRange(`C${nextRow}:C${nextRow + unselectedRows.length - 1}`)
+      .setDataValidations(ruleArr);
+  }
+  SpreadsheetApp.flush();
+}</code></pre>
+            <p>
+              This is pretty much it. Now we have two custom menu options in our
+              Google Sheet: one populates with de-duped entries from Gmail and
+              Calendar. The other handles each row based on its selected action.
+            </p>
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

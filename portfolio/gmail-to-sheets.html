@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-Z3RDBR33MX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-Z3RDBR33MX');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="This project required watching a specific Gmail inbox and capturing new email messages into a Google Sheet. The Google Apps Script also pulls"
+    />
+    <title>Gmail to Google Sheets | Ben Ronkin</title>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="../blog/index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="./index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+            <!---->
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <h1>Gmail to Google Sheets</h1>
+        <h5>Google Apps Script</h5>
+
+        <div class="row mt30">
+          <div class="col s12 prompt">
+            <span> Interested in purchasing this script? </span>
+            <a class="ml20" href="../contact.html"> Contact me</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m6">
+            <img
+              src="../img/gmail-to-sheets-messages.png"
+              alt="Sales leads in client"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m6">
+            <ul class="collection with-header">
+              <li class="collection-header"><h4>Key highlights</h4></li>
+              <li class="collection-item">
+                Google Apps Script that works like a Contact Management System
+              </li>
+              <li class="collection-item">The script watches a Gmail inbox</li>
+              <li class="collection-item">
+                New email messages are captured in a Google Sheet
+              </li>
+              <li class="collection-item">
+                Sender information is saved in a different Google Sheet
+              </li>
+              <li class="collection-item">
+                Users can easily pull all messages by a sender's email address
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="summary">
+          <h2>Summary</h2>
+          <p>
+            This project required watching a specific Gmail inbox and capturing
+            new email messages into a Google Sheet. The Google Apps Script also
+            pulls out sender information into a contacts sheet. Spreadsheet
+            owners can easily view all messages by sender.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Watching Gmail inbox</h2>
+            <p>
+              The script periodically watches a pre-specified Gmail inbox for
+              new incoming messages.
+            </p>
+            <p>
+              When new messages arrive, the script process them and parses their
+              information into a Google Sheet
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="../img/gmail-to-sheets-inbox.png"
+              class="responsive-img"
+              style="width: 75%"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-l s12 m5">
+            <img
+              src="../img/gmail-to-sheets-users.png"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col col-r s12 m7">
+            <div class="">
+              <h2>Sender CRM</h2>
+              <p>
+                The script pulls out the sender information from each messages,
+                separting out the sender's name and their email address.
+              </p>
+              <p>
+                The script checks whether the email address is already captured
+                in the sheet. If it's not then the script adds the new user to
+                the sheet.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m6">
+            <h2>Message storage</h2>
+            <p>
+              The script pulls information about each message onto a separate
+              sheet. The script checks whether the message ID is already
+              captured in the sheet, and if it's not then the script adds in the
+              new message.
+            </p>
+            <p>
+              The script pulls the sender's email address together with the
+              message information. This enables grouping and viewing all
+              messages by a given sender.
+            </p>
+            <p></p>
+          </div>
+          <div class="col col-r s12 m6">
+            <img
+              src="../img/gmail-to-sheets-messages.png"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">Google Apps Script</div>
+            <div class="chip">Google Sheets</div>
+            <div class="chip">GMail Service</div>
+            <div class="chip">Google Spreadsheet Service</div>
+          </div>
+        </div>
+
+        <div class="row mt30">
+          <div class="col s12 prompt">
+            <span> Interested in purchasing this script? </span>
+            <a class="ml20" href="../contact.html"> Contact me</a>
+          </div>
+        </div>
+
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Google Form File Validation"
+            subtitle="Google Cloud"
+            image="../img/form-file-validation-form.png"
+            target="form-file-validation.html"
+            topics="gas form sheet email"
+          >
+            <div slot="description">
+              <p>
+                The project involved creating a Google Form that accepts file
+                uploads. Upon every upload, a Google Apps Script was to validate
+                the file against a set of validation rules that are configurable
+                by managers. The script was to email the file submitter if
+                errors occurred.
+              </p>
+              <p>
+                The script was to log every submission and its validation
+                results. Valid files are moved to a destination folder.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Email Google Sheet as PDF"
+            subtitle="Google Workspace"
+            image="../img/sheet-pdf-email-sidebar.png"
+            target="sheet-pdf-email.html"
+            topics="gas sheet email pdf"
+          >
+            <div slot="description">
+              <p>
+                A Google Sheet contains a summary sheet that aggregates data
+                from 12 monthly sheets. A sidebar enables users to PDF and email
+                a single monthly sheet or the entire workbook, with customizable
+                email recipients, subject, and body.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Data enrichment workflow"
+            subtitle="Google Workspace"
+            image="../img/data-enrichment-lifecycle.png"
+            target="data-enrichment.html"
+            topics="gas drive sheets excel csv email"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a sophisticated
+                workflow system that handles new file submission in Google Apps
+                Script.
+              </p>
+              <p>
+                The system cuts down on the effort to validate and enrich
+                submitted files, while providing stakeholders with a clear
+                picture regarding the status of every submission.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Custom form to Google Sheet"
+            subtitle="Google Workspace"
+            image="../img/custom-form-form.png"
+            target="custom-form.html"
+            topics="gas sheet form email webapp"
+          >
+            <div slot="description">
+              <p>
+                I needed a contact form deployed for this portfolio website.
+                Opted to have a custom form that fits my site design instead of
+                using Google Form. I built a custom form that, when submitted,
+                sends the form data to a Google Apps Script that stores
+                submissions in a Google Sheet and sends me an email
+                notification.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Website message from Google Sheet"
+            subtitle="Google Workspace"
+            image="../img/iframe-spreadsheet-personal-message.png"
+            target="message-from-spreadsheet.html"
+            topics="gas sheet webapp"
+          >
+            <div slot="description">
+              <p>
+                In this small project, the client had a standalone website that
+                was separate from Google GSuite.
+              </p>
+              <p>
+                The client needed to present a personal message to every
+                logged-in user. Messages were stored in a two-column Google
+                Spreadsheet column containing email addresses and the message
+                for each user.
+              </p>
+              <p>
+                The project requiring fetching the right message as the user
+                accessed the message page.
+              </p>
+            </div>
+          </portfolio-card>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolioCard.js"></script>
+  </body>
+</html>

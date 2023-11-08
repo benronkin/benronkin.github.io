@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-Z3RDBR33MX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-Z3RDBR33MX');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="This Google Apps Script automatically pulls PayPal transactions using the Google transactions API into a Google Sheet."
+    />
+    <title>PayPal API into Google Sheets | Ben Ronkin</title>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="../blog/index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="./index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1>PayPal API into Google Sheets</h1>
+        <h5>Google Apps Script</h5>
+
+        <div class="row top-image">
+          <img
+            src="../img/paypal-api-hero.png"
+            alt="paypal-api-hero.png"
+            class="responsive-img"
+          />
+        </div>
+
+        <div class="summary">
+          <h2>SUMMARY</h2>
+          <p>
+            This Google Apps Script pulls PayPal transactions into Google Sheets
+            using the PayPal transactions API. Clients can run the script to
+            pull transactions automatically every month, or pull data for custom
+            date ranges, such as year-to-day, previous quarter, and more.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m5">
+            <h2>Set up a PayPal app</h2>
+            <p>
+              The client quickly sets up a PayPal app on developer.paypal.com
+              and enables transaction searches.
+            </p>
+            <p>
+              The app provides a web address to pull the PayPal transactions.
+            </p>
+          </div>
+          <div class="col col-r s12 m7">
+            <img
+              src="../img/paypal-api-app.png"
+              alt="paypal-api-app.png"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m7">
+            <img
+              src="../img/paypal-api-code.png"
+              alt="paypal-api-code"
+              class="responsive-img"
+            />
+          </div>
+          <div class="col s12 m5">
+            <h2>Automated script</h2>
+            <p>
+              The Google Apps Script uses the PayPal app credentials to access
+              the client data based on the client's desired reporting period.
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4">
+            <h2>Google Sheet report</h2>
+            <p>
+              The script pulls all of the PayPal transactions for the desired
+              date range. From each transaction the script pulls the data
+              elements most relevant to the client.
+            </p>
+            <p>
+              The script also includes calculated metrics that are added to the
+              dataset as well. The script saves the transactions to the client's
+              Google Sheet.
+            </p>
+          </div>
+          <div class="col col-r s12 m8">
+            <img
+              src="../img/paypal-api-sheets.png"
+              alt="paypal-api-sheets"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">PayPal API</div>
+            <div class="chip">Google Apps Script</div>
+            <div class="chip">Google Spreadsheet Service</div>
+            <div class="chip">Google Drive Service</div>
+            <div class="chip">eslint</div>
+            <div class="chip">prettier</div>
+          </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+
+          <portfolio-card
+            title="Document Merge with JobNimbus"
+            subtitle="Google Workspace"
+            image="../img/jobnimbus-merge-log.png"
+            target="jobnimbus-merge.html"
+            topics="gas sheet drive api"
+          >
+            <div slot="description">
+              <p>
+                My home renovation client needed to pull home owner data from
+                his JobNimbus CRM, and create and populate new Google Docs with
+                that information. I created a Google Apps Script that uses the
+                JobNimbus API to pull customer data and automate document merge
+                jobs.
+              </p>
+            </div>
+          </portfolio-card>
+
+          <portfolio-card
+            title="Google Sheet to Asana via Zapier"
+            subtitle="Google Workspace"
+            image="../img/sheet-zapier-asana-asana2.png"
+            target="sheet-zapier-asana.html"
+            topics="gas sheet trigger api zapier asana"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script pulls new entries from a Google Sheet in
+                real-time. It uses a Zapier webhook to insert new to-do tasks
+                into an Asana project. The payload includes a mix of standard
+                and custom Asana fields. The script updates the sheet with
+                Zapier IDs to eliminate duplicate inserts.
+              </p>
+            </div>
+          </portfolio-card>
+
+          <portfolio-card
+            title="Merge Google Sheets"
+            subtitle="Google Workspace"
+            image="../img/merge-sheets-dashboard.png"
+            target="merge-sheets.html"
+            topics="gas excel csv sheet drive"
+          >
+            <div slot="description">
+              <p>
+                This Google Apps Script accepts a URL to a Google Drive folder
+                that contains several source files (Google Sheets, Excel, and
+                CSV). The script duplicates a sheet template, merges the source
+                files based on a common key, and then populates the templated
+                sheet. The output sheet includes a dashboard that summarizes key
+                information in the spreadsheet.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Expand Google Sheet rows"
+            subtitle="Google Workspace"
+            image="../img/expand-row-summary.png"
+            target="expand-row.html"
+            topics="gas sheet"
+          >
+            <div slot="description">
+              <p>
+                In this small project, the client had a Google Sheet with two
+                tabs (summary and detail), and required a way to expand summary
+                rows based on date range in each of the rows. I developed a
+                Google Apps Script to enable the client to expand the rows on
+                demand.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Data enrichment workflow"
+            subtitle="Google Workspace"
+            image="../img/data-enrichment-lifecycle.png"
+            target="data-enrichment.html"
+            topics="gas drive sheets excel csv email"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a sophisticated
+                workflow system that handles new file submission in Google Apps
+                Script.
+              </p>
+              <p>
+                The system cuts down on the effort to validate and enrich
+                submitted files, while providing stakeholders with a clear
+                picture regarding the status of every submission.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Sheet columns to Docs"
+            subtitle="Google Workspace"
+            image="../img/columns-to-docs-cover.png"
+            target="sheet-columns-to-docs.html"
+            topics="gas sheet doc drive"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a simple Google
+                Apps Script that converts Google Sheet columns to a set of
+                Google Docs.
+              </p>
+              <p>
+                The script uses the header row as the name of each file. All
+                rows in each column are populated one after the other into the
+                body of every Google Doc.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Forms to Google Doc"
+            subtitle="Google Workspace"
+            image="../img/forms-to-doc-doc.png"
+            target="forms-to-doc.html"
+            topics="gas form sheet doc"
+          >
+            <div slot="description">
+              <p>
+                The client needed to collect signatures and comments on an open
+                letter. A Google Apps Script records each form submission
+                directly into a dedicated table inside a Google Doc.
+              </p>
+              <p></p>
+            </div>
+          </portfolio-card>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolioCard.js"></script>
+  </body>
+</html>

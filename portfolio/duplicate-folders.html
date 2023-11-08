@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-Z3RDBR33MX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-Z3RDBR33MX');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Duplicating folders in Google Drive is currently a manual process in which yoy create folders one at a time. This Google Apps Script automates the process. "
+    />
+    <title>Duplicate files and folders automatically | Ben Ronkin</title>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="../blog/index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="./index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1>Duplicate files and folders automatically</h1>
+        <h5>Google Apps Script</h5>
+
+        <div class="row top-image">
+          <img
+            src="../img/duplicate-folders-hero.png"
+            alt="duplicate folders hero"
+            class="responsive-img"
+          />
+        </div>
+
+        <div class="summary">
+          <h2>SUMMARY</h2>
+          <p>
+            Duplicating folders in Google Drive is currently a manual process in
+            which yoy create folders one at a time. This Google Apps Script
+            automates the process. Users select the folder they want to copy and
+            its target folder. The web app duplicates all files and sub-folders.
+            Users can run this process automatically on a schedule.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m5">
+            <h2>Easy folder selection</h2>
+            <p>
+              Users leverage a Google Drive picker to select the folder they
+              wish to copy, and where to save it.
+            </p>
+            <p>The web app can remember folder selection for future use.</p>
+          </div>
+          <div class="col col-r s12 m7">
+            <img
+              src="../img/duplicate-folders-picker.png"
+              alt="duplicate folders picker"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m8">
+            <img
+              src="../img/duplicate-folders-webapp.png"
+              alt="duplicate folders webapp"
+              class="responsive-img"
+              style="width: 90%"
+            />
+          </div>
+          <div class="col col-r s12 m4">
+            <div class="">
+              <h2>Configurable process</h2>
+
+              <p>
+                Users can select to duplicate only sub-folders or to duplicate
+                files as well.
+              </p>
+              <p>
+                The web app an be run on demand or configured to run
+                automatically on schedule.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m6">
+            <h2>Deep folder duplication</h2>
+            <p>
+              The web app duplicates deeply-nested folders and files, regardless
+              of how deep folders are. It visits every sub-folder and checks for
+              nested sub-folders within.
+            </p>
+          </div>
+          <div class="col col-r s12 m6">
+            <img
+              src="../img/duplicate-folders-folders.png"
+              alt="duplicate folders folders"
+              class="responsive-img"
+            />
+          </div>
+        </div>
+
+        <div class="card techs">
+          <div class="card-content">
+            <span class="card-title"
+              >Technologies and libraries in project</span
+            >
+            <br />
+            <div class="chip">Google Apps Script</div>
+            <div class="chip">Google Drive Service</div>
+            <div class="chip">eslint</div>
+            <div class="chip">prettier</div>
+          </div>
+        </div>
+        <div class="related-cases">
+          <div class="h5-div"><h5>RELATED CASE STUDIES</h5></div>
+          <portfolio-card
+            title="Data management app"
+            subtitle="Google Cloud"
+            image="../img/leadsharing-lead.png"
+            target="lead-sharing.html"
+            topics="gcp drive webapp"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I've been designing,
+                developing, releasing, and maintaining a secured Node.js Express
+                web application on Google Cloud Platform.
+              </p>
+              <p>
+                The application enables managers and their partners to track the
+                progress of sales leads and exchange messages about lead status.
+              </p>
+              <p>
+                Lead data is stored securely in a NoSQL database. The app offers
+                a variety of derived data attributes that are calculated in
+                real-time, client-side.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Google Form File Validation"
+            subtitle="Google Cloud"
+            image="../img/form-file-validation-form.png"
+            target="form-file-validation.html"
+            topics="gas form sheet email"
+          >
+            <div slot="description">
+              <p>
+                The project involved creating a Google Form that accepts file
+                uploads. Upon every upload, a Google Apps Script was to validate
+                the file against a set of validation rules that are configurable
+                by managers. The script was to email the file submitter if
+                errors occurred.
+              </p>
+              <p>
+                The script was to log every submission and its validation
+                results. Valid files are moved to a destination folder.
+              </p>
+            </div>
+          </portfolio-card>
+          <portfolio-card
+            title="Data enrichment workflow"
+            subtitle="Google Workspace"
+            image="../img/data-enrichment-lifecycle.png"
+            target="data-enrichment.html"
+            topics="gas drive sheets excel csv email"
+          >
+            <div slot="description">
+              <p>
+                As a solo developer on the project, I created a sophisticated
+                workflow system that handles new file submission in Google Apps
+                Script.
+              </p>
+              <p>
+                The system cuts down on the effort to validate and enrich
+                submitted files, while providing stakeholders with a clear
+                picture regarding the status of every submission.
+              </p>
+            </div>
+          </portfolio-card>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolioCard.js"></script>
+  </body>
+</html>

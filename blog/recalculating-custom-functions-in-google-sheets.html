@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-91362999-4');
+  </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css">
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="I use Google Sheets to track my various stock investments. Sure, there are plenty of online tools 
+    that can do this for you, but I use Sheets because I like to develop" />
+    <title>Recalculating custom functions in Google Sheets | Ben Ronkin</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+     crossorigin="anonymous"></script>
+</head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+          ><i class="material-icons black-text">menu</i></a
+        >
+        <ul class="sidenav" id="mobile">
+          <li><a href="../products/index.html">Shop scripts</a></li>
+          <li><a href="../portfolio/index.html">Case studies</a></li>
+          <li><a href="../reviews.html">Client reviews</a></li>
+          <li><a href="./index.html">Blog</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+<div class="container">
+<div class="blog-post">
+  <div class="blog-post-header">
+
+    <h5><a href="index.html">Blog</a></h5>
+    <h1>Recalculating custom functions in Google Sheets</h1>
+    <p class="muted">
+      <span style="display: flex; align-items: center;">
+        <i class="material-icons">today</i>August 2, 2020
+      </span>
+    </p>
+  </div>
+
+<div class="blog-post-body">
+<p>
+I use Google Sheets to track my various stock investments. Sure, there are plenty of online tools 
+that can do this for you, but I use Sheets because I like to develop my own metrics and see
+if they help me make smarter buy/sell decisions in the long run.
+</p>
+<p>
+Having custom metrics means developing custom functions in Google Apps Script and then
+applying them inside Google Sheet cells. I use the great Yahoo API to fetch daily stock
+quotes and store them in a log sheet to save on API calls. So one example of a custom 
+function is to pull the latest close price of a given stock from the log:
+</p>
+<p><pre><code>function LASTPRICE(ticker) {
+  const headers = getQuotesHeaders();
+  const lastPrices = getQuotesPrices().slice(-1).flat();
+      
+  const tickerIdx = headers.indexOf(ticker);
+      
+  if (tickerIdx === -1) {
+    throw Error(`Company not recognized: ${ticker}`);
+  }
+  return lastPrices[tickerIdx];
+}</code></pre></p>
+<p>
+In LASTPRICE, I pass in the company I'm interested in. I use some other functions to get the header
+row and price rows from the log sheet. I find the column index of the stock I'm interested in and I
+return the corresponding cell from the last row of the sheet since my API call appends daily quotes
+to the bottom of the sheet.
+</p>
+
+<p>
+This works as expected, but there's just one problem with custom functions: they don't recalculate
+like regular Google Sheets functions do when you open or refresh a sheet. By design, custom 
+functions recalculate only when their arguments change. But in my summary sheet I 
+don't change them: I have a row per company and in LASTPRICE I simply refer to the ticker of the
+company listed in column A of that row. It's the underlying data in my log sheet that changes. I
+need LASTPRICE to recognize when new rows are added to the log and inspect the new last row.
+</p>
+<p>
+I searched for solutions to this pesky problem. The consensus seemed to be that I needed
+to hack a workaround myself whereby I would pass in a second argument whose value I needed to change
+as often as I needed to have the function recalculate.
+</p>
+<p>
+If you're thinking that this is lunacy then you're not alone. 
+</p>
+<p>
+So, we're to pass in a second argument that we have no intention to use in the function whatsoever, 
+just so that Google Sheets sees the value change and bothers to recalculate the function? What 
+kind of a world is this? 
+</p>
+<p>
+Whatever, I'll add in a second argument. But to protest my exacerbation with this forced 
+hack I shall NOT declare it in my function signature! Thank you Javascript for letting me pass in
+arguments and completely ignore them in the function parameters!
+</p>
+<p>
+Alright, so what's the fastest way to pass in a second argument that changes its value often 
+enough so that the function always picks the last row from my log? I know, I'll just pass in the 
+standard Google Sheet function NOW(), yay!
+</p>
+<p><pre><code>=LASTPRICE(A2, NOW())</code></pre></p>
+
+<p>
+End of story? Hardly! You try a stunt like that and Google Sheets is quick to chastise: 
+</p>
+<p>
+<img src="../../img/lastprice-error.png" alt="LASTPRICE error" width="50%">
+</p>
+<p>
+What? Come on, give me a break! This is, this is... I don't even know what this is. What ever happened
+to "Do no evil?"
+</p>
+<p>
+Looks like I can't get away with it this easy. I need to construct a whole operation just to 
+change the value of an argument I have no intention to use. My day is going on so nicely. 
+</p>
+<p>
+Take two:
+</p>
+
+<p><pre><code>function saveNewDate() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Config');
+  const date = new Date();
+  sheet.getRange('B1').setValue(date.toLocaleString('en-US'));
+}</code></pre></p>
+
+<p>This is a simple function to update a cell value. Of course it requires me to create a new 
+'Config' tab to keep it separate from my summary data. I need to update my API function slightly 
+to call this function whenever I fetch new data. No biggie.</p>
+
+<p>Now I need to update all my custom functions to reference this new cell:</p>
+
+<p><pre><code>=LASTPRICE(A2, Config!$B$1)</code></pre></p>
+
+<p>This is ugly. I set up a named range for the cell, so can now use:</p>
+
+<p><pre><code>=LASTPRICE(A2, LastPull)</code></pre></p>
+
+<p>This will run when the API runs, but I can always have the custom functions recalculate by
+  manually updating the config cell value. The functions will recalculate as soon as I update the
+  cell, so that's nice.
+</p>
+
+<p>
+This is not a robust solution. Every time I use a new custom function I have to remember to use the
+dummy field. But at least it gets the job done.
+</p>
+<p>
+– Ben
+</p>
+
+</div>
+</div>
+</div>
+</main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolioCard.js"></script>
+  </body>
+</html>
+
+

@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" >
+    <channel>
+        <title>BenRonkin.com Blog</title>
+        <atom:link href="https://benronkin.com/blog/rss.xml" type="application/rss+xml" rel="self"  />
+        <description>I am Ben, an automation developer. I enjoy sharing my knowledge with Google Apps Script and Javascript in general.</description>
+        <link>https://benronkin.com/blog</link>
+        <pubDate>Thu, 2 Jul 2020 18:00:00 -0800</pubDate>
+
+        <item>
+            <title>Infinity scroll with Google Apps Script</title>
+            <description><![CDATA[
+            <p>
+              In this post, we will create a small Google Apps Script web app
+              that receives data requests. The app will fetch rows from a Google
+              Sheet. A client side web page will execute calls to the apps
+              script for new data as the user scrolls down the page.
+            </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/infinity-scroll-with-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/infinity-scroll-with-google-apps-script.html</guid>
+            <pubDate>Thu, 7 Sep 2023 13:00:00 -0800</pubDate>
+        </item>
+
+
+        <item>
+            <title>Create a Google Drive AddOn for Stability.ai</title>
+            <description><![CDATA[
+            <p>
+              <a href="https://stability.ai/" target="_blank">Stability.ai</a>
+              offers a publicly-available service to create and edit images
+              using artificial intelligence. The service is very intuitive to
+              use and yields great results. It is similar to the Dall-E service
+              from OpenAI, which I've previously written about
+              <a
+                href="https://benronkin.com/blog/use-dall-e-with-google-apps-script-to-convert-text-to-images-automatically.html"
+                >here</a
+              >
+              and
+              <a
+                href="https://benronkin.com/blog/automate-image-edits-and-variations-with-dall-e-api-and-apps-script.html"
+                >here</a
+              >.
+            </p>
+            <p>
+              In this post, we will create a Google Drive AddOn that will
+              interact with the Stability.AI API to create and edit images.
+            </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/create-google-drive-addon-for-stability-ai.html</link> 
+            <guid>https://benronkin.com/blog/create-google-drive-addon-for-stability-ai.html</guid>
+            <pubDate>Thu, 18 May 2023 18:00:00 -0800</pubDate>
+        </item>
+
+        <item>
+            <title>Build a Chrome extension for DeepL translator API</title>
+            <description><![CDATA[
+            <p>
+            <a href="https://www.deepl.com/translator">DeepL Translator</a> is a
+            great service for translating content between different languages.
+            The company offers a Chrome extension to use the service in the
+            browser, but we can build our own extension. Let's see how!
+          </p>
+          <p>
+            This tutorial deals only with the development of the extension, not
+            with getting it published in the Chrome Web Store.
+          </p>
+          <p>
+            In this tutorial we will store the DeepL API key in the extension
+            code. THIS IS NOT A BEST PRACTICE! Anyone who uses the extension can
+            access the key and abuse it. If you want to offer the extension
+            commercially then you should consider using a proxy server to issue
+            API requests, or a similar solution.
+          </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/create-chrome-extension-for-deepl-translator.html</link> 
+            <guid>https://benronkin.com/blog/create-chrome-extension-for-deepl-translator.html</guid>
+            <pubDate>Tue, 9 May 2023 17:00:00 -0800</pubDate>
+        </item>
+
+        <item>
+            <title>Send Google Search Console data to ChatGPT</title>
+            <description><![CDATA[<p>
+              Artificial Intelligence is getting into new business workflows by
+              the day. One way we can increase work productivity, as well as the
+              Search Engine Optimization (SEO) of our websites is by connecting
+              AI with Google Search Console. Let's see how to pull search
+              queries out of GSC and have OpenAI's ChatGPT create blog post
+              titles for these queries – all using Google Apps Script.
+            </p>]]></description>
+            <link>https://benronkin.com/blog/google-search-console-to-chat-gpt-using-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/google-search-console-to-chat-gpt-using-apps-script.html</guid>
+            <pubDate>Sun, 30 Apr 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Create an Add-to-Calendar widget with a form</title>
+            <description>
+            <![CDATA[
+          <p>
+            Are you familiar with the Add-to-Calendar widget that shows up in
+            confirmation emails and web pages after a user registers to an event
+            or a meeting? the widget enables the user to quickly add the event
+            to their favorite calendar.
+          </p>
+          <p>
+            If you'd like to have the ability to quickly create such widgets for
+            your own audiences, then you're in luck, because today I'll be
+            sharing the code for an online form that you can use to generate
+            these widgets.
+          </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/create-add-to-calendar-widget-with-form.html</link> 
+            <guid>https://benronkin.com/blog/create-add-to-calendar-widget-with-form.html</guid>
+            <pubDate>Thu, 20 Apr 2023 15:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Add a timer to a Google Form with Apps Script</title>
+            <description>
+            <![CDATA[
+            <p>
+              Adding a timer to a form is a great way to limit the time alloted
+              to fill out and submit the form. If you run online quizzes, for
+              instance, a timer mapped to a form can go a long way. Google Form
+              doesn't allow us to embed a timer inside a form, but luckily we
+              can use Google Apps Script to build a web app that has a timer and
+              embeds a form.
+            </p>
+            <p>
+              In this tutorial we will build such a web app. In addition to the
+              timer, the web app will allow the form user to pause the timer
+              once, and then resume filling out the form (in case they need a
+              bathroom break, for example).
+            </p>
+            <p>
+              But wait, there's more: our web app will also collect data on how
+              users interact with the form: when they access it, pause it,
+              resume it, run out of time, or submit the form.
+            </p>
+            ]]>
+            </description>
+            <link>https://benronkin.com/blog/add-timer-to-google-form-with-google-apps-script.html.html</link> 
+            <guid>https://benronkin.com/blog/add-timer-to-google-form-with-google-apps-script.html.html</guid>
+            <pubDate>Thu, 13 Apr 2023 11:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Automate image edits and variations with Dall-E API and Google Apps Script</title>
+            <description><![CDATA[
+            <p>
+              In my
+              <a
+                href="https://benronkin.com/blog/use-dall-e-with-google-apps-script-to-convert-text-to-images-automatically.html"
+                >previous post</a
+              >
+              we saw how to use the OpenAI Dall-E API to convert text prompts to
+              images programmatically, using Google Apps Script. In this post we
+              will see how to use the API to manipulate existing images. We will
+              edit areas of an image, as well as create whole variations of an
+              image. Let's get going with Apps Script.
+            </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/automate-image-edits-and-variations-with-dall-e-api-and-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/automate-image-edits-and-variations-with-dall-e-api-and-apps-script.html</guid>
+            <pubDate>Tue, 4 Apr 2023 08:00:00 -0800</pubDate>
+        </item>
+        
+        <item>
+            <title>Use Dall-E and ChatGPT APIs with Google Apps Script to convert text to images automatically</title>
+            <description><![CDATA[
+            <p>
+              Since AI is all the rage now, I wanted to explore how to use the
+              OpenAI Dall-E service to create images automatically. How about
+              creating images for my blog posts? I could use the posts'
+              summaries as prompts for ChatGPT, asking the service to produce a
+              list of physical objects that could represent the contents of the
+              summaries. Then I'll feed those objects to Dall-E, asking it to
+              create an image that contains those objects. Once Dall-E provides
+              the image URLs, I'll have the automation download the files to my
+              Google Drive. Let's see how to do this with Google Apps Script.
+            </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/use-dall-e-with-google-apps-script-to-convert-text-to-images-automatically.html</link> 
+            <guid>https://benronkin.com/blog/use-dall-e-with-google-apps-script-to-convert-text-to-images-automatically.html</guid>
+            <pubDate>Wed, 29 Mar 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Get more customer reviews with ChatGPT and Apps Script</title>
+            <description><![CDATA[
+            <p>I have a
+            <a href="https://benronkin.com/reviews.html">reviews page</a> on my site where I list
+            client testimonials. I have a simple review submission form that
+            clients populate with their review text, name, and email. When the
+            form is submitted, I receive its information in a simple email
+            message. I then copy/paste the information to my reviews page.
+            Everything works fine except for one issue: often, clients don't
+            know what to say in the review or how to structure their message.
+            They want to help me but they are not sure what the review should
+            say.
+          </p>
+          <p>
+            Luckily, ChatGPT can assist clients in drafting their personalized
+            reviews. In this post, we'll see how to build a Google Apps
+            Script-based system that accepts talking points from clients,
+            converts them to a ChatGPT prompt, get a review draft from the AI,
+            and enables the clients to edit and post their reviews. We'll get
+            their review in an email message.
+          </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/get-more-reviews-with-chatgpt-and-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/get-more-reviews-with-chatgpt-and-google-apps-script.html</guid>
+            <pubDate>Wed, 15 Mar 2023 11:00:00 -0800</pubDate>
+        </item>
+
+        <item>
+            <title>Build a Telegram chat bot for ChatGPT with Google Apps Script</title>
+            <description><![CDATA[
+            <p>
+              In my
+              <a href="https://benronkin.com/blog/use-chatgpt-api-with-google-apps-script.html"
+                >previous post</a
+              >, we saw how to use Google Apps Script to read real-estate
+              property highlights from a Google Sheet, feed them to ChatGPT, and
+              store the property summaries that ChatGPT wrote for us in Google
+              Docs. Subsequently, I received a request on my
+              <a href="https://www.youtube.com/channel/UCWMIUw-t9xoiqZXJg-GJ9pg"
+                >YouTube channel</a
+              >
+              to do a follow-up tutorial on how to build a Telegram chat bot
+              that interacts with ChatGPT using Apps Script. Well, I think that
+              it's a great idea, so let's see how to do that.
+            </p>
+            ]]></description>
+            <link>https://benronkin.com/blog/build-telegram-chat-bot-for-chatgpt-with-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/build-telegram-chat-bot-for-chatgpt-with-google-apps-script.html</guid>
+            <pubDate>Thu, 9 Mar 2023 12:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Use ChatGPT API with Google Apps Script</title>
+            <description>ChatGPT! It's on everyone's mind these days. Luckily, the OpenAI
+              company offers a public API for ChatGPT, which means that we can
+              connect to ChatGPT from Google Apps Script. Hooray!
+              To understand how to use the API, let's imagine that we work in a
+              real-estate agency, where our agents tour new properties, take
+              notes about each property, and compose property overviews with the
+              notes from their tours to be posted on the MLS. We can use the
+              ChatGPT API to feed the agent notes and receive a compelling
+              overview automatically.</description>
+            <link>https://benronkin.com/blog/use-chatgpt-api-with-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/use-chatgpt-api-with-google-apps-script.html</guid>
+            <pubDate>Wed, 1 Mar 2023 18:00:00 -0800</pubDate>
+        </item>
+        
+        <item>
+            <title>Prevent CSS overwrites with iFrames</title>
+            <description>In a
+            &lt;a href="https://benronkin.com/blog/aggregate-newsletters-with-apps-script.html"
+              &gt;previous post&lt;/a
+            &gt;
+            we saw how to aggregate email messages on a web page, so that we
+            could read our newsletters on a single page, as opposed to fetching
+            them from our overflowing inbox. One problem with injecting external
+            HTML into your page is that the HTML can come with its own styling
+            rules, and those rules can conflict with and overwrite other rules,
+            whether in other HTML snippets or in your own page. This is
+            happening because as the web browser renders the injected HTML, it
+            processes any styling it encounters, and applies it – if relevant –
+            to other snippets or to the containing page.</description>
+            <link>https://benronkin.com/blog/prevent-css-overwrites-with-iframes.html</link> 
+            <guid>https://benronkin.com/blog/prevent-css-overwrites-with-iframes.html</guid>
+            <pubDate>Mon, 27 Feb 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Push Airtable data to Google Docs</title>
+            <description>Airtable is a great solution for storing data of all kinds, and
+              many people are using it for different use cases. Let's learn how
+              to push Airtable data to a Google Doc. We'll use a simple Airtable
+              base with a single Products table that has three columns: Name,
+              SKU, and Quantity. We want to push to Google Doc all of the
+              out-of-stock products whose quantity equals zero.</description>
+            <link>https://benronkin.com/blog/push-airtable-data-to-google-docs-with-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/push-airtable-data-to-google-docs-with-apps-script.html</guid>
+            <pubDate>Tue, 21 Feb 2023 13:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Print labels with mail-merge using Apps Script</title>
+            <description>Are people still printing labels these days? I guess they are. Well,
+            we can help those poor souls with some good-old Apps Script magic.
+            Let's build a system that lets the user select a label type. The
+            script will create a template that corresponds with the user's
+            selection. The user will then paste a set of placeholders inside the
+            template, and our Apps Script will take some fake recipients' data
+            and mail-merge it into the labels. Sounds good? Lovely!</description>
+            <link>https://benronkin.com/blog/print-labels-with-mail-merge-using-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/print-labels-with-mail-merge-using-google-apps-script.html</guid>
+            <pubDate>Sat, 18 Feb 2023 11:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Fetch YouTube subscribers and comments with Apps Script</title>
+            <description>YouTube has a terrific user interface that provides channel
+              managers and owners like you and me with valuable statistics about
+              the performance of our channels and their videos. But YouTube also
+              has rich APIs that enable us to pull the data out of the system to
+              anywhere we to consume it. So lets build a Google Apps Script
+              webapp that will respond to GET requests and send over subscriber
+              and comment information.</description>
+            <link>https://benronkin.com/blog/fetch-youtube-subscribers-comments-with-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/fetch-youtube-subscribers-comments-with-apps-script.html</guid>
+            <pubDate>Thu, 9 Feb 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Get the function caller</title>
+            <description>Let's say that you have a bunch of functions that do different things, but at the end, they all call the same function. Let's call that function "wrapUp." Each time wrapUp gets called, you want it to log the name of its caller. How can you do that?</description>
+            <link>https://benronkin.com/blog/get-the-function-caller.html</link> 
+            <guid>https://benronkin.com/blog/get-the-function-caller.html</guid>
+            <pubDate>Tue, 7 Feb 2023 12:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Aggregate newsletter emails with a Google Apps Script webapp</title>
+            <description>I don't know about you, but I have a love-hate relationship with newsletter emails. On one hand, newsletters have terrific content: I get new, in-depth information directly from the source. Newsletters keep me informed about the subjects I care about the most. But I really, really dislike emails. For starters, I'm a zero-inbox kind of guy: I don't like emails sitting in my inbox. As soon as an email comes in, I'd like to process it and get rid of it right there and then. But I'm also very busy which means that I usually don't have the time to read newsletter emails when they decide to pop in.</description>
+            <link>https://benronkin.com/blog/aggregate-newsletters-with-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/aggregate-newsletters-with-apps-script.html</guid>
+            <pubDate>Mon, 6 Feb 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Create dynamic custom menus with Apps Script</title>
+            <description>Remember the petition you and I wrote to the management team at our company regarding their recent decision to discontinue the work-from-home policy and have everyone back at the office? Well, I have bad news and good news: The bad news is that management would not relent: all employees must return to the office full-time. But the good news is that management has decided to institute a new performance-based bonus program!</description>
+            <link>https://benronkin.com/blog/create-dynamic-custom-menus-with-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/create-dynamic-custom-menus-with-apps-script.html</guid>
+            <pubDate>Thu, 2 Feb 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Download web images to Google Drive automatically using Apps Script</title>
+            <description>Your team keeps a large storage of high-quality images on some web server, but the guy who manages the server was caught in the latest round of layoffs, and now nobody knows how to access and get these images. Luckily, Apps Script can automatically download these images to Google Drive, so no need to fret.</description>
+            <link>https://benronkin.com/blog/download-images-automatically.html</link> 
+            <guid>https://benronkin.com/blog/download-images-automatically.html</guid>
+            <pubDate>Wed, 1 Feb 2023 14:50:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Insert form submissions into Google Docs automatically</title>
+            <description>All good things, as the saying goes, come to an end. After letting us work fully remote for past couple of years, management at our fledging startup has recently announced that it expected everyone back at the office five days a week. Goodbye work flexibility, and hello (again) insane commutes. You, dear reader, and I – AKA The OGs on the company's Slack – are of course not going to put up with that. After all, our fellow employees are looking to us to take a stand, and, darn it, we will. We are going to write a petition in a Google Doc that we will share with management, letting them know exactly how we feel about their inane decision. But it's not just you and I to do the writing: we'll get the troops to contribute their thoughts as well. We'll collect comments from colleagues and embed them in the document using a simple Google Form with two questions: "Enter your comment" and "Enter your name."</description>
+            <link>https://benronkin.com/blog/insert-form-submissions-into-google-docs.html</link> 
+            <guid>https://benronkin.com/blog/insert-form-submissions-into-google-docs.html</guid>
+            <pubDate>Sat, 28 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Add a form to an email and save responses in a Google Sheet</title>
+            <description>Let's pretend that you run a home-improvement store, with lots of products on the shelves. Every day or so, you pick a bunch of products and note them in a Google Sheet. You'd like to have your loyal employee run an inventory check and note the quantity of each product. There's only one wrinkle: as loyal as the employee is, you don't want to give them access to the Google Sheet itself; who knows what they'd do with it? How can we automate our way around this pickle?</description>
+            <link>https://benronkin.com/blog/add-form-to-email-with-google-apps-script.html</link> 
+            <guid>https://benronkin.com/blog/add-form-to-email-with-google-apps-script.html</guid>
+            <pubDate>Wed, 25 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Sync Gmail and Google Calendar recipients to Google Contacts - Part 2</title>
+            <description>In the previous post we looked at how to populate a Google Sheet with names and email addresses from our Gmail and Google Calendar accounts. In this post we'll see how to push this information into Google Contacts using the Google People API.</description>
+            <link>https://benronkin.com/blog/sync-gmail-calendar-contacts-part2.html</link> 
+            <guid>https://benronkin.com/blog/sync-gmail-calendar-contacts-part2.html</guid>
+            <pubDate>Mon, 23 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Sync Gmail and Google Calendar recipients to Google Contacts</title>
+            <description>I interact with a lot of people using Gmail messages and Google Calendar events. I'd like to collect the contact info of these individuals in Google Contacts as my de-facto CRM. Adding these records manually takes too much time: I'd like this done programmatically. Thing is, I don't want to mine every email and invite: some of these are transactional emails or one-off meetings. Instead, I'd like to have the contact info aggregated into a Google Sheet where I can visually inspect the rows, mark which ones to save and which ones to ignore.</description>
+            <link>https://benronkin.com/blog/sync-gmail-calendar-contacts.html</link> 
+            <guid>https://benronkin.com/blog/sync-gmail-calendar-contacts.html</guid>
+            <pubDate>Thu, 19 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Improve user experience with custom menus in Google Sheets</title>
+            <description>Custom menus in Google Sheets are a terrific way to let users kick off automation functions on their own terms. When we empower users to decide when and what automation to run, we improve the effectiveness of our automation code. But custom menus have two issues when they're part of scripts that require access to sensitive or restricted scopes...</description>
+            <link>https://benronkin.com/blog/improve-user-experience-with-custom-menus-in-google-sheets.html</link> 
+            <guid>https://benronkin.com/blog/improve-user-experience-with-custom-menus-in-google-sheets.html</guid>
+            <pubDate>Mon, 16 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+        <item>
+            <title>Handle column changes in Google Sheets with Apps Script</title>
+            <description>A client of mine recently asked for my help in automating the data pulls they were doing. They wanted me to use the system's REST API to fetch new data and write it to a Google Sheet. The response payload of the API was pretty easy to navigate: essentially an array with a bunch of objects, where each object represented a user with certain keys for first and last names, phone, email -- that sort of thing. All I had to do was call the API periodically, get back new user objects, and them to a nested array so that I can append the data to Google Sheets. Easy enough, but there was one wrinkle...</description>
+            <link>https://benronkin.com/blog/handle-column-changes-in-google-sheets-with-app-script.html</link> 
+            <guid>https://benronkin.com/blog/handle-column-changes-in-google-sheets-with-app-script.html</guid>
+            <pubDate>Thu, 12 Jan 2023 18:00:00 -0800</pubDate>
+        </item>
+    </channel>
+</rss>

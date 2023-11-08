@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Create a Google Drive AddOn for Stability.ai | Ben Ronkin</title>
+    <meta
+      property="og:title"
+      content="Create a Google Drive AddOn for Stability.ai"
+    />
+    <meta
+      name="description"
+      content="Learn how to create new images and image revisions using Stability AI API inside a Google Drive AddOn"
+    />
+    <meta
+      property="og:description"
+      content="Learn how to create new images and image revisions using Stability AI API inside a Google Drive AddOn"
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/drive-addon-stability-hero.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/create-google-drive-addon-for-stability-ai.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Create a Google Drive AddOn for Stability.ai</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> May 18, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/ubzLN6OmoFQ"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="blog-post-body">
+            <p>
+              <a href="https://stability.ai/" target="_blank">Stability.ai</a>
+              offers a publicly-available service to create and edit images
+              using artificial intelligence. The service is very intuitive to
+              use and yields great results. It is similar to the Dall-E service
+              from OpenAI, which I've previously written about
+              <a
+                href="https://benronkin.com/blog/use-dall-e-with-google-apps-script-to-convert-text-to-images-automatically.html"
+                >here</a
+              >
+              and
+              <a
+                href="https://benronkin.com/blog/automate-image-edits-and-variations-with-dall-e-api-and-apps-script.html"
+                >here</a
+              >.
+            </p>
+            <p>
+              In this post, we will create a Google Drive AddOn that will
+              interact with the Stability.AI API to create and edit images.
+            </p>
+            <div class="card-panel alert-notice">
+              In this tutorial I will focus solely on the creation of the AddOn.
+              I will not cover how to publish the AddOn on the Google Workspace
+              marketplace.
+            </div>
+
+            <h2>Setup</h2>
+
+            <p>
+              To use Stability.ai, you need to create an account and get your
+              API key. To start, head to
+              <a href="https://dreamstudio.ai/">DreamStudio.ai</a> and click on
+              "Login". The easiest is to login with your Google credentials.
+              After that, click on your name at the top-right corner. You'll be
+              taken to page that lists your API key. Copy it and save it
+              somewhere safe.
+            </p>
+
+            <div class="card-panel alert-notice">
+              Your API key will be later stored in the Google Apps Script file.
+              Make sure that only people you trust can access this file.
+              Otherwise, your API quota might be drained.
+            </div>
+
+            <p>
+              To create a Google Workspace AddOn, you need to create a new
+              Google Cloud Platform project and associate it with your Google
+              Apps script file. So head to the GCP console, create an OAuth
+              Consent screen, and enable the Google Drive API. Watch the video
+              above if you don't know how to perform these steps.
+            </p>
+            <p>
+              Next, create a Google Apps Script file and click on the Gear icon
+              to access the project settings. Tick the box "Show
+              'appsscript.json' manifest file in editor." Under "Google Cloud
+              Platform (GCP) Project," click "Change project" and paste in your
+              GCP project number which you can find on the project dashboard.
+              Lastly, under "Script Properties," click "Add script property."
+              For the property name, enter "stabilityApiKey", and in the value
+              box paste the Stability AI key that you copied earlier.
+            </p>
+            <h2>The manifest file</h2>
+            <p>
+              We need to let Google Apps Script know about our AddOn. We do this
+              by adding entries into the manifest file. In Google Apps Script,
+              click on "appsscript.json" in the Editor, and paste in the
+              following values:
+            </p>
+
+            <pre><code class="language-json">{
+  "timeZone": "whatever-your-locale-is",
+  "dependencies": {},
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "urlFetchWhitelist": ["https://api.stability.ai/"],
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/script.external_request",
+    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/drive.addons.metadata.readonly",
+  ],
+  "addOns": {
+    "common": {
+      "name": "Stability AI",
+      "logoUrl": "link-to-an-icon-file"
+    },
+    "drive": {
+      "homepageTrigger": { "runFunction": "genHomeCard", "enabled": true },
+      "onItemsSelectedTrigger": { "runFunction": "refreshAddOn" }
+    }
+  }
+}
+</code></pre>
+
+            <p>
+              The top four attributes should already be in your file; we are not
+              changing them. We need to let the AddOn know which URLs it's
+              permitted to access, and we do so using the "urlFetchWhitelist"
+              attribute. We'll be calling the stability API endpoints. Be sure
+              to include the trailing forward slash.
+            </p>
+            <p>
+              The "oauthScopes" tell Apps Script what areas of Google Workspace
+              the AddOn is permitted to access. We need the ability to issue
+              UrlFetchApp calls and read/write files in Google Drive.
+            </p>
+            <p>
+              The "addOns" sections include two sub-sections: "common" defines
+              the name of the AddOn and a link to an icon that will be displayed
+              in Google Drive. You can host an icon file on Google Drive or
+              someplace else. The "drive" section defines two functions that
+              will run whenever the AddOn home page loads, and whenever the user
+              selects a file in Google Drive.
+            </p>
+
+            <h2>Rendering the AddOn</h2>
+
+            <p>
+              In order to show the AddOn, we need to build a basic UI inside the
+              "genHomeCard" function. So create a function with that name in
+              your "Code.gs" file, and enter the following:
+            </p>
+
+            <pre><code class="language-javascript">function genHomeCard(e) {
+  const selected = getSelectedFile(e);
+  const title = selected.title
+    ? `Create image for ${selected.title}`
+    : 'Create a brand new image';
+  var promptInput = CardService.newTextInput()
+    .setFieldName('prompt')
+    .setTitle('Enter prompt for Stability AI');
+  const action = CardService.newAction().setFunctionName('onCreateImage');
+  const button = CardService.newTextButton()
+    .setText('Generate')
+    .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
+    .setBackgroundColor('#333333')
+    .setOnClickAction(action);
+
+  return CardService.newCardBuilder()
+    .setName('Stability AI')
+    .setHeader(CardService.newCardHeader().setTitle(title))
+    .addSection(
+      CardService.newCardSection().addWidget(promptInput).addWidget(button)
+    )
+    .build();
+}
+
+function getSelectedFile(e){
+  return {title: 'temp title'};
+}
+</code></pre>
+
+            <p>
+              Above, the function gets information about the selected file (if
+              any) using the <strong>getSelectedFile</strong> function that we
+              will define momentarily. We then create a title for our AddOn
+              based on whether a file is selected. Next we define an input box
+              and a submit button for our UI. We define an action that declares
+              <strong>onCreateImage</strong> function, which will run whenever
+              the button is clicked.
+            </p>
+
+            <p>
+              Lastly, we create a new card that represents our AddOn home page.
+              We set the header with the title, and load in the two widgets. We
+              then build the card and return it; by returning it we allow Google
+              Drive to render the UI in the Drive window.
+            </p>
+
+            <h2>Deploying the AddOn</h2>
+
+            <p>
+              As I mentioned above, this AddOn will only be available in your
+              development account. To do so, click on the blue "Deploy" button.
+              Make sure that "Addon" is selected under Type. Click Deploy. Then
+              click on Deploy again, and select "Test deployment". Click the
+              "Install" button and then done. Now, if you reload the Google
+              Drive window, your icon should appear on the right-hand side.
+              Click on it, should pop-up the AddOn like this:
+            </p>
+
+            <img
+              class="responsive-img"
+              src="../img/drive-addon-stability-homepage.png"
+              alt="AddOn"
+            />
+
+            <h2>Responding to file selection</h2>
+
+            <p>
+              At the moment, if you select a file in Google Drive when the AddOn
+              is open, you will encounter an error that the
+              <strong>refreshAddOn</strong> function isn't found. This is
+              because we declared it in our manifest file, and Google Workspace
+              is looking to fire it in response to a file selection. So let's
+              add that function:
+            </p>
+
+            <pre><code class="language-javascript">function refreshAddOn(e) {
+  CardService.newNavigation().popCard();
+  return genHomeCard(e);
+}</code></pre>
+
+            <p>
+              This simple function removes the existing home page card and
+              recreates it. Now information about the selected file is available
+              in the "e" object that Apps Script passes to the function
+              automatically, so we can use it. Let's revise the
+              <strong>getSelectedFile</strong> function:
+            </p>
+
+            <pre><code class="language-javascript">function getSelectedFile(e) {
+              if (!e.drive.selectedItems) {
+                return { error: 'No item selected' };
+              }
+              if (e.drive.selectedItems.length > 1) {
+                return { error: 'Multiple items selected' };
+              }
+              if (!e.drive.selectedItems[0].mimeType.startsWith('image')) {
+                return { error: 'Non-image file selected' };
+              }
+              return {
+                title: e.drive.selectedItems[0].title,
+                file: DriveApp.getFileById(e.drive.selectedItems[0].id),
+              };
+            }</code></pre>
+
+            <p>
+              Above, we get the data about the selected file by looking at
+              e.drive.selectedItems. We perform several checks to ensure only
+              one image file is selected. We then return its name and the file
+              itself.
+            </p>
+
+            <p>
+              If you know select and unselect a file in the drive while the
+              AddOn is open then you should see the title of the home page
+              change accordingly.
+            </p>
+
+            <h2>Responding to submit events</h2>
+            <p>We need the code that is associated with the button action:</p>
+
+            <pre><code class="language-javascript">function onCreateImage(e) {
+  if (!e.formInputs.prompt) {
+    return;
+  }
+  let notificationMessage;
+  const text = e.formInputs.prompt[0];
+  const selected = getSelectedFile(e);
+  const resp = callStability(text, selected.file);
+  if (resp.error) {
+    notificationMessage = resp.error;
+  } else {
+    notificationMessage = saveFile(resp.dataString, selected.file, text);
+  }
+
+  return CardService.newActionResponseBuilder()
+    .setNotification(CardService.newNotification().setText(notificationMessage))
+    .build();
+}</code></pre>
+
+            <p>
+              Above, we check that the value of the input box is available in
+              the "e" object. If not then we return. We can the text and the
+              selected file. We call the Stability API (below) and render a
+              notification according to the result. if everything is OK then we
+              call <strong>saveFile</strong> which will save the file in our
+              Google Drive.
+            </p>
+
+            <h2>Calling Stability AI</h2>
+            <p>
+              We now need a function that can interact with the Stability.ai
+              API:
+            </p>
+
+            <pre><code class="language-javascript">function callStability(text, file) {
+  const scriptProps = PropertiesService.getScriptProperties();
+  const apiKey = scriptProps.getProperty('stabilityApiKey');
+  const engineId = 'stable-diffusion-xl-beta-v2-2-2';
+  let apiUrl = 'https://api.stability.ai/v1/generation/' + engineId + '/';
+
+  const options = {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+    muteHttpExceptions: true,
+  };
+
+  let payload;
+
+  if (!file) {
+    apiUrl += 'text-to-image';
+    options['headers']['Content-Type'] = 'application/json';
+    payload = {
+      height: 512,
+      width: 512,
+      text_prompts: [{ text, weight: 0.5 }],
+      steps: 50,
+      style_preset: 'comic-book',
+      samples: 1,
+    };
+    options.payload = JSON.stringify(payload);
+  } else {
+    apiUrl += 'image-to-image';
+    // options['headers']['Content-Type'] = 'multipart/form-data';
+    payload = {
+      // height: '512',
+      // width: '512',
+      style_preset: 'comic-book',
+      samples: '1',
+      steps: '50',
+      'text_prompts[0][text]': text,
+      'text_prompts[0][weight]': '0.5',
+      init_image: file.getBlob(),
+      image_strength: '0.5',
+    };
+    options.payload = payload;
+  }
+  // console.log(JSON.stringify(options, null, 2));
+  const response = UrlFetchApp.fetch(apiUrl, options);
+  const content = response.getContentText();
+  const jsn = JSON.parse(content);
+  if (!jsn.artifacts) {
+    console.log(JSON.stringify(jsn, null, 2));
+    return { error: jsn.message };
+  }
+  return { dataString: jsn.artifacts[0].base64 };
+}</code></pre>
+
+            <p>
+              Above, we get our API key from the script property. We define the
+              API url. We then set the options object and its payload attribute
+              based on whether we pass in a selected file or not. If there's no
+              file then we will generate a brand new image. Otherwise, we will
+              create an image based on the image and the prompt text.
+            </p>
+            <p>
+              We pass in several attributes like the dimensions of the file, the
+              prompt, and the file itself. We call the API end point and parse
+              out the result.
+            </p>
+
+            <h2>Saving the new file</h2>
+
+            <p>
+              All we need to do now is the save the new file in Google Drive:
+            </p>
+
+            <pre><code class="language-javascript">function saveFile(data, file, text) {
+  const decoded = Utilities.base64Decode(data, Utilities.Charset.UTF_8);
+  const blob = Utilities.newBlob(decoded, 'image/png', text);
+  // Enable Drive API in the GCP project in order to use DriveApp
+  const newFile = DriveApp.createFile(blob);
+  if (file) {
+    // If a user selected a file then the current folder
+    // can be determined, and the file can be moved there
+    const folder = file.getParents().next();
+    newFile.moveTo(folder);
+    return 'File saved';
+  } else {
+    return 'File saved at the root folder';
+  }
+}</code></pre>
+
+            <p>
+              Above, we get the data in base64, the original file (if one
+              exists), and the prompt. We decode the string, and create a new
+              blob from the resulting byte array. We save the blob as a file.
+              Now, if the original file is present then we derive its folder and
+              move the file there. Otherwise, we store the file at the root
+              folder.
+            </p>
+
+            <p>
+              That's all there is to it. We kept thing pretty basic here and
+              used static values for most of the Stability AI parameters. You
+              can make the UI more robust by adding more fields for these
+              parameters so that the user can change them without accessing the
+              code.
+            </p>
+            <p>Happy stabilizing!</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

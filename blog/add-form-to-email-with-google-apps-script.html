@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Add a form to an email and save responses in a Google Sheet| Ben Ronkin
+    </title>
+    <meta
+      property="og:title"
+      content="Add a form to an email and save responses in a Google Sheet"
+    />
+    <meta
+      name="description"
+      content="Read data from a Google Sheet, create a form based on the data, render the form in an email message, and store the submissions of the form back to the Google Sheet."
+    />
+    <meta
+      property="og:description"
+      content="Read data from a Google Sheet, create a form based on the data, render the form in an email message, and store the submissions of the form back to the Google Sheet."
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/add-form-to-email.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/add-form-to-email-with-google-apps-script.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Add a form to an email and save responses in a Google Sheet</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> January 25, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed//hlUpqf1jCrQ"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="blog-post-body">
+            <p>
+              Let's pretend that you run a home-improvement store, with lots of
+              products on the shelves. Every day or so, you pick a bunch of
+              products and note them in a Google Sheet, which looks something
+              like this:
+            </p>
+            <img
+              class="responsive-img"
+              src="../img/add-form-to-email-sheet.png"
+              alt="Inventory sheet"
+            />
+            <p>
+              You'd like to have your loyal employee run an inventory check and
+              note the quantity of each product. There's only one wrinkle: as
+              loyal as the employee is, you don't want to give them access to
+              the Google Sheet itself; who knows what they'd do with it?
+            </p>
+            <p>
+              How can we automate our way around this pickle? Well, one way is
+              to use Apps Script to create an HTML form with product information
+              that it will take directly from the sheet. It will then insert the
+              form into an email message that will be sent to the employee. The
+              message would look something like this:
+            </p>
+            <img
+              class="responsive-img"
+              src="../img/add-form-to-email-email.png"
+              alt="Inventory email"
+            />
+            <p>
+              Apps Script will have a web app deployed that will await the form
+              submissions. Once the employee fills out the quantity numbers
+              directly into the form inside the email message and clicks submit,
+              Apps Script will receive the information and update the quantity
+              for each product in the Google Sheet automatically.
+            </p>
+            <p>Sounds too good to be true? Nah, we can get it done.</p>
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+
+            <p>Let's note the steps we need to take with this script:</p>
+            <ul>
+              <li>Create a custom menu option to email out a form</li>
+              <li>Read rows from the sheet</li>
+              <li>Create an HTML page with a form using rows</li>
+              <li>Email out the form</li>
+              <li>Capture form submissions</li>
+              <li>Update spreadsheet quantities</li>
+              <li>Update deployment URL and republish</li>
+            </ul>
+
+            <p>
+              To get started, create a Google Sheet with three columns that
+              looks like the one above. Open Apps Script from the Extensions
+              menu. Inside Code.gs, let's add the code for our custom menu:
+            </p>
+
+            <pre><code class="language-javascript">function onOpen(e) {
+  const ui = SpreadsheetApp.getUi();
+  ui.createMenu('🟢 Automation').addItem('Email form', 'emailForm').addToUi();
+}</code></pre>
+            <p>
+              We define the <strong>onOpen</strong> function that Apps Script
+              automatically runs whenever the spreadsheet is opened. Inside of
+              it, we get the UI object, create a top menu, one menu item, and
+              add it to the UI. The menu references the
+              <strong>emailForm</strong> function that we want to run when we
+              select the custom menu. So let's work on that next.
+            </p>
+
+            <pre><code class="language-javascript">function emailForm() {
+  const ss = SpreadsheetApp.getActive();
+  const sh = ss.getSheetByName('Inventory');
+  const items = sh.getDataRange().getValues();
+  items.splice(0, 1);
+  const template = HtmlService.createTemplateFromFile('EmailTemplate');
+  template.data = {
+    items,
+  };
+  const htmlBody = template.evaluate().getContent();
+  GmailApp.sendEmail('employee@mycompany.com', 'Inventory update', '', { htmlBody });
+}</code></pre>
+            <p>
+              Above, we get the current spreadsheet, followed by its Inventory
+              sheet. We extract all the cells from the sheet. We then splice
+              away the header row, since we don't need it for our form. We'll
+              create the header manually.
+            </p>
+            <p>
+              Next, we create an HTML template using a template file that we
+              will develop next. We attach a "data" object to the template that
+              includes our product information. We then evaluate the template
+              and get its HTML content. "htmlBody" contains the actual HTML of
+              the email message. In the last line we use
+              <strong>GmailApp</strong> to send out the email to the employee,
+              passing the htmlBody inside an options object.
+            </p>
+            <p>
+              Don't run this function yet, since we don't have the HTML
+              template. Create a new HTML file in the Apps Script IDE and name
+              it "EmailTemplate.html." Here's the code for it:
+            </p>
+
+            <pre><code class="language-html">&lt;!DOCTYPE html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="UTF-8" />
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    &lt;title>Update inventory&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;h1>Update inventory&lt;/h1>
+    &lt;form
+      action=""
+      method="post"
+    >
+      &lt;table>
+        &lt;tr>
+          &lt;td>SKU&lt;/td>
+          &lt;td>Name&lt;/td>
+          &lt;td>Quantity&lt;/td>
+        &lt;/tr>
+        &lt;? data.items.forEach(item=>
+        { ?>
+        &lt;tr>
+          &lt;td style="padding: 0 15px">
+            &lt;?= item[0] ?>
+          &lt;/td>
+          &lt;td style="padding: 0 15px">
+            &lt;?= item[1] ?>
+          &lt;/td>
+          &lt;td style="padding: 0 15px">
+            &lt;input type="text" name="&lt;?= item[0] ?>" style="width: 50px" />
+          &lt;/td>
+        &lt;/tr>
+        &lt;? }) ?>
+      &lt;/table>
+      &lt;button type="submit" style="margin: 15px; padding: 7px 15px">
+        SUBMIT
+      &lt;/button>
+    &lt;/form>
+  &lt;/body>
+&lt;/html></code></pre>
+            <p>
+              The above markup contains a basic HTML head section. The body
+              section includes a header and a form. Inside the form we have a
+              table with a header row.
+            </p>
+            <p>
+              We use scriptlets to embed code inside the HTML. When Apps Script
+              processes the template, it takes the data that we pass into the
+              template and uses it to create table rows. Our "forEach" loop
+              iterates over the nested array of SKUs and product names, writing
+              the data directly into the page as if we enter it manually. Be
+              careful how you implement these pesky scriptlets; they can easily
+              break the markup. Anyway, we close things out with a simple submit
+              button.
+            </p>
+            <p>
+              If you run <strong>emailForm</strong> now, using your own email
+              address as the recipient, then you should see the email message
+              with the form, just like above. But clicking the submit button
+              will not post the data, since the form currently does not have an
+              action attribute that it can use to post the data.
+            </p>
+
+            <p>
+              Before we generate the "action" URL, let's create the function
+              that Apps Script will run automatically whenever a form is
+              submitted:
+            </p>
+
+            <pre><code class="language-javascript">function doPost(e) {
+              const items = Object.entries(e.parameters)
+                .map(([k, v]) => [k, v[0]])
+                .sort();
+              const quantities = items.map((row) => [row[1]]);
+              const ss = SpreadsheetApp.getActive();
+              const sh = ss.getSheetByName('Inventory');
+              sh.getRange(2, 3, quantities.length, 1).setValues(quantities);
+              SpreadsheetApp.flush();
+              return ContentService.createTextOutput(
+                'Submission recorded. You can close this tab.'
+              ).setMimeType(ContentService.MimeType.TEXT);
+            }</code></pre>
+
+            <p>
+              doPost will run automatically, and Apps Script will pass the form
+              payload into the "e" parameter. We can access the data via
+              "e.parameters", which is an object where the SKUs are the keys,
+              and the values are the quantities. We use "Object.entries()" to
+              convert the object to a nested array. We sort the array by the
+              SKUs so that we can easily paste the data into the sheet, since
+              it's also sorted by SKU. We use "map" to extract the quantities
+              and write them into their column in the sheet. We then return a
+              text response informing the user that they can close the new tab
+              that the submission opened.
+            </p>
+
+            <p>
+              Ok, now we can generate the "action" URL, by converting our Apps
+              Script to a web app. Click on the blue "Deploy" button, select
+              "New deployment," click on the gear icon on the left side, select
+              "Web app", select execute as: me, and Who has access: Anyone
+              within your org. Copy the resulting web app URL. and paste it into
+              the action string.
+            </p>
+            <p>
+              Lastly, you need to update the webapp deployment given that by
+              inserting the action URL we changed the code. So click Deploy
+              again, but this time click "Manage deployments." Click the pencil
+              button, and under "Version," select "New Version." Click deploy
+              and you should be good to go.
+            </p>
+
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

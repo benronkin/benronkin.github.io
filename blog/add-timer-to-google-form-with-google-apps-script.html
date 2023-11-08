@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Add a timer to a Google Form with Apps Script | Ben Ronkin</title>
+    <meta
+      property="og:title"
+      content="Add a timer to a Google Form with Apps Script"
+    />
+    <meta
+      name="description"
+      content="Learn how to add a timer to a Google form using a Google Apps Script web app. The timer will disable the form if the time runs out. The user can pause the timer once."
+    />
+    <meta
+      property="og:description"
+      content="Learn how to add a timer to a Google form using a Google Apps Script web app. The timer will disable the form if the time runs out. The user can pause the timer once."
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/google-form-timer-hero.png"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/add-timer-to-google-form-with-google-apps-script.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Add a timer to a Google Form with Apps Script</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> April 13, 2023
+              </span>
+            </p>
+          </div>
+
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/zyqGAW0JBng"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="blog-post-body">
+            <p>
+              Adding a timer to a form is a great way to limit the time alloted
+              to fill out and submit the form. If you run online quizzes, for
+              instance, a timer mapped to a form can go a long way. Google Form
+              doesn't allow us to embed a timer inside a form, but luckily we
+              can use Google Apps Script to build a web app that has a timer and
+              embeds a form.
+            </p>
+            <p>
+              In this tutorial we will build such a web app. In addition to the
+              timer, the web app will allow the form user to pause the timer
+              once, and then resume filling out the form (in case they need a
+              bathroom break, for example).
+            </p>
+            <p>
+              But wait, there's more: our web app will also collect data on how
+              users interact with the form: when they access it, pause it,
+              resume it, run out of time, or submit the form.
+            </p>
+            <p>
+              When we're done, our timer-boosted Google Form web app will look
+              like this:
+            </p>
+            <img
+              class="responsive-img"
+              src="../img/google-form-timer-webapp.png"
+              alt="Google Form timer webapp"
+            />
+            <p>Sounds fun? Let's goooo!</p>
+            <h2>Setup</h2>
+            <p>
+              To build this web app, create a brand new Google Apps Script file.
+              It will house the entire code of the web app. You also want to
+              create a simple Google Form with 2-3 questions. Name one of your
+              questions "Your assigned ID".
+            </p>
+
+            <div class="card-panel alert-notice">
+              In this tutorial, I am availing the web app to all users, even
+              anonymous. Google Apps Script doesn't let you, as the script
+              owner, access the anonymous user's email address. Because I want
+              to be able to map the form responses to the form activities I'm
+              collecting in the web app, I need to use some form of
+              identification. I will use a randomly generated ID for every form.
+              The script will enter the ID in the question's answer
+              automatically, so that the user need not worry about that. If
+              you're going to deploy the web app only for users in your Google
+              Workspace account, then the ID isn't needed: you can get the
+              user's email address directly.
+            </div>
+            <p>
+              Store the form responses in a Google Sheet that you can access by
+              clicking on the "Responses" tab inside the form designer, then
+              click on the Google Sheet icon, and select a new Google Sheet. It
+              will be stored in the same Google Drive folder of your form. Open
+              the sheet and add a new tab named "Timesheet". We will log the
+              webapp events in this tab, so go ahead and add three column
+              headers in the first row: "UUID", "Date/Time", and "Event".
+            </p>
+            <h2>The main HTML</h2>
+
+            <p>
+              For our webapp to work, we need to create an HTML page that will
+              include the timer and embed the Google Form. Inside your Google
+              Apps Script file, create an "index.html" page and paste there the
+              following markup (heads-up, it contains bare-bones styling since I
+              am NOT a designer):
+            </p>
+            <pre><code class="language-html">&lt;!DOCTYPE html>
+&lt;html>
+  &lt;head>
+    &lt;meta charset="UTF-8" />
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    &lt;title>My form&lt;/title>
+    &lt;base target="_top" />
+    &lt;style>
+      html,
+      body {
+        font-family: sans-serif, Arial;
+      }
+      h1 {
+        text-align: center;
+      }
+      iframe {
+        margin: auto;
+      }
+      #footer {
+        background-color: beige;
+        padding: 5px;
+      }
+      #timer {
+        display: flex;
+        justify-content: space-between;
+        width: 600px;
+        margin: auto;
+      }
+      .container {
+        width: 90%;
+        margin: auto;
+      }
+    &lt;/style>
+  &lt;/head>
+  &lt;body>
+    &lt;div class="container">
+      &lt;h1>Your session has started!&lt;/h1>
+      &lt;div id="timer">
+        &lt;p>
+          Time alloted:
+          &lt;span id="time-alloted">&lt;/span>
+        &lt;/p>
+        &lt;p>Time remaining: &lt;span id="time-remaining">&lt;/span>&lt;/p>
+        &lt;button>Pause once&lt;/button>
+      &lt;/div>
+      &lt;iframe
+        id="my-iframe"
+        width="640"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        >Loading…&lt;/iframe
+      >
+    &lt;/div>
+    &lt;div id="footer">&lt;div class="container">Footer&lt;/div>&lt;/div>
+  &lt;/body>
+&lt;/html>
+</code></pre>
+            <p>
+              Above, we define a "timer" div that includes three components:
+              time alloted, time remaining, and a pause button. We also have the
+              iFrame element, but we don't define the "src" attribute to the
+              form, because we want to set it dynamically with code so that we
+              can append the UUID to it (more on that later).
+            </p>
+            <p>
+              I'm also including a "footer" div for demo-purposes only: we'll
+              use this tutorial to see how we can change the height of the
+              iFrame programmatically, and the footer will help us visualize the
+              change in the iFrame height. You certainly don't need to include
+              it for the form to work.
+            </p>
+
+            <h2>The error page</h2>
+
+            <p>
+              Since we will avail the form to anonymous users, we cannot get
+              their email address. This means that when we provide our form
+              users the URL to our webapp, we need to generate a unique UUID for
+              each user and append it as a query parameter to the end of the URL
+              (we will shortly run a function to do this for us). This UUID
+              gives us certain interesting capabilities. For instance, we can
+              block users who access the form without supplying a valid UUID. We
+              can also block users who access the form for the second time after
+              having visited the form before (even if they didn't submit the
+              form!!!). In such a scenario, we want our web app to serve an
+              error page, instead of the main HTML, notifying the user about the
+              problem. So create a second page named "error.html" and paste the
+              following markup:
+            </p>
+
+            <pre><code class="language-javascript">&lt;!DOCTYPE html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="UTF-8" />
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    &lt;title>Error&lt;/title>
+    &lt;base target="_top" />
+    &lt;style>
+      html,
+      body {
+        font-family: sans-serif, Arial;
+      }
+      h1 {
+        text-align: center;
+      }
+      .container {
+        width: 90%;
+        margin: auto;
+      }
+    &lt;/style>
+  &lt;/head>
+  &lt;body>
+    &lt;div class="container">
+      &lt;h1>Error&lt;/h1>
+      &lt;p style="text-align: center">&lt;?!= serverData.error ?>&lt;/p>
+    &lt;/div>
+  &lt;/body>
+&lt;/html>
+</code></pre>
+
+            <p>
+              This is super-simple page. The only notable thing here is the
+              <strong>&lt;?!= serverData.error ?></strong> scriplet tag. It
+              allows our Google Apps Script web app to dynamically insert the
+              error message that we will generate into the page before it's
+              rendered in the browser.
+            </p>
+
+            <h2>Serving the main page</h2>
+
+            <p>
+              Let's create a function that will deliver our "index.html" page to
+              users of our web app. Inside the "Code.gs" page, enter the
+              following code:
+            </p>
+
+            <pre><code class="language-javascript">function doGet(e) {
+  const htmlTemplate = HtmlService.createTemplateFromFile('index');
+  const htmlOutput = htmlTemplate.evaluate();
+  return htmlOutput;
+}</code></pre>
+
+            <p>
+              Above, we define the <strong>doGet</strong> function that creates
+              a template from our index.html file and evaluate it, which
+              generates the HTML code that the function finally returns to the
+              client. Note that "doGet" must be called just that in order for
+              Apps Script to run it automatically.
+            </p>
+
+            <p>
+              While we're at it, let's create the function that will serve the
+              error page:
+            </p>
+
+            <pre><code class="language-javascript">function sendError(message) {
+  const htmlTemplate = HtmlService.createTemplateFromFile('error');
+  htmlTemplate.serverData = { error: message };
+  const htmlOutput = htmlTemplate.evaluate();
+  return htmlOutput;
+}</code></pre>
+
+            <p>
+              You can see above that we are attaching a "serverData" object to
+              our template. The object contains an "error" key that has the
+              message that the function receives as its value. You may recall
+              that in our error.html page, we use a scriptlet tag to render this
+              serverData.error in our HTML page. That's how we push data from
+              the server to the page.
+            </p>
+
+            <p>
+              Go ahead and deploy the script as a web app by clicking on the
+              blue Deploy button. Select "Web app" from the gear icon. Make sure
+              the script executes as you and is available to anyone. When you're
+              done, copy the generated web app URL and store it someplace. We'll
+              use it next.
+            </p>
+
+            <h2>Generating web app links</h2>
+
+            <p>
+              Just like we share a Google Form with users by copying its URL, we
+              need to give the web app users its URL. But remember that we need
+              to generate and append a unique ID (UUID) to each URL so that we
+              know who's who. Let's create a function that we can run anytime we
+              need to generate a new URL for a user:
+            </p>
+
+            <pre><code class="language-javascript">function genFormUrl() {
+  const webappUrl = 'paste-your-webapp-url-here';
+  const uuid = Utilities.getUuid();
+  console.log(webappUrl + `?uuid=${uuid}`);
+}</code></pre>
+
+            <p>
+              The function above will simply generate a random ID and append it
+              to the uuid query parameter at the end of your web app URL. Just
+              paste your webapp url inside the single quotes.
+            </p>
+
+            <h2>Recording events in our timesheet</h2>
+
+            <p>
+              Now that we have the facility to generate webapp URLs with unique
+              IDs, we can report on how our webapp is used. Let's create a
+              generic function that will receive a UUID and an event and log
+              them into our timesheet:
+            </p>
+
+            <pre><code class="language-javascript">function updateServer(uuid, event) {
+  const now = Utilities.formatDate(
+    new Date(),
+    Session.getScriptTimeZone(),
+    'MM/dd/yyyy HH:mm:ss'
+  );
+  const ss = SpreadsheetApp.openById('paste-your-google-sheet-id-here');
+  const timesheet = ss.getSheetByName('Timesheet');
+  timesheet.appendRow([uuid, now, event]);
+  SpreadsheetApp.flush();
+}</code></pre>
+            <p>
+              To get the ID of your Google Sheet, simply copy the last sequence
+              of characters from the end of its web address, without any forward
+              slashes. Paste it in the code above. The function will generate a
+              new Date object and convert it to a formatted date/time string. It
+              will append a row that populates the three columns in our
+              Timesheet tab.
+            </p>
+
+            <p>
+              Let's record the event of creating a new link. We will use this
+              log momentarily to validate users' UUIDs. Simply insert a call to
+              the function into your <strong>genFromUrl</strong> function:
+            </p>
+
+            <pre><code class="language-javascript">function genFormUrl() {
+  const webappUrl = 'paste-your-webapp-url-here';
+  const uuid = Utilities.getUuid();
+  updateServer(uuid, 'Created form');  // Our logging call here
+  console.log(webappUrl + `?uuid=${uuid}`);
+}</code></pre>
+
+            <p>
+              Let's also record the event of serving the form to a user. Update
+              your <strong>doGet</strong> function accordingly:
+            </p>
+
+            <pre><code class="language-javascript">function doGet(e) {
+  updateServer(uuid, 'Started form');  // Our logging call here
+  const htmlTemplate = HtmlService.createTemplateFromFile('index');
+  const htmlOutput = htmlTemplate.evaluate();
+  return htmlOutput;
+}</code></pre>
+
+            <h2>Validating UUIDs</h2>
+
+            <p>
+              Now that we are logging events, we can validate the users who are
+              accessing our web app, and redirect them to our error page if they
+              don't meet our validation criteria. Below, we run three checks: we
+              ensure that a UUID exists in the webapp url, that the UUID appears
+              in our log (to ensure that the user isn't attaching a fake UUID,
+              and that the user hasn't been served the webapp before):
+            </p>
+
+            <pre><code class="language-javascript">function doGet(e) {
+  // Check if uuid is present
+  if (!e.parameter || !e.parameter.uuid) {
+    return sendError(
+      `UUID parameter is missing. Contact form manager for details.`
+    );
+  }
+  // Check if uuid was previously issued
+  const uuid = e.parameter.uuid;
+  const ss = SpreadsheetApp.openById('paste-your-google-sheet-id-here');
+  const timesheet = ss.getSheetByName('Timesheet');
+  let uuids = timesheet.getRange('A2:A').getValues().flat();
+  uuids = uuids.filter((u) => u === uuid);
+  if (uuids.length === 0) {
+    return sendError(
+      `UUID "${uuid}" isn't recognized. Contact form manager for details.`
+    );
+  }
+  // Check if form with the uuid was previously started
+  if (uuids.length > 1) {
+    return sendError(
+      `Your UUID "${uuid}" was already used. Contact form manager for details.`
+    );
+  }
+  updateServer(uuid, 'Started form');
+  const htmlTemplate = HtmlService.createTemplateFromFile('index');
+  htmlTemplate.serverData = { uuid, timeAlloted: '00:00:10' };
+  const htmlOutput = htmlTemplate.evaluate();
+  return htmlOutput;
+}</code></pre>
+
+            <p>
+              Above, we look for the uuid query parameter. If we can't find it
+              then we return our error page with the message. Next, we access
+              our Timesheet tab and get all of our existing UUIDs that have been
+              recorded there. We're looking for the user's UUID. If we cannot
+              find it, then we send the error page for it. Lastly, we ensure
+              that our list of UUIDs contains the user's UUID only once (for
+              when the form was created). If it appears more than once then it
+              means that the user accessed the web app before and we prevent
+              them from accessing it again.
+            </p>
+
+            <p>
+              At this point you can test your web app by clicking on Deploy >
+              Test deployment, and accessing the test url. You should see the
+              error page. Next, run <strong>genFormUrl</strong>, copy the
+              ?uuid=abc123 from the log and attach it to your DEV url. The form
+              should now appear.
+            </p>
+            <div class="card-panel alert-notice">
+              Note that if you try to access the /exec URL then you will not see
+              your latest code in action. For this to happen you need to click
+              "Deploy" > "Edit deployments", click the pencil icon, select a new
+              version, and click deploy. This will update the deployment with
+              your latest code.
+            </div>
+
+            <h2>The timer, finally</h2>
+
+            <p>
+              Talk about bury the lede! But all this preparatory work is needed
+              in order to take full advantage of the timer. Without it, the
+              timer is probably useless: users would be able to access the form
+              multiple times.
+            </p>
+
+            <p>
+              The first thing we need to do is to pass the UUID from the server
+              to the client, so that we can incorporate it into our form. We can
+              also push the alloted time for the form. Let's change our doPost
+              slightly:
+            </p>
+
+            <pre><code class="language-javascript">  const htmlTemplate = HtmlService.createTemplateFromFile('index');
+  htmlTemplate.serverData = { uuid, timeAlloted: '00:01:00' };
+  const htmlOutput = htmlTemplate.evaluate();</code></pre>
+
+            <p>
+              Above, I'm including the new line that needs to come between the
+              two existing lines. We're attaching the serverData object to the
+              template and initiate the time alloted to 1 minute.
+            </p>
+
+            <p>
+              Go back your index.html page and add a
+              <strong>&lt;script>&lt/script></strong> tag right before the
+              closing <strong>&lt;/body></strong> tag. We're going to include a
+              lot of client-side Javascript inside the script tag.
+            </p>
+
+            <p>
+              First, we need to write the server data to the page, so that we
+              can access it in code:
+            </p>
+
+            <pre><code class="language-javascript">// Set server data
+const uuid = '&lt?!= serverData.uuid ?>';
+const timeAlloted = '&lt;?!= serverData.timeAlloted ?>';</code></pre>
+
+            <p>
+              Google Apps Script will write the two variables into the page as
+              if we manually typed them.
+            </p>
+            <p>Next, let's define the components that we will manipulate:</p>
+
+            <pre><code class="language-javascript">// Declare components
+const iframe = document.querySelector('#my-iframe');
+const timer = document.querySelector('#timer');
+const h1 = document.querySelector('h1');
+const button = document.querySelector('button');
+const timeRemainingSpan = document.querySelector('#time-remaining');</code></pre>
+
+            <p>
+              Now we can work on our form iFrame. Add the following code, and
+              I'll explain it below:
+            </p>
+
+            <pre><code class="language-javascript">// Set the iframe
+let loadCounter = 0;
+let formSubmitted = false;
+let formPaused = false;
+iframe.onload = function () {
+  loadCounter += 1;
+  if (loadCounter === 1) {
+    iframe.style.height = '800px';
+  } else if (loadCounter === 2) {
+    iframe.style.height = '300px';
+    formSubmitted = true;
+    timer.style.display = 'none';
+    google.script.run
+    .withSuccessHandler(onSuccessSubmit)
+    .updateServer(uuid, 'Submitted the form');
+
+  function onSuccessSubmit(message) {
+    h1.innerText = message;
+  }
+  }
+};</code></pre>
+
+            <p>
+              Above, we adjust the height of the iFrame whenever it loads. When
+              we set its src attribute (momentarily), it loads the first time.
+              When the user Submits the form, the iFrame loads the confirmation
+              page (that's a second time). So we use "loadCounter" to know the
+              state of the iFrame and adjust its height accordingly.
+            </p>
+
+            <p>
+              Note that we are also calling out our server-side
+              <strong>updateServer</strong> when the user submits the form.
+              Obviously we know that they submit from the fact that Google Form
+              records their submission in the Google Sheet, but I'm showcasing
+              this capability here for completion-sake. Note that the time of
+              the log record will be slightly behind the time that Google Form
+              will report.
+            </p>
+
+            <p>
+              Now we need to paste the form URL to the iFrame. But we also want
+              to pre-fill the UUID into our question so that the user doesn't
+              have to do that. To do so, open the Google Form, click the three
+              dots on the right, click "Get pre-filled link", enter 'xxxxx' in
+              the ID question value, click the purple "Get link" button, and
+              then the black "Copy link" button at the bottom of the page.
+            </p>
+
+            <p>
+              Now paste the URL in your code and add the delete the 'xxxxx':
+            </p>
+
+            <pre><code class="language-javascript">iframe.src =
+'https://docs.google.com/forms/d/e/your-form-path/viewform?embedded=true&usp=pp_url&entry.your-question-number=' +
+uuid;</code></pre>
+
+            <p>
+              Try reloading the page and see if the form renders. You might want
+              to comment out temporarily the test of multiple UUIDs inside
+              <strong>doGet</strong> so that you don't need to issue a new UUID
+              any time you work on the code.
+            </p>
+
+            <p>Let's initialize the timer:</p>
+
+            <pre><code class="language-javascript">// Set timer
+document.querySelector('#time-alloted').innerText = timeAlloted;
+const timeRemaining = new Date();
+const [hoursRemaining, minutesRemaining, secondsRemaining] =
+  timeAlloted.split(':');
+timeRemaining.setHours(
+  hoursRemaining,
+  minutesRemaining,
+  secondsRemaining
+);</code></pre>
+
+            <p>
+              Time alloted is static, so we just enter the string from the
+              server. But time remaining is dynamic – we will decrement it every
+              second – so that we store it in a separate variable that is
+              initialized with the hours, minutes, and seconds counts of time
+              alloted.
+            </p>
+
+            <h2>Decrementing time remaining</h2>
+
+            <p>
+              We need a function that will reduce time remaining by one second,
+              unless the time has run out, the user has paused the timer (for a
+              bathroom break), or the user has submitted the form. Here's the
+              code:
+            </p>
+
+            <pre><code class="language-javascript">function updateTimeRemaining() {
+  timeRemaining.setSeconds(timeRemaining.getSeconds() - 1);
+  const hh = timeRemaining.getHours();
+  const mm = timeRemaining.getMinutes();
+  const ss = timeRemaining.getSeconds();
+  timeRemainingSpan.innerText =
+    String(hh).padStart(2, '0') +
+    ':' +
+    String(mm).padStart(2, '0') +
+    ':' +
+    String(ss).padStart(2, '0');
+  if (hh === 0 && mm === 0 && ss === 0) {
+    iframe.style.display = 'none';
+    h1.innerText = 'You ran out of time!';
+    button.disabled = 'disabled';
+    google.script.run.updateServer(uuid, 'Ran out of time');
+    return;
+  }
+  if (formSubmitted || formPaused) {
+    return;
+  }
+  setTimeout(updateTimeRemaining, 1000);
+}</code></pre>
+
+            <p>
+              The function defines a timeout of one second after which the
+              function wil be called again, if the conditions described above
+              are not met. Note that if the time runs out, we call our
+              server-side <strong>updateServer</strong> function, so that it can
+              log the fact that time has elapsed.
+            </p>
+
+            <p>
+              We can initiate the countdown inside the
+              <strong>onload</strong> function when loadCounter is 1:
+            </p>
+
+            <pre><code class="language-javascript">if (loadCounter === 1) {
+  iframe.style.height = '800px';
+  updateTimeRemaining();
+}</code></pre>
+
+            <h2>Pause and resume</h2>
+
+            <p>
+              Finally, we can allow the user to pause and resume the form one
+              time when they click on the button. Here's the code:
+            </p>
+
+            <pre><code class="language-javascript">button.addEventListener('click', () => {
+  if (button.innerText === 'Pause once') {
+    formPaused = true;
+    iframe.style.display = 'none';
+    button.innerText = 'Resume';
+    google.script.run.updateServer(uuid, 'Paused the form');
+  } else {
+    formPaused = false;
+    iframe.style.display = 'block';
+    button.innerText = 'Pause used';
+    button.disabled = 'disabled';
+    google.script.run.updateServer(uuid, 'Resumed the form');
+    updateTimeRemaining();
+  }
+});</code></pre>
+
+            <p>
+              Above, we add a click event listener to the button. We check its
+              state: if it shows the default "Pause once" caption then we set
+              formPaused to true, which will cause our
+              <strong>updateTimeRemaining</strong> to pause the timer. The form
+              disappears so that the user cannot continue to work on it.
+              Clicking the button again brings back the form, sets "formPaused"
+              to false, restarts <strong>updateTimeRemaining</strong> and
+              disables the button. Note that we report on form pause and form
+              resume events.
+            </p>
+
+            <p>
+              This is it. If you made it thus far then I'm really proud of you!
+              It's a lot to take in, but I hope you can see the power of this
+              approach. Now you can run analysis in Google Sheet, comparing the
+              form results to the activities you logged, and seeing which UUIDs
+              access the form but don't submit it.
+            </p>
+            <p>Happy form-timing!</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Using Google Docs text in Apps Script | Ben Ronkin</title>
+    <meta property="og:title" content="Using Google Docs text in Apps Script" />
+    <meta
+      name="description"
+      content="Read content from the body of a Google Doc and use it to send emails"
+    />
+    <meta
+      property="og:description"
+      content="Read content from the body of a Google Doc and use it to send emails"
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/using-google-doc-text-in-google-apps-script.html"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Using Google Docs text in Apps Script</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> April 14, 2022
+              </span>
+            </p>
+          </div>
+          <div
+            class="blog-post-hero"
+            style="display: flex; justify-content: center"
+          >
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/Un6iExX_2jk
+              "
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="blog-post-body">
+            <p>
+              In the
+              <a
+                href="google-sheet-dropdown-with-names-of-google-drive-files.html"
+                >previous post</a
+              >, we looked at how to scan a Google Drive folder in order to
+              collect the names of its files, and use them to populate a
+              dropdown in Google Sheet. We will now see how to access the text
+              inside these Google Docs in order to use them as email templates
+              in our mail-merge solution.
+            </p>
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+            <p>
+              Currently, the Google Docs are empty and only have unique names
+              for the dropdown. We need to add the texts for the email subject
+              line and body in each document. Here's what my "Follow-up"
+              template looks like:
+            </p>
+            <img
+              class="responsive-img"
+              src="../img/docs-text-template.png"
+              alt="docs text template"
+            />
+            <p>
+              The document contains three areas: one for the subject line, the
+              next for an HTML body, and the third for plain-text body. We will
+              pass both versions of the body to "GmailApp.senEmail()", so that
+              the recipient's email system can render the right version for
+              them. All three areas include our placeholders wrapped in double
+              curly brackets, as we saw in the first post. We will still
+              personalize each message by replacing these placeholders with the
+              recipient's data.
+            </p>
+            <p>
+              One thing to be careful about: Google Docs tends to replace a
+              simple quotes character with a fancier one, which isn't part of a
+              valid HTML. This may result in broken CSS, so pay attention to
+              that.
+            </p>
+            <p>
+              I've decided to place the texts inside three tables each made of a
+              single column and a single row. This gives me a nice border for
+              the area and, as we will see below, this will make fetching the
+              text in Apps Script super easy. But you can arrange your three
+              areas however you want.
+            </p>
+            <p>
+              We need to change our "sendEmail()" function to take advantage of
+              the Google Docs. Here's the revised code:
+            </p>
+            <pre><code class="language-javascript">function sendEmails() {
+  // Inform user that automation is starting
+  notifyUser_('Preparing emails...');
+  // Get the name of the Google Docs file from the dropdown cell
+  const templateName = g.ss
+    .getSheetByName(g.adminSheetName)
+    .getRange(g.dropdownRange)
+    .getValue();
+  // Check that the name isn't empty  
+  if (templateName.toString().trim().length === 0) {
+    notifyUser_('Select an email template and click SEND EMAILS');
+    return;
+  }
+  // Construct a query string that looks for a Google Docs file 
+  // with the given name inside the templates folder
+  const query = `"${g.templatesFolderId}" in parents and 
+    title = "${templateName}"`;
+  // Get the template file corresponding with the given name
+  const file = DriveApp.searchFiles(query).next();
+  // Open the document using the file's ID
+  const doc = DocumentApp.openById(file.getId());
+  // Get the document's body
+  const body = doc.getBody();
+  // Get the list of tables inside the body
+  const tables = body.getTables();
+  // Assign text from each table to the global variable's keys
+  [g.subject, g.htmlBody, g.body] = tables.map((table) => table.getText());
+  // Get the recipients' data
+  const sh = g.ss.getSheetByName(g.dataSheetName);
+  let [headers, ...data] = sh.getDataRange().getValues();
+  data = data.filter((row) => row[0].toString().trim().length > 0);
+  // Create and send a personalized message to each recipient
+  try {
+    data.forEach((row) => {
+      // Copy the subject, HTML body and text body
+      let subject = g.subject;
+      let htmlBody = g.htmlBody;
+      let body = g.body;
+      let email;
+      headers.forEach((header, i) => {
+        // Personalize the message components
+        // using the recipient's data
+        const re = new RegExp(`{{${header}}}`, 'g');
+        subject = subject.replace(re, row[i]);
+        body = body.replace(re, row[i]);
+        htmlBody = htmlBody.replace(re, row[i]);
+        if (header === 'email') {
+          email = row[i];
+        }
+      });
+      // HTML body needs to be passed inside an options
+      // object when using GmailApp.sendEmail
+      let options = {};
+      if (htmlBody) {
+        options.htmlBody = htmlBody;
+      }
+      GmailApp.sendEmail(email, subject, body, options);
+    });
+    notifyUser_('Mail merge completed');
+  } catch (err) {
+    notifyUser_(err.message);
+    return;
+  }
+}</code></pre>
+            <p>
+              We can see how easy it is to extract text from Google Docs: once
+              the user makes a template selection using the dropdown, the
+              template name is stored in the cell. We simply use that name to
+              look for a file with such name inside our templates folder. We
+              open the file as a Google Doc and then access the tables inside
+              its body. We extract the text from each table and assign it to the
+              keys inside the global object. You will notice that the order of
+              the keys "[g.subject, g.htmlBody, g.body]" must match the order of
+              the tables in the Google Docs.
+            </p>
+            <p>
+              Once we have the template texts, we iterate over the list of
+              recipients, duplicating the texts, and populate the placeholders
+              with the recipient's data.
+            </p>
+            <p>
+              Notice how we've revised the "GmailApp.sendEmail()" to accept an
+              options object that contains an "htmlBody" data.
+            </p>
+            <p>
+              Our mail-merge solution now supports multiple templates. We can
+              store texts of different campaigns in different files and easily
+              access them via the dropdown menu when sending out the emails.
+            </p>
+
+            <div class="row mt30 mb0">
+              <div class="col s12 prompt">
+                <span> Interested in customizing this script? </span>
+                <a class="ml20" href="../contact.html"> Contact me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

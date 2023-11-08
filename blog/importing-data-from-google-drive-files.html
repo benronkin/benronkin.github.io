@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-91362999-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-91362999-4');
+    </script>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/material-palenight.min.css"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="This is the first post in the Automating Google Sheets series. Here I'm going to list some considerations that you as a business manager should keep in mind when populating a Google Sheet with data from external files."
+    />
+    <meta
+      property="og:title"
+      content="Importing data from Google Drive files"
+    />
+    <meta
+      property="og:image"
+      content="//benronkin.com/img/blog-importing-data-from-google-drive-files.png"
+    />
+    <meta
+      property="og:description"
+      content="This is the first post in the Automating Google Sheets series. Here I'm going to list some considerations that you as a business manager should keep in mind when populating a Google Sheet with data from external files."
+    />
+    <meta
+      property="og:url"
+      content="//benronkin.com/blog/importing-data-from-google-drive-files.html"
+    />
+
+    <title>Importing data from Google Drive files | Ben Ronkin</title>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1462457565685419"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="../index.html" class="brand-logo" style="margin-left: 20px"
+            >Ben Ronkin</a
+          >
+          <a href="#" data-target="mobile" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="sidenav" id="mobile">
+            <li><a href="../products/index.html">Shop scripts</a></li>
+            <li><a href="../portfolio/index.html">Case studies</a></li>
+            <li><a href="../reviews.html">Client reviews</a></li>
+            <li><a href="./index.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li data-tooltip="Work">
+              <a href="../products/index.html">SHOP</a>
+            </li>
+            <li data-tooltip="Work">
+              <a href="../portfolio/index.html">CASE STUDIES</a>
+            </li>
+            <li data-tooltip="Client Testimonials">
+              <a href="../reviews.html">REVIEWS</a>
+            </li>
+            <li data-tooltip="Blog">
+              <a href="../blog/index.html"> BLOG</a>
+            </li>
+            <li data-tooltip="Contact">
+              <a href="../contact.html"> CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <div class="blog-post-header">
+            <h5><a href="index.html">Blog</a></h5>
+            <h1>Importing data from Google Drive files</h1>
+            <p class="muted">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">today</i> April 19, 2022
+              </span>
+            </p>
+          </div>
+
+          <div class="blog-post-hero">
+            <img
+              class="responsive-img"
+              src="../img/blog-importing-data-from-google-drive-files.png"
+              alt="blog post hero"
+            />
+          </div>
+
+          <div class="blog-post-body">
+            <p>
+              This is the first post in the
+              <a href="automate-google-sheets-intro.html"
+                >Automating Google Sheets</a
+              >
+              series. Here I'm going to list some considerations that you as a
+              business manager should keep in mind when populating a Google
+              Sheet with data from external files.
+            </p>
+            <p>
+              As a business manager you may need to work with external data.
+              This often entails logging into a third-party system and
+              downloading a file. You then open the file, copy the required
+              data, and paste it into the Google Sheet.
+            </p>
+            <p>
+              I've seen many workflows that incorporate this type of work, such
+              as appending data to a log, consolidating columns from different
+              sources into one spreadsheet, converting data formats, and finding
+              and replacing data in different cells.
+            </p>
+            <p>
+              As you may have experienced, this process isn't terribly
+              productive. You're required to follow a strict and frankly boring
+              procedure that is error-prone: you may copy the wrong data or
+              paste it in the wrong place.
+            </p>
+            <p>
+              The good news is that this type of work is ideal for automation.
+              Google Apps Script – the scripting solution for Google Workspace –
+              is very strong when it comes to pulling data out of Google Drive
+              files.
+            </p>
+
+            <p>
+              Here are some considerations to keep in mind as you consider
+              automating data ingestion into a Google Sheet:
+            </p>
+
+            <h2 id="structure">How to structure the automation system</h2>
+
+            <p>
+              My recommendation is that you create a centralized Google Drive
+              folder to house all of your automation projects. This will make it
+              easy to find and maintain the automation scripts over time. Let's
+              call this top folder <strong>Automations</strong>.
+            </p>
+            <p>
+              Inside <strong>Automations</strong>, we will have a set of
+              sub-folders, each for a specific automation project. It's
+              important to keep different scripts separate for ease of
+              maintenance. Let's call once such folder
+              <strong>Project A</strong>.
+            </p>
+
+            <p>
+              Inside <strong>Project A</strong>, I typically like to have three
+              sub-folders:
+            </p>
+            <ul>
+              <li>- Admin</li>
+              <li>- Inputs</li>
+              <li>- Output</li>
+            </ul>
+
+            <p>
+              Inside the <strong>Admin</strong> folder, I keep the script. It's
+              important to decide whether the script should be bound to a Google
+              Spreadsheet or be a standalone script file. I typically prefer to
+              use a Spreadsheet-bound script, unless the script does several
+              things (like serving a web app or writing to several
+              spreadsheets).
+            </p>
+
+            <p>
+              Inside the <strong>Admin</strong> folder I might create a
+              subfolder to house templates. The script might need to duplicate a
+              template and populate it as part of the data ingestion process, so
+              it's good to keep the templates organized.
+            </p>
+
+            <p>
+              The <strong>Inputs</strong> folder is used as the staging area.
+              That's the folder you will use to drag-and-drop your external
+              files into. I usually like to create an
+              <strong>Archive</strong> sub-folder inside
+              <strong>Inputs</strong> where the script automatically moves the
+              input file at the end of the process. This helps keeping the
+              staging area clear and avoid issues such as data duplication as a
+              result of processing the same file several times.
+            </p>
+
+            <p>
+              Finally, the <strong>Output</strong> sub-folder houses the output
+              of the automation process. The script will either create a new
+              Google Sheet there that you later move to someplace else or update
+              an existing Google Sheet with new data.
+            </p>
+
+            <h2 id="source-to-target">How to map source and target files</h2>
+
+            <p>
+              The way the automation script pulls source data into a target
+              Google Sheet depends largely on the schemas (i.e, the column names
+              and order) of the two files. If the two files have identical
+              column headers then a mapping isn't required: the automation can
+              pull the source data rows and paste them into the target sheet
+              as-is.
+            </p>
+            <p>
+              Often, however, the two schemas are not identical: either the
+              source includes columns that are not required or that are named
+              differently in the target sheet. In that case the automation will
+              need to be told how to map each column of the source file to the
+              target file.
+            </p>
+            <p>
+              Typically, I'll have an <strong>Admin</strong> sheet inside the
+              <strong>Admin</strong> folder. The sheet will have a tab with two
+              columns: one would list the header names in the source file, and
+              other will list the corresponding header in the target sheet.
+            </p>
+            <p>
+              What I like about this approach is that it enables business users
+              to manage the mapping on their own without relying on a developer
+              to handle changes to the source or target schemas. Business users
+              simply update the mapping cells and the automation will use the
+              new names going forward.
+            </p>
+
+            <h2 id="file-names">How to identify input files</h2>
+            <p>
+              Another consideration is source file names. When the automation
+              needs to pick up a single file at a time, file naming isn't
+              normally an issue: The automation can be set to inspect the
+              <strong>Inputs</strong> folder and pick the first file it finds
+              there.
+            </p>
+            <p>
+              There are cases, however, when the automation needs to handle
+              multiple files, and each file needs to be processed differently.
+              For instance, you may have two files and you want to pick columns
+              A and B from file 1, and columns C and D from file 2.
+            </p>
+            <p>
+              In this case, the automation will need to identify each file by
+              name. To do so, I typically add a <strong>Settings</strong> tab in
+              the <strong>Admin</strong> sheet. The first column in the sheet
+              lists variable names that appear in the automation code, and the
+              second column lists the values of these keys. The developer enters
+              the variable names and the business users enter their values.
+            </p>
+            <p>
+              This gives business users to flexibility to handle file name
+              changes without changing the automation code.
+            </p>
+            <p>
+              There are occasions when file names change all the time: for
+              instance, when the file name includes the create date of the file.
+              In that case, the <strong>Settings</strong> tab will include a
+              name pattern that always stays the same, and the automation will
+              look for file names that include these pattern.
+            </p>
+
+            <h2 id="trigger">When to run the automation</h2>
+
+            <p>
+              There are two main ways to run the automation: on-schedule or
+              on-demand.
+            </p>
+
+            <p>
+              On-schedule execution is usually suitable for instances when files
+              are placed in the <strong>Inputs</strong> by some other agency:
+              either by another automation that places the file at the same
+              schedule, or by outside users who don't run the main automation.
+              In such cases, the automation can be set to run periodically using
+              a time-based trigger.
+            </p>
+
+            <p>
+              On-demand execution means that the person who's in charge of the
+              automation manually triggers the automation after he or she has
+              placed the file in the <strong>Inputs</strong> folder. To achieve
+              that, I typically like to create a custom menu in the
+              <strong>Admin</strong> sheet that business users click on to start
+              the automation.
+            </p>
+
+            <h2 id="log">How to monitor the automation</h2>
+
+            <p>
+              It's a best practice to keep track of the execution of the
+              automation. Depending on client needs, I typically se the
+              automation to move files in the <strong>Inputs</strong> folder to
+              an <strong>Archive</strong> sub-folder as mentioned earlier. In
+              conjunction with that, I sometimes set up a
+              <strong>Log</strong> tab inside the <strong>Admin</strong> sheet,
+              where every data ingestion is documented, including a link to the
+              archived input file. This helps business users to keep up to date
+              with what's going on and find the source file should a question or
+              an issue arise.
+            </p>
+
+            <h2 id="human">How to deal with the human element</h2>
+
+            <p>
+              The most unpredictable element of any automation system is the
+              group of people who will end up using it or supplying it with
+              data. It's important, therefore, to design the automation in such
+              a way that surprises require little to no change to the automation
+              code. Here are some suggestions:
+            </p>
+            <p>
+              First, make sure your developer plans for changes in any
+              assumption he or she makes when designing the system. Of course,
+              designing for maximum flexibility brings its own set of issues
+              (and it makes the project more expensive), but there are typically
+              logical what-if scenarios that you can be prepared for.
+            </p>
+
+            <p>
+              Second, make sure that the developer makes all the necessary
+              validations as soon as the execution starts running – rather then
+              be surprised later in the execution where it's more difficult to
+              pinpoint the source of the trouble. I like to use a messages tab
+              in the <strong>Admin</strong> sheet where I can communicate
+              validation failures to the business user once he or she hits the
+              custom menu to run the automation.
+            </p>
+
+            <p>
+              Third, as discussed before, it's important to use a
+              <strong>Settings</strong> tab or a <strong>Mapping</strong> tab,
+              as indicated before, where business users can change different
+              attributes of the system on their own, without requiring code
+              change.
+            </p>
+            <p>
+              Lastly, it's important to keep an open mind and understand that
+              some changes cannot be anticipated and will require code change.
+              When such changes are needed and they're relatively small in
+              scope, I and other developers I know don't charge our clients
+              extra and simply make the changes "on the house."
+            </p>
+
+            <p>
+              Please <a href="../contact.html">drop me a line</a> if you have
+              any questions.
+            </p>
+
+            <h2 id="case-studies">Related case studies</h2>
+            <p>
+              Below are a few case studies that illustrate how to ingest data
+              into Google Sheets.
+            </p>
+            <p><br /></p>
+
+            <portfolio-card
+              title="Unlimited document merge"
+              subtitle="Google Workspace"
+              image="../img/merge-docs-sheets-sidebar.png"
+              target="../merge-docs-sheets.html"
+              topics="gas document sheet drive pdf webapp"
+            >
+              <div slot="description">
+                <p>
+                  My client needed to merge multiple Google Sheet rows into
+                  templated Google Docs. He had many source data tabs and
+                  document templates to choose from. I created a Google Apps
+                  Script that automates data merge, and scales as more data tabs
+                  and templates are created.
+                </p>
+              </div>
+            </portfolio-card>
+
+            <portfolio-card
+              title="Data enrichment workflow"
+              subtitle="Google Workspace"
+              image="../img/data-enrichment-lifecycle.png"
+              target="../data-enrichment.html"
+              topics="gas drive sheets excel csv email"
+            >
+              <div slot="description">
+                <p>
+                  As a solo developer on the project, I created a sophisticated
+                  workflow system that handles new file submission in Google
+                  Apps Script.
+                </p>
+                <p>
+                  The system cuts down on the effort to validate and enrich
+                  submitted files, while providing stakeholders with a clear
+                  picture regarding the status of every submission.
+                </p>
+              </div>
+            </portfolio-card>
+
+            <portfolio-card
+              title="Merge Google Sheets"
+              subtitle="Google Workspace"
+              image="../img/merge-sheets-dashboard.png"
+              target="../merge-sheets.html"
+              topics="gas excel csv sheet drive"
+            >
+              <div slot="description">
+                <p>
+                  This Google Apps Script accepts a URL to a Google Drive folder
+                  that contains several source files (Google Sheets, Excel, and
+                  CSV). The script duplicates a sheet template, merges the
+                  source files based on a common key, and then populates the
+                  templated sheet. The output sheet includes a dashboard that
+                  summarizes key information in the spreadsheet.
+                </p>
+              </div>
+            </portfolio-card>
+
+            <portfolio-card
+              title="CRM server in Google sheet"
+              subtitle="Google Workspace"
+              image="../img/db-api-cover.png"
+              target="../crm-in-sheets.html"
+              topics="gas sheets crm webapp"
+            >
+              <div slot="description">
+                <p>
+                  A sales manager manages all sales leads in a Google Sheet. She
+                  needs to route leads to her team and have her reps follow up
+                  on the leads and update their status and information.
+                </p>
+                <p>
+                  Instead of having the reps update the master sheet, she uses
+                  the Google Apps Script web app to distribute leads to reps and
+                  update the master sheet based on reps' local updates.
+                </p>
+              </div>
+            </portfolio-card>
+
+            <portfolio-card
+              title="Expand Google Sheet rows"
+              subtitle="Google Workspace"
+              image="../img/expand-row-summary.png"
+              target="../expand-row.html"
+              topics="gas sheet"
+            >
+              <div slot="description">
+                <p>
+                  In this small project, the client had a Google Sheet with two
+                  tabs (summary and detail), and required a way to expand
+                  summary rows based on date range in each of the rows. I
+                  developed a Google Apps Script to enable the client to expand
+                  the rows on demand.
+                </p>
+              </div>
+            </portfolio-card>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">
+              You can use rows and columns here to organize your footer content.
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+      <div class="footer-copyright">
+        <div class="container space-between">
+          <span>© 2020-2023 Copyright Ben Ronkin</span>
+          <span
+            ><a href="https://benronkin.com/blog/rss.xml">
+              <span style="display: flex; align-items: center">
+                <i class="material-icons">rss_feed</i> RSS feed
+              </span>
+            </a></span
+          >
+          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script src="../js/main.js"></script>
+    <script src="../js/portfolioCard.js"></script>
+  </body>
+</html>
