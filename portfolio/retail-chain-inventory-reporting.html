@@ -29,9 +29,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Google Sheets reports and dashboard for construction crews"
+      content="Dashboard for retail chain inventory"
     />
-    <title>Google Sheets reports and dashboard for construction crews | Ben Ronkin</title>
+    <title>Dashboard for retail chain inventory | Ben Ronkin</title>
 
   </head>
 
@@ -73,22 +73,22 @@
       </nav>
 
       <div class="container">
-        <h1>Reports and dashboards for construction crews</h1>
+        <h1>Dashboard for retail chain inventory</h1>
         <h5>Google Apps Script</h5>
 
         <div class="row top-image">
           <img
-            src="../img/construction-dashboard-hero.png"
-            alt="construction-dashboard-hero.png"
+            src="../img/retail-inventory-dashboard.png"
+            alt="retail-inventory-dashboard.png"
             class="responsive-img"
-            width="75%"
+            width="95%"
           />
         </div>
 
         <div class="summary">
           <h2>SUMMARY</h2>
           <p>
-            The client needed automation to calculate commissions for construction crews. A Google Form is used to capture work details. A Google Apps Script calculates commissions. Google Sheets reports and dashboards visualize the data for analysis and insights.
+            The client had a retail chain with dozens of locations. He needed a solution to collect inventory levels from each store, and consolidate the data into a single dashboard that reflects current levels against par levels. The dashboard enables management to track inventory levels across stores and adjust inventories among them.
           </p>
         </div>
 
@@ -96,7 +96,7 @@
           <div class="col s12 m5">
             <h2>Capture work details</h2>
             <p>
-              The client uses a Google Form to capture information on a new job. Every form entry includes general job information, as well as daily data capture of the technicians performing the work.
+              The client uses a Google Form to capture inventory level from every store. The form includes the name of the store, the name of employee filling out the form, and inventory level for each product.
             </p>
             <p>
               When the form is submitted, its responses are captured in a Google Sheet that my Google Apps Script automation can access.
@@ -104,8 +104,8 @@
           </div>
           <div class="col col-r s12 m7">
             <img
-              src="../img/construction-dashboard-form.png"
-              alt="construction-dashboard-form.png"
+              src="../img/retail-inventory-form.png"
+              alt="retail-inventory-form.png"
               class="responsive-img"
               width="60%"
             />
@@ -115,77 +115,43 @@
         <div class="row">
           <div class="col s12 m7">
             <img
-              src="../img/construction-dashboard-settings.png"
-              alt="construction-dashboard-settings"
+              src="../img/retail-inventory-par.png"
+              alt="retail-inventory-par.png"
               class="responsive-img"
               width="75%"
             />
           </div>
           <div class="col s12 m5">
-            <h2>Configurable settings</h2>
+            <h2>Par levels</h2>
             <p>
-              The Google Apps Script operates inside a Google Sheet where using a Settings tab, the client can change various inputs such as split rates, deduction rates, etc.
+              The Google Sheet that contains the automation includes the par levels for each product for three groups. The sheet assigns each store to a par group. This enables the automation to know the right par level of each store.
             </p>
-            <p>The script automation runs on all form submissions – both historical and new – enabling the client to perform what-if scenario analyses by changing the settings and rerunning the automation.
+            <p>The script automation runs on all form submissions, identifying the most recent submission from each store. The script calculates the "need" and "excess" of each store relative to its inventory level and par level.
             </p>
           </div>
         </div>
 
         <div class="row">
           <div class="col s12 m5">
-            <h2>Commission calculation</h2>
+            <h2>Inventory dashboard</h2>
             <p>
-              The Google Apps Script uses the client settings and the form submissions in order to calculate payouts for every crew member on every job. The calculation are quite complex: for instance, the crew commission depends on the number of full-time and part-time members, which can vary on different days of the job.
+              The automation produces a dashboard that indicates the inventory levels, needs, and excess of each product for each store. The automation also flags in red any store that is late to submit its inventory levels. 
             </p>
             <p>
-             The automation uses sophisticated business logic to calculate commissions correctly.
+             The dashboard enables management to track inventory levels across stores and adjust inventories among them.
             </p>
           </div>
           <div class="col col-r s12 m7">
             <img
-              src="../img/construction-dashboard-raw.png"
-              alt="construction-dashboard-raw.png"
+              src="../img/retail-inventory-dashboard-narrow.png"
+              alt="retail-inventory-dashboard-narrow.png"
               class="responsive-img"
-              width="70%"
+              width="90%"
             />
           </div>
         </div>
 
-        <div class="row">
-          <div class="col s12 m7">
-            <img
-              src="../img/construction-dashboard-report.png"
-              alt="construction-dashboard-report"
-              class="responsive-img"
-              width="75%"
-            />
-          </div>
-          <div class="col s12 m5">
-            <h2>Consolidated Reports</h2>
-            <p>
-              The client's Google Sheet contains a report tab that consolidates multiple crew member rows to a single row per job. Sophisticated formulas find the right data item inside the automation's raw data tab and present it in a consolidated view.
-            </p>
-            <p>The client can easily see how much commission every crew member was paid per job.
-            </p>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col s12 m5">
-            <h2>Executive Dashboard</h2>
-            <p>
-              The client's Google Sheet contains an interactive dashboard that enables managers to keep track of key business metrics. The dashboard is connected directly to the raw data from the automation, giving a bird's-eye view of crew commissions, job completions, and more.
-            </p>
-          </div>
-          <div class="col col-r s12 m7">
-            <img
-              src="../img/construction-dashboard-hero.png"
-              alt="construction-dashboard-hero.png"
-              class="responsive-img"
-              width="70%"
-            />
-          </div>
-        </div>
 
 
         <div class="card techs">
