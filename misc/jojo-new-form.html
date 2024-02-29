@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+  </head>
+  <body>
+    <form>
+      <input type="text" name="first-name" placeholder="first name" />
+      <input type="text" name="last-name" placeholder="last name" />
+      <button id="btn-submit">Submit</button>
+      <div id="message"></div>
+    </form>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // inits
+        const submitButton = document.querySelector('#btn-submit')
+
+        const formDataToJson_ = (formData) => {
+          const json = {}
+          for (let key of formData.keys()) {
+            json[key] = formData.get(key)
+          }
+          return json
+        }
+
+        const handleFormSubmit = async (e) => {
+          e.preventDefault()
+          submitButton.disabled = true
+          const formData = new FormData(e.target)
+
+          const url =
+            'https://script.google.com/macros/s/AKfycbxCqblyJ5qxhZtr4gh0cFQtJKnJPYgQcXFhJ00kl3aBo7yHQhBjmYEmjvIfqNUkS7NJXg/exec'
+
+          const headers = new Headers()
+          headers.append('Content-Type', 'text/plain;charset=utf-8')
+
+          const req = new Request(url, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(formDataToJson_(formData)),
+          })
+
+          try {
+            const res = await fetch(req)
+            const jsn = await res.json()
+            document.querySelector('#message').innerText = jsn.status
+          } catch (err) {
+            document.querySelector('#message').innerText = err
+          }
+          submitButton.disabled = false
+        }
+
+        document
+          .querySelector('form')
+          .addEventListener('submit', handleFormSubmit)
+      })
+    </script>
+  </body>
+</html>
