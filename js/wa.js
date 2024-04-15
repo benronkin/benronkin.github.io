@@ -2,8 +2,7 @@ async function collect(data) {
   data.location = window.location
   data.referrer = document.referrer
 
-  const url =
-    'http://127.0.0.1:5001/web-analytics-2024/us-central1/requestApp/collect'
+  const url = 'https://requestapp-55p23hikza-uc.a.run.app/collect'
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
 
