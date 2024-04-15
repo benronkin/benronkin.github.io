@@ -443,5 +443,16 @@
       hljs.highlightAll()
     </script>
     <script src="../js/main.js"></script>
+        <script src="../js/wa.js"></script>
+    <script>
+      document.querySelector('#buy-top-btn').addEventListener('click', () => {
+        collect({ type: 'button-click', target: 'top buy button' })
+      })
+      document
+        .querySelector('#buy-stripe-btn')
+        .addEventListener('click', () => {
+          collect({ type: 'button-click', target: 'Stripe buy button' })
+        })
+    </script>
   </body>
 </html>
