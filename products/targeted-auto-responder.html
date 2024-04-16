@@ -88,14 +88,19 @@
                 templates.
               </p>
               <div style="margin-top: 30px">
-                <a id="buy-top-btn" href="#buy-section" class="btn btn-hero-single">Buy now</a>
+                <a
+                  id="buy-top-btn"
+                  href="#buy-section"
+                  class="btn btn-hero-single"
+                  >Buy now</a
+                >
               </div>
             </div>
             <div
               class="col m12 l6"
               style="display: flex; justify-content: center"
             >
-<!--               <img
+              <!--               <img
                 src="../img/auto-responder-hero.png"
                 alt="auto-responder-hero.png"
                 class="responsive-img"
@@ -286,6 +291,23 @@
                   Google Drive.
                 </div>
               </div>
+              <!---->
+              <div class="info-box">
+                <div class="info-question">
+                  <span class="info-question-span"
+                    >What are the requirements for using this script?</span
+                  >
+                  <span class="toggle">+</span>
+                </div>
+                <div class="info-answer hide">
+                  You need to have a Gmail account or a Google Workspace
+                  account. Please note that this automation uses the Gmail API
+                  that comes with a daily usage quota. If you have tens of
+                  thousands of emails in your inbox then the automation will not
+                  work correctly.
+                </div>
+              </div>
+              <!---->
               <div class="info-box">
                 <div class="info-question">
                   <span class="info-question-span"
@@ -315,19 +337,6 @@
                   <a href="../contact.html">contact form</a> to describe your
                   customization needs. I'll provide you with the amount of hours
                   you'll need to prepay, and the hourly rate.
-                </div>
-              </div>
-              <!---->
-              <div class="info-box">
-                <div class="info-question">
-                  <span class="info-question-span"
-                    >What are the requirements for using this script?</span
-                  >
-                  <span class="toggle">+</span>
-                </div>
-                <div class="info-answer hide">
-                  You need to have a Gmail account or a Google Workspace
-                  account.
                 </div>
               </div>
               <!---->
@@ -444,7 +453,7 @@
       hljs.highlightAll()
     </script>
     <script src="../js/main.js"></script>
-        <script src="../js/wa.js"></script>
+    <script src="../js/wa.js"></script>
     <script>
       document.querySelector('#buy-top-btn').addEventListener('click', () => {
         collect({ type: 'button-click', target: 'top buy button' })
