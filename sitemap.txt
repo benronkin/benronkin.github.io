@@ -3,6 +3,7 @@ https://benronkin.com/index.html
 https://benronkin.com/contact.html
 https://benronkin.com/reviews.html
 https://benronkin.com/blog/index.html
+https://benronkin.com/blog/transforming-sales-communication-with-targeted-auto-responder.html
 https://benronkin.com/blog/infinity-scroll-with-google-apps-script.html
 https://benronkin.com/blog/create-google-drive-addon-for-stability-ai.html
 https://benronkin.com/blog/create-chrome-extension-for-deepl-translator.html
