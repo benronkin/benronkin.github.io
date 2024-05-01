@@ -180,7 +180,11 @@ section.primary .product-info {
 }
 
 section#buy-section .btn-hero-single {
-  background-color: var(--secondary) !important;
+ color: black
+}
+section#buy-section .btn-hero-single:hover {
+ color: white;
+ background: greenyellow;
 }
 
 section#buy-section .product-info p {
@@ -432,11 +436,14 @@ video {
   align-items: center;
 }
 
-.btn-hero-single,
-.btn-hero-single:hover {
-  background-color: var(--purple) !important;
-  color: white;
+.btn-hero-single
+{
+  background-color: greenyellow !important;
+  color: black ;
   font-size: 1.2rem;
+}
+.btn-hero-single:hover {
+  background-color: green !important;
 }
 
 .chip {
