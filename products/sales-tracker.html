@@ -84,7 +84,7 @@
                 Sales Tracker in Google Sheet
               </h1>
               <p class="product-subheader">
-                Summarize your sales transactions by category.
+                Track your sales transactions and summarize by category.
               </p>
               <div style="margin-top: 30px">
                 <a
@@ -99,19 +99,14 @@
               class="col m12 l6"
               style="display: flex; justify-content: center"
             >
-              <!--               <img
-                src="../img/auto-responder-hero.png"
-                alt="auto-responder-hero.png"
-                class="responsive-img"
-              /> -->
-              <iframe
+              <!-- <iframe
                 class="product-iframe"
                 src="https://www.youtube.com/embed/xhi-DkFYU2c?si=ySVeZ1nDK_MKAVWS"
                 title="Calendar Events from Google Sheet"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
-              ></iframe>
+              ></iframe> -->
             </div>
           </div>
         </div>
@@ -121,11 +116,9 @@
           <div class="row">
             <div class="col s12">
               <p class="high-level">
-                This script-based Google Sheet sends automated responses to new
-                emails that arrive in your Gmail account. Build custom rules
-                that define when a response email should be sent. Use templates
-                for custom email subject and body. Leverage Gmail's labels to
-                trigger responses based on business rules.
+                This script-based Google Sheet includes a form to enter new
+                sales transactions. It also includes a date-based report to view
+                total sales, as well as breakdown by category.
               </p>
             </div>
           </div>
@@ -134,109 +127,93 @@
 
       <div class="container">
         <div class="row">
-          <div class="col s12 m7">
-            <h2 style="text-align: left">Go beyond the basics</h2>
+          <div class="col s12 m6">
+            <h2 style="text-align: left">Accurate data entry</h2>
             <p style="text-align: left">
-              While Gmail provides a vacation responder, it poses several
-              limitations:
+              Use the embedded form to enter your sales transactions accurately
+              and consistently. You can add your own fields to the form, and
+              they will be automatically added to the Sales tracking tab.
             </p>
-            <ul>
-              <li>- You can set only one responder at a time</li>
-              <li>- You cannot set a responder to specific days of the week</li>
-              <li>
-                - You cannot set a responder to different hours of the day
-              </li>
-              <li>
-                - You cannot target specific patterns, like senders and subjects
-              </li>
-              <li>
-                - You do not have multiple templates for different responses
-              </li>
-              <li>
-                - You can't alter the number of days (4) before an auto response
-                is re-sent
-              </li>
-            </ul>
             <p style="text-align: left">
-              Because of these limitations, it's impossible to target
-              auto-response emails to different business conditions.
+              When you click the "Add" button, the transaction will be recorded
+              in the Sales tab, and the form will reset for the next entry.
             </p>
           </div>
-          <div class="col col-r s12 m5">
+          <div class="col col-r s12 m6">
             <img
-              src="../img/auto-responder-gmail-settings.png"
-              alt="auto-responder-gmail-settings.png"
+              src="../img/sales-tracker-form.png"
+              alt="sales-tracker-form.png"
               class="responsive-img"
             />
           </div>
         </div>
 
         <div class="row">
-          <div class="col s12">
-            <h2>Targeted Auto-Responder for Gmail</h2>
-
+          <div class="col s12 m6">
             <img
-              src="../img/auto-responder-rules.png"
-              alt="auto-responder-rules.png"
+              src="../img/sales-tracker-sales.png"
+              alt="sales-tracker-sales.png"
               class="responsive-img"
             />
           </div>
-          <div class="col s12">
-            <p>
-              Create different auto-response campaigns based on rules. You can
-              have as many rules as you want. Rules can based on specific
-              from/to dates or on days of the week. Each row in the tab
-              represents a standalone rule. The rule can be enabled or disabled
-              at any time. You can also change the from/to dates at any time.
-            </p>
-            <p></p>
+          <div class="col col-r s12 m6">
+            <div>
+              <h2 style="text-align: left">Centralized sales data</h2>
+              <p style="text-align: left">
+                All form submissions are recorded in the sales tab for easy
+                access. You can manually add rows to this tab if you wish.
+              </p>
+              <p style="text-align: left">
+                All reporting is done based on this tab.
+              </p>
+            </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col s12">
-            <h2>Advanced targeting with Gmail labels</h2>
-            <img
-              src="../img/auto-responder-labels.png"
-              alt="auto-responder-labels.png"
-              class="responsive-img"
-            />
-          </div>
-          <div class="col s12">
-            <p>
-              You can target different types of incoming emails with different
-              response campaigns using Gmail labels and filters. All you need to
-              do is create a label and assign it to a filter. Then, simply
-              reference the label in your rules:
+          <div class="col s12 m6">
+            <h2 style="text-align: left">Customizable categories</h2>
+            <p style="text-align: left">
+              Use the Settings tab to define your report categories. Categories
+              are optional and also flexible: you can have none, or as many as
+              you need. The tab makes it easy to update your categories going
+              forward.
+            </p>
+            <p style="text-align: left">
+              The categories are used to break down sales inside the report.
             </p>
           </div>
-          <div class="col s12">
+          <div class="col col-r s12 m6">
             <img
-              src="../img/auto-responder-labels2.png"
-              alt="auto-responder-labels.png"
+              src="../img/sales-tracker-settings.png"
+              alt="sales-tracker-settings.png"
               class="responsive-img"
             />
           </div>
         </div>
 
         <div class="row">
-          <div class="col s12">
-            <h2>Custom templates</h2>
-
+          <div class="col s12 m6">
             <img
-              src="../img/auto-responder-templates.png"
-              alt="auto-responder-templates.png"
+              src="../img/sales-tracker-report.png"
+              alt="sales-tracker-report.png"
               class="responsive-img"
             />
           </div>
-          <div class="col s12">
-            <p>
-              Define different subject line and email body templates and
-              associate the templates with your rules, so that the right
-              response is sent to the right recipient. You can define a subject
-              line, an HTML body using markup, and plain-text body.
-            </p>
-            <p></p>
+          <div class="col col-r s12 m6">
+            <div>
+              <h2 style="text-align: left">Date-based reporting</h2>
+              <p style="text-align: left">
+                The Report tab sums up the sales transactions. You can filter
+                the report using a From/To date range. The report will display
+                the sum of transactions with a date that falls within the
+                specified date range.
+              </p>
+              <p style="text-align: left">
+                The report provides both a total dollar amount for all sales, as
+                well as a breakdown by category.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -245,7 +222,7 @@
             <h2>BUY THIS PRODUCT</h2>
             <div class="row" style="margin: 50px 0 0 0">
               <div class="col s12 l6 offset-l3 product-info">
-                <h3>$45</h3>
+                <h3>$25</h3>
                 <p class="text-left">
                   The price is a one-time fee for the purchase of a script-based
                   Google Sheet.
@@ -254,12 +231,11 @@
                   <li>Spreadsheet-bound Google Apps Script</li>
                   <li>Unlimited script use</li>
                   <li>Fully customizable</li>
-                  <li>Implementation instructions</li>
                   <li>Free email support for 30 days</li>
                 </ul>
                 <a
                   id="buy-stripe-btn"
-                  href="https://buy.stripe.com/00gcQ3bHwaWBbdu8wC"
+                  href="https://buy.stripe.com/00g6rF6ncc0Fbdu3cl"
                   class="btn btn-hero-single"
                   >pay with stripe</a
                 >
