@@ -1,17 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="shortcut icon" href="/img/favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lexicon</title>
   </head>
+  <style>
+    iframe {
+      height: 100%;
+      width: 100%;
+      border: none;
+    }
+  </style>
   <body>
     <iframe
-      width="100%"
-      height="100%"
+      id="lexicon-iframe"
       src="https://script.google.com/macros/s/AKfycbw55ljHMG4nHaIYAxWA7gDxlsiU_seR7Q02gRUa1PWtHAGB79o/exec"
       frameborder="0"
     ></iframe>
+
+    <script>
+      function adjustIframeHeight(iframeId) {
+        const iframe = document.getElementById(iframeId)
+        if (!iframe) {
+          console.error(`No iframe found with id: ${iframeId}`)
+          return
+        }
+
+        // Function to set iframe height
+        function setIframeHeight() {
+          iframe.height = ''
+          iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px'
+        }
+
+        // Adjust height on load
+        iframe.addEventListener('load', setIframeHeight)
+
+        // Adjust height on window resize
+        window.addEventListener('resize', setIframeHeight)
+
+        // Initial adjustment if iframe is already loaded
+        if (iframe.contentDocument || iframe.contentWindow.document.readyState === 'complete') {
+          setIframeHeight()
+        }
+      }
+
+      // Example usage
+      document.addEventListener('DOMContentLoaded', () => {
+        adjustIframeHeight('lexicon-iframe')
+      })
+    </script>
   </body>
 </html>
