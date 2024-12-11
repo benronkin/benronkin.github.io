@@ -20,72 +20,10 @@
     }
   </style>
   <body>
-    <div id="login-div" style="width: 200px"></div>
-
     <iframe
       id="lexicon-iframe"
       src="https://script.google.com/macros/s/AKfycbw55ljHMG4nHaIYAxWA7gDxlsiU_seR7Q02gRUa1PWtHAGB79o/exec"
       frameborder="0"
     ></iframe>
-
-    <!-- Use the onload to trigger the button after the library has loaded
-    so that you don't get a "google not found" error. -->
-    <script src="https://accounts.google.com/gsi/client" onload="renderButton()" async defer></script>
-    <script>
-      /**
-       * Handle the JWT Token received after a successful login
-       */
-      function handleCallbackResponse(response) {
-        const { name, givenName, familyName, email, emailVerified, pictureUrl } = decodeToken(response.credential)
-        // You can use the hidden property to hide the button
-        // after a successful login instead of style.display
-        document.querySelector('#login-div').hidden = true
-        document.querySelector('#user-icon').src = pictureUrl
-        document.querySelector('#user-name').innerText = name
-        document.querySelector('#logout-div').style.display = 'inline-block'
-      }
-
-      /**
-       * Extract name, email, pic url from token
-       */
-      function decodeToken(token) {
-        var base64Url = token.split('.')[1]
-        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-        var jsonPayload = decodeURIComponent(
-          window
-            .atob(base64)
-            .split('')
-            .map(function (c) {
-              return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-            })
-            .join('')
-        )
-        const jsn = JSON.parse(jsonPayload)
-        return {
-          name: jsn.name,
-          givenName: jsn.given_name,
-          familyName: jsn.family_name,
-          email: jsn.email,
-          pictureUrl: jsn.picture,
-          emailVerified: jsn.email_verified
-        }
-      }
-
-      function renderButton() {
-        google.accounts.id.initialize({
-          // initialize with the client id from the GCP project OAuth Client ID
-          client_id: '477210946709-n4fh59gh610egmffer7faugif8kk7b4j.apps.googleusercontent.com',
-          callback: handleCallbackResponse
-        })
-        google.accounts.id.renderButton(document.querySelector('#login-div'), {
-          theme: 'outline',
-          size: 'large'
-        })
-        // Optionally also show the one-tap option. The cool thing is that if the user clicks on it,
-        // then handleCallbackResponse will be executed as usual, so login button on left will
-        // disappear.
-        // google.accounts.id.prompt()
-      }
-    </script>
   </body>
 </html>
