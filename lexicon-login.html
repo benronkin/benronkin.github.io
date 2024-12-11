@@ -20,10 +20,11 @@
         const { name, givenName, familyName, email, emailVerified, pictureUrl } = decodeToken(response.credential)
         // You can use the hidden property to hide the button
         // after a successful login instead of style.display
-        document.querySelector('#login-div').hidden = true
-        document.querySelector('#user-icon').src = pictureUrl
-        document.querySelector('#user-name').innerText = name
-        document.querySelector('#logout-div').style.display = 'inline-block'
+        // document.querySelector('#login-div').hidden = true
+        // document.querySelector('#user-icon').src = pictureUrl
+        // document.querySelector('#user-name').innerText = name
+        // document.querySelector('#logout-div').style.display = 'inline-block'
+        console.log('Name:', name)
       }
 
       /**
