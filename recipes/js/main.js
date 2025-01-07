@@ -1,6 +1,7 @@
-import { getWebAppData, postWebApp, handleTokenQueryParam } from './io.js'
+import { postWebApp, handleTokenQueryParam } from './io.js'
 import { state } from './state.js'
-import { setRecipeEventListeners, populateRecipes, getLatestRecipes } from './recipes.js' // set recipe event listeners implicitly
+import { initRecipes } from './recipes.js'
+import { initShopping } from './shopping.js'
 
 // ----------------------
 // Globals
@@ -11,9 +12,7 @@ const loginForm = document.querySelector('#login-form')
 const headerEl = document.querySelector('#header')
 const modeSelect = document.querySelector('#mode-select')
 const shoppingContainer = document.querySelector('#shopping-container')
-const shoppingEl = document.querySelector('#shopping-list')
 const recipesContainer = document.querySelector('#recipes-container')
-const recipeLinksPanel = document.querySelector('#recipe-links-panel')
 
 // ----------------------
 // Event listeners
@@ -35,9 +34,11 @@ modeSelect.addEventListener('change', (e) => {
   handleModeSelectChange(e)
 })
 
-/* When shopping list changes */
-shoppingEl.addEventListener('change', (e) => {
-  handleShoppingListChange(e)
+/* When fetching recipes fail */
+document.addEventListener('recipes-fetch-fail', () => {
+  loginContainer.classList.remove('hidden')
+  headerEl.classList.add('hidden')
+  recipeLinksPanel.classList.add('hidden')
 })
 
 // ------------------------
@@ -49,22 +50,9 @@ shoppingEl.addEventListener('change', (e) => {
  */
 async function handleDOMContentLoaded() {
   window.state = state // avail `state` in browser console for debugging
-
-  setRecipeEventListeners()
-
+  initRecipes()
+  initShopping()
   handleTokenQueryParam()
-  const { recipes, error } = await getLatestRecipes()
-
-  if (error) {
-    loginContainer.classList.remove('hidden')
-    headerEl.classList.add('hidden')
-    recipeLinksPanel.classList.add('hidden')
-    return
-  }
-  state.setRecipes(recipes)
-  populateRecipes()
-  const shopping = await getShoppingList()
-  shoppingEl.value = shopping
 }
 
 /**
@@ -99,44 +87,6 @@ async function handleLoginFormSubmit() {
   } catch (err) {
     console.log(err)
   }
-}
-
-/**
- * Handle shopping list change
- */
-async function handleShoppingListChange(e) {
-  const { value } = e.target
-  try {
-    const { message, error } = await postWebApp(state.getWebAppUrl(), {
-      path: 'shopping-update',
-      value
-    })
-    if (error) {
-      throw new Error(error)
-    }
-    console.log(message)
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-// ------------------------
-// Shopping functions
-// ------------------------
-
-/**
- * Get the shopping list
- */
-async function getShoppingList() {
-  const { shopping, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=shopping`)
-  if (error) {
-    console.log(`getShoppingList error: ${error}`)
-    return { error }
-  }
-  if (token) {
-    localStorage.setItem('token', token)
-  }
-  return shopping
 }
 
 // ------------------------

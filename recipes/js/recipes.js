@@ -1,5 +1,10 @@
 import { getWebAppData, postWebApp } from './io.js'
+import { resizeTextarea } from './ui.js'
 import { state } from './state.js'
+
+// ----------------------
+// Globals
+// ----------------------
 
 const addRecipeBtn = document.querySelector('#add-recipe')
 const searchRecipesEl = document.querySelector('#search-recipes')
@@ -21,7 +26,7 @@ const recipeIdEl = document.querySelector('#recipe-id')
 /**
  * Set recipe event listeners
  */
-export function setRecipeEventListeners() {
+export async function initRecipes() {
   /* When recipes container is populated */
   recipesContainer.addEventListener('recipes-loaded', () => {
     handleRecipeContainerPopulated()
@@ -43,84 +48,15 @@ export function setRecipeEventListeners() {
       handleFieldChange(e.target)
     })
   })
-}
 
-/**
- * Get the latest recipes
- */
-export async function getLatestRecipes() {
-  const { recipes, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=recipes`)
+  const { recipes, error } = await getLatestRecipes()
+
   if (error) {
-    console.log(`getLatestRecipes error: ${error}`)
-    return { error }
-  }
-  if (token) {
-    localStorage.setItem('token', token)
-  }
-  return recipes
-}
-
-/**
- * Populate the recipes list
- */
-export function populateRecipes() {
-  const recipes = state.getRecipes()
-  if (!recipes) {
-    console.log(`populateRecipes error: state does not have recipes: ${recipes}`)
+    document.dispatchEvent(new CustomEvent('recipes-fetch-fail'))
     return
   }
-
-  recipesContainer.classList.remove('hidden')
-  recipesList.innerHTML = ''
-  for (const recipe of recipes) {
-    const li = document.createElement('li')
-    li.textContent = recipe.title
-    li.classList.add('recipe-link')
-    li.dataset.id = recipe.id
-    recipesList.appendChild(li)
-  }
-  recipesContainer.dispatchEvent(new CustomEvent('recipes-loaded'))
-}
-
-/**
- * Load the recipe object to the page
- */
-export function loadRecipe(recipe) {
-  const activeTab = document.querySelector('.tab.active')
-  if (activeTab) {
-    activeTab.classList.remove('active')
-  }
-  const tabId = `tab-${recipe.id}`
-  let tab = document.querySelector(`#${tabId}`)
-  if (!tab) {
-    tab = document.createElement('div')
-    tab.id = tabId
-    tab.classList.add('tab')
-    tab.classList.add('active')
-    tab.innerHTML = `<span class="text-tab">${recipe.title}</span> <i class="close-tab fa-regular fa-circle-xmark"></i>`
-    document.querySelector('#tabs').appendChild(tab)
-    tab.querySelector('.text-tab').addEventListener('click', (e) => {
-      handleTabClick(tab)
-    })
-    tab.querySelector('.close-tab').addEventListener('click', (e) => {
-      e.stopPropagation()
-      handleTabCloseClick(tab)
-    })
-  }
-  tab.classList.add('active')
-  recipeEl.classList.remove('hidden')
-  recipeTitleEl.value = recipe.title
-  recipeIngredients.value = recipe.ingredients
-  resizeTextarea(recipeIngredients)
-  recipeMethod.value = recipe.method
-  resizeTextarea(recipeMethod)
-  recipeNotes.value = recipe.notes
-  resizeTextarea(recipeNotes)
-  recipeCategory.value = recipe.category || ''
-  resizeTextarea(recipeCategory)
-  recipeTags.value = recipe.tags
-  resizeTextarea(recipeTags)
-  recipeIdEl.textContent = recipe.id
+  state.setRecipes(recipes)
+  populateRecipes()
 }
 
 // ------------------------
@@ -276,6 +212,84 @@ function handleTabCloseClick(tab) {
 // ------------------------
 
 /**
+ * Get the latest recipes
+ */
+async function getLatestRecipes() {
+  const { recipes, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=recipes`)
+  if (error) {
+    console.log(`getLatestRecipes error: ${error}`)
+    return { error }
+  }
+  if (token) {
+    localStorage.setItem('token', token)
+  }
+  return recipes
+}
+
+/**
+ * Populate the recipes list
+ */
+function populateRecipes() {
+  const recipes = state.getRecipes()
+  if (!recipes) {
+    console.log(`populateRecipes error: state does not have recipes: ${recipes}`)
+    return
+  }
+
+  recipesContainer.classList.remove('hidden')
+  recipesList.innerHTML = ''
+  for (const recipe of recipes) {
+    const li = document.createElement('li')
+    li.textContent = recipe.title
+    li.classList.add('recipe-link')
+    li.dataset.id = recipe.id
+    recipesList.appendChild(li)
+  }
+  recipesContainer.dispatchEvent(new CustomEvent('recipes-loaded'))
+}
+
+/**
+ * Load the recipe object to the page
+ */
+function loadRecipe(recipe) {
+  const activeTab = document.querySelector('.tab.active')
+  if (activeTab) {
+    activeTab.classList.remove('active')
+  }
+  const tabId = `tab-${recipe.id}`
+  let tab = document.querySelector(`#${tabId}`)
+  if (!tab) {
+    tab = document.createElement('div')
+    tab.id = tabId
+    tab.classList.add('tab')
+    tab.classList.add('active')
+    tab.innerHTML = `<span class="text-tab">${recipe.title}</span> <i class="close-tab fa-regular fa-circle-xmark"></i>`
+    document.querySelector('#tabs').appendChild(tab)
+    tab.querySelector('.text-tab').addEventListener('click', (e) => {
+      handleTabClick(tab)
+    })
+    tab.querySelector('.close-tab').addEventListener('click', (e) => {
+      e.stopPropagation()
+      handleTabCloseClick(tab)
+    })
+  }
+  tab.classList.add('active')
+  recipeEl.classList.remove('hidden')
+  recipeTitleEl.value = recipe.title
+  recipeIngredients.value = recipe.ingredients
+  resizeTextarea(recipeIngredients)
+  recipeMethod.value = recipe.method
+  resizeTextarea(recipeMethod)
+  recipeNotes.value = recipe.notes
+  resizeTextarea(recipeNotes)
+  recipeCategory.value = recipe.category || ''
+  resizeTextarea(recipeCategory)
+  recipeTags.value = recipe.tags
+  resizeTextarea(recipeTags)
+  recipeIdEl.textContent = recipe.id
+}
+
+/**
  * Get the searched recipes
  */
 async function getSearchedRecipes(q) {
@@ -285,21 +299,4 @@ async function getSearchedRecipes(q) {
     return { error }
   }
   return recipes
-}
-
-/**
- * Resize the textarea
- */
-function resizeTextarea(textarea) {
-  // First, set the textarea to the default height
-  textarea.style.height = 'auto'
-  textarea.style.height = '0'
-
-  // Get the scroll height of the textarea content
-  let minHeight = textarea.scrollHeight
-
-  // If the scroll height is more than the default height, expand the textarea
-  if (minHeight > textarea.clientHeight) {
-    textarea.style.height = minHeight + 10 + 'px'
-  }
 }
