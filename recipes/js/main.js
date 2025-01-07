@@ -1,4 +1,5 @@
 import { getWebAppData, postWebApp, handleTokenQueryParam } from './io.js'
+import { state } from './state.js'
 
 // ----------------------
 // Globals
@@ -6,7 +7,6 @@ import { getWebAppData, postWebApp, handleTokenQueryParam } from './io.js'
 
 const WEB_APP_URL =
   'https://script.google.com/macros/s/AKfycbzUYReY4jAwZ0m_jbW1WUPGJxsGtZqJO3QwhxNIn-uOnLHQoCdztG0NHjDbNdZ4QDd5/exec'
-let recipesArr
 let afterRecipe = null
 
 const loginContainer = document.querySelector('#login-container')
@@ -35,26 +35,7 @@ const recipeIdEl = document.querySelector('#recipe-id')
 
 /* When page is loaded */
 document.addEventListener('DOMContentLoaded', async () => {
-  handleTokenQueryParam()
-  const { recipes, error } = await getLatestRecipes()
-
-  if (error) {
-    loginContainer.classList.remove('hidden')
-    headerEl.classList.add('hidden')
-    recipeLinksPanel.classList.add('hidden')
-    return
-  }
-
-  // if (!localStorage.getItem('recipes')) {
-  //   if (recipes?.length > 0) {
-  //     localStorage.setItem('recipes', JSON.stringify(recipes))
-  //   }
-  // }
-  // recipesArr = JSON.parse(localStorage.getItem('recipes'))
-  recipesArr = recipes
-  populateRecipes(recipesArr)
-  const shopping = await getShoppingList()
-  shoppingEl.value = shopping
+  handleDOMContentLoaded()
 })
 
 /* When login form is submitted */
@@ -65,17 +46,10 @@ loginForm.addEventListener('submit', async (e) => {
 
 /* When mode select is changed */
 modeSelect.addEventListener('change', (e) => {
-  const mode = e.target.value
-  if (mode === 'recipes') {
-    recipesContainer.classList.remove('hidden')
-    shoppingContainer.classList.add('hidden')
-  } else {
-    recipesContainer.classList.add('hidden')
-    shoppingContainer.classList.remove('hidden')
-  }
+  handleModeSelectChange(e)
 })
 
-/* When recipes container is popualted */
+/* When recipes container is populated */
 recipesContainer.addEventListener('recipes-loaded', () => {
   handleRecipeContainerPopulated()
 })
@@ -85,7 +59,7 @@ addRecipeBtn.addEventListener('click', async () => {
   await handleRecipeCreate()
 })
 
-/* When serach recipes input key down */
+/* When search recipes input key down */
 searchRecipesEl.addEventListener('keydown', async (e) => {
   await handleRecipeSearch(e)
 })
@@ -105,6 +79,41 @@ shoppingEl.addEventListener('change', (e) => {
 // ------------------------
 // Event handler functions
 // ------------------------
+
+/**
+ * Handle DOMContentLoaded
+ */
+async function handleDOMContentLoaded() {
+  window.state = state // avail `state` in browser console for debugging
+
+  handleTokenQueryParam()
+  const { recipes, error } = await getLatestRecipes()
+
+  if (error) {
+    loginContainer.classList.remove('hidden')
+    headerEl.classList.add('hidden')
+    recipeLinksPanel.classList.add('hidden')
+    return
+  }
+  state.setRecipes(recipes)
+  populateRecipes()
+  const shopping = await getShoppingList()
+  shoppingEl.value = shopping
+}
+
+/**
+ * Handle mode select change
+ */
+function handleModeSelectChange(e) {
+  const mode = e.target.value
+  if (mode === 'recipes') {
+    recipesContainer.classList.remove('hidden')
+    shoppingContainer.classList.add('hidden')
+  } else {
+    recipesContainer.classList.add('hidden')
+    shoppingContainer.classList.remove('hidden')
+  }
+}
 
 /**
  * Handle form submit
@@ -145,11 +154,10 @@ async function handleRecipeLinkClick(elem) {
   document.querySelector('.recipe-link.active')?.classList.remove('active')
   elem.classList.add('active')
   const recipeId = elem.dataset.id
-  const recipe = recipesArr.find((r) => r.id === recipeId)
+  const recipe = state.getRecipeById(recipeId)
   if (!recipe) {
-    console.log(`Recipe not found for id: ${recipeId}`)
-    console.log('recipesArr:', recipesArr)
-
+    console.log(`handleRecipeLinkClick error: Recipe not found for id: ${recipeId}`)
+    console.log('recipes:', state.getRecipes())
     return
   }
 
@@ -169,7 +177,7 @@ async function handleRecipeLinkClick(elem) {
  */
 function handleTabClick(elem) {
   const recipeId = elem.id.replace('tab-', '')
-  const recipe = recipesArr.find((r) => r.id === recipeId)
+  const recipe = state.getRecipeById(recipeId)
 
   document.querySelector('.recipe-link.active').classList.remove('active')
   document.querySelector(`.recipe-link[data-id="${recipeId}"]`).classList.add('active')
@@ -206,7 +214,7 @@ async function handleFieldChange(elem) {
   }
   const id = recipeIdEl.textContent
 
-  recipesArr.find((r) => r.id === id)[recipeSection] = elem.value
+  state.setRecipeSection(id, recipeSection, elem.value)
 
   try {
     const { message, error } = await postWebApp(WEB_APP_URL, {
@@ -241,7 +249,7 @@ async function handleRecipeCreate() {
     category: '',
     tags: ''
   }
-  recipesArr.push(newRecipe)
+  state.addRecipe(newRecipe)
   const li = document.createElement('li')
   li.textContent = newRecipe.title
   li.classList.add('recipe-link')
@@ -267,8 +275,8 @@ async function handleRecipeSearch(e) {
     return
   }
   const { recipes } = await getSearchedRecipes(value)
-  recipesArr = recipes
-  populateRecipes(recipesArr)
+  state.setRecipes(recipes)
+  populateRecipes()
 }
 
 /**
@@ -365,9 +373,10 @@ function loadRecipe(recipe) {
 /**
  * Populate the recipes list
  */
-function populateRecipes(recipes) {
+function populateRecipes() {
+  const recipes = state.getRecipes()
   if (!recipes) {
-    console.log(`populateRecipes error: No recipes: ${recipes}`)
+    console.log(`populateRecipes error: state does not have recipes: ${recipes}`)
     return
   }
 
