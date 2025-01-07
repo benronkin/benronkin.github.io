@@ -150,3 +150,12 @@ ul {
 .ml200 {
   margin-left: 200px;
 }
+
+/* mobile */
+
+@media (max-width: 768px) {
+  #left-panel-toggle {
+    padding: 20px;
+    margin-right: 50px;
+  }
+}
