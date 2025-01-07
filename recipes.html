@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="shortcut icon" href="https://benronkin.com/img/favicon.ico" />
+    <title>Recipes | Ben Ronkin</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      button,
+      input,
+      textarea {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      #add-recipe {
+        padding: 5px 10px;
+        margin: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      #header {
+        margin: 20px;
+        position: fixed;
+      }
+      #mode-select {
+        font-size: 24px;
+        border: none;
+      }
+      #mode-select:focus {
+        outline: none;
+      }
+      #shopping-container {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: 20px 0 0 200px;
+      }
+      #shopping-container.hidden {
+        display: none;
+      }
+      #shopping-list {
+        margin-top: 50px;
+        width: 100%;
+        height: 100vh;
+        border: none;
+        padding: 20px;
+      }
+      #recipe {
+        width: 100%;
+        padding: 20px;
+        border-left: 1px solid #ccc;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      #recipe.hidden {
+        display: none;
+      }
+      #recipe #recipe-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      #recipe input,
+      #recipe textarea {
+        width: 100%;
+        margin-bottom: 10px;
+        border: none;
+      }
+      #recipe input {
+        padding: 20px 0;
+      }
+      #recipe-links-panel {
+        position: fixed;
+        width: 200px;
+        padding: 0 10px;
+        overflow: hidden;
+        margin-top: 100px;
+      }
+      #recipes-panel {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin-left: 200px;
+      }
+      #search-recipes {
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 5px;
+      }
+      #tabs {
+        display: flex;
+        margin-top: 50px;
+      }
+      .hidden {
+        display: none;
+      }
+      .recipe-link {
+        cursor: pointer;
+        padding: 10px;
+        margin-bottom: 5px;
+      }
+      .recipe-link.active {
+        font-weight: bold;
+      }
+      .tab {
+        padding: 10px;
+        cursor: pointer;
+        border: 1px solid #ccc;
+      }
+      .tab.active {
+        border-bottom: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="login-container" class="hidden">
+      <h2>Please log in</h2>
+      <form id="login-form">
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value="ronkinben@gmail.com"
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <div id="header">
+      <select name="mode-select" id="mode-select">
+        <option value="recipes">Recipes</option>
+        <option value="shopping">Shopping</option>
+      </select>
+    </div>
+
+    <div id="shopping-container" class="hidden">
+      <textarea name="shopping-list" id="shopping-list"></textarea>
+    </div>
+
+    <div id="recipes-container">
+      <div id="recipe-links-panel">
+        <button id="add-recipe">NEW RECIPE</button>
+        <input type="search" id="search-recipes" />
+        <ul id="recipes-list"></ul>
+      </div>
+      <div id="recipes-panel">
+        <div id="tabs"></div>
+        <div id="recipe" class="hidden">
+          <input name="recipe-title" id="recipe-title" class="field" />
+          <h3>Notes</h3>
+          <textarea
+            name="recipe-notes"
+            id="recipe-notes"
+            class="field"
+          ></textarea>
+          <h3>Ingredients</h3>
+          <textarea
+            name="recipe-ingredients"
+            id="recipe-ingredients"
+            class="field"
+          ></textarea>
+          <h3>Method</h3>
+          <textarea
+            name="recipe-method"
+            id="recipe-method"
+            class="field"
+          ></textarea>
+          <h3>Category</h3>
+          <input name="recipe-category" id="recipe-category" class="field" />
+          <h3>Tags</h3>
+          <input name="recipe-tags" id="recipe-tags" class="field" />
+          <h3>Id</h3>
+          <p id="recipe-id"></p>
+        </div>
+      </div>
+    </div>
+    <script>
+      // ----------------------
+      // Globals
+      // ----------------------
+
+      const WEB_APP_URL =
+        'https://script.google.com/macros/s/AKfycbzUYReY4jAwZ0m_jbW1WUPGJxsGtZqJO3QwhxNIn-uOnLHQoCdztG0NHjDbNdZ4QDd5/exec'
+      let recipesArr
+      let afterRecipe = null
+
+      const loginContainer = document.querySelector('#login-container')
+      const loginForm = document.querySelector('#login-form')
+      const modeSelect = document.querySelector('#mode-select')
+      const shoppingContainer = document.querySelector('#shopping-container')
+      const shoppingEl = document.querySelector('#shopping-list')
+      const addRecipeBtn = document.querySelector('#add-recipe')
+      const searchRecipesEl = document.querySelector('#search-recipes')
+      const recipesContainer = document.querySelector('#recipes-container')
+      const recipesList = document.querySelector('#recipes-list')
+      const recipeEl = document.querySelector('#recipe')
+      const recipeTitleEl = document.querySelector('#recipe-title')
+      const recipeIngredients = document.querySelector('#recipe-ingredients')
+      const recipeMethod = document.querySelector('#recipe-method')
+      const recipeNotes = document.querySelector('#recipe-notes')
+      const recipeCategory = document.querySelector('#recipe-category')
+      const recipeTags = document.querySelector('#recipe-tags')
+      const recipeIdEl = document.querySelector('#recipe-id')
+
+      // ----------------------
+      // Event listeners
+      // ----------------------
+
+      /* When page is loaded */
+      document.addEventListener('DOMContentLoaded', async () => {
+        handleTokenQueryParam()
+        if (!localStorage.getItem('recipes')) {
+          const { recipes, error } = await getLatestRecipes()
+          if (error) {
+            loginContainer.classList.remove('hidden')
+            return
+          }
+          if (recipes?.length > 0) {
+            localStorage.setItem('recipes', JSON.stringify(recipes))
+          }
+        }
+        recipesArr = JSON.parse(localStorage.getItem('recipes'))
+        populateRecipes(recipesArr)
+        const shopping = await getShoppingList()
+        shoppingEl.value = shopping
+      })
+
+      /* When login form is submitted */
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        handleLoginFormSubmit()
+      })
+
+      /* When mode select is changed */
+      modeSelect.addEventListener('change', (e) => {
+        const mode = e.target.value
+        if (mode === 'recipes') {
+          recipesContainer.classList.remove('hidden')
+          shoppingContainer.classList.add('hidden')
+        } else {
+          recipesContainer.classList.add('hidden')
+          shoppingContainer.classList.remove('hidden')
+        }
+      })
+
+      /* When recipes container is popualted */
+      recipesContainer.addEventListener('recipes-loaded', () => {
+        handleRecipeContainerPopulated()
+      })
+
+      /* When add recipe button is clicked */
+      addRecipeBtn.addEventListener('click', async () => {
+        await handleRecipeCreate()
+      })
+
+      /* When serach recipes input key down */
+      searchRecipesEl.addEventListener('keydown', async (e) => {
+        await handleRecipeSearch(e)
+      })
+
+      /* When recipe field loses focus */
+      document.querySelectorAll('.field').forEach((field) => {
+        field.addEventListener('change', (e) => {
+          handleFieldChange(e.target)
+        })
+      })
+
+      /* When shopping list changes */
+      shoppingEl.addEventListener('change', (e) => {
+        handleShoppingListChange(e)
+      })
+
+      // ------------------------
+      // Event handler functions
+      // ------------------------
+
+      /**
+       * Handle form submit
+       */
+      async function handleLoginFormSubmit() {
+        const formData = new FormData(loginForm)
+        const email = formData.get('email')
+        try {
+          const { res, error } = await postWebApp(WEB_APP_URL, {
+            email,
+            path: 'login',
+          })
+          if (error) {
+            throw new Error(error)
+          }
+          const jsn = await res.json()
+          console.log(jsn)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+
+      /**
+       * Handle recipe container populated
+       */
+      function handleRecipeContainerPopulated() {
+        const recipeLinks = document.querySelectorAll('.recipe-link')
+        for (const recipeLink of recipeLinks) {
+          recipeLink.addEventListener('click', async (e) => {
+            handleRecipeLinkClick(e.target)
+          })
+        }
+      }
+
+      /**
+       * Handle recipe link click
+       */
+      async function handleRecipeLinkClick(elem) {
+        document
+          .querySelector('.recipe-link.active')
+          ?.classList.remove('active')
+        elem.classList.add('active')
+        const recipeId = elem.dataset.id
+        const recipe = recipesArr.find((r) => r.id === recipeId)
+        if (!recipe) {
+          console.log(`Recipe not found for id: ${recipeId}`)
+          console.log('recipesArr:', recipesArr)
+
+          return
+        }
+
+        loadRecipe(recipe)
+        const { message, error } = await postWebApp(WEB_APP_URL, {
+          path: 'recipe-access',
+          id: recipeId,
+        })
+        if (error) {
+          console.log(error)
+        }
+        console.log(message)
+      }
+
+      /**
+       * Handle tab click
+       */
+      function handleTabClick(elem) {
+        const recipeId = elem.id.replace('tab-', '')
+        const recipe = recipesArr.find((r) => r.id === recipeId)
+
+        loadRecipe(recipe)
+      }
+
+      /**
+       * Handle tab close click
+       */
+      function handleTabCloseClick(tab) {
+        tab.remove()
+        const activeTab = document.querySelector('.tab.active')
+        if (!activeTab) {
+          document
+            .querySelector('.recipe-link.active')
+            .classList.remove('active')
+          const firstTab = document.querySelector('.tab')
+          if (firstTab) {
+            const firstTabId = firstTab.id.replace('tab-', '')
+            document
+              .querySelector(`.recipe-link[data-id="${firstTabId}"]`)
+              .click()
+          } else {
+            recipeEl.classList.add('hidden')
+          }
+        }
+      }
+
+      /**
+       * Handle recipe field change
+       */
+      async function handleFieldChange(elem) {
+        const recipeSection = elem.id.replace('recipe-', '')
+        if (recipeSection === 'title') {
+          document
+            .querySelector('.tab.active')
+            .querySelector('.text-tab').textContent = elem.value
+          document.querySelector('.recipe-link.active').textContent = elem.value
+        }
+        const id = recipeIdEl.textContent
+
+        recipesArr.find((r) => r.id === id)[recipeSection] = elem.value
+
+        try {
+          const { message, error } = await postWebApp(WEB_APP_URL, {
+            path: 'recipe-update',
+            id,
+            value: elem.value,
+            section: recipeSection,
+          })
+          if (error) {
+            throw new Error(error)
+          }
+          console.log(message)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+
+      /**
+       * Handle recipe create
+       */
+      async function handleRecipeCreate() {
+        addRecipeBtn.disabled = true
+        addRecipeBtn.textContent = 'Creating...'
+        const { id } = await getWebAppData(`${WEB_APP_URL}?path=recipe-create`)
+
+        const newRecipe = {
+          id,
+          title: 'New Recipe',
+          ingredients: '',
+          method: '',
+          notes: '',
+          category: '',
+          tags: '',
+        }
+        recipesArr.push(newRecipe)
+        const li = document.createElement('li')
+        li.textContent = newRecipe.title
+        li.classList.add('recipe-link')
+        li.dataset.id = newRecipe.id
+        recipesList.appendChild(li)
+        li.addEventListener('click', () => {
+          handleRecipeLinkClick(li)
+        })
+        li.click()
+        addRecipeBtn.disabled = false
+        addRecipeBtn.textContent = 'NEW RECIPE'
+      }
+
+      /**
+       * Handle recipe search
+       */
+      async function handleRecipeSearch(e) {
+        if (e.key !== 'Enter') {
+          return
+        }
+        const value = e.target.value.toLowerCase().trim()
+        if (value.length === 0) {
+          return
+        }
+        const { recipes } = await getSearchedRecipes(value)
+        recipesArr = recipes
+        populateRecipes(recipesArr)
+      }
+
+      /**
+       * Handle shopping list change
+       */
+      async function handleShoppingListChange(e) {
+        const { value } = e.target
+        try {
+          const { message, error } = await postWebApp(WEB_APP_URL, {
+            path: 'shopping-update',
+            value,
+          })
+          if (error) {
+            throw new Error(error)
+          }
+          console.log(message)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+
+      // ------------------------
+      // Recipe functions
+      // ------------------------
+
+      /**
+       * Get the latest recipes
+       */
+      async function getLatestRecipes() {
+        const { recipes, token, error } = await getWebAppData(
+          `${WEB_APP_URL}?path=recipes`
+        )
+        if (error) {
+          console.log(`getLatestRecipes error: ${error}`)
+          return { error }
+        }
+        if (token) {
+          localStorage.setItem('token', token)
+        }
+        return recipes
+      }
+
+      /**
+       * Get the searched recipes
+       */
+      async function getSearchedRecipes(q) {
+        const { recipes, token, error } = await getWebAppData(
+          `${WEB_APP_URL}?path=recipes&q=${q}`
+        )
+        if (error) {
+          console.log(`getSearchedRecipes error: ${error}`)
+          return { error }
+        }
+        return recipes
+      }
+
+      /**
+       * Load the recipe
+       */
+      function loadRecipe(recipe) {
+        const activeTab = document.querySelector('.tab.active')
+        if (activeTab) {
+          activeTab.classList.remove('active')
+        }
+        const tabId = `tab-${recipe.id}`
+        let tab = document.querySelector(`#${tabId}`)
+        if (!tab) {
+          tab = document.createElement('div')
+          tab.id = tabId
+          tab.classList.add('tab')
+          tab.classList.add('active')
+          tab.innerHTML = `<span class="text-tab">${recipe.title}</span> <i class="close-tab fa-regular fa-circle-xmark"></i>`
+          document.querySelector('#tabs').appendChild(tab)
+          tab.querySelector('.text-tab').addEventListener('click', (e) => {
+            handleTabClick(tab)
+          })
+          tab.querySelector('.close-tab').addEventListener('click', (e) => {
+            e.stopPropagation()
+            handleTabCloseClick(tab)
+          })
+        }
+        tab.classList.add('active')
+        recipeEl.classList.remove('hidden')
+        recipeTitleEl.value = recipe.title
+        recipeIngredients.value = recipe.ingredients
+        resizeTextarea(recipeIngredients)
+        recipeMethod.value = recipe.method
+        resizeTextarea(recipeMethod)
+        recipeNotes.value = recipe.notes
+        resizeTextarea(recipeNotes)
+        recipeCategory.value = recipe.category || ''
+        resizeTextarea(recipeCategory)
+        recipeTags.value = recipe.tags
+        resizeTextarea(recipeTags)
+        recipeIdEl.textContent = recipe.id
+      }
+
+      /**
+       * Populate the recipes list
+       */
+      function populateRecipes(recipes) {
+        recipesContainer.classList.remove('hidden')
+        recipesList.innerHTML = ''
+        for (const recipe of recipes) {
+          const li = document.createElement('li')
+          li.textContent = recipe.title
+          li.classList.add('recipe-link')
+          li.dataset.id = recipe.id
+          recipesList.appendChild(li)
+        }
+        recipesContainer.dispatchEvent(new CustomEvent('recipes-loaded'))
+      }
+
+      // ------------------------
+      // Shopping functions
+      // ------------------------
+
+      /**
+       * Get the shopping list
+       */
+      async function getShoppingList() {
+        const { shopping, token, error } = await getWebAppData(
+          `${WEB_APP_URL}?path=shopping`
+        )
+        if (error) {
+          console.log(`getShoppingList error: ${error}`)
+          return { error }
+        }
+        if (token) {
+          localStorage.setItem('token', token)
+        }
+        return shopping
+      }
+
+      // ------------------------
+      // Helper functions
+      // ------------------------
+
+      /**
+       * Get data from Web app
+       */
+      async function getWebAppData(path) {
+        const token = localStorage.getItem('token')
+        if (!token) {
+          return { error: 'getWebAppData error: No token' }
+        }
+        path += (path.includes('?') ? `&` : `?`) + `t=${token}`
+
+        const headers = new Headers()
+        headers.append('Content-Type', 'text/plain;charset=utf-8')
+
+        const req = new Request(path, {
+          redirect: 'follow',
+          headers,
+        })
+        try {
+          const res = await fetch(req)
+          const jsn = await res.json()
+          return jsn
+        } catch (err) {
+          return {
+            error: `getWebAppData error: ${err}.`,
+          }
+        }
+      }
+
+      /**
+       * Post data to Web app
+       */
+      async function postWebApp(path, data) {
+        const token = localStorage.getItem('token')
+        if (!token) {
+          return { error: 'postWebApp error: No token' }
+        }
+        path += (path.includes('?') ? `&` : `?`) + `t=${token}`
+
+        const headers = new Headers()
+        headers.append('Content-Type', 'text/plain;charset=utf-8')
+
+        const req = new Request(path, {
+          method: 'POST',
+          redirect: 'follow',
+          headers,
+          body: JSON.stringify(data),
+        })
+        try {
+          const res = await fetch(req)
+          const jsn = await res.json()
+          return jsn
+        } catch (err) {
+          return { error: `postWebApp error: ${err}` }
+        }
+      }
+
+      /**
+       * If the user clicked on the email link then the token will be in the query param.
+       * Save the token to local storage and remove it from the URL.
+       */
+      function handleTokenQueryParam() {
+        const urlParams = new URLSearchParams(window.location.search)
+        const token = urlParams.get('t')
+        if (!token) {
+          return
+        }
+        localStorage.setItem('token', token)
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname
+        )
+      }
+
+      /**
+       * Resize the textarea
+       */
+      function resizeTextarea(textarea) {
+        // First, set the textarea to the default height
+        textarea.style.height = 'auto'
+        textarea.style.height = '0'
+
+        // Get the scroll height of the textarea content
+        let minHeight = textarea.scrollHeight
+
+        // If the scroll height is more than the default height, expand the textarea
+        if (minHeight > textarea.clientHeight) {
+          textarea.style.height = minHeight + 10 + 'px'
+        }
+      }
+    </script>
+  </body>
+</html>
