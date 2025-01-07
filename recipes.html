@@ -309,15 +309,14 @@
         const formData = new FormData(loginForm)
         const email = formData.get('email')
         try {
-          const { res, error } = await postWebApp(WEB_APP_URL, {
+          const { error, ...rest } = await postWebApp(WEB_APP_URL, {
             email,
             path: 'login',
           })
           if (error) {
             throw new Error(error)
           }
-          const jsn = await res.json()
-          console.log(jsn)
+          console.log(rest)
         } catch (err) {
           console.log(err)
         }
