@@ -247,7 +247,8 @@
         //     localStorage.setItem('recipes', JSON.stringify(recipes))
         //   }
         // }
-        recipesArr = JSON.parse(localStorage.getItem('recipes'))
+        // recipesArr = JSON.parse(localStorage.getItem('recipes'))
+        recipesArr = recipes
         populateRecipes(recipesArr)
         const shopping = await getShoppingList()
         shoppingEl.value = shopping
@@ -571,7 +572,10 @@
        * Populate the recipes list
        */
       function populateRecipes(recipes) {
-        console.log('recipes:', recipes)
+        if (!recipes) {
+          console.log(`populateRecipes error: No recipes: ${recipes}`)
+          return
+        }
 
         recipesContainer.classList.remove('hidden')
         recipesList.innerHTML = ''
