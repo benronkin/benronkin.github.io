@@ -98,10 +98,11 @@ ul {
 }
 #recipe-links-panel {
   background-color: #f9f9f9;
+  height: 100vh;
   position: fixed;
+  overflow: auto;
   width: 220px;
   padding: 0 10px;
-  overflow: hidden;
   margin-top: 90px;
   z-index: 2;
 }
