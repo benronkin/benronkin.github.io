@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', async () => {
  * Handle DOMContentLoaded
  */
 async function handleDOMContentLoaded() {
-  initRecipes()
-  initShopping()
   initAuth()
   initUi()
+  initRecipes()
+  initShopping()
 }
 
 // ------------------------
