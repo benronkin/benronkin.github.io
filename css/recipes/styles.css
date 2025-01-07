@@ -1,0 +1,118 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+html,
+body,
+button,
+input,
+textarea {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+#add-recipe {
+  padding: 5px 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#header {
+  margin: 20px;
+  position: fixed;
+}
+#mode-select {
+  font-size: 24px;
+  border: none;
+}
+#mode-select:focus {
+  outline: none;
+}
+#shopping-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 20px 0 0 200px;
+}
+#shopping-container.hidden {
+  display: none;
+}
+#shopping-list {
+  margin-top: 50px;
+  width: 100%;
+  height: 100vh;
+  border: none;
+  padding: 20px;
+}
+#recipe {
+  width: 100%;
+  padding: 20px;
+  border-left: 1px solid #ccc;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+#recipe.hidden {
+  display: none;
+}
+#recipe #recipe-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+#recipe input,
+#recipe textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  border: none;
+}
+#recipe input {
+  padding: 20px 0;
+}
+#recipe-links-panel {
+  position: fixed;
+  width: 200px;
+  padding: 0 10px;
+  overflow: hidden;
+  margin-top: 100px;
+}
+#recipes-panel {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-left: 200px;
+}
+#search-recipes {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 5px;
+}
+#tabs {
+  display: flex;
+  margin-top: 50px;
+}
+.hidden {
+  display: none;
+}
+.recipe-link {
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+.recipe-link.active {
+  font-weight: bold;
+}
+.tab {
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+.tab.active {
+  border-bottom: none;
+}
