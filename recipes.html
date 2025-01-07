@@ -213,12 +213,14 @@
 
       const loginContainer = document.querySelector('#login-container')
       const loginForm = document.querySelector('#login-form')
+      const headerEl = document.querySelector('#header')
       const modeSelect = document.querySelector('#mode-select')
       const shoppingContainer = document.querySelector('#shopping-container')
       const shoppingEl = document.querySelector('#shopping-list')
       const addRecipeBtn = document.querySelector('#add-recipe')
       const searchRecipesEl = document.querySelector('#search-recipes')
       const recipesContainer = document.querySelector('#recipes-container')
+      const recipeLinksPanel = document.querySelector('#recipe-links-panel')
       const recipesList = document.querySelector('#recipes-list')
       const recipeEl = document.querySelector('#recipe')
       const recipeTitleEl = document.querySelector('#recipe-title')
@@ -236,16 +238,20 @@
       /* When page is loaded */
       document.addEventListener('DOMContentLoaded', async () => {
         handleTokenQueryParam()
-        if (!localStorage.getItem('recipes')) {
-          const { recipes, error } = await getLatestRecipes()
-          if (error) {
-            loginContainer.classList.remove('hidden')
-            return
-          }
-          if (recipes?.length > 0) {
-            localStorage.setItem('recipes', JSON.stringify(recipes))
-          }
+        const { recipes, error } = await getLatestRecipes()
+
+        if (error) {
+          loginContainer.classList.remove('hidden')
+          headerEl.classList.add('hidden')
+          recipeLinksPanel.classList.add('hidden')
+          return
         }
+
+        // if (!localStorage.getItem('recipes')) {
+        //   if (recipes?.length > 0) {
+        //     localStorage.setItem('recipes', JSON.stringify(recipes))
+        //   }
+        // }
         recipesArr = JSON.parse(localStorage.getItem('recipes'))
         populateRecipes(recipesArr)
         const shopping = await getShoppingList()
