@@ -15,6 +15,9 @@ textarea {
 h2 {
   margin-bottom: 20px;
 }
+select {
+  cursor: pointer;
+}
 ul {
   list-style-type: none;
   padding: 0;
@@ -29,6 +32,14 @@ ul {
 #header {
   margin: 20px;
   position: fixed;
+  display: flex;
+  align-items: center;
+  top: 0;
+}
+#left-panel-toggle {
+  cursor: pointer;
+  padding: 10px;
+  margin-right: 10px;
 }
 #mode-select {
   font-size: 24px;
@@ -40,8 +51,8 @@ ul {
 #shopping-container {
   display: flex;
   flex-direction: column;
-  width: 80%;
-  margin: 20px 0 0 200px;
+  margin: 20px;
+  margin-top: 50px;
 }
 #shopping-container.hidden {
   display: none;
@@ -90,7 +101,6 @@ ul {
   display: flex;
   flex-direction: column;
   width: 80%;
-  margin-left: 200px;
 }
 #search-recipes {
   border: 1px solid #ccc;
@@ -99,7 +109,7 @@ ul {
 }
 #tabs {
   display: flex;
-  margin-top: 50px;
+  margin-top: 90px;
 }
 .card {
   background-color: #fafafa;
@@ -131,4 +141,12 @@ ul {
 }
 .tab.active {
   border-bottom: none;
+}
+
+/** utilities */
+.ml20 {
+  margin-left: 20px;
+}
+.ml200 {
+  margin-left: 200px;
 }

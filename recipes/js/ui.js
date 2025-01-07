@@ -5,6 +5,9 @@
 const modeSelect = document.querySelector('#mode-select')
 const shoppingContainer = document.querySelector('#shopping-container')
 const recipesContainer = document.querySelector('#recipes-container')
+const recipeLinksPanel = document.querySelector('#recipe-links-panel')
+const recipesPanel = document.querySelector('#recipes-panel')
+const leftPanelToggle = document.querySelector('#left-panel-toggle')
 
 // ------------------------
 // Exported functions
@@ -14,6 +17,11 @@ const recipesContainer = document.querySelector('#recipes-container')
  * Handle mode select change
  */
 export function initUi() {
+  /* When the left panel toggle is clicked */
+  leftPanelToggle.addEventListener('click', () => {
+    handleLeftPanelToggle()
+  })
+
   /* When mode select is changed */
   modeSelect.addEventListener('change', (e) => {
     handleModeSelectChange(e)
@@ -30,12 +38,23 @@ export function initUi() {
 function handleModeSelectChange(e) {
   const mode = e.target.value
   if (mode === 'recipes') {
+    leftPanelToggle.classList.remove('hidden')
     recipesContainer.classList.remove('hidden')
     shoppingContainer.classList.add('hidden')
   } else {
+    leftPanelToggle.classList.add('hidden')
     recipesContainer.classList.add('hidden')
     shoppingContainer.classList.remove('hidden')
   }
+}
+
+/**
+ * Handle left panel toggle
+ */
+function handleLeftPanelToggle() {
+  recipeLinksPanel.classList.toggle('hidden')
+  recipesPanel.classList.toggle('ml200')
+  recipesPanel.classList.toggle('ml20')
 }
 
 // ------------------------
