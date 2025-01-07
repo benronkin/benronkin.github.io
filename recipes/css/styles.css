@@ -30,6 +30,7 @@ ul {
   cursor: pointer;
 }
 #header {
+  background-color: white;
   margin: 20px;
   position: fixed;
   display: flex;
