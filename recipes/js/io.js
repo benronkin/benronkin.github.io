@@ -58,18 +58,4 @@ async function postWebApp(path, data) {
   }
 }
 
-/**
- * If the user clicked on the email link then the token will be in the query param.
- * Save the token to local storage and remove it from the URL.
- */
-function handleTokenQueryParam() {
-  const urlParams = new URLSearchParams(window.location.search)
-  const token = urlParams.get('t')
-  if (!token) {
-    return
-  }
-  localStorage.setItem('token', token)
-  window.history.replaceState({}, document.title, window.location.pathname)
-}
-
-export { getWebAppData, postWebApp, handleTokenQueryParam }
+export { getWebAppData, postWebApp }

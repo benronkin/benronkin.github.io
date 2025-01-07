@@ -1,10 +1,9 @@
 let recipes = []
-let afterRecipeId = null // for pagination
-
+let afterRecipeId = null // for pagination to be implemented later
 const WEB_APP_URL =
   'https://script.google.com/macros/s/AKfycbzUYReY4jAwZ0m_jbW1WUPGJxsGtZqJO3QwhxNIn-uOnLHQoCdztG0NHjDbNdZ4QDd5/exec'
 
-export const state = {
+const stateObj = {
   // -----------------------
   // misc
   // -----------------------
@@ -50,3 +49,10 @@ export const state = {
     recipe[section] = value
   }
 }
+
+// Make `state` globally accessible via `window` for debugging
+if (typeof window !== 'undefined') {
+  window.state = stateObj
+}
+
+export const state = stateObj
