@@ -571,6 +571,8 @@
        * Populate the recipes list
        */
       function populateRecipes(recipes) {
+        console.log('recipes:', recipes)
+
         recipesContainer.classList.remove('hidden')
         recipesList.innerHTML = ''
         for (const recipe of recipes) {
