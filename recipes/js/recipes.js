@@ -10,6 +10,7 @@ const addRecipeBtn = document.querySelector('#add-recipe')
 const searchRecipesEl = document.querySelector('#search-recipes')
 const recipesContainer = document.querySelector('#recipes-container')
 const recipeLinksPanel = document.querySelector('#recipe-links-panel')
+const recipesPanel = document.querySelector('#recipes-panel')
 const recipesList = document.querySelector('#recipes-list')
 const recipeEl = document.querySelector('#recipe')
 const recipeTitleEl = document.querySelector('#recipe-title')
@@ -161,6 +162,8 @@ async function handleRecipeLinkClick(elem) {
   // hide the left panel if mobile
   if (isMobile()) {
     recipeLinksPanel.classList.add('hidden')
+    recipesPanel.classList.remove('mt200')
+    recipesPanel.classList.add('mt20')
   }
 
   elem.classList.add('active')
