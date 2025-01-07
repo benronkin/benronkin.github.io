@@ -170,23 +170,11 @@
         <div id="recipe" class="hidden">
           <input name="recipe-title" id="recipe-title" class="field" />
           <h3>Notes</h3>
-          <textarea
-            name="recipe-notes"
-            id="recipe-notes"
-            class="field"
-          ></textarea>
+          <textarea name="recipe-notes" id="recipe-notes" class="field"></textarea>
           <h3>Ingredients</h3>
-          <textarea
-            name="recipe-ingredients"
-            id="recipe-ingredients"
-            class="field"
-          ></textarea>
+          <textarea name="recipe-ingredients" id="recipe-ingredients" class="field"></textarea>
           <h3>Method</h3>
-          <textarea
-            name="recipe-method"
-            id="recipe-method"
-            class="field"
-          ></textarea>
+          <textarea name="recipe-method" id="recipe-method" class="field"></textarea>
           <h3>Category</h3>
           <input name="recipe-category" id="recipe-category" class="field" />
           <h3>Tags</h3>
@@ -312,7 +300,7 @@
         try {
           const { error, ...rest } = await postWebApp(WEB_APP_URL, {
             email,
-            path: 'login',
+            path: 'login'
           })
           if (error) {
             throw new Error(error)
@@ -339,9 +327,7 @@
        * Handle recipe link click
        */
       async function handleRecipeLinkClick(elem) {
-        document
-          .querySelector('.recipe-link.active')
-          ?.classList.remove('active')
+        document.querySelector('.recipe-link.active')?.classList.remove('active')
         elem.classList.add('active')
         const recipeId = elem.dataset.id
         const recipe = recipesArr.find((r) => r.id === recipeId)
@@ -355,7 +341,7 @@
         loadRecipe(recipe)
         const { message, error } = await postWebApp(WEB_APP_URL, {
           path: 'recipe-access',
-          id: recipeId,
+          id: recipeId
         })
         if (error) {
           console.log(error)
@@ -370,6 +356,9 @@
         const recipeId = elem.id.replace('tab-', '')
         const recipe = recipesArr.find((r) => r.id === recipeId)
 
+        document.querySelector('.recipe-link.active').classList.remove('active')
+        document.querySelector(`.recipe-link[data-id="${recipeId}"]`).classList.add('active')
+
         loadRecipe(recipe)
       }
 
@@ -380,15 +369,11 @@
         tab.remove()
         const activeTab = document.querySelector('.tab.active')
         if (!activeTab) {
-          document
-            .querySelector('.recipe-link.active')
-            .classList.remove('active')
+          document.querySelector('.recipe-link.active').classList.remove('active')
           const firstTab = document.querySelector('.tab')
           if (firstTab) {
             const firstTabId = firstTab.id.replace('tab-', '')
-            document
-              .querySelector(`.recipe-link[data-id="${firstTabId}"]`)
-              .click()
+            document.querySelector(`.recipe-link[data-id="${firstTabId}"]`).click()
           } else {
             recipeEl.classList.add('hidden')
           }
@@ -401,9 +386,7 @@
       async function handleFieldChange(elem) {
         const recipeSection = elem.id.replace('recipe-', '')
         if (recipeSection === 'title') {
-          document
-            .querySelector('.tab.active')
-            .querySelector('.text-tab').textContent = elem.value
+          document.querySelector('.tab.active').querySelector('.text-tab').textContent = elem.value
           document.querySelector('.recipe-link.active').textContent = elem.value
         }
         const id = recipeIdEl.textContent
@@ -415,7 +398,7 @@
             path: 'recipe-update',
             id,
             value: elem.value,
-            section: recipeSection,
+            section: recipeSection
           })
           if (error) {
             throw new Error(error)
@@ -441,7 +424,7 @@
           method: '',
           notes: '',
           category: '',
-          tags: '',
+          tags: ''
         }
         recipesArr.push(newRecipe)
         const li = document.createElement('li')
@@ -481,7 +464,7 @@
         try {
           const { message, error } = await postWebApp(WEB_APP_URL, {
             path: 'shopping-update',
-            value,
+            value
           })
           if (error) {
             throw new Error(error)
@@ -500,9 +483,7 @@
        * Get the latest recipes
        */
       async function getLatestRecipes() {
-        const { recipes, token, error } = await getWebAppData(
-          `${WEB_APP_URL}?path=recipes`
-        )
+        const { recipes, token, error } = await getWebAppData(`${WEB_APP_URL}?path=recipes`)
         if (error) {
           console.log(`getLatestRecipes error: ${error}`)
           return { error }
@@ -517,9 +498,7 @@
        * Get the searched recipes
        */
       async function getSearchedRecipes(q) {
-        const { recipes, token, error } = await getWebAppData(
-          `${WEB_APP_URL}?path=recipes&q=${q}`
-        )
+        const { recipes, token, error } = await getWebAppData(`${WEB_APP_URL}?path=recipes&q=${q}`)
         if (error) {
           console.log(`getSearchedRecipes error: ${error}`)
           return { error }
@@ -597,9 +576,7 @@
        * Get the shopping list
        */
       async function getShoppingList() {
-        const { shopping, token, error } = await getWebAppData(
-          `${WEB_APP_URL}?path=shopping`
-        )
+        const { shopping, token, error } = await getWebAppData(`${WEB_APP_URL}?path=shopping`)
         if (error) {
           console.log(`getShoppingList error: ${error}`)
           return { error }
@@ -629,7 +606,7 @@
 
         const req = new Request(path, {
           redirect: 'follow',
-          headers,
+          headers
         })
         try {
           const res = await fetch(req)
@@ -637,7 +614,7 @@
           return jsn
         } catch (err) {
           return {
-            error: `getWebAppData error: ${err}.`,
+            error: `getWebAppData error: ${err}.`
           }
         }
       }
@@ -663,7 +640,7 @@
           method: 'POST',
           redirect: 'follow',
           headers,
-          body: JSON.stringify(data),
+          body: JSON.stringify(data)
         })
         try {
           const res = await fetch(req)
@@ -685,11 +662,7 @@
           return
         }
         localStorage.setItem('token', token)
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname
-        )
+        window.history.replaceState({}, document.title, window.location.pathname)
       }
 
       /**
