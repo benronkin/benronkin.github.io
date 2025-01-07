@@ -4,7 +4,6 @@ import { state } from './state.js'
 const addRecipeBtn = document.querySelector('#add-recipe')
 const searchRecipesEl = document.querySelector('#search-recipes')
 const recipesContainer = document.querySelector('#recipes-container')
-const recipeLinksPanel = document.querySelector('#recipe-links-panel')
 const recipesList = document.querySelector('#recipes-list')
 const recipeEl = document.querySelector('#recipe')
 const recipeTitleEl = document.querySelector('#recipe-title')
@@ -44,6 +43,21 @@ export function setRecipeEventListeners() {
       handleFieldChange(e.target)
     })
   })
+}
+
+/**
+ * Get the latest recipes
+ */
+export async function getLatestRecipes() {
+  const { recipes, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=recipes`)
+  if (error) {
+    console.log(`getLatestRecipes error: ${error}`)
+    return { error }
+  }
+  if (token) {
+    localStorage.setItem('token', token)
+  }
+  return recipes
 }
 
 /**
