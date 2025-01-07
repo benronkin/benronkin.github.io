@@ -1,3 +1,5 @@
+import { postWebApp } from './io.js'
+
 // ----------------------
 // Globals
 // ----------------------
@@ -6,6 +8,7 @@ const headerEl = document.querySelector('#header')
 const loginContainer = document.querySelector('#login-container')
 const loginForm = document.querySelector('#login-form')
 const recipeLinksPanel = document.querySelector('#recipe-links-panel')
+const loginMessageEl = document.querySelector('#login-message')
 
 // ----------------------
 // Exported functions
@@ -38,15 +41,16 @@ async function handleLoginFormSubmit() {
   const formData = new FormData(loginForm)
   const email = formData.get('email')
   try {
-    const { error, ...rest } = await postWebApp(state.getWebAppUrl(), {
+    const { error, message } = await postWebApp(state.getWebAppUrl(), {
       email,
       path: 'login'
     })
     if (error) {
       throw new Error(error)
     }
-    console.log(rest)
+    loginMessageEl.textContent = message
   } catch (err) {
+    loginMessageEl.textContent = err.message
     console.log(err)
   }
 }

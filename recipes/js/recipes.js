@@ -293,7 +293,7 @@ function loadRecipe(recipe) {
  * Get the searched recipes
  */
 async function getSearchedRecipes(q) {
-  const { recipes, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=recipes&q=${q}`)
+  const { recipes, error } = await getWebAppData(`${state.getWebAppUrl()}?path=recipes&q=${q}`)
   if (error) {
     console.log(`getSearchedRecipes error: ${error}`)
     return { error }
