@@ -162,8 +162,8 @@ async function handleRecipeLinkClick(elem) {
   // hide the left panel if mobile
   if (isMobile()) {
     recipeLinksPanel.classList.add('hidden')
-    recipesPanel.classList.remove('mt200')
-    recipesPanel.classList.add('mt20')
+    recipesPanel.classList.remove('ml220')
+    recipesPanel.classList.add('ml20')
   }
 
   elem.classList.add('active')

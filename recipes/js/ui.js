@@ -60,7 +60,7 @@ function handleModeSelectChange(e) {
  */
 function handleLeftPanelToggle() {
   recipeLinksPanel.classList.toggle('hidden')
-  recipesPanel.classList.toggle('ml200')
+  recipesPanel.classList.toggle('ml220')
   recipesPanel.classList.toggle('ml20')
 }
 

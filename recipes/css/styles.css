@@ -93,10 +93,10 @@ ul {
 #recipe-links-panel {
   background-color: #f9f9f9;
   position: fixed;
-  width: 200px;
+  width: 220px;
   padding: 0 10px;
   overflow: hidden;
-  margin-top: 100px;
+  margin-top: 90px;
   z-index: 2;
 }
 #recipes-panel {
@@ -150,8 +150,8 @@ ul {
 .ml20 {
   margin-left: 20px;
 }
-.ml200 {
-  margin-left: 200px;
+.ml220 {
+  margin-left: 220px;
 }
 
 /* mobile */
