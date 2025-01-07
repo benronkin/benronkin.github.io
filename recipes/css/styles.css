@@ -36,6 +36,7 @@ ul {
   display: flex;
   align-items: center;
   top: 0;
+  z-index: 3;
 }
 #left-panel-toggle {
   cursor: pointer;
