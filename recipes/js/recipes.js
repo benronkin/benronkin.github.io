@@ -1,12 +1,15 @@
 import { getWebAppData, postWebApp } from './io.js'
 import { resizeTextarea, isMobile } from './ui.js'
 import { state } from './state.js'
+import { skippedIngredients, transformedIngredients } from './ingredients.js'
 
 // ----------------------
 // Globals
 // ----------------------
 
 const addRecipeBtn = document.querySelector('#add-recipe')
+const shopIngredientsBtn = document.querySelector('#shop-ingredients')
+const shoppingEl = document.querySelector('#shopping-list')
 const searchRecipesEl = document.querySelector('#search-recipes')
 const recipesContainer = document.querySelector('#recipes-container')
 const recipeLinksPanel = document.querySelector('#recipe-links-panel')
@@ -37,6 +40,11 @@ export async function initRecipes() {
   /* When add recipe button is clicked */
   addRecipeBtn.addEventListener('click', async () => {
     await handleRecipeCreate()
+  })
+
+  /* When shop ingredients button is clicked */
+  shopIngredientsBtn.addEventListener('click', async () => {
+    handleShopIngredientsClick()
   })
 
   /* When search recipes input key down */
@@ -157,6 +165,8 @@ async function handleFieldChange(elem) {
  * Handle recipe link click
  */
 async function handleRecipeLinkClick(elem) {
+  shopIngredientsBtn.classList.remove('hidden')
+  shopIngredientsBtn.disabled = false
   document.querySelector('.recipe-link.active')?.classList.remove('active')
 
   // hide the left panel if mobile
@@ -213,8 +223,36 @@ function handleTabCloseClick(tab) {
       document.querySelector(`.recipe-link[data-id="${firstTabId}"]`).click()
     } else {
       recipeEl.classList.add('hidden')
+      shopIngredientsBtn.classList.add('hidden')
     }
   }
+}
+
+/**
+ * Handle shop ingredients click
+ */
+function handleShopIngredientsClick() {
+  shopIngredientsBtn.disabled = true
+  const shoppingArr = []
+
+  tabs.querySelectorAll('.tab').forEach((tab) => {
+    const title = tab.querySelector('.text-tab').textContent
+    const id = tab.id.replace('tab-', '')
+    const recipe = state.getRecipeById(id)
+    const ingredients = recipe.ingredients
+      .split('\n')
+      .map((line) => line.trim().toLowerCase())
+      .filter(filterIngredient)
+      .map(transformIngredient)
+    shoppingArr.push({ title, ingredients })
+  })
+  const shoppingList = shoppingArr.reduce((acc, recipe) => {
+    return acc + `For recipe: ${recipe.title}\n${recipe.ingredients.join('\n')}\n\n-------------\n\n`
+  }, '')
+  const list =
+    shoppingEl.value.trim().length > 0 ? `${shoppingEl.value}\n\n-------------\n\n${shoppingList}` : shoppingList
+  shoppingEl.value = list
+  shoppingEl.dispatchEvent(new Event('change'))
 }
 
 // ------------------------
@@ -274,7 +312,7 @@ function loadRecipe(recipe) {
     tab.classList.add('tab')
     tab.classList.add('active')
     tab.innerHTML = `<span class="text-tab">${recipe.title}</span> <i class="close-tab fa-regular fa-circle-xmark"></i>`
-    document.querySelector('#tabs').appendChild(tab)
+    document.querySelector('#tabs').insertBefore(tab, document.querySelector('#tabs').lastElementChild)
     tab.querySelector('.text-tab').addEventListener('click', (e) => {
       handleTabClick(tab)
     })
@@ -309,4 +347,36 @@ async function getSearchedRecipes(q) {
     return { error }
   }
   return recipes
+}
+
+/**
+ * Filter ingredient lines that should not be added to the shopping list
+ */
+function filterIngredient(line) {
+  if (!/[a-zA-Z]{3,}/.test(line)) {
+    return false
+  }
+  for (const word of skippedIngredients) {
+    const regEx = new RegExp(`\\b${word}\\b`, 'g')
+    if (regEx.test(line)) {
+      return false
+    }
+  }
+  return true
+}
+
+/**
+ * Transform ingredient lines to a shopping list format
+ */
+function transformIngredient(line) {
+  for (const [key, value] of Object.entries(transformedIngredients)) {
+    if (line.includes(key)) {
+      line = line.replace(key, value)
+    }
+  }
+  const comma = line.indexOf(',')
+  if (comma > -1) {
+    line = line.slice(0, comma)
+  }
+  return line
 }

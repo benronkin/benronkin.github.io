@@ -12,6 +12,19 @@ textarea {
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
 }
+button {
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  height: 40px;
+}
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 h2 {
   margin-bottom: 20px;
 }
@@ -116,6 +129,9 @@ ul {
   border-radius: 6px;
   padding: 5px;
   width: 100%;
+}
+#shop-ingredients {
+  margin-left: auto;
 }
 #tabs {
   display: flex;
