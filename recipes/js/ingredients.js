@@ -38,6 +38,7 @@ export const skippedIngredients = [
   'walnut',
   'walnuts',
   'water',
+  'yeast',
   'yogurt'
 ]
 

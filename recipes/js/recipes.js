@@ -11,6 +11,7 @@ const addRecipeBtn = document.querySelector('#add-recipe')
 const shopIngredientsBtn = document.querySelector('#shop-ingredients')
 const shoppingEl = document.querySelector('#shopping-list')
 const searchRecipesEl = document.querySelector('#search-recipes')
+const searchRecipesMessageEl = document.querySelector('#search-recipes-message')
 const recipesContainer = document.querySelector('#recipes-container')
 const recipeLinksPanel = document.querySelector('#recipe-links-panel')
 const recipesPanel = document.querySelector('#recipes-panel')
@@ -123,11 +124,15 @@ async function handleRecipeSearch(e) {
   if (e.key !== 'Enter') {
     return
   }
+  searchRecipesMessageEl.textContent = ''
   const value = e.target.value.toLowerCase().trim()
   if (value.length === 0) {
     return
   }
   const { recipes } = await getSearchedRecipes(value)
+  if (recipes.length === 0) {
+    searchRecipesMessageEl.textContent = 'No recipes found'
+  }
   state.setRecipes(recipes)
   populateRecipes()
 }
