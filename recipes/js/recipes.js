@@ -60,7 +60,10 @@ export async function initRecipes() {
     })
   })
 
-  const { recipes, error } = await getLatestRecipes()
+  const resp = await getLatestRecipes()
+  console.log('resp:', resp)
+
+  // const { recipes, error } = await getLatestRecipes()
 
   if (error) {
     document.dispatchEvent(new CustomEvent('recipes-fetch-fail'))
@@ -101,7 +104,8 @@ async function handleRecipeCreate() {
     method: '',
     notes: '',
     category: '',
-    tags: ''
+    tags: '',
+    related: ''
   }
   state.addRecipe(newRecipe)
   const li = document.createElement('li')
@@ -276,7 +280,7 @@ async function getLatestRecipes() {
   if (token) {
     localStorage.setItem('token', token)
   }
-  return recipes
+  return { recipes }
 }
 
 /**
