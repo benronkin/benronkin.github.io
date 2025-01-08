@@ -1,8 +1,10 @@
 export const skippedIngredients = [
   'almond',
   'almonds',
+  'and pepper',
   'baking powder',
   'baking soda',
+  'black pepper',
   'carrot',
   'carrots',
   'cinnamon',
@@ -25,7 +27,6 @@ export const skippedIngredients = [
   'nutmeg',
   'oil',
   'onion',
-  'pepper',
   'peppers',
   'rum',
   'salt',
@@ -38,6 +39,7 @@ export const skippedIngredients = [
   'walnut',
   'walnuts',
   'water',
+  'white pepper',
   'yeast',
   'yogurt'
 ]

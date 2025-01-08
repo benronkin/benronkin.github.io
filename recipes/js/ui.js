@@ -81,6 +81,6 @@ export function resizeTextarea(textarea) {
 
   // If the scroll height is more than the default height, expand the textarea
   if (minHeight > textarea.clientHeight) {
-    textarea.style.height = minHeight + 10 + 'px'
+    textarea.style.height = minHeight + 'px'
   }
 }
