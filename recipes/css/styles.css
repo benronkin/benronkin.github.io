@@ -124,6 +124,18 @@ ul {
   flex-direction: column;
   width: 80%;
 }
+#related-recipes-header,
+#related-recipes-body {
+  display: flex;
+  align-items: center;
+}
+#related-recipe-links {
+  width: 50%;
+}
+#related-recipe-links .recipe-link {
+  padding-left: 0;
+}
+
 #search-recipes {
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -159,6 +171,41 @@ ul {
 }
 .recipe-link.active {
   font-weight: bold;
+}
+.switch {
+  background-color: #999999;
+  position: relative;
+  width: 2rem;
+  height: 1rem;
+  border: 1px solid #333333;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 300ms ease;
+}
+.switch.on {
+  background-color: lightgreen;
+}
+.thumb {
+  color: blue;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: white;
+  border: 1px solid blue;
+  border-radius: 50%;
+  position: absolute;
+  left: -5%;
+  transition: left 300ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.thumb.on {
+  left: 50%;
+}
+.thumb i {
+  font-size: 0.75rem;
 }
 .tab {
   padding: 10px;

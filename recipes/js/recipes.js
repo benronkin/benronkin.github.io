@@ -7,6 +7,8 @@ import { skippedIngredients, transformedIngredients } from './ingredients.js'
 // Globals
 // ----------------------
 
+const switchEl = document.querySelector('.switch')
+const thumbEl = document.querySelector('.thumb')
 const addRecipeBtn = document.querySelector('#add-recipe')
 const shopIngredientsBtn = document.querySelector('#shop-ingredients')
 const shoppingEl = document.querySelector('#shopping-list')
@@ -18,6 +20,8 @@ const recipesPanel = document.querySelector('#recipes-panel')
 const recipesList = document.querySelector('#recipes-list')
 const recipeEl = document.querySelector('#recipe')
 const recipeTitleEl = document.querySelector('#recipe-title')
+const recipeRelated = document.querySelector('#recipe-related')
+const relatedRecipesEl = document.querySelector('#related-recipe-links')
 const recipeIngredients = document.querySelector('#recipe-ingredients')
 const recipeMethod = document.querySelector('#recipe-method')
 const recipeNotes = document.querySelector('#recipe-notes')
@@ -33,6 +37,11 @@ const recipeIdEl = document.querySelector('#recipe-id')
  * Set recipe event listeners
  */
 export async function initRecipes() {
+  /* When related recipes switch is toggled */
+  switchEl.addEventListener('click', () => {
+    handleRelatedSwitchClick()
+  })
+
   /* When recipes container is populated */
   recipesContainer.addEventListener('recipes-loaded', () => {
     handleRecipeContainerPopulated()
@@ -60,6 +69,11 @@ export async function initRecipes() {
     })
   })
 
+  /* When related recipe is changed */
+  recipeRelated.addEventListener('change', (e) => {
+    populateRelatedRecipes(e.target.value)
+  })
+
   const { recipes, error } = await getLatestRecipes()
 
   if (error) {
@@ -73,6 +87,16 @@ export async function initRecipes() {
 // ------------------------
 // Event handler functions
 // ------------------------
+
+/**
+ * Handle related switch click
+ */
+function handleRelatedSwitchClick() {
+  switchEl.classList.toggle('on')
+  thumbEl.classList.toggle('on')
+  recipeRelated.classList.toggle('hidden')
+  resizeTextarea(recipeRelated)
+}
 
 /**
  * Handle recipe container populated
@@ -182,7 +206,10 @@ async function handleRecipeLinkClick(elem) {
     recipesPanel.classList.add('ml20')
   }
 
-  elem.classList.add('active')
+  // if this li is a related link then clicking it
+  // needs to activate its li in the sidebar
+  // so don't use: elem.classList.add('active')
+  document.querySelector(`.recipe-link[data-id="${elem.dataset.id}"]`).classList.add('active')
   const recipeId = elem.dataset.id
   const recipe = state.getRecipeById(recipeId)
   if (!recipe) {
@@ -306,6 +333,12 @@ function populateRecipes() {
  * Load the recipe object to the page
  */
 function loadRecipe(recipe) {
+  if (switchEl.classList.contains('on')) {
+    switchEl.dispatchEvent(new Event('click'))
+  }
+
+  switchEl.classList.remove('on')
+  thumbEl.classList.remove('on')
   const activeTab = document.querySelector('.tab.active')
   if (activeTab) {
     activeTab.classList.remove('active')
@@ -330,6 +363,8 @@ function loadRecipe(recipe) {
   tab.classList.add('active')
   recipeEl.classList.remove('hidden')
   recipeTitleEl.value = recipe.title
+  recipeRelated.value = recipe.related
+  populateRelatedRecipes(recipe.related)
   recipeIngredients.value = recipe.ingredients
   resizeTextarea(recipeIngredients)
   recipeMethod.value = recipe.method
@@ -385,4 +420,40 @@ function transformIngredient(line) {
     line = line.slice(0, comma)
   }
   return line
+}
+
+/**
+ * Populate related recipes
+ */
+function populateRelatedRecipes(ids) {
+  relatedRecipesEl.innerHTML = ''
+  if (!ids) {
+    return
+  }
+  const splitRegEx = /,|\n|\s/
+  const idsArr = ids
+    .split(splitRegEx)
+    .map((id) => id.trim())
+    .filter((id) => id.length > 0)
+  const ulEl = document.createElement('ul')
+  for (const id of idsArr) {
+    const title = state.getRecipeById(id).title
+    const li = makeRecipeLinkEl(id, title)
+    ulEl.appendChild(li)
+  }
+  relatedRecipesEl.appendChild(ulEl)
+}
+
+/**
+ * Make a recipe link element
+ */
+function makeRecipeLinkEl(id, title) {
+  const li = document.createElement('li')
+  li.textContent = title
+  li.classList.add('recipe-link')
+  li.dataset.id = id
+  li.addEventListener('click', () => {
+    handleRecipeLinkClick(li)
+  })
+  return li
 }
