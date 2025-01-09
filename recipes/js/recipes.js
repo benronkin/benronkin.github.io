@@ -60,10 +60,7 @@ export async function initRecipes() {
     })
   })
 
-  const resp = await getLatestRecipes()
-  console.log('resp:', resp)
-
-  // const { recipes, error } = await getLatestRecipes()
+  const { recipes, error } = await getLatestRecipes()
 
   if (error) {
     document.dispatchEvent(new CustomEvent('recipes-fetch-fail'))
@@ -256,10 +253,10 @@ function handleShopIngredientsClick() {
     shoppingArr.push({ title, ingredients })
   })
   const shoppingList = shoppingArr.reduce((acc, recipe) => {
-    return acc + `For recipe: ${recipe.title}\n${recipe.ingredients.join('\n')}\n\n-------------\n\n`
+    return acc + `For recipe: ${recipe.title}\n${recipe.ingredients.join('\n')}\n-------------\n`
   }, '')
   const list =
-    shoppingEl.value.trim().length > 0 ? `${shoppingEl.value}\n\n-------------\n\n${shoppingList}` : shoppingList
+    shoppingEl.value.trim().length > 0 ? `${shoppingEl.value.trim()}\n\n-------------\n\n${shoppingList}` : shoppingList
   shoppingEl.value = list
   shoppingEl.dispatchEvent(new Event('change'))
 }
@@ -355,7 +352,7 @@ async function getSearchedRecipes(q) {
     console.log(`getSearchedRecipes error: ${error}`)
     return { error }
   }
-  return recipes
+  return { recipes }
 }
 
 /**
