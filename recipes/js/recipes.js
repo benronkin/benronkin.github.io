@@ -129,14 +129,9 @@ async function handleRecipeCreate() {
     related: ''
   }
   state.addRecipe(newRecipe)
-  const li = document.createElement('li')
-  li.textContent = newRecipe.title
-  li.classList.add('recipe-link')
-  li.dataset.id = newRecipe.id
+
+  const li = makeRecipeLinkEl(id, newRecipe.title)
   recipesList.appendChild(li)
-  li.addEventListener('click', () => {
-    handleRecipeLinkClick(li)
-  })
   li.click()
   addRecipeBtn.disabled = false
   addRecipeBtn.textContent = 'NEW RECIPE'

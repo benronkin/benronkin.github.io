@@ -28,6 +28,9 @@ button:disabled {
 h2 {
   margin-bottom: 20px;
 }
+h3 {
+  margin: 20px 0;
+}
 select {
   cursor: pointer;
 }
@@ -92,6 +95,11 @@ ul {
   flex-direction: column;
   align-items: stretch;
 }
+#recipe input:hover,
+#recipe textarea:hover {
+  background-color: #f9f9f9;
+}
+
 #recipe.hidden {
   display: none;
 }
@@ -133,7 +141,8 @@ ul {
   width: 50%;
 }
 #related-recipe-links .recipe-link {
-  padding-left: 0;
+  padding: 5px 5px 5px 0;
+  margin-bottom: 3px !important;
 }
 
 #search-recipes {
