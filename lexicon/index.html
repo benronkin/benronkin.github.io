@@ -24,10 +24,45 @@
     }
   </style>
   <body>
-    <iframe
-      id="lexicon-iframe"
-      src="https://script.google.com/macros/s/AKfycbw55ljHMG4nHaIYAxWA7gDxlsiU_seR7Q02gRUa1PWtHAGB79o/exec"
-      frameborder="0"
-    ></iframe>
+    <iframe id="lexicon-iframe" frameborder="0"></iframe>
+
+    <script>
+      // ----------------------
+      // Globals
+      // ----------------------
+
+      const iframeEl = document.getElementById('lexicon-iframe')
+      const iframeUrl =
+        'https://script.google.com/macros/s/AKfycbw55ljHMG4nHaIYAxWA7gDxlsiU_seR7Q02gRUa1PWtHAGB79o/exec'
+
+      // ----------------------
+      // Init
+      // ----------------------
+
+      /**
+       *
+       */
+      function init() {
+        console.log('here!')
+
+        setQueryParamOnIFrame()
+      }
+
+      init()
+
+      // ----------------------
+      // Helpers
+      // ----------------------
+
+      /**
+       * If the URL has a query parameter, set it on the iframe
+       */
+      function setQueryParamOnIFrame() {
+        const urlParams = new URLSearchParams(window.location.search)
+        const queryParam = urlParams.get('w')
+        const url = iframeUrl + (queryParam?.length ? `?w=${queryParam}` : '')
+        iframeEl.src = url
+      }
+    </script>
   </body>
 </html>
