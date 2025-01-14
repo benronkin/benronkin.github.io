@@ -263,22 +263,46 @@ function handleShopIngredientsClick() {
   shopIngredientsBtn.disabled = true
   const shoppingArr = []
 
-  tabs.querySelectorAll('.tab').forEach((tab) => {
-    const title = tab.querySelector('.text-tab').textContent
-    const id = tab.id.replace('tab-', '')
-    const recipe = state.getRecipeById(id)
-    const ingredients = recipe.ingredients
-      .split('\n')
-      .map((line) => line.trim().toLowerCase())
-      .filter(filterIngredient)
-      .map(transformIngredient)
-    shoppingArr.push({ title, ingredients })
-  })
-  const shoppingList = shoppingArr.reduce((acc, recipe) => {
-    return acc + `For recipe: ${recipe.title}\n${recipe.ingredients.join('\n')}\n-------------\n`
-  }, '')
-  const list =
-    shoppingEl.value.trim().length > 0 ? `${shoppingEl.value.trim()}\n\n-------------\n\n${shoppingList}` : shoppingList
+  const tabs = [...document.querySelectorAll('.tab')]
+  let title
+  let tabId
+  let id
+  let recipe
+  let ingredients
+  let shoppingList
+  let list = ''
+
+  try {
+    for (const tab of tabs) {
+      title = tab.querySelector('.text-tab').textContent
+      tabId = tab.id
+      id = tabId.replace('tab-', '')
+      recipe = state.getRecipeById(id)
+      ingredients = recipe.ingredients
+        .split('\n')
+        .map((line) => line.trim().toLowerCase())
+        .filter(filterIngredient)
+        .map(transformIngredient)
+      shoppingArr.push({ title, ingredients })
+    }
+    shoppingList = shoppingArr.reduce((acc, recipe) => {
+      return acc + `For recipe: ${recipe.title}\n${recipe.ingredients.join('\n')}\n-------------\n`
+    }, '')
+    list =
+      shoppingEl.value.trim().length > 0
+        ? `${shoppingEl.value.trim()}\n\n-------------\n\n${shoppingList}`
+        : shoppingList
+  } catch (err) {
+    console.log(`handleShopIngredientsClick error: ${err}`)
+    console.log('title:', title)
+    console.log('tabId:', tabId)
+    console.log('id:', id)
+    console.log('recipe:', recipe)
+    console.log('ingredients:', ingredients)
+    console.log('shoppingList:', shoppingList)
+    console.log('list:', list)
+  }
+
   shoppingEl.value = list
   shoppingEl.dispatchEvent(new Event('change'))
 }
