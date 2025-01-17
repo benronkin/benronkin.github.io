@@ -12,6 +12,10 @@ textarea {
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
 }
+input,
+textarea {
+  padding: 3px;
+}
 button {
   border-radius: 6px;
   cursor: pointer;
