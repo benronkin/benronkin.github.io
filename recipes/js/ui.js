@@ -26,6 +26,8 @@ export function initUi() {
   modeSelect.addEventListener('change', (e) => {
     handleModeSelectChange(e)
   })
+
+  setModeSelectValue()
 }
 
 /**
@@ -53,6 +55,7 @@ function handleModeSelectChange(e) {
     recipesContainer.classList.add('hidden')
     shoppingContainer.classList.remove('hidden')
   }
+  localStorage.setItem('mode', mode)
 }
 
 /**
@@ -82,5 +85,16 @@ export function resizeTextarea(textarea) {
   // If the scroll height is more than the default height, expand the textarea
   if (minHeight > textarea.clientHeight) {
     textarea.style.height = minHeight + 'px'
+  }
+}
+
+/**
+ * Set the mode select value using local storage
+ */
+function setModeSelectValue() {
+  const mode = localStorage.getItem('mode')
+  if (mode) {
+    modeSelect.value = mode
+    handleModeSelectChange({ target: { value: mode } })
   }
 }
