@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', async () => {
  */
 async function handleDOMContentLoaded() {
   initAuth()
-  initUi()
   initRecipes()
   initShopping()
+  initUi()
 }
 
 // ------------------------

@@ -2,6 +2,8 @@
 // Globals
 // ----------------------
 
+const headerEl = document.querySelector('#header')
+const loginContainer = document.querySelector('#login-container')
 const modeSelect = document.querySelector('#mode-select')
 const shoppingContainer = document.querySelector('#shopping-container')
 const recipesContainer = document.querySelector('#recipes-container')
@@ -27,7 +29,14 @@ export function initUi() {
     handleModeSelectChange(e)
   })
 
+  // recall user's selection from local storage
   setModeSelectValue()
+
+  // user is logged in
+  if (loginContainer.classList.contains('hidden')) {
+    headerEl.classList.remove('hidden')
+    recipesContainer.classList.remove('hidden')
+  }
 }
 
 /**
