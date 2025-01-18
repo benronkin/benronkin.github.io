@@ -153,7 +153,8 @@ async function handleRecipeSearch(e) {
   if (recipes.length === 0) {
     searchRecipesMessageEl.textContent = 'No recipes found'
   }
-  state.setRecipes(recipes)
+  const openRecipes = getOpenRecipes()
+  state.setRecipes([...openRecipes, ...recipes])
   populateRecipes()
 }
 
@@ -475,4 +476,16 @@ function makeRecipeLinkEl(id, title) {
     handleRecipeLinkClick(li)
   })
   return li
+}
+
+/**
+ * Get an array of recipes that are currently showing in the tabs
+ */
+function getOpenRecipes() {
+  const tabs = [...document.querySelectorAll('.tab')]
+  const openRecipes = tabs.map((tab) => {
+    const id = tab.id.replace('tab-', '')
+    return state.getRecipeById(id)
+  })
+  return openRecipes
 }
