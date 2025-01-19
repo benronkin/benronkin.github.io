@@ -1,47 +1,45 @@
-let recipes = []
-let afterRecipeId = null // for pagination to be implemented later
-const WEB_APP_URL =
-  'https://script.google.com/macros/s/AKfycbzUYReY4jAwZ0m_jbW1WUPGJxsGtZqJO3QwhxNIn-uOnLHQoCdztG0NHjDbNdZ4QDd5/exec'
-
 const stateObj = {
+  data: {
+    recipes: [],
+    afterRecipeId: null, // for pagination; to be implemented later
+    WEB_APP_URL:
+      'https://script.google.com/macros/s/AKfycbzUYReY4jAwZ0m_jbW1WUPGJxsGtZqJO3QwhxNIn-uOnLHQoCdztG0NHjDbNdZ4QDd5/exec'
+  },
+
+  get: function (key) {
+    return this.data[key]
+  },
+
+  set: function (key, value) {
+    this.data[key] = value
+  },
+
+  push: function (key, value) {
+    this.data[key].push(value)
+  },
+
   // -----------------------
   // misc
   // -----------------------
 
   getWebAppUrl: function () {
-    return WEB_APP_URL
-  },
-
-  // -----------------------
-  // pagination
-  // -----------------------
-
-  getAfterRecipeId: function () {
-    return afterRecipeId
-  },
-
-  setAfterRecipeId: function (newAfterRecipeId) {
-    afterRecipeId = newAfterRecipeId
+    return this.data.WEB_APP_URL
   },
 
   // -----------------------
   // recipes
   // -----------------------
 
-  addRecipe: function (recipe) {
-    recipes.push(recipe)
-  },
-
   getRecipeById: function (id) {
-    return recipes.find((recipe) => recipe.id === id)
+    return this.data.recipes.find((recipe) => recipe.id === id)
   },
 
   getRecipes: function () {
-    return recipes
+    return [...this.data.recipes]
   },
 
   setRecipes: function (newRecipes) {
-    recipes = newRecipes
+    this.data.recipes = [...newRecipes]
   },
 
   setRecipeSection: function (id, section, value) {

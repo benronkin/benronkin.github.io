@@ -61,18 +61,28 @@ ul {
   padding-top: 20px;
   position: fixed;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   top: 0;
   left: 0;
   right: 0;
   z-index: 3;
+}
+#header div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 #left-panel-toggle {
   cursor: pointer;
   padding: 10px;
   margin-right: 10px;
 }
+#message {
+  margin: 10px 7px;
+}
 #mode-select {
+  margin-top: 3px;
+  width: 150px;
   font-size: 24px;
   border: none;
 }
@@ -91,10 +101,6 @@ ul {
 #recipe input:hover,
 #recipe textarea:hover {
   background-color: #f9f9f9;
-}
-
-#recipe.hidden {
-  display: none;
 }
 #recipe #recipe-title {
   font-size: 1.5rem;
@@ -158,9 +164,6 @@ ul {
   display: flex;
   flex-direction: column;
 }
-#shopping-container.hidden {
-  display: none;
-}
 #shopping-list {
   margin-top: 50px;
   width: 100%;
@@ -212,7 +215,7 @@ ul {
   gap: 10px;
 }
 .hidden {
-  display: none;
+  display: none !important;
 }
 .recipe-link {
   cursor: pointer;

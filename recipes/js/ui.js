@@ -3,6 +3,7 @@
 // ----------------------
 
 const headerEl = document.querySelector('#header')
+const messageEl = document.querySelector('#message')
 const loginContainer = document.querySelector('#login-container')
 const modeSelect = document.querySelector('#mode-select')
 const shoppingContainer = document.querySelector('#shopping-container')
@@ -16,7 +17,7 @@ const leftPanelToggle = document.querySelector('#left-panel-toggle')
 // ------------------------
 
 /**
- * Handle mode select change
+ * Set event listeners for top-level UI
  */
 export function initUi() {
   /* When the left panel toggle is clicked */
@@ -29,14 +30,17 @@ export function initUi() {
     handleModeSelectChange(e)
   })
 
-  // recall user's selection from local storage
-  setModeSelectValue()
-
-  // user is logged in
   if (loginContainer.classList.contains('hidden')) {
+    // user is logged in
     headerEl.classList.remove('hidden')
-    recipesContainer.classList.remove('hidden')
+    // recall user's selection from local storage
+    setModeSelectValue()
   }
+}
+
+export function setMessage(value) {
+  messageEl.innerHTML = value
+  console.log('messageEl.innerHTML', messageEl.innerHTML)
 }
 
 /**
@@ -55,16 +59,25 @@ export function isMobile() {
  */
 function handleModeSelectChange(e) {
   const mode = e.target.value
-  if (mode === 'recipes') {
-    leftPanelToggle.classList.remove('hidden')
-    recipesContainer.classList.remove('hidden')
-    recipeLinksPanel.classList.remove('hidden')
-    shoppingContainer.classList.add('hidden')
-  } else {
-    leftPanelToggle.classList.add('hidden')
-    recipesContainer.classList.add('hidden')
-    recipeLinksPanel.classList.add('hidden')
-    shoppingContainer.classList.remove('hidden')
+
+  switch (mode) {
+    case 'recipes':
+      shoppingContainer.classList.add('hidden')
+      leftPanelToggle.classList.remove('hidden')
+      leftPanelToggle.click()
+
+      if (state.get('recipesFetched')) {
+        recipesContainer.classList.remove('hidden')
+      }
+      break
+    case 'shopping':
+      leftPanelToggle.classList.add('hidden')
+      recipesContainer.classList.add('hidden')
+      recipeLinksPanel.classList.add('hidden')
+      if (state.get('shoppingFetched')) {
+        shoppingContainer.classList.remove('hidden')
+      }
+      break
   }
   localStorage.setItem('mode', mode)
 }

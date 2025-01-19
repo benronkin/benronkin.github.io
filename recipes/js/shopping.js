@@ -6,6 +6,8 @@ import { initDragging, makeElementDraggable } from './drag.js'
 // Globals
 // ----------------------
 
+const messageEl = document.querySelector('#message')
+const modeSelect = document.querySelector('#mode-select')
 const shoppingForm = document.querySelector('#shopping-form')
 const shoppingInput = document.querySelector('#shopping-input')
 const shoppingContainer = document.querySelector('#shopping-container')
@@ -23,7 +25,13 @@ const suggestionsEl = document.querySelector('#shopping-suggestions')
 export async function initShopping() {
   await displayShoppingList()
   await refreshLocalStorageSuggestions()
-  suggestionsSwitch.classList.remove('disabled')
+
+  if (modeSelect.value === 'shopping') {
+    shoppingContainer.classList.remove('hidden')
+    initDragging()
+    shoppingInput.focus()
+    messageEl.innerHTML = ''
+  }
 }
 
 // ------------------------
@@ -182,10 +190,7 @@ async function displayShoppingList() {
     }
   }
 
-  if (!shoppingContainer.classList.contains('hidden')) {
-    initDragging()
-    shoppingInput.focus()
-  }
+  state.set('shoppingFetched', true)
 }
 
 /**

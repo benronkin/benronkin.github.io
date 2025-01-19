@@ -7,6 +7,7 @@ import { skippedIngredients, transformedIngredients } from './ingredients.js'
 // Globals
 // ----------------------
 
+const messageEl = document.querySelector('#message')
 const switchEl = document.querySelector('#related-recipes-switch')
 const addRecipeBtn = document.querySelector('#add-recipe')
 const shopIngredientsBtn = document.querySelector('#shop-ingredients')
@@ -80,6 +81,10 @@ export async function initRecipes() {
     return
   }
   state.setRecipes(recipes)
+  state.set('recipesFetched', true)
+  if (localStorage.getItem('mode') === 'recipes') {
+    messageEl.innerHTML = ''
+  }
   populateRecipes()
 }
 
@@ -126,7 +131,7 @@ async function handleRecipeCreate() {
     tags: '',
     related: ''
   }
-  state.addRecipe(newRecipe)
+  state.push('recipes', newRecipe)
 
   const li = makeRecipeLinkEl(id, newRecipe.title)
   recipesList.appendChild(li)
