@@ -39,7 +39,6 @@ export async function initShopping() {
     }
   }
 
-  // shoppingEl.value = shopping
   if (!shoppingContainer.classList.contains('hidden')) {
     initDragging()
     shoppingInput.focus()
