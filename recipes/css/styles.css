@@ -237,14 +237,14 @@ ul {
   align-items: center;
   width: 270px;
 }
-.shopping-item span {
+.shopping-item span,
+.shopping-suggestion span {
   margin-left: 20px;
 }
 .shopping-suggestion {
   cursor: pointer;
   display: flex;
-  justify-content: flex-start;
-  gap: 10px;
+  justify-content: space-between;
   align-items: center;
   width: 300px;
   padding: 0.5rem;

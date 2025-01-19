@@ -102,7 +102,7 @@ async function handleShoppingListChange() {
 
   try {
     const { message, error } = await postWebApp(state.getWebAppUrl(), {
-      path: 'shopping-update',
+      path: 'shopping-list-update',
       value
     })
     if (error) {
@@ -208,14 +208,32 @@ function displaySuggestions(suggestions) {
   suggestions.sort()
   for (const s of suggestions) {
     const div = document.createElement('DIV')
-    div.classList.add('shopping-suggestion')
-    div.innerHTML = `<i class="fa-solid fa-plus"></i><span>${s}<//span>`
+
+    div.innerHTML = `<div class="shopping-suggestion"><div><i class="fa-solid fa-plus"></i><span>${s}</span></div>
+    <i class="fa fa-trash hidden"></i></div>`
+
     suggestionsEl.appendChild(div)
+
+    div.addEventListener('click', () => {
+      div.querySelector('.fa-trash').classList.toggle('hidden')
+    })
+
     div.querySelector('.fa-plus').addEventListener('click', () => {
       let shoppingItem = createShoppingItem(s)
       shoppingItem = makeElementDraggable(shoppingItem)
       shoppingDiv.appendChild(shoppingItem)
       div.remove()
+      shoppingInput.focus()
+    })
+
+    div.querySelector('.fa-trash').addEventListener('click', async () => {
+      const item = div.querySelector('span').innerText
+      const items = getShoppingListItems().filter((i) => i !== item)
+      updateLocalStorageSuggestions(items)
+      await postWebApp(state.getWebAppUrl(), {
+        path: 'shopping-suggestions-update',
+        value: items.join(',')
+      })
     })
   }
 }
