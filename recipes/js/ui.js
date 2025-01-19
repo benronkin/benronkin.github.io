@@ -58,10 +58,12 @@ function handleModeSelectChange(e) {
   if (mode === 'recipes') {
     leftPanelToggle.classList.remove('hidden')
     recipesContainer.classList.remove('hidden')
+    recipeLinksPanel.classList.remove('hidden')
     shoppingContainer.classList.add('hidden')
   } else {
     leftPanelToggle.classList.add('hidden')
     recipesContainer.classList.add('hidden')
+    recipeLinksPanel.classList.add('hidden')
     shoppingContainer.classList.remove('hidden')
   }
   localStorage.setItem('mode', mode)

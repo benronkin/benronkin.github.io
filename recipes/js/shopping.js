@@ -1,25 +1,25 @@
 import { getWebAppData, postWebApp } from './io.js'
-import { resizeTextarea } from './ui.js'
 import { state } from './state.js'
+import { initDragging, makeElementDraggable } from './drag.js'
 
 // ----------------------
 // Globals
 // ----------------------
 
-const shoppingEl = document.querySelector('#shopping-list')
+const shoppingForm = document.querySelector('#shopping-form')
+const shoppingInput = document.querySelector('#shopping-input')
+const shoppingContainer = document.querySelector('#shopping-container')
+const shoppingDiv = document.querySelector('#shopping-div')
+// const shoppingEl = document.querySelector('#shopping-list')
 
 // ----------------------
 // Exported functions
 // ----------------------
+
 /**
  * Set recipe event listeners
  */
 export async function initShopping() {
-  /* When shopping list changes */
-  shoppingEl.addEventListener('change', (e) => {
-    handleShoppingListChange(e)
-  })
-
   const { shopping, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=shopping`)
   if (error) {
     console.log(`getShoppingList error: ${error}`)
@@ -28,8 +28,64 @@ export async function initShopping() {
   if (token) {
     localStorage.setItem('token', token)
   }
-  shoppingEl.value = shopping
+
+  if (shopping.length > 0) {
+    const values = shopping.split(',')
+    for (let i = 0; i < values.length; i++) {
+      const value = values[i].trim()
+      let shoppingItem = createShoppingItem(value)
+      shoppingItem = makeElementDraggable(shoppingItem)
+      shoppingDiv.appendChild(shoppingItem)
+    }
+  }
+
+  // shoppingEl.value = shopping
+  if (!shoppingContainer.classList.contains('hidden')) {
+    initDragging()
+    shoppingInput.focus()
+  }
 }
+
+// ------------------------
+// Event handler
+// ------------------------
+
+/* When shopping list changes */
+document.addEventListener('list-changed', (e) => {
+  handleShoppingListChange()
+})
+
+/* when clearSelection is dispatched */
+document.addEventListener('clear-selection', () => {
+  clearSelection()
+})
+
+/* when shopping input key is pressed */
+shoppingInput.addEventListener('keyup', (e) => {
+  if (shoppingInput.value.trim() === '') {
+    shoppingInput.dataset.index = ''
+    document.querySelectorAll('i.fa-trash').forEach((el) => el.classList.add('hidden'))
+  }
+})
+
+/* when shopping form is submitted */
+shoppingForm.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  const itemId = shoppingInput.dataset.index
+  const value = shoppingInput.value
+  const itemEl = document.getElementById(itemId)
+  clearSelection()
+  if (itemEl) {
+    // existing item is edited
+    itemEl.querySelector('span').innerText = value
+  } else {
+    // new item is added
+    let shoppingItem = createShoppingItem(value)
+    shoppingItem = makeElementDraggable(shoppingItem)
+    shoppingDiv.appendChild(shoppingItem)
+  }
+  document.dispatchEvent(new CustomEvent('list-changed'))
+})
 
 // ------------------------
 // Event handler functions
@@ -38,8 +94,9 @@ export async function initShopping() {
 /**
  * Handle shopping list change
  */
-async function handleShoppingListChange(e) {
-  const { value } = e.target
+async function handleShoppingListChange() {
+  const items = [...shoppingDiv.querySelectorAll('.shopping-item')].map((el) => el.innerText)
+  const value = items.join(',')
   try {
     const { message, error } = await postWebApp(state.getWebAppUrl(), {
       path: 'shopping-update',
@@ -52,4 +109,66 @@ async function handleShoppingListChange(e) {
   } catch (err) {
     console.log(err)
   }
+}
+
+// ------------------------
+// Helpers
+// ------------------------
+
+/**
+ *
+ */
+function createShoppingItem(item) {
+  const shoppingItem = document.createElement('div')
+  shoppingItem.classList.add('shopping-item')
+  shoppingItem.id = generateUUID()
+  shoppingItem.innerHTML = `
+    <div><i class="fa-solid fa-bars"></i><span>${item}</span></div>
+    <i class="fa fa-trash hidden"></i>`
+
+  /* when trash icon is clicked */
+  shoppingItem.querySelector('i.fa-trash').addEventListener('click', (e) => {
+    e.stopPropagation()
+    shoppingItem.remove()
+    clearSelection()
+    document.dispatchEvent(new CustomEvent('list-changed'))
+  })
+
+  /* When shopping item is clicked */
+  shoppingItem.addEventListener('click', (e) => {
+    document.querySelectorAll('i.fa-trash').forEach((el) => el.classList.add('hidden'))
+    const parent = e.target.closest('.shopping-item')
+    parent.classList.toggle('checked')
+    if (parent.classList.contains('checked')) {
+      shoppingInput.value = parent.innerText
+      shoppingInput.dataset.index = parent.id
+      parent.querySelector('i.fa-trash').classList.remove('hidden')
+    } else {
+      clearSelection()
+    }
+    shoppingInput.focus()
+  })
+
+  return shoppingItem
+}
+
+/**
+ *
+ */
+function clearSelection() {
+  shoppingInput.value = ''
+  shoppingInput.dataset.index = ''
+  document.querySelectorAll('i.fa-trash').forEach((el) => el.classList.add('hidden'))
+  document.querySelectorAll('.shopping-item').forEach((el) => el.classList.remove('checked'))
+}
+
+/**
+ * Create a uuid
+ */
+function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0
+    const v = c === 'x' ? r : (r & 0x3) | 0x8
+    return v.toString(16)
+  })
 }
