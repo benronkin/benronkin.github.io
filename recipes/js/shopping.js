@@ -23,6 +23,7 @@ const suggestionsEl = document.querySelector('#shopping-suggestions')
 export async function initShopping() {
   await displayShoppingList()
   await refreshLocalStorageSuggestions()
+  suggestionsSwitch.classList.remove('disabled')
 }
 
 // ------------------------
@@ -31,6 +32,9 @@ export async function initShopping() {
 
 /* when suggestions switch is clicked */
 suggestionsSwitch.addEventListener('click', () => {
+  if (suggestionsSwitch.classList.contains('disabled')) {
+    return
+  }
   handleSuggestionsSwitchClick()
 })
 
