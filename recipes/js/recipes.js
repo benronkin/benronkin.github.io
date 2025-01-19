@@ -356,7 +356,6 @@ function loadRecipe(recipe) {
   }
 
   switchEl.classList.remove('on')
-  thumbEl.classList.remove('on')
   const activeTab = document.querySelector('.tab.active')
   if (activeTab) {
     activeTab.classList.remove('active')
