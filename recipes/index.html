@@ -44,11 +44,21 @@
     </div>
 
     <div id="shopping-container" class="hidden">
-      <form id="shopping-form">
-        <input type="text" id="shopping-input" placeholder="Add item" />
-      </form>
-      <div id="shopping-div" class="drag-container"></div>
-      <!-- <textarea name="shopping-list" id="shopping-list"> </textarea> -->
+      <div class="left-pane">
+        <form id="shopping-form">
+          <input type="text" id="shopping-input" placeholder="Add item" />
+        </form>
+        <div id="shopping-div" class="drag-container"></div>
+      </div>
+      <div class="right-pane">
+        <div class="flex">
+          <div class="switch" id="suggestions-switch">
+            <div class="thumb"></div>
+          </div>
+          <span>Show suggestions</span>
+        </div>
+        <div id="shopping-suggestions"></div>
+      </div>
     </div>
 
     <div id="recipes-container" class="hidden">
@@ -68,7 +78,7 @@
           <textarea name="recipe-notes" id="recipe-notes" class="field"></textarea>
           <div id="related-recipes-header">
             <h3>related recipes</h3>
-            <div class="switch ml20">
+            <div id="related-recipes-switch" class="switch ml20">
               <div class="thumb"></div>
             </div>
           </div>

@@ -7,8 +7,7 @@ import { skippedIngredients, transformedIngredients } from './ingredients.js'
 // Globals
 // ----------------------
 
-const switchEl = document.querySelector('.switch')
-const thumbEl = document.querySelector('.thumb')
+const switchEl = document.querySelector('#related-recipes-switch')
 const addRecipeBtn = document.querySelector('#add-recipe')
 const shopIngredientsBtn = document.querySelector('#shop-ingredients')
 const shoppingEl = document.querySelector('#shopping-list')
@@ -93,7 +92,6 @@ export async function initRecipes() {
  */
 function handleRelatedSwitchClick() {
   switchEl.classList.toggle('on')
-  thumbEl.classList.toggle('on')
   recipeRelated.classList.toggle('hidden')
   resizeTextarea(recipeRelated)
 }

@@ -10,7 +10,8 @@ const shoppingForm = document.querySelector('#shopping-form')
 const shoppingInput = document.querySelector('#shopping-input')
 const shoppingContainer = document.querySelector('#shopping-container')
 const shoppingDiv = document.querySelector('#shopping-div')
-// const shoppingEl = document.querySelector('#shopping-list')
+const suggestionsSwitch = document.querySelector('#suggestions-switch')
+const suggestionsEl = document.querySelector('#shopping-suggestions')
 
 // ----------------------
 // Exported functions
@@ -49,7 +50,12 @@ export async function initShopping() {
 // Event handler
 // ------------------------
 
-/* When shopping list changes */
+/* when suggestions switch is clicked */
+suggestionsSwitch.addEventListener('click', () => {
+  handleSuggestionsSwitchClick()
+})
+
+/* when shopping list changes */
 document.addEventListener('list-changed', (e) => {
   handleShoppingListChange()
 })
@@ -91,11 +97,30 @@ shoppingForm.addEventListener('submit', async (e) => {
 // ------------------------
 
 /**
+ * handle suggestions switch clicks
+ */
+function handleSuggestionsSwitchClick() {
+  suggestionsEl.innerHTML = ''
+  suggestionsSwitch.classList.toggle('on')
+  if (suggestionsSwitch.classList.contains('on')) {
+    let suggestions = localStorage.getItem('shopping-suggestions')
+    if (suggestions) {
+      suggestions = suggestions.split(',').filter((s) => s.toString().trim().length > 1)
+    } else {
+      suggestions = ['apples', 'carrots', 'berries']
+    }
+    displaySuggestions(suggestions)
+  }
+}
+
+/**
  * Handle shopping list change
  */
 async function handleShoppingListChange() {
-  const items = [...shoppingDiv.querySelectorAll('.shopping-item')].map((el) => el.innerText)
+  const items = getShoppingListItems()
+  updateLocalStorageSuggestions(items)
   const value = items.join(',')
+
   try {
     const { message, error } = await postWebApp(state.getWebAppUrl(), {
       path: 'shopping-update',
@@ -152,6 +177,27 @@ function createShoppingItem(item) {
 }
 
 /**
+ * Display a list of suggestions
+ */
+function displaySuggestions(suggestions) {
+  const shoppingItems = getShoppingListItems()
+  suggestions = suggestions.filter((s) => !shoppingItems.includes(s))
+  suggestions.sort()
+  for (const s of suggestions) {
+    const div = document.createElement('DIV')
+    div.classList.add('shopping-suggestion')
+    div.innerHTML = `<i class="fa-solid fa-plus"></i><span>${s}<//span>`
+    suggestionsEl.appendChild(div)
+    div.querySelector('.fa-plus').addEventListener('click', () => {
+      let shoppingItem = createShoppingItem(s)
+      shoppingItem = makeElementDraggable(shoppingItem)
+      shoppingDiv.appendChild(shoppingItem)
+      div.remove()
+    })
+  }
+}
+
+/**
  *
  */
 function clearSelection() {
@@ -170,4 +216,25 @@ function generateUUID() {
     const v = c === 'x' ? r : (r & 0x3) | 0x8
     return v.toString(16)
   })
+}
+
+/**
+ * Get shopping list items
+ */
+function getShoppingListItems() {
+  const items = [...shoppingDiv.querySelectorAll('.shopping-item')].map((el) => el.innerText.toLowerCase().trim())
+  return items
+}
+
+/**
+ * Update local storage suggestions
+ */
+function updateLocalStorageSuggestions(items) {
+  let localStorageSuggestions = (localStorage.getItem('shopping-suggestions') || '').split(',')
+  for (const item of items) {
+    if (item && !localStorageSuggestions.includes(item)) {
+      localStorageSuggestions.push(item)
+    }
+  }
+  localStorage.setItem('shopping-suggestions', localStorageSuggestions.join(','))
 }

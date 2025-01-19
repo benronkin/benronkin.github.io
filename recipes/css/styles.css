@@ -74,22 +74,6 @@ ul {
 #mode-select:focus {
   outline: none;
 }
-#shopping-container {
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-  margin-top: 50px;
-}
-#shopping-container.hidden {
-  display: none;
-}
-#shopping-list {
-  margin-top: 50px;
-  width: 100%;
-  height: 100vh;
-  border: none;
-  padding: 20px;
-}
 #recipe {
   width: 100%;
   padding: 20px;
@@ -158,6 +142,27 @@ ul {
 #shop-ingredients {
   margin-left: auto;
 }
+#shopping-container {
+  display: flex;
+  gap: 50px;
+  margin: 20px;
+  margin-top: 50px;
+}
+#shopping-container .right-pane {
+  margin-top: 55px;
+  display: flex;
+  flex-direction: column;
+}
+#shopping-container.hidden {
+  display: none;
+}
+#shopping-list {
+  margin-top: 50px;
+  width: 100%;
+  height: 100vh;
+  border: none;
+  padding: 20px;
+}
 #shopping-div {
   padding-bottom: 20px;
 }
@@ -169,6 +174,11 @@ ul {
   border-bottom: 1px solid #ccc;
   border-radius: 6px;
   margin-bottom: 10px;
+}
+#shopping-suggestions {
+  display: flex;
+  flex-direction: column;
+  margin-top: 21px;
 }
 #tabs {
   display: flex;
@@ -191,6 +201,11 @@ ul {
   color: red;
   margin-left: 10px;
 }
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .hidden {
   display: none;
 }
@@ -202,20 +217,34 @@ ul {
 .recipe-link.active {
   font-weight: bold;
 }
-
 .shopping-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 300px;
-  border-bottom: 1px solid #ccc;
+  padding: 0.5rem;
+  background-color: lightgreen;
+  margin-bottom: 0.5rem;
 }
 .shopping-item div {
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 10px;
   width: 270px;
+}
+.shopping-item span {
+  margin-left: 20px;
+}
+.shopping-suggestion {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: center;
+  width: 300px;
+  padding: 0.5rem;
+  background-color: plum;
+  margin-bottom: 0.5rem;
 }
 .shopping-item span {
   margin-left: 20px;
@@ -249,7 +278,7 @@ ul {
   align-items: center;
   justify-content: center;
 }
-.thumb.on {
+.switch.on .thumb {
   left: 50%;
 }
 .thumb i {

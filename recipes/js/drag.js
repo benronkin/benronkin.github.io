@@ -82,9 +82,6 @@ function makeDragStyles() {
     }
     .draggable {
       cursor: move;
-      padding: 0.5rem;
-      background-color: lightgreen;
-      margin-bottom: 0.5rem;
     }
     .draggable.dragging {
       opacity: 0.5;
