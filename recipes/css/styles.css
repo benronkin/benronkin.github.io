@@ -5,6 +5,11 @@
 }
 
 html,
+body {
+  min-height: 1500px;
+}
+
+html,
 body,
 button,
 input,
