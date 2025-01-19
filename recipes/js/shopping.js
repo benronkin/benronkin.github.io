@@ -21,29 +21,8 @@ const suggestionsEl = document.querySelector('#shopping-suggestions')
  * Set recipe event listeners
  */
 export async function initShopping() {
-  const { shopping, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=shopping`)
-  if (error) {
-    console.log(`getShoppingList error: ${error}`)
-    return { error }
-  }
-  if (token) {
-    localStorage.setItem('token', token)
-  }
-
-  if (shopping.length > 0) {
-    const values = shopping.split(',')
-    for (let i = 0; i < values.length; i++) {
-      const value = values[i].trim()
-      let shoppingItem = createShoppingItem(value)
-      shoppingItem = makeElementDraggable(shoppingItem)
-      shoppingDiv.appendChild(shoppingItem)
-    }
-  }
-
-  if (!shoppingContainer.classList.contains('hidden')) {
-    initDragging()
-    shoppingInput.focus()
-  }
+  await displayShoppingList()
+  await refreshLocalStorageSuggestions()
 }
 
 // ------------------------
@@ -174,6 +153,50 @@ function createShoppingItem(item) {
   })
 
   return shoppingItem
+}
+
+/**
+ * Display shopping list
+ */
+async function displayShoppingList() {
+  const { shoppingList, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=shopping-list`)
+  if (error) {
+    console.log(`displayShoppingList error: ${error}`)
+    return { error }
+  }
+  if (token) {
+    localStorage.setItem('token', token)
+  }
+
+  if (shoppingList.length > 0) {
+    const values = shoppingList.split(',')
+    for (let i = 0; i < values.length; i++) {
+      const value = values[i].trim()
+      let shoppingItem = createShoppingItem(value)
+      shoppingItem = makeElementDraggable(shoppingItem)
+      shoppingDiv.appendChild(shoppingItem)
+    }
+  }
+
+  if (!shoppingContainer.classList.contains('hidden')) {
+    initDragging()
+    shoppingInput.focus()
+  }
+}
+
+/**
+ * Refresh local storage suggestions from server
+ */
+async function refreshLocalStorageSuggestions() {
+  const { shoppingSuggestions, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=shopping-suggestions`)
+  if (error) {
+    console.log(`refreshLocalStorageSuggestions error: ${error}`)
+    return { error }
+  }
+  if (token) {
+    localStorage.setItem('token', token)
+  }
+  localStorage.setItem('shopping-suggestions', shoppingSuggestions)
 }
 
 /**
