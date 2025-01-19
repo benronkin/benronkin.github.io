@@ -228,12 +228,14 @@ function displaySuggestions(suggestions) {
 
     div.querySelector('.fa-trash').addEventListener('click', async () => {
       const item = div.querySelector('span').innerText
-      const items = getShoppingListItems().filter((i) => i !== item)
-      updateLocalStorageSuggestions(items)
+      const items = getShoppingListItems()
+        .filter((i) => i !== item)
+        .join(',')
+      localStorage.setItem('shopping-suggestions', items)
       div.remove()
       await postWebApp(state.getWebAppUrl(), {
         path: 'shopping-suggestions-update',
-        value: items.join(',')
+        value: items
       })
     })
   }
