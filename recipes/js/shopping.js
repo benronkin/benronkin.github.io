@@ -219,7 +219,7 @@ function displaySuggestions(suggestions) {
     })
 
     div.querySelector('.fa-plus').addEventListener('click', () => {
-      let shoppingItem = createShoppingItem(s)
+      const shoppingItem = createShoppingItem(s)
       shoppingItem = makeElementDraggable(shoppingItem)
       shoppingDiv.appendChild(shoppingItem)
       div.remove()
@@ -230,6 +230,7 @@ function displaySuggestions(suggestions) {
       const item = div.querySelector('span').innerText
       const items = getShoppingListItems().filter((i) => i !== item)
       updateLocalStorageSuggestions(items)
+      div.remove()
       await postWebApp(state.getWebAppUrl(), {
         path: 'shopping-suggestions-update',
         value: items.join(',')
