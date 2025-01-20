@@ -28,6 +28,7 @@ const skippedIngredients = [
   'oil',
   'onion',
   'peppers',
+  'recipe',
   'rum',
   'salt',
   'soy',
