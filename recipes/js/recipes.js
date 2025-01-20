@@ -1,7 +1,7 @@
 import { getWebAppData, postWebApp } from './io.js'
 import { resizeTextarea, isMobile } from './ui.js'
 import { state } from './state.js'
-import { skippedIngredients, transformedIngredients } from './ingredients.js'
+import { filterIngredient, transformIngredient } from './ingredients.js'
 import { addItemsToShoppingList } from './shopping.js'
 
 // ----------------------
@@ -384,38 +384,6 @@ async function getSearchedRecipes(q) {
     return { error }
   }
   return { recipes }
-}
-
-/**
- * Filter ingredient lines that should not be added to the shopping list
- */
-function filterIngredient(line) {
-  if (!/[a-zA-Z]{3,}/.test(line)) {
-    return false
-  }
-  for (const word of skippedIngredients) {
-    const regEx = new RegExp(`\\b${word}\\b`, 'g')
-    if (regEx.test(line)) {
-      return false
-    }
-  }
-  return true
-}
-
-/**
- * Transform ingredient lines to a shopping list format
- */
-function transformIngredient(line) {
-  for (const [key, value] of Object.entries(transformedIngredients)) {
-    if (line.includes(key)) {
-      line = line.replace(key, value)
-    }
-  }
-  const comma = line.indexOf(',')
-  if (comma > -1) {
-    line = line.slice(0, comma)
-  }
-  return line
 }
 
 /**

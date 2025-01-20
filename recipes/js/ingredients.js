@@ -1,4 +1,4 @@
-export const skippedIngredients = [
+const skippedIngredients = [
   'almond',
   'almonds',
   'and pepper',
@@ -44,7 +44,7 @@ export const skippedIngredients = [
   'yogurt'
 ]
 
-export const transformedIngredients = {
+const transformedIngredients = {
   'beaten egg': 'egg',
   'beaten eggs': 'eggs',
   'chocolate coins': 'chocolate',
@@ -52,5 +52,48 @@ export const transformedIngredients = {
   'egg whites': 'eggs',
   'egg yolk': 'egg',
   'egg yolks': 'eggs',
-  'raspberry puree': 'raspberries'
+  'raspberry puree': 'raspberries',
+  'whipping cream': 'heavy cream'
+}
+
+const nameOnlyIngredients = ['butter', 'heavy cream']
+
+/**
+ * Transform ingredient lines to a shopping list format
+ */
+export function transformIngredient(line) {
+  for (const [key, value] of Object.entries(transformedIngredients)) {
+    if (line.includes(key)) {
+      line = line.replace(key, value)
+    }
+  }
+
+  for (const nameOnly of nameOnlyIngredients) {
+    const regex = new RegExp(`\\b${nameOnly}\\b`)
+    if (regex.test(line)) {
+      line = nameOnly
+    }
+  }
+
+  const comma = line.indexOf(',')
+  if (comma > -1) {
+    line = line.slice(0, comma)
+  }
+  return line
+}
+
+/**
+ * Filter ingredient lines that should not be added to the shopping list
+ */
+export function filterIngredient(line) {
+  if (!/[a-zA-Z]{3,}/.test(line)) {
+    return false
+  }
+  for (const word of skippedIngredients) {
+    const regEx = new RegExp(`\\b${word}\\b`, 'g')
+    if (regEx.test(line)) {
+      return false
+    }
+  }
+  return true
 }
