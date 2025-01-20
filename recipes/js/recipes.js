@@ -77,15 +77,12 @@ export async function initRecipes() {
   const { recipes, error } = await getLatestRecipes()
 
   if (error) {
-    document.dispatchEvent(new CustomEvent('recipes-fetch-fail'))
-    return
+    document.dispatchEvent(new CustomEvent('fetch-fail'))
+    return { error }
   }
   state.setRecipes(recipes)
-  state.set('recipesFetched', true)
-  if (localStorage.getItem('mode') === 'recipes') {
-    messageEl.innerHTML = ''
-  }
   populateRecipes()
+  return { message: 'recipes-fetch-ok' }
 }
 
 // ------------------------

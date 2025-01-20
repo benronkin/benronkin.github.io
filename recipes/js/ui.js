@@ -33,14 +33,26 @@ export function initUi() {
   if (loginContainer.classList.contains('hidden')) {
     // user is logged in
     headerEl.classList.remove('hidden')
-    // recall user's selection from local storage
-    setModeSelectValue()
   }
 }
 
+/**
+ * Set the mode select value using local storage
+ */
+export function activateUi() {
+  const mode = localStorage.getItem('mode')
+  if (mode) {
+    modeSelect.value = mode
+    handleModeSelectChange({ target: { value: mode } })
+  }
+  setMessage('')
+}
+
+/**
+ * Set message at top of page
+ */
 export function setMessage(value) {
   messageEl.innerHTML = value
-  console.log('messageEl.innerHTML', messageEl.innerHTML)
 }
 
 /**
@@ -65,18 +77,13 @@ function handleModeSelectChange(e) {
       shoppingContainer.classList.add('hidden')
       leftPanelToggle.classList.remove('hidden')
       leftPanelToggle.click()
-
-      if (state.get('recipesFetched')) {
-        recipesContainer.classList.remove('hidden')
-      }
+      recipesContainer.classList.remove('hidden')
       break
     case 'shopping':
       leftPanelToggle.classList.add('hidden')
       recipesContainer.classList.add('hidden')
       recipeLinksPanel.classList.add('hidden')
-      if (state.get('shoppingFetched')) {
-        shoppingContainer.classList.remove('hidden')
-      }
+      shoppingContainer.classList.remove('hidden')
       break
   }
   localStorage.setItem('mode', mode)
@@ -109,16 +116,5 @@ export function resizeTextarea(textarea) {
   // If the scroll height is more than the default height, expand the textarea
   if (minHeight > textarea.clientHeight) {
     textarea.style.height = minHeight + 'px'
-  }
-}
-
-/**
- * Set the mode select value using local storage
- */
-function setModeSelectValue() {
-  const mode = localStorage.getItem('mode')
-  if (mode) {
-    modeSelect.value = mode
-    handleModeSelectChange({ target: { value: mode } })
   }
 }

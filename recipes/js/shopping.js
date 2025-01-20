@@ -1,12 +1,12 @@
 import { getWebAppData, postWebApp } from './io.js'
 import { state } from './state.js'
 import { initDragging, makeElementDraggable } from './drag.js'
+import { setMessage } from './ui.js'
 
 // ----------------------
 // Globals
 // ----------------------
 
-const messageEl = document.querySelector('#message')
 const modeSelect = document.querySelector('#mode-select')
 const shoppingForm = document.querySelector('#shopping-form')
 const shoppingInput = document.querySelector('#shopping-input')
@@ -23,15 +23,19 @@ const suggestionsEl = document.querySelector('#shopping-suggestions')
  * Set recipe event listeners
  */
 export async function initShopping() {
-  await displayShoppingList()
+  const { message, error } = await displayShoppingList()
+  if (error) {
+    setMessage(error)
+    return { error }
+  }
   await refreshLocalStorageSuggestions()
 
   if (modeSelect.value === 'shopping') {
     shoppingContainer.classList.remove('hidden')
     initDragging()
     shoppingInput.focus()
-    messageEl.innerHTML = ''
   }
+  return { message }
 }
 
 // ------------------------
@@ -189,8 +193,7 @@ async function displayShoppingList() {
       shoppingDiv.appendChild(shoppingItem)
     }
   }
-
-  state.set('shoppingFetched', true)
+  return { message: 'shopping-fetch-ok' }
 }
 
 /**

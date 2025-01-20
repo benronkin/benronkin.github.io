@@ -15,8 +15,8 @@ const loginMessageEl = document.querySelector('#login-message')
 // ----------------------
 
 export function initAuth() {
-  /* When fetching recipes fail */
-  document.addEventListener('recipes-fetch-fail', () => {
+  /* When fetching recipes or shopping list fails */
+  document.addEventListener('fetch-fail', () => {
     loginContainer.classList.remove('hidden')
     headerEl.classList.add('hidden')
     recipeLinksPanel.classList.add('hidden')
