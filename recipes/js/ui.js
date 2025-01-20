@@ -76,13 +76,14 @@ function handleModeSelectChange(e) {
     case 'recipes':
       shoppingContainer.classList.add('hidden')
       leftPanelToggle.classList.remove('hidden')
-      leftPanelToggle.click()
       recipesContainer.classList.remove('hidden')
+      if (recipeLinksPanel.classList.contains('hidden')) {
+        leftPanelToggle.click()
+      }
       break
     case 'shopping':
       leftPanelToggle.classList.add('hidden')
       recipesContainer.classList.add('hidden')
-      recipeLinksPanel.classList.add('hidden')
       shoppingContainer.classList.remove('hidden')
       break
   }
