@@ -2,16 +2,15 @@ import { getWebAppData, postWebApp } from './io.js'
 import { resizeTextarea, isMobile } from './ui.js'
 import { state } from './state.js'
 import { skippedIngredients, transformedIngredients } from './ingredients.js'
+import { addItemsToShoppingList } from './shopping.js'
 
 // ----------------------
 // Globals
 // ----------------------
 
-const messageEl = document.querySelector('#message')
 const switchEl = document.querySelector('#related-recipes-switch')
 const addRecipeBtn = document.querySelector('#add-recipe')
 const shopIngredientsBtn = document.querySelector('#shop-ingredients')
-const shoppingEl = document.querySelector('#shopping-list')
 const searchRecipesEl = document.querySelector('#search-recipes')
 const searchRecipesMessageEl = document.querySelector('#search-recipes-message')
 const recipesContainer = document.querySelector('#recipes-container')
@@ -270,42 +269,20 @@ function handleShopIngredientsClick() {
   let id
   let recipe
   let ingredients
-  let shoppingList
-  let list = ''
 
-  try {
-    for (const tab of tabs) {
-      title = tab.querySelector('.text-tab').textContent
-      tabId = tab.id
-      id = tabId.replace('tab-', '')
-      recipe = state.getRecipeById(id)
-      ingredients = recipe.ingredients
-        .split('\n')
-        .map((line) => line.trim().toLowerCase())
-        .filter(filterIngredient)
-        .map(transformIngredient)
-      shoppingArr.push({ title, ingredients })
-    }
-    shoppingList = shoppingArr.reduce((acc, recipe) => {
-      return acc + `For recipe: ${recipe.title}\n${recipe.ingredients.join('\n')}\n-------------\n`
-    }, '')
-    list =
-      shoppingEl.value.trim().length > 0
-        ? `${shoppingEl.value.trim()}\n\n-------------\n\n${shoppingList}`
-        : shoppingList
-  } catch (err) {
-    console.log(`handleShopIngredientsClick error: ${err}`)
-    console.log('title:', title)
-    console.log('tabId:', tabId)
-    console.log('id:', id)
-    console.log('recipe:', recipe)
-    console.log('ingredients:', ingredients)
-    console.log('shoppingList:', shoppingList)
-    console.log('list:', list)
+  for (const tab of tabs) {
+    title = tab.querySelector('.text-tab').textContent
+    tabId = tab.id
+    id = tabId.replace('tab-', '')
+    recipe = state.getRecipeById(id)
+    ingredients = recipe.ingredients
+      .split('\n')
+      .map((line) => line.trim().toLowerCase())
+      .filter(filterIngredient)
+      .map(transformIngredient)
+    shoppingArr.push(...ingredients)
   }
-
-  shoppingEl.value = list
-  shoppingEl.dispatchEvent(new Event('change'))
+  addItemsToShoppingList(shoppingArr)
 }
 
 // ------------------------

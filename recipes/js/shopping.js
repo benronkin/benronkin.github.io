@@ -38,6 +38,20 @@ export async function initShopping() {
   return { message }
 }
 
+/**
+ * Add an array of items to the shopping list
+ */
+export function addItemsToShoppingList(newItems) {
+  newItems = newItems.map((item) => item.trim()).filter((item) => item.toString().length > 0)
+  // avoid duplicating existing items in shopping list
+  const items = getShoppingListItems()
+  newItems = newItems.filter((item) => !items.includes(item))
+  // append to list
+  for (const item of newItems) {
+    addShoppingItemToList(item)
+  }
+}
+
 // ------------------------
 // Event handler
 // ------------------------
@@ -80,9 +94,7 @@ shoppingForm.addEventListener('submit', async (e) => {
     itemEl.querySelector('span').innerText = value
   } else {
     // new item is added
-    let shoppingItem = createShoppingItem(value)
-    shoppingItem = makeElementDraggable(shoppingItem)
-    shoppingDiv.appendChild(shoppingItem)
+    addShoppingItemToList(value)
   }
   document.dispatchEvent(new CustomEvent('list-changed'))
 })
@@ -172,6 +184,15 @@ function createShoppingItem(item) {
 }
 
 /**
+ * Add shopping item to list
+ */
+function addShoppingItemToList(value) {
+  let shoppingItem = createShoppingItem(value)
+  shoppingItem = makeElementDraggable(shoppingItem)
+  shoppingDiv.appendChild(shoppingItem)
+}
+
+/**
  * Display shopping list
  */
 async function displayShoppingList() {
@@ -183,15 +204,9 @@ async function displayShoppingList() {
   if (token) {
     localStorage.setItem('token', token)
   }
-
   if (shoppingList.length > 0) {
     const values = shoppingList.split(',')
-    for (let i = 0; i < values.length; i++) {
-      const value = values[i].trim()
-      let shoppingItem = createShoppingItem(value)
-      shoppingItem = makeElementDraggable(shoppingItem)
-      shoppingDiv.appendChild(shoppingItem)
-    }
+    addItemsToShoppingList(values)
   }
   return { message: 'shopping-fetch-ok' }
 }
@@ -231,9 +246,7 @@ function displaySuggestions(suggestions) {
     })
 
     div.querySelector('.fa-plus').addEventListener('click', () => {
-      const shoppingItem = createShoppingItem(s)
-      shoppingItem = makeElementDraggable(shoppingItem)
-      shoppingDiv.appendChild(shoppingItem)
+      addShoppingItemToList(s)
       div.remove()
       shoppingInput.focus()
     })

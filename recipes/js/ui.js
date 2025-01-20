@@ -40,12 +40,12 @@ export function initUi() {
  * Set the mode select value using local storage
  */
 export function activateUi() {
+  setMessage('')
   const mode = localStorage.getItem('mode')
   if (mode) {
     modeSelect.value = mode
     handleModeSelectChange({ target: { value: mode } })
   }
-  setMessage('')
 }
 
 /**
