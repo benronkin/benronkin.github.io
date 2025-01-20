@@ -50,6 +50,7 @@ export function addItemsToShoppingList(newItems) {
   for (const item of newItems) {
     addShoppingItemToList(item)
   }
+  document.dispatchEvent(new CustomEvent('list-changed'))
 }
 
 // ------------------------
