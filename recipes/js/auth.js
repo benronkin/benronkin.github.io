@@ -7,7 +7,7 @@ import { postWebApp } from './io.js'
 const headerEl = document.querySelector('#header')
 const loginContainer = document.querySelector('#login-container')
 const loginForm = document.querySelector('#login-form')
-const loginBtn = document.querySelector('#login-btn"')
+const loginBtn = document.querySelector('#login-btn')
 const recipeLinksPanel = document.querySelector('#recipe-links-panel')
 const loginMessageEl = document.querySelector('#login-message')
 
