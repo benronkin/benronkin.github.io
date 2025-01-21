@@ -25,7 +25,7 @@ async function getWebAppData(path) {
     return jsn
   } catch (err) {
     return {
-      error: `getWebAppData error: ${err}.`
+      error: `getWebAppData error: ${err}\nRes: ${res}`
     }
   }
 }
