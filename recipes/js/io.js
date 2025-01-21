@@ -7,6 +7,7 @@ async function getWebAppData(path) {
     return { error: 'getWebAppData error: No token' }
   }
   if (token.startsWith('reg')) {
+    localStorage.removeItem('token')
     return { error: 'Unexpected reg token in local storage' }
   }
   path += (path.includes('?') ? `&` : `?`) + `t=${token}`
