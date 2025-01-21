@@ -1,7 +1,6 @@
 import { postWebApp } from './io.js'
 import { state } from './state.js'
 import { initDragging, makeElementDraggable } from './drag.js'
-import { setMessage } from './ui.js'
 
 // ----------------------
 // Globals
@@ -25,7 +24,6 @@ const suggestionsEl = document.querySelector('#shopping-suggestions')
 export async function initShopping(shoppingList, shoppingSuggestions) {
   displayShoppingList(shoppingList)
   localStorage.setItem('shopping-suggestions', shoppingSuggestions)
-
   if (modeSelect.value === 'shopping') {
     shoppingContainer.classList.remove('hidden')
     initDragging()

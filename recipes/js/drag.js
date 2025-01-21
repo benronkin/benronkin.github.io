@@ -28,7 +28,6 @@ function makeElementDraggable(elem) {
  */
 function enableDragContainers() {
   const dragContainers = document.querySelectorAll('.drag-container')
-
   for (const container of dragContainers) {
     container.addEventListener('dragover', (e) => {
       e.preventDefault()
