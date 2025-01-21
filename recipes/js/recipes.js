@@ -136,7 +136,7 @@ async function handleRecipeSearch(e) {
   if (e.key !== 'Enter') {
     return
   }
-  searchRecipesMessageEl.textContent = ''
+  searchRecipesMessageEl.textContent = 'Searching...'
   const value = e.target.value.toLowerCase().trim()
   if (value.length === 0) {
     return
@@ -144,6 +144,8 @@ async function handleRecipeSearch(e) {
   const { recipes } = await getSearchedRecipes(value)
   if (recipes.length === 0) {
     searchRecipesMessageEl.textContent = 'No recipes found'
+  } else {
+    searchRecipesMessageEl.textContent = ''
   }
   const openRecipes = getOpenRecipes()
   state.setRecipes([...openRecipes, ...recipes])
