@@ -49,8 +49,9 @@ async function postWebApp(path, data) {
     headers,
     body: JSON.stringify(data)
   })
+  let res
   try {
-    const res = await fetch(req)
+    res = await fetch(req)
     const jsn = await res.json()
     return jsn
   } catch (err) {
