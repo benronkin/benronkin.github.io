@@ -1,5 +1,5 @@
 import { getWebAppData, postWebApp } from './io.js'
-import { resizeTextarea, isMobile } from './ui.js'
+import { resizeTextarea, isMobile, setMessage } from './ui.js'
 import { state } from './state.js'
 import { filterIngredient, transformIngredient } from './ingredients.js'
 import { addItemsToShoppingList } from './shopping.js'
@@ -296,6 +296,7 @@ async function getLatestRecipes() {
   const { recipes, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=recipes`)
   if (error) {
     console.log(`getLatestRecipes error: ${error}`)
+    setMessage(error)
     return { error }
   }
   if (token) {
