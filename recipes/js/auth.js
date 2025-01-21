@@ -65,7 +65,7 @@ async function handleLoginFormSubmit() {
 function handleTokenQueryParam() {
   const urlParams = new URLSearchParams(window.location.search)
   const token = urlParams.get('t')
-  if (!token || token.startsWith('reg')) {
+  if (!token) {
     return
   }
   localStorage.setItem('token', token)
