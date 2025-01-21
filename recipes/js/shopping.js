@@ -1,4 +1,4 @@
-import { getWebAppData, postWebApp } from './io.js'
+import { postWebApp } from './io.js'
 import { state } from './state.js'
 import { initDragging, makeElementDraggable } from './drag.js'
 import { setMessage } from './ui.js'
@@ -22,20 +22,15 @@ const suggestionsEl = document.querySelector('#shopping-suggestions')
 /**
  * Set recipe event listeners
  */
-export async function initShopping() {
-  const { message, error } = await displayShoppingList()
-  if (error) {
-    setMessage(error)
-    return { error }
-  }
-  await refreshLocalStorageSuggestions()
+export async function initShopping(shoppingList, shoppingSuggestions) {
+  displayShoppingList(shoppingList)
+  localStorage.setItem('shopping-suggestions', shoppingSuggestions)
 
   if (modeSelect.value === 'shopping') {
     shoppingContainer.classList.remove('hidden')
     initDragging()
     shoppingInput.focus()
   }
-  return { message }
 }
 
 /**
@@ -196,35 +191,11 @@ function addShoppingItemToList(value) {
 /**
  * Display shopping list
  */
-async function displayShoppingList() {
-  const { shoppingList, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=shopping-list`)
-  if (error) {
-    console.log(`displayShoppingList error: ${error}`)
-    return { error }
-  }
-  if (token) {
-    localStorage.setItem('token', token)
-  }
+function displayShoppingList(shoppingList) {
   if (shoppingList.length > 0) {
     const values = shoppingList.split(',')
     addItemsToShoppingList(values)
   }
-  return { message: 'shopping-fetch-ok' }
-}
-
-/**
- * Refresh local storage suggestions from server
- */
-async function refreshLocalStorageSuggestions() {
-  const { shoppingSuggestions, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=shopping-suggestions`)
-  if (error) {
-    console.log(`refreshLocalStorageSuggestions error: ${error}`)
-    return { error }
-  }
-  if (token) {
-    localStorage.setItem('token', token)
-  }
-  localStorage.setItem('shopping-suggestions', shoppingSuggestions)
 }
 
 /**

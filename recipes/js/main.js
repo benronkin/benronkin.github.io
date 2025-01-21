@@ -1,3 +1,4 @@
+import { getWebAppData } from './io.js'
 import { initRecipes } from './recipes.js'
 import { initShopping } from './shopping.js'
 import { initAuth } from './auth.js'
@@ -26,13 +27,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function handleDOMContentLoaded() {
   initUi()
   initAuth()
-  // parallel execution of async functions
-  const [recipesResult, shoppingResult] = await Promise.all([initRecipes(), initShopping()])
-  const error = recipesResult.error || shoppingResult.error
+
+  const { recipes, shoppingList, shoppingSuggestions, token, error } = await getWebAppData(
+    `${state.getWebAppUrl()}?path=session-opener`
+  )
+
   if (error) {
     setMessage(error)
-    return
+    document.dispatchEvent(new CustomEvent('fetch-fail'))
+    return { error }
   }
+
+  if (token) {
+    localStorage.setItem('token', token)
+  }
+
+  initRecipes(recipes)
+  initShopping(shoppingList, shoppingSuggestions)
   activateUi()
 }
 

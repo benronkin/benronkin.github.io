@@ -35,7 +35,7 @@ const recipeIdEl = document.querySelector('#recipe-id')
 /**
  * Set recipe event listeners
  */
-export async function initRecipes() {
+export async function initRecipes(recipes) {
   /* When related recipes switch is toggled */
   switchEl.addEventListener('click', () => {
     handleRelatedSwitchClick()
@@ -73,15 +73,8 @@ export async function initRecipes() {
     populateRelatedRecipes(e.target.value)
   })
 
-  const { recipes, error } = await getLatestRecipes()
-
-  if (error) {
-    document.dispatchEvent(new CustomEvent('fetch-fail'))
-    return { error }
-  }
   state.setRecipes(recipes)
   populateRecipes()
-  return { message: 'recipes-fetch-ok' }
 }
 
 // ------------------------
@@ -292,18 +285,18 @@ function handleShopIngredientsClick() {
 /**
  * Get the latest recipes
  */
-async function getLatestRecipes() {
-  const { recipes, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=recipes`)
-  if (error) {
-    console.log(`getLatestRecipes error: ${error}`)
-    setMessage(error)
-    return { error }
-  }
-  if (token) {
-    localStorage.setItem('token', token)
-  }
-  return { recipes }
-}
+// async function getLatestRecipes() {
+//   const { recipes, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=recipes`)
+//   if (error) {
+//     console.log(`getLatestRecipes error: ${error}`)
+//     setMessage(error)
+//     return { error }
+//   }
+//   if (token) {
+//     localStorage.setItem('token', token)
+//   }
+//   return { recipes }
+// }
 
 /**
  * Populate the recipes list
