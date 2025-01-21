@@ -70,6 +70,9 @@ function handleTokenQueryParam() {
   if (!token) {
     return
   }
-  localStorage.setItem('token', token)
-  window.history.replaceState({}, document.title, window.location.pathname)
+
+  if (token.startsWith('acc')) {
+    localStorage.setItem('token', token)
+    window.history.replaceState({}, document.title, window.location.pathname)
+  }
 }
