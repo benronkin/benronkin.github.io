@@ -54,7 +54,8 @@ async function postWebApp(path, data) {
     const jsn = await res.json()
     return jsn
   } catch (err) {
-    return { error: `postWebApp error: ${err}` }
+    const message = `postWebApp error: ${err}\nFetch payload: ${JSON.stringify(data)}\nres:${res}`
+    return { error: message }
   }
 }
 
