@@ -2,9 +2,7 @@
 // Globals
 // ----------------------
 
-const headerEl = document.querySelector('#header')
 const messageEl = document.querySelector('#message')
-const loginContainer = document.querySelector('#login-container')
 const modeSelect = document.querySelector('#mode-select')
 const shoppingContainer = document.querySelector('#shopping-container')
 const recipesContainer = document.querySelector('#recipes-container')
@@ -29,11 +27,6 @@ export function initUi() {
   modeSelect.addEventListener('change', (e) => {
     handleModeSelectChange(e)
   })
-
-  if (loginContainer.classList.contains('hidden')) {
-    // user is logged in
-    headerEl.classList.remove('hidden')
-  }
 }
 
 /**

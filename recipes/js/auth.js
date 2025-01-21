@@ -4,7 +4,6 @@ import { postWebApp } from './io.js'
 // Globals
 // ----------------------
 
-const headerEl = document.querySelector('#header')
 const loginContainer = document.querySelector('#login-container')
 const loginForm = document.querySelector('#login-form')
 const loginBtn = document.querySelector('#login-btn')
@@ -19,7 +18,6 @@ export function initAuth() {
   /* When fetching recipes or shopping list fails */
   document.addEventListener('fetch-fail', () => {
     loginContainer.classList.remove('hidden')
-    headerEl.classList.add('hidden')
     recipeLinksPanel.classList.add('hidden')
   })
 

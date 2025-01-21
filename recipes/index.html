@@ -26,16 +26,7 @@
     <title>Recipes | Ben Ronkin</title>
   </head>
   <body>
-    <div id="login-container" class="card hidden">
-      <h2>Enter your email address to gain access</h2>
-      <form id="login-form">
-        <input type="email" name="email" placeholder="Email" style="width: 250px" />
-        <button id="login-btn" type="submit">Submit</button>
-      </form>
-      <span id="login-message">&nbsp;</span>
-    </div>
-
-    <div id="header" class="hidden">
+    <div id="header">
       <i id="left-panel-toggle" class="fa-solid fa-bars hidden"></i>
       <div>
         <select name="mode-select" id="mode-select">
@@ -44,6 +35,15 @@
         </select>
         <div id="message">Fetching data from server...</div>
       </div>
+    </div>
+
+    <div id="login-container" class="card hidden">
+      <h2>Enter your email address to gain access</h2>
+      <form id="login-form">
+        <input type="email" name="email" placeholder="Email" style="width: 250px" />
+        <button id="login-btn" type="submit">Submit</button>
+      </form>
+      <span id="login-message">&nbsp;</span>
     </div>
 
     <div id="shopping-container" class="hidden">
