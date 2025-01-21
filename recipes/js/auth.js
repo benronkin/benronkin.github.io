@@ -7,6 +7,7 @@ import { postWebApp } from './io.js'
 const headerEl = document.querySelector('#header')
 const loginContainer = document.querySelector('#login-container')
 const loginForm = document.querySelector('#login-form')
+const loginBtn = document.querySelector('#"login-btn"')
 const recipeLinksPanel = document.querySelector('#recipe-links-panel')
 const loginMessageEl = document.querySelector('#login-message')
 
@@ -25,8 +26,12 @@ export function initAuth() {
   /* When login form is submitted */
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault()
-    handleLoginFormSubmit()
+    loginBtn.disabled = true
+    loginMessageEl.textContent = 'Checking. Please wait...'
+    await handleLoginFormSubmit()
+    loginBtn.disabled = false
   })
+
   handleTokenQueryParam()
 }
 
