@@ -28,7 +28,8 @@ export function initUi() {
     handleModeSelectChange(e)
   })
 
-  setMessage('')
+  setMessage('Loading...')
+
   const mode = localStorage.getItem('mode')
   if (mode) {
     modeSelect.value = mode
@@ -39,6 +40,7 @@ export function initUi() {
  * Set the mode select value using local storage
  */
 export function activateUi() {
+  setMessage('')
   const mode = localStorage.getItem('mode')
   if (mode) {
     handleModeSelectChange({ target: { value: mode } })
