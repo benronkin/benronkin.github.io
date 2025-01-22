@@ -22,11 +22,11 @@ const suggestionsEl = document.querySelector('#shopping-suggestions')
  * Set recipe event listeners
  */
 export async function initShopping(shoppingList, shoppingSuggestions) {
+  initDragging()
   displayShoppingList(shoppingList)
   localStorage.setItem('shopping-suggestions', shoppingSuggestions)
   if (modeSelect.value === 'shopping') {
     shoppingContainer.classList.remove('hidden')
-    initDragging()
     shoppingInput.focus()
   }
 }
@@ -148,7 +148,7 @@ function createShoppingItem(item) {
   shoppingItem.classList.add('shopping-item')
   shoppingItem.id = generateUUID()
   shoppingItem.innerHTML = `
-    <div><i class="fa-solid fa-bars"></i><span>${item}</span></div>
+    <div><i class="fa-solid fa-bars"></i><span>${item.toString().trim().toLowerCase()}</span></div>
     <i class="fa fa-trash hidden"></i>`
 
   /* when trash icon is clicked */
