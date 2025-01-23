@@ -12,14 +12,34 @@ function initDragging() {
 function makeElementDraggable(elem) {
   elem.classList.add('draggable')
   elem.setAttribute('draggable', 'true')
+
   elem.addEventListener('dragstart', (event) => {
     elem.classList.add('dragging')
   })
+
+  let isDragging = false
+
+  elem.addEventListener('touchstart', (event) => {
+    isDragging = false // Reset dragging state
+    elem.classList.add('dragging')
+    event.preventDefault()
+  })
+
   elem.addEventListener('dragend', (event) => {
     elem.classList.remove('dragging')
     document.dispatchEvent(new CustomEvent('clear-selection'))
     document.dispatchEvent(new CustomEvent('list-changed'))
   })
+
+  elem.addEventListener('touchend', (event) => {
+    elem.classList.remove('dragging')
+    if (!isDragging) {
+      // Treat it as a click if no drag happened
+      elem.click() // Trigger the click handler manually
+    }
+    document.dispatchEvent(new CustomEvent('list-changed'))
+  })
+
   return elem
 }
 
@@ -31,18 +51,33 @@ function enableDragContainers() {
   for (const container of dragContainers) {
     container.addEventListener('dragover', (e) => {
       e.preventDefault()
-      const draggedElem = document.querySelector('.dragging')
-      const afterElement = getAfterElement(container, e.clientY)
-      if (afterElement === null) {
-        container.appendChild(draggedElem)
-      } else {
-        container.insertBefore(draggedElem, afterElement)
-      }
+      handleDraggedElement(e, container)
+    })
+    container.addEventListener('touchmove', (e) => {
+      e.preventDefault()
+      handleDraggedElement(e, container)
     })
 
     container.addEventListener('drop', (event) => {
       event.preventDefault()
     })
+
+    container.addEventListener('touchend', (event) => {
+      event.preventDefault()
+    })
+  }
+}
+
+/**
+ * handle the dragged item inside the container
+ */
+function handleDraggedElement(e, container) {
+  const draggedElem = document.querySelector('.dragging')
+  const afterElement = getAfterElement(container, e.clientY || e.touches[0].clientY)
+  if (afterElement === null) {
+    container.appendChild(draggedElem)
+  } else {
+    container.insertBefore(draggedElem, afterElement)
   }
 }
 
