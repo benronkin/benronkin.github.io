@@ -52,11 +52,20 @@
           <input type="text" id="shopping-input" placeholder="Add item" autocomplete="off" />
         </form>
 
-        <div class="flex">
-          <div class="switch" id="suggestions-switch">
-            <div class="thumb"></div>
+        <div class="flex" style="justify-content: space-between">
+          <div class="flex">
+            <div class="switch" id="sort-switch">
+              <div class="thumb"></div>
+            </div>
+            <span>Sort</span>
           </div>
-          <span>Show suggestions</span>
+
+          <div class="flex">
+            <div class="switch" id="suggest-switch">
+              <div class="thumb"></div>
+            </div>
+            <span>Suggest</span>
+          </div>
         </div>
         <div id="shopping-suggestions"></div>
 

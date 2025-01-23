@@ -1,7 +1,7 @@
 import { postWebApp } from './io.js'
 import { state } from './state.js'
 import { setMessage } from './ui.js'
-import { initDragging, makeElementDraggable } from './drag.js'
+import { makeDragStyles, enableDragContainers, enableDragging, disableDragging } from './drag.js'
 
 // ----------------------
 // Globals
@@ -12,8 +12,9 @@ const shoppingForm = document.querySelector('#shopping-form')
 const shoppingInput = document.querySelector('#shopping-input')
 const shoppingContainer = document.querySelector('#shopping-container')
 const shoppingDiv = document.querySelector('#shopping-div')
-const suggestionsSwitch = document.querySelector('#suggestions-switch')
-const suggestionsEl = document.querySelector('#shopping-suggestions')
+const suggestionsContainer = document.querySelector('#shopping-suggestions')
+const suggestSwitch = document.querySelector('#suggest-switch')
+const sortSwitch = document.querySelector('#sort-switch')
 
 // ----------------------
 // Exported functions
@@ -23,7 +24,8 @@ const suggestionsEl = document.querySelector('#shopping-suggestions')
  * Set recipe event listeners
  */
 export async function initShopping(shoppingList, shoppingSuggestions) {
-  initDragging()
+  makeDragStyles()
+  enableDragContainers()
   displayShoppingList(shoppingList)
   localStorage.setItem('shopping-suggestions', shoppingSuggestions)
   if (modeSelect.value === 'shopping') {
@@ -51,23 +53,17 @@ export function addItemsToShoppingList(newItems) {
 // Event handler
 // ------------------------
 
-/* when suggestions switch is clicked */
-suggestionsSwitch.addEventListener('click', () => {
-  if (suggestionsSwitch.classList.contains('disabled')) {
-    return
-  }
-  handleSuggestionsSwitchClick()
-})
+/* when sort switch is clicked */
+sortSwitch.addEventListener('click', handleSortSwitchClick)
+
+/* when suggest switch is clicked */
+suggestSwitch.addEventListener('click', handleSuggestSwitchClick)
 
 /* when shopping list changes */
-document.addEventListener('list-changed', (e) => {
-  handleShoppingListChange()
-})
+document.addEventListener('list-changed', handleShoppingListChange)
 
 /* when clearSelection is dispatched */
-document.addEventListener('clear-selection', () => {
-  clearSelection()
-})
+document.addEventListener('clear-selection', clearSelection)
 
 /* when shopping input key is pressed */
 shoppingInput.addEventListener('keyup', (e) => {
@@ -106,12 +102,36 @@ shoppingForm.addEventListener('submit', async (e) => {
 // ------------------------
 
 /**
- * handle suggestions switch clicks
+ * Handle sort switch click
  */
-function handleSuggestionsSwitchClick() {
-  suggestionsEl.innerHTML = ''
-  suggestionsSwitch.classList.toggle('on')
-  if (suggestionsSwitch.classList.contains('on')) {
+function handleSortSwitchClick() {
+  sortSwitch.classList.toggle('on')
+  const shoppingItems = document.querySelectorAll('.shopping-item')
+  const shoppingTrashes = document.querySelectorAll('i.fa-trash')
+  const shoppingBars = document.querySelectorAll('#shopping-container i.fa-bars')
+
+  if (sortSwitch.classList.contains('on')) {
+    enableDragging()
+    clearSelection()
+    shoppingBars.forEach((el) => el.classList.remove('hidden'))
+    shoppingItems.forEach((el) => el.removeEventListener('click', handleShoppingItemClick))
+    shoppingTrashes.forEach((el) => el.removeEventListener('click', handleShoppingTrashClick))
+  } else {
+    disableDragging()
+    shoppingBars.forEach((el) => el.classList.add('hidden'))
+    shoppingItems.forEach((el) => el.addEventListener('click', handleShoppingItemClick))
+    shoppingTrashes.forEach((el) => el.addEventListener('click', handleShoppingTrashClick))
+  }
+}
+
+/**
+ * handle suggest switch click
+ */
+function handleSuggestSwitchClick() {
+  clearSelection()
+  suggestionsContainer.innerHTML = ''
+  suggestSwitch.classList.toggle('on')
+  if (suggestSwitch.classList.contains('on')) {
     let suggestions = localStorage.getItem('shopping-suggestions')
     if (suggestions) {
       suggestions = suggestions.split(',').filter((s) => s.toString().trim().length > 1)
@@ -144,6 +164,33 @@ async function handleShoppingListChange() {
   }
 }
 
+/**
+ *
+ */
+function handleShoppingItemClick(e) {
+  document.querySelectorAll('i.fa-trash').forEach((el) => el.classList.add('hidden'))
+  const parent = e.target.closest('.shopping-item')
+  parent.classList.toggle('checked')
+  if (parent.classList.contains('checked')) {
+    shoppingInput.value = parent.innerText
+    shoppingInput.dataset.index = parent.id
+    parent.querySelector('i.fa-trash').classList.remove('hidden')
+  } else {
+    clearSelection()
+  }
+  shoppingInput.focus()
+}
+
+/**
+ *
+ */
+function handleShoppingTrashClick(e) {
+  e.stopPropagation()
+  e.target.closest('.shopping-item').remove()
+  clearSelection()
+  document.dispatchEvent(new CustomEvent('list-changed'))
+}
+
 // ------------------------
 // Helpers
 // ------------------------
@@ -156,31 +203,14 @@ function createShoppingItem(item) {
   shoppingItem.classList.add('shopping-item')
   shoppingItem.id = generateUUID()
   shoppingItem.innerHTML = `
-    <div><i class="fa-solid fa-bars"></i><span>${item.toString().trim().toLowerCase()}</span></div>
+    <div><i class="fa-solid fa-bars hidden"></i><span>${item.toString().trim().toLowerCase()}</span></div>
     <i class="fa fa-trash hidden"></i>`
 
   /* when trash icon is clicked */
-  shoppingItem.querySelector('i.fa-trash').addEventListener('click', (e) => {
-    e.stopPropagation()
-    shoppingItem.remove()
-    clearSelection()
-    document.dispatchEvent(new CustomEvent('list-changed'))
-  })
+  shoppingItem.querySelector('i.fa-trash').addEventListener('click', handleShoppingTrashClick)
 
   /* When shopping item is clicked */
-  shoppingItem.addEventListener('click', (e) => {
-    document.querySelectorAll('i.fa-trash').forEach((el) => el.classList.add('hidden'))
-    const parent = e.target.closest('.shopping-item')
-    parent.classList.toggle('checked')
-    if (parent.classList.contains('checked')) {
-      shoppingInput.value = parent.innerText
-      shoppingInput.dataset.index = parent.id
-      parent.querySelector('i.fa-trash').classList.remove('hidden')
-    } else {
-      clearSelection()
-    }
-    shoppingInput.focus()
-  })
+  shoppingItem.addEventListener('click', handleShoppingItemClick)
 
   return shoppingItem
 }
@@ -189,8 +219,7 @@ function createShoppingItem(item) {
  * Add shopping item to list
  */
 function addShoppingItemToList(value) {
-  let shoppingItem = createShoppingItem(value)
-  shoppingItem = makeElementDraggable(shoppingItem)
+  const shoppingItem = createShoppingItem(value)
   shoppingDiv.appendChild(shoppingItem)
 }
 
@@ -217,7 +246,7 @@ function displaySuggestions(suggestions) {
     div.innerHTML = `<div class="shopping-suggestion"><div><i class="fa-solid fa-plus"></i><span>${s}</span></div>
     <i class="fa fa-trash hidden"></i></div>`
 
-    suggestionsEl.appendChild(div)
+    suggestionsContainer.appendChild(div)
 
     div.addEventListener('click', () => {
       div.querySelector('.fa-trash').classList.toggle('hidden')
