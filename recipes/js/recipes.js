@@ -37,14 +37,10 @@ const recipeIdEl = document.querySelector('#recipe-id')
  */
 export async function initRecipes(recipes) {
   /* When related recipes switch is toggled */
-  switchEl.addEventListener('click', () => {
-    handleRelatedSwitchClick()
-  })
+  switchEl.addEventListener('click', handleRelatedSwitchClick)
 
   /* When recipes container is populated */
-  recipesContainer.addEventListener('recipes-loaded', () => {
-    handleRecipeContainerPopulated()
-  })
+  recipesContainer.addEventListener('recipes-loaded', handleRecipeContainerPopulated)
 
   /* When add recipe button is clicked */
   addRecipeBtn.addEventListener('click', async () => {
@@ -63,6 +59,7 @@ export async function initRecipes(recipes) {
 
   /* When recipe field loses focus */
   document.querySelectorAll('.field').forEach((field) => {
+    field.addEventListener('keyup', handleFieldKeyUp)
     field.addEventListener('change', (e) => {
       handleFieldChange(e.target)
     })
@@ -162,7 +159,6 @@ async function handleFieldChange(elem) {
     document.querySelector('.recipe-link.active').textContent = elem.value
   }
   const id = recipeIdEl.textContent
-
   state.setRecipeSection(id, recipeSection, elem.value)
 
   try {
@@ -248,6 +244,16 @@ function handleTabCloseClick(tab) {
       recipeEl.classList.add('hidden')
       shopIngredientsBtn.classList.add('hidden')
     }
+  }
+}
+
+/**
+ * Handle when key is up inside field input or textarea
+ */
+function handleFieldKeyUp(e) {
+  const elem = e.target
+  if (elem.nodeName === 'TEXTAREA') {
+    resizeTextarea(elem)
   }
 }
 
