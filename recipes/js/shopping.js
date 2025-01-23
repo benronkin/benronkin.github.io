@@ -1,5 +1,6 @@
 import { postWebApp } from './io.js'
 import { state } from './state.js'
+import { setMessage } from './ui.js'
 import { initDragging, makeElementDraggable } from './drag.js'
 
 // ----------------------
@@ -79,15 +80,22 @@ shoppingInput.addEventListener('keyup', (e) => {
 /* when shopping form is submitted */
 shoppingForm.addEventListener('submit', async (e) => {
   e.preventDefault()
+
   const itemId = shoppingInput.dataset.index
   const value = shoppingInput.value
   const itemEl = document.getElementById(itemId)
+
   clearSelection()
   if (itemEl) {
     // existing item is edited
     itemEl.querySelector('span').innerText = value
   } else {
     // new item is added
+    if (inShoppingList(value)) {
+      setMessage('Already in list')
+      return
+    }
+
     addShoppingItemToList(value)
   }
   document.dispatchEvent(new CustomEvent('list-changed'))
@@ -255,6 +263,14 @@ function generateUUID() {
     const v = c === 'x' ? r : (r & 0x3) | 0x8
     return v.toString(16)
   })
+}
+
+/**
+ * Check if item is in list
+ */
+function inShoppingList(item) {
+  const items = getShoppingListItems()
+  return items.includes(item.toString().trim().toLowerCase())
 }
 
 /**

@@ -157,11 +157,6 @@ ul {
   margin: 20px;
   margin-top: 50px;
 }
-#shopping-container .right-pane {
-  margin-top: 55px;
-  display: flex;
-  flex-direction: column;
-}
 #shopping-list {
   margin-top: 50px;
   width: 100%;
