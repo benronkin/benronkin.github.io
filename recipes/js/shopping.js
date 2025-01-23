@@ -178,7 +178,7 @@ function handleShoppingItemClick(e) {
   } else {
     clearSelection()
   }
-  shoppingInput.focus()
+  // shoppingInput.focus()
 }
 
 /**
