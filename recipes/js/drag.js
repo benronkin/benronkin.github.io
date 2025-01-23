@@ -7,12 +7,6 @@
  */
 export function makeDragStyles() {
   const styles = `
-    /* Disable text selection */
-    html, body {
-      -webkit-user-select: none; /* For Safari */
-      -ms-user-select: none;     /* For Internet Explorer/Edge */
-      user-select: none;         /* Standard */
-    }
     .drag-container {
       margin-top: 1rem;
     }
