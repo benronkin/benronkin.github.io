@@ -108,17 +108,9 @@ function handleSortSwitchClick() {
  */
 function handleSuggestSwitchClick() {
   clearSelection()
-  suggestionsContainer.innerHTML = ''
   suggestSwitch.classList.toggle('on')
-  if (suggestSwitch.classList.contains('on')) {
-    let suggestions = localStorage.getItem('shopping-suggestions')
-    if (suggestions) {
-      suggestions = suggestions.split(',').filter((s) => s.toString().trim().length > 1)
-    } else {
-      suggestions = ['apples', 'carrots', 'berries']
-    }
-    displaySuggestions(suggestions)
-  }
+  suggestionsContainer.classList.toggle('hidden')
+  displaySuggestions()
 }
 
 /**
@@ -187,13 +179,47 @@ function handleShoppingItemClick(e) {
 }
 
 /**
- *
+ * Handle shopping item trash click
  */
 function handleShoppingTrashClick(e) {
   e.stopPropagation()
   e.target.closest('.shopping-item').remove()
   clearSelection()
   document.dispatchEvent(new CustomEvent('list-changed'))
+  displaySuggestions()
+}
+
+/**
+ * Handle suggestion item click
+ */
+function handleSuggestionItemClick(e) {
+  const div = e.target.closest('.shopping-suggestion')
+  div.querySelector('.fa-trash').classList.toggle('hidden')
+}
+
+/**
+ * Handle suggestion plus click
+ */
+function handleSuggestionPlusClick(e) {
+  const div = e.target.closest('.shopping-suggestion')
+  addShoppingItemToList(div.innerText, 'prepend')
+  div.remove()
+}
+
+/**
+ * Handle suggestion trash click
+ */
+function handleSuggestionTrashClick(e) {
+  const div = e.target.closest('.shopping-suggestion')
+  const item = div.textContent
+  div.remove()
+  let localStorageSuggestions = (localStorage.getItem('shopping-suggestions') || '').split(',')
+  localStorageSuggestions = localStorageSuggestions.filter((i) => i !== item)
+  localStorage.setItem('shopping-suggestions', localStorageSuggestions)
+  postWebApp(state.getWebAppUrl(), {
+    path: 'shopping-suggestions-update',
+    value: localStorageSuggestions
+  })
 }
 
 // ------------------------
@@ -201,23 +227,34 @@ function handleShoppingTrashClick(e) {
 // ------------------------
 
 /**
- *
+ * Create a shopping item element
  */
 function createShoppingItem(item) {
-  const shoppingItem = document.createElement('div')
-  shoppingItem.classList.add('shopping-item')
-  shoppingItem.id = generateUUID()
-  shoppingItem.innerHTML = `
+  const div = document.createElement('div')
+  div.classList.add('shopping-item')
+  div.id = generateUUID()
+  div.innerHTML = `
     <div><i class="fa-solid fa-bars hidden"></i><span>${item.toString().trim().toLowerCase()}</span></div>
     <i class="fa fa-trash hidden"></i>`
 
-  /* when trash icon is clicked */
-  shoppingItem.querySelector('i.fa-trash').addEventListener('click', handleShoppingTrashClick)
+  div.addEventListener('click', handleShoppingItemClick)
+  div.querySelector('i.fa-trash').addEventListener('click', handleShoppingTrashClick)
+  return div
+}
 
-  /* When shopping item is clicked */
-  shoppingItem.addEventListener('click', handleShoppingItemClick)
+/**
+ * Create a shopping suggestion element
+ */
+function createShoppingSuggestion(item) {
+  const div = document.createElement('DIV')
+  div.classList.add('shopping-suggestion')
+  div.innerHTML = `<div><i class="fa-solid fa-plus"></i><span>${item}</span></div>
+    <i class="fa fa-trash hidden"></i>`
 
-  return shoppingItem
+  div.addEventListener('click', handleSuggestionItemClick)
+  div.querySelector('.fa-plus').addEventListener('click', handleSuggestionPlusClick)
+  div.querySelector('.fa-trash').addEventListener('click', handleSuggestionTrashClick)
+  return div
 }
 
 /**
@@ -245,40 +282,20 @@ function displayShoppingList(shoppingList) {
 /**
  * Display a list of suggestions
  */
-function displaySuggestions(suggestions) {
+function displaySuggestions() {
+  let suggestions = localStorage.getItem('shopping-suggestions')
+  if (suggestions) {
+    suggestions = suggestions.split(',').filter((s) => s.toString().trim().length > 1)
+  } else {
+    suggestions = ['apples', 'carrots', 'berries']
+  }
+  suggestionsContainer.innerHTML = ''
   const shoppingItems = getShoppingListItems()
   suggestions = suggestions.filter((s) => !shoppingItems.includes(s))
   suggestions.sort()
   for (const s of suggestions) {
-    const div = document.createElement('DIV')
-
-    div.innerHTML = `<div class="shopping-suggestion"><div><i class="fa-solid fa-plus"></i><span>${s}</span></div>
-    <i class="fa fa-trash hidden"></i></div>`
-
+    const div = createShoppingSuggestion(s)
     suggestionsContainer.appendChild(div)
-
-    div.addEventListener('click', () => {
-      div.querySelector('.fa-trash').classList.toggle('hidden')
-    })
-
-    div.querySelector('.fa-plus').addEventListener('click', () => {
-      addShoppingItemToList(s)
-      div.remove()
-      shoppingInput.focus()
-    })
-
-    div.querySelector('.fa-trash').addEventListener('click', async () => {
-      const item = div.querySelector('span').innerText
-      const items = getShoppingListItems()
-        .filter((i) => i !== item)
-        .join(',')
-      localStorage.setItem('shopping-suggestions', items)
-      div.remove()
-      await postWebApp(state.getWebAppUrl(), {
-        path: 'shopping-suggestions-update',
-        value: items
-      })
-    })
   }
 }
 

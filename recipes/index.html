@@ -47,30 +47,28 @@
     </div>
 
     <div id="shopping-container" class="hidden">
-      <div class="left-pane">
-        <form id="shopping-form">
-          <input type="text" id="shopping-input" placeholder="Add item" autocomplete="off" />
-        </form>
+      <form id="shopping-form">
+        <input type="text" id="shopping-input" placeholder="Add item" autocomplete="off" />
+      </form>
 
-        <div class="flex" style="justify-content: space-between">
-          <div class="flex">
-            <div class="switch" id="sort-switch">
-              <div class="thumb"></div>
-            </div>
-            <span>Sort</span>
+      <div class="flex" style="justify-content: space-between">
+        <div class="flex">
+          <div class="switch" id="sort-switch">
+            <div class="thumb"></div>
           </div>
-
-          <div class="flex">
-            <div class="switch" id="suggest-switch">
-              <div class="thumb"></div>
-            </div>
-            <span>Suggest</span>
-          </div>
+          <span>Sort</span>
         </div>
-        <div id="shopping-suggestions"></div>
 
-        <div id="shopping-div" class="drag-container"></div>
+        <div class="flex">
+          <div class="switch" id="suggest-switch">
+            <div class="thumb"></div>
+          </div>
+          <span>Suggest</span>
+        </div>
       </div>
+      <div id="shopping-suggestions" class="hidden"></div>
+
+      <div id="shopping-div" class="drag-container"></div>
     </div>
 
     <div id="recipes-container" class="hidden">
