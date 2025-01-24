@@ -74,28 +74,7 @@ shoppingInput.addEventListener('keyup', (e) => {
 })
 
 /* when shopping form is submitted */
-shoppingForm.addEventListener('submit', async (e) => {
-  e.preventDefault()
-
-  const itemId = shoppingInput.dataset.index
-  const value = shoppingInput.value
-  const itemEl = document.getElementById(itemId)
-
-  clearSelection()
-  if (itemEl) {
-    // existing item is edited
-    itemEl.querySelector('span').innerText = value
-  } else {
-    // new item is added
-    if (inShoppingList(value)) {
-      setMessage('Already in list')
-      return
-    }
-
-    addShoppingItemToList(value)
-  }
-  document.dispatchEvent(new CustomEvent('list-changed'))
-})
+shoppingForm.addEventListener('submit', (e) => handleShoppingFormSubmit(e, 'prepend'))
 
 // ------------------------
 // Event handler functions
@@ -140,6 +119,32 @@ function handleSuggestSwitchClick() {
     }
     displaySuggestions(suggestions)
   }
+}
+
+/**
+ * Handle shopping form submit
+ */
+function handleShoppingFormSubmit(e, prepend) {
+  e.preventDefault()
+
+  const itemId = shoppingInput.dataset.index
+  const value = shoppingInput.value
+  const itemEl = document.getElementById(itemId)
+
+  clearSelection()
+  if (itemEl) {
+    // existing item is edited
+    itemEl.querySelector('span').innerText = value
+  } else {
+    // new item is added
+    if (inShoppingList(value)) {
+      setMessage('Already in list')
+      return
+    }
+
+    addShoppingItemToList(value, prepend)
+  }
+  document.dispatchEvent(new CustomEvent('list-changed'))
 }
 
 /**
@@ -218,9 +223,13 @@ function createShoppingItem(item) {
 /**
  * Add shopping item to list
  */
-function addShoppingItemToList(value) {
+function addShoppingItemToList(value, prepend) {
   const shoppingItem = createShoppingItem(value)
-  shoppingDiv.appendChild(shoppingItem)
+  if (prepend) {
+    shoppingDiv.insertBefore(shoppingItem, shoppingDiv.firstChild)
+  } else {
+    shoppingDiv.appendChild(shoppingItem)
+  }
 }
 
 /**
