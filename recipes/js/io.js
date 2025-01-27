@@ -1,7 +1,26 @@
+// ------------------------
+// Exported functions
+// ------------------------
+
+/**
+ * If the user clicked on the email link then the token will be in the query param.
+ * Save the token to local storage and remove it from the URL.
+ */
+export function handleTokenQueryParam() {
+  const urlParams = new URLSearchParams(window.location.search)
+  const token = urlParams.get('t')
+  if (!token) {
+    return
+  }
+  localStorage.setItem('token', token)
+  // remove query param from address bar url
+  window.history.replaceState({}, document.title, window.location.pathname)
+}
+
 /**
  * Get data from Web app
  */
-async function getWebAppData(path) {
+export async function getWebAppData(path) {
   const token = localStorage.getItem('token')
   if (!token) {
     return { error: 'getWebAppData error: No token' }
@@ -29,7 +48,7 @@ async function getWebAppData(path) {
 /**
  * Post data to Web app
  */
-async function postWebApp(path, data) {
+export async function postWebApp(path, data) {
   // user does not need a token to access unprotected paths
   const unprotectedPaths = ['login']
   if (!unprotectedPaths.includes(data.path)) {
@@ -61,5 +80,3 @@ async function postWebApp(path, data) {
     return { error: message }
   }
 }
-
-export { getWebAppData, postWebApp }

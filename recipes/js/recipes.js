@@ -1,5 +1,5 @@
 import { getWebAppData, postWebApp } from './io.js'
-import { resizeTextarea, isMobile, setMessage } from './ui.js'
+import { resizeTextarea, isMobile } from './ui.js'
 import { state } from './state.js'
 import { filterIngredient, transformIngredient } from './ingredients.js'
 import { addItemsToShoppingList } from './shopping.js'
@@ -59,7 +59,6 @@ export async function initRecipes(recipes) {
 
   /* When recipe field loses focus */
   document.querySelectorAll('.field').forEach((field) => {
-    field.addEventListener('keyup', handleFieldKeyUp)
     field.addEventListener('change', (e) => {
       handleFieldChange(e.target)
     })
@@ -248,16 +247,6 @@ function handleTabCloseClick(tab) {
 }
 
 /**
- * Handle when key is up inside field input or textarea
- */
-function handleFieldKeyUp(e) {
-  const elem = e.target
-  if (elem.nodeName === 'TEXTAREA') {
-    resizeTextarea(elem)
-  }
-}
-
-/**
  * Handle shop ingredients click
  */
 function handleShopIngredientsClick() {
@@ -289,22 +278,6 @@ function handleShopIngredientsClick() {
 // ------------------------
 // Helper functions
 // ------------------------
-
-/**
- * Get the latest recipes
- */
-// async function getLatestRecipes() {
-//   const { recipes, token, error } = await getWebAppData(`${state.getWebAppUrl()}?path=recipes`)
-//   if (error) {
-//     console.log(`getLatestRecipes error: ${error}`)
-//     setMessage(error)
-//     return { error }
-//   }
-//   if (token) {
-//     localStorage.setItem('token', token)
-//   }
-//   return { recipes }
-// }
 
 /**
  * Populate the recipes list

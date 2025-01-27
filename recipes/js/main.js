@@ -1,12 +1,7 @@
-import { getWebAppData } from './io.js'
+import { handleTokenQueryParam, getWebAppData } from './io.js'
 import { initRecipes } from './recipes.js'
 import { initShopping } from './shopping.js'
-import { initAuth } from './auth.js'
 import { initUi, activateUi, setMessage } from './ui.js'
-
-// ----------------------
-// Globals
-// ----------------------
 
 // ----------------------
 // Event listeners
@@ -25,8 +20,8 @@ document.addEventListener('DOMContentLoaded', async () => {
  * Handle DOMContentLoaded
  */
 async function handleDOMContentLoaded() {
+  handleTokenQueryParam()
   initUi()
-  initAuth()
 
   const { recipes, shoppingList, shoppingSuggestions, token, error } = await getWebAppData(
     `${state.getWebAppUrl()}?path=session-opener`
@@ -46,7 +41,3 @@ async function handleDOMContentLoaded() {
   initShopping(shoppingList, shoppingSuggestions)
   activateUi()
 }
-
-// ------------------------
-// Helper functions
-// ------------------------

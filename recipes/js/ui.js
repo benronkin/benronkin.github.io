@@ -2,6 +2,10 @@
 // Globals
 // ----------------------
 
+const loginContainer = document.querySelector('#login-container')
+const loginForm = document.querySelector('#login-form')
+const loginBtn = document.querySelector('#login-btn')
+const loginMessageEl = document.querySelector('#login-message')
 const messageEl = document.querySelector('#message')
 const modeSelect = document.querySelector('#mode-select')
 const shoppingContainer = document.querySelector('#shopping-container')
@@ -18,6 +22,17 @@ const leftPanelToggle = document.querySelector('#left-panel-toggle')
  * Set event listeners for top-level UI
  */
 export function initUi() {
+  /* When login form is submitted */
+  loginForm.addEventListener('submit', async (e) => {
+    await handleLoginFormSubmit()
+  })
+
+  /* When fetching recipes or shopping list fails */
+  document.addEventListener('fetch-fail', () => {
+    loginContainer.classList.remove('hidden')
+    recipeLinksPanel.classList.add('hidden')
+  })
+
   /* When the left panel toggle is clicked */
   leftPanelToggle.addEventListener('click', () => {
     handleLeftPanelToggle()
@@ -64,6 +79,31 @@ export function isMobile() {
 // ------------------------
 // Event handler functions
 // ------------------------
+
+/**
+ * Handle login form submit
+ */
+async function handleLoginFormSubmit(e) {
+  e.preventDefault()
+  loginBtn.disabled = true
+  loginMessageEl.textContent = 'Checking. Please wait...'
+
+  const formData = new FormData(loginForm)
+  const email = formData.get('email')
+  try {
+    const { error, message } = await postWebApp(state.getWebAppUrl(), {
+      email,
+      path: 'login'
+    })
+    if (error) {
+      throw new Error(error)
+    }
+    loginMessageEl.textContent = message
+  } catch (err) {
+    loginMessageEl.textContent = err.message
+    console.log(err)
+  }
+}
 
 /**
  * Handle mode select change
