@@ -118,6 +118,7 @@ function handleSuggestSwitchClick() {
  */
 function handleShoppingFormSubmit(e, prepend) {
   e.preventDefault()
+  setMessage('')
 
   const itemId = shoppingInput.dataset.index
   const value = shoppingInput.value

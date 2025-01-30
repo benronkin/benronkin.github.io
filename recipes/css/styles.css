@@ -201,8 +201,12 @@ ul {
 }
 .fa-trash {
   cursor: pointer;
-  color: red;
+  color: white;
   margin-left: 10px;
+  padding: 7px;
+  background-color: red;
+  border: 1px solid red;
+  border-radius: 6px;
 }
 .flex {
   display: flex;
