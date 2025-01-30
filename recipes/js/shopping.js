@@ -205,6 +205,7 @@ function handleSuggestionPlusClick(e) {
   const div = e.target.closest('.shopping-suggestion')
   addShoppingItemToList(div.innerText, 'prepend')
   div.remove()
+  document.dispatchEvent(new CustomEvent('list-changed'))
 }
 
 /**
