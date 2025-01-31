@@ -24,48 +24,64 @@ export function makeDragStyles() {
 }
 
 /**
- * Enable drag and drop functionality for all drag containers once
- * when initShopping fires
- */
-export function enableDragContainers() {
-  const dragContainers = document.querySelectorAll('.drag-container')
-  for (const container of dragContainers) {
-    container.addEventListener('dragover', (e) => {
-      e.preventDefault()
-      handleDraggedElement(e, container)
-    })
-    container.addEventListener('touchmove', (e) => {
-      e.preventDefault()
-      handleDraggedElement(e, container)
-    })
-
-    // container.addEventListener('drop', (event) => {
-    //   event.preventDefault()
-    // })
-
-    // container.addEventListener('touchend', (event) => {
-    //   event.preventDefault()
-    // })
-  }
-}
-
-/**
  *
  */
 export function enableDragging() {
   document.querySelectorAll('.shopping-item').forEach((elem) => makeElementDraggable(elem))
+  document.querySelectorAll('.drag-container').forEach((container) => {
+    container.addEventListener('dragover', enableDragContainer)
+    container.addEventListener('touchmove', enableDragContainer)
+  })
 }
 
 /**
  *
  */
 export function disableDragging() {
-  document.querySelectorAll('.shopping-item').forEach((elem) => breakElementDraggable(elem))
+  document.querySelectorAll('.draggable').forEach((elem) => breakElementDraggable(elem))
+  document.querySelectorAll('.drag-container').forEach((container) => {
+    container.removeEventListener('dragover', enableDragContainer)
+    container.removeEventListener('touchmove', enableDragContainer)
+  })
 }
 
 // -------------------------------
-// Event listeners
+// Event handler functions
 // -------------------------------
+
+/**
+ *
+ */
+function handleDragStart(e) {
+  e.target.closest('.shopping-item').classList.add('dragging')
+}
+
+/**
+ *
+ */
+function handleDragEnd(e) {
+  e.target.closest('.shopping-item').classList.remove('dragging')
+  document.dispatchEvent(new CustomEvent('list-changed'))
+}
+
+// -------------------------------
+// Helper functions
+// -------------------------------
+
+/**
+ * Enable drag containers
+ */
+function enableDragContainer(e) {
+  e.preventDefault()
+  const draggedElem = document.querySelector('.dragging')
+  const dragContainer = draggedElem.closest('.drag-container')
+  const afterElement = getAfterElement(dragContainer, e.clientY || e.touches[0].clientY)
+  if (afterElement === null) {
+    dragContainer.appendChild(draggedElem)
+  } else {
+    dragContainer.insertBefore(draggedElem, afterElement)
+  }
+}
 
 /**
  * Make an existing DOM element draggable
@@ -92,42 +108,6 @@ function breakElementDraggable(elem) {
   elem.removeEventListener('dragend', handleDragEnd)
   elem.removeEventListener('touchend', handleDragEnd)
 }
-
-// -------------------------------
-// Event handler functions
-// -------------------------------
-
-/**
- *
- */
-function handleDragStart(e) {
-  e.target.closest('.shopping-item').classList.add('dragging')
-}
-
-/**
- *
- */
-function handleDragEnd(e) {
-  e.target.closest('.shopping-item').classList.remove('dragging')
-  document.dispatchEvent(new CustomEvent('list-changed'))
-}
-
-/**
- * handle the dragged item inside the container
- */
-function handleDraggedElement(e, container) {
-  const draggedElem = document.querySelector('.dragging')
-  const afterElement = getAfterElement(container, e.clientY || e.touches[0].clientY)
-  if (afterElement === null) {
-    container.appendChild(draggedElem)
-  } else {
-    container.insertBefore(draggedElem, afterElement)
-  }
-}
-
-// -------------------------------
-// Helper functions
-// -------------------------------
 
 /**
  *

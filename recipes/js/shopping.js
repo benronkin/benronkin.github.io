@@ -1,7 +1,7 @@
 import { postWebApp } from './io.js'
 import { state } from './state.js'
 import { setMessage } from './ui.js'
-import { makeDragStyles, enableDragContainers, enableDragging, disableDragging } from './drag.js'
+import { makeDragStyles, enableDragging, disableDragging } from './drag.js'
 
 // ----------------------
 // Globals
@@ -25,7 +25,6 @@ const sortSwitch = document.querySelector('#sort-switch')
  */
 export async function initShopping(shoppingList, shoppingSuggestions) {
   makeDragStyles()
-  enableDragContainers()
   displayShoppingList(shoppingList)
   localStorage.setItem('shopping-suggestions', shoppingSuggestions)
   if (modeSelect.value === 'shopping') {
