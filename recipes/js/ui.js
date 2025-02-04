@@ -23,9 +23,7 @@ const leftPanelToggle = document.querySelector('#left-panel-toggle')
  */
 export function initUi() {
   /* When login form is submitted */
-  loginForm.addEventListener('submit', async (e) => {
-    await handleLoginFormSubmit()
-  })
+  loginForm.addEventListener('submit', handleLoginFormSubmit())
 
   /* When fetching recipes or shopping list fails */
   document.addEventListener('fetch-fail', () => {
@@ -73,7 +71,9 @@ export function setMessage(value) {
  * Detect if mobile device
  */
 export function isMobile() {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  )
 }
 
 // ------------------------
