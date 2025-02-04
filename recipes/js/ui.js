@@ -23,7 +23,7 @@ const leftPanelToggle = document.querySelector('#left-panel-toggle')
  */
 export function initUi() {
   /* When login form is submitted */
-  loginForm.addEventListener('submit', handleLoginFormSubmit())
+  loginForm.addEventListener('submit', handleLoginFormSubmit)
 
   /* When fetching recipes or shopping list fails */
   document.addEventListener('fetch-fail', () => {
