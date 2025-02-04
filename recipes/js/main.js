@@ -1,4 +1,4 @@
-import { handleTokenQueryParam, getWebAppData } from './io.js'
+import { handleTokenQueryParam, getWebApp } from './io.js'
 import { initRecipes } from './recipes.js'
 import { initShopping } from './shopping.js'
 import { initUi, activateUi, setMessage } from './ui.js'
@@ -23,9 +23,8 @@ async function handleDOMContentLoaded() {
   handleTokenQueryParam()
   initUi()
 
-  const { recipes, shoppingList, shoppingSuggestions, token, error } = await getWebAppData(
-    `${state.getWebAppUrl()}?path=session-opener`
-  )
+  const { recipes, shoppingList, shoppingSuggestions, token, error } =
+    await getWebApp(`${state.getWebAppUrl()}?path=session-opener`)
 
   if (error) {
     setMessage(error)

@@ -1,4 +1,4 @@
-import { getWebAppData, postWebApp } from './io.js'
+import { getWebApp, postWebApp } from './io.js'
 import { resizeTextarea, isMobile } from './ui.js'
 import { state } from './state.js'
 import { filterIngredient, transformIngredient } from './ingredients.js'
@@ -40,7 +40,10 @@ export async function initRecipes(recipes) {
   switchEl.addEventListener('click', handleRelatedSwitchClick)
 
   /* When recipes container is populated */
-  recipesContainer.addEventListener('recipes-loaded', handleRecipeContainerPopulated)
+  recipesContainer.addEventListener(
+    'recipes-loaded',
+    handleRecipeContainerPopulated
+  )
 
   /* When add recipe button is clicked */
   addRecipeBtn.addEventListener('click', async () => {
@@ -104,7 +107,7 @@ function handleRecipeContainerPopulated() {
 async function handleRecipeCreate() {
   addRecipeBtn.disabled = true
   addRecipeBtn.textContent = 'Creating...'
-  const { id } = await getWebAppData(`${state.getWebAppUrl()}?path=recipe-create`)
+  const { id } = await getWebApp(`${state.getWebAppUrl()}?path=recipe-create`)
 
   const newRecipe = {
     id,
@@ -154,7 +157,9 @@ async function handleRecipeSearch(e) {
 async function handleFieldChange(elem) {
   const recipeSection = elem.id.replace('recipe-', '')
   if (recipeSection === 'title') {
-    document.querySelector('.tab.active').querySelector('.text-tab').textContent = elem.value
+    document
+      .querySelector('.tab.active')
+      .querySelector('.text-tab').textContent = elem.value
     document.querySelector('.recipe-link.active').textContent = elem.value
   }
   const id = recipeIdEl.textContent
@@ -194,11 +199,15 @@ async function handleRecipeLinkClick(elem) {
   // if this li is a related link then clicking it
   // needs to activate its li in the sidebar
   // so don't use: elem.classList.add('active')
-  document.querySelector(`.recipe-link[data-id="${elem.dataset.id}"]`).classList.add('active')
+  document
+    .querySelector(`.recipe-link[data-id="${elem.dataset.id}"]`)
+    .classList.add('active')
   const recipeId = elem.dataset.id
   const recipe = state.getRecipeById(recipeId)
   if (!recipe) {
-    console.log(`handleRecipeLinkClick error: Recipe not found for id: ${recipeId}`)
+    console.log(
+      `handleRecipeLinkClick error: Recipe not found for id: ${recipeId}`
+    )
     console.log('recipes:', state.getRecipes())
     return
   }
@@ -222,7 +231,9 @@ function handleTabClick(elem) {
   const recipe = state.getRecipeById(recipeId)
 
   document.querySelector('.recipe-link.active').classList.remove('active')
-  document.querySelector(`.recipe-link[data-id="${recipeId}"]`).classList.add('active')
+  document
+    .querySelector(`.recipe-link[data-id="${recipeId}"]`)
+    .classList.add('active')
 
   loadRecipe(recipe)
 }
@@ -285,7 +296,9 @@ function handleShopIngredientsClick() {
 function populateRecipes() {
   const recipes = state.getRecipes()
   if (!recipes) {
-    console.log(`populateRecipes error: state does not have recipes: ${recipes}`)
+    console.log(
+      `populateRecipes error: state does not have recipes: ${recipes}`
+    )
     return
   }
 
@@ -322,7 +335,9 @@ function loadRecipe(recipe) {
     tab.classList.add('tab')
     tab.classList.add('active')
     tab.innerHTML = `<span class="text-tab">${recipe.title}</span> <i class="close-tab fa-regular fa-circle-xmark"></i>`
-    document.querySelector('#tabs').insertBefore(tab, document.querySelector('#tabs').lastElementChild)
+    document
+      .querySelector('#tabs')
+      .insertBefore(tab, document.querySelector('#tabs').lastElementChild)
     tab.querySelector('.text-tab').addEventListener('click', (e) => {
       handleTabClick(tab)
     })
@@ -353,7 +368,9 @@ function loadRecipe(recipe) {
  * Get the searched recipes
  */
 async function getSearchedRecipes(q) {
-  const { recipes, error } = await getWebAppData(`${state.getWebAppUrl()}?path=recipes&q=${q}`)
+  const { recipes, error } = await getWebApp(
+    `${state.getWebAppUrl()}?path=recipes&q=${q}`
+  )
   if (error) {
     console.log(`getSearchedRecipes error: ${error}`)
     return { error }

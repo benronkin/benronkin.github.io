@@ -20,10 +20,10 @@ export function handleTokenQueryParam() {
 /**
  * Get data from Web app
  */
-export async function getWebAppData(path) {
+export async function getWebApp(path) {
   const token = localStorage.getItem('token')
   if (!token) {
-    return { error: 'getWebAppData error: No token' }
+    return { error: 'getWebApp error: No token' }
   }
   path += (path.includes('?') ? `&` : `?`) + `t=${token}`
 
@@ -40,7 +40,7 @@ export async function getWebAppData(path) {
     return jsn
   } catch (err) {
     return {
-      error: `getWebAppData error: ${err}\nRes: ${await res.text()}`
+      error: `getWebApp error: ${err}\nRes: ${await res.text()}`
     }
   }
 }
@@ -74,9 +74,9 @@ export async function postWebApp(path, data) {
     const jsn = await res.json()
     return jsn
   } catch (err) {
-    const message = `postWebApp error: ${err}\nFetch payload: ${JSON.stringify(data)}\nres:${
-      res ? JSON.stringify(res) : 'no res'
-    }`
+    const message = `postWebApp error: ${err}\nFetch payload: ${JSON.stringify(
+      data
+    )}\nres:${res ? JSON.stringify(res) : 'no res'}`
     return { error: message }
   }
 }
