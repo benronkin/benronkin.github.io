@@ -8,13 +8,14 @@
  */
 export async function handleTokenQueryParam() {
   const urlParams = new URLSearchParams(window.location.search)
-  const token = urlParams.get('token')
-  if (!token) {
+  const tokenParam = urlParams.get('token')
+  if (!tokenParam) {
+    console.log('no token')
     return
   }
-  const { message, error } = await getWebApp(
-    `${state.getWebAppUrl()}/email-validate?token=${token}`
-  )
+
+  localStorage.setItem('authToken', tokenParam)
+
   // remove query param from address bar url
   window.history.replaceState({}, document.title, window.location.pathname)
 }
@@ -26,9 +27,15 @@ export async function getWebApp(path) {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
 
+  const token = localStorage.getItem('authToken')
+  if (!token) {
+    console.log('getWebApp no token. aborting')
+    return
+  }
+  headers.append('Auth-Token', token)
+
   const req = new Request(path, {
-    headers,
-    credentials: 'include' // 🔥 Ensures cookies are stored and sent
+    headers
   })
   let res
   try {
@@ -56,10 +63,16 @@ export async function postWebApp(path, data) {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
 
+  const token = localStorage.getItem('authToken')
+  if (!token) {
+    console.log('postWebApp no token. aborting')
+    return
+  }
+  headers.append('Auth-Token', token)
+
   const req = new Request(path, {
     method: 'POST',
     headers,
-    credentials: 'include', // 🔥 Ensures cookies are stored and sent
     body: JSON.stringify(data)
   })
   let res
