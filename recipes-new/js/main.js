@@ -30,7 +30,7 @@ async function handleDOMContentLoaded() {
 
   handleTokenQueryParam()
 
-  const token = urlParams.get('token')
+  const token = localStorage.getItem('authToken')
   if (!token) {
     console.log('handleDOMContentLoaded: no token')
     loginContainer.classList.remove('hidden')
