@@ -6,18 +6,18 @@
  * If the user clicked on the email link then the token will be in the query param.
  * Save the token to local storage and remove it from the URL.
  */
-export async function handleTokenQueryParam() {
+export function handleTokenQueryParam() {
   const urlParams = new URLSearchParams(window.location.search)
   const tokenParam = urlParams.get('token')
   if (!tokenParam) {
-    console.log('no token')
-    return
+    return { error: 'no token' }
   }
 
   localStorage.setItem('authToken', tokenParam)
 
   // remove query param from address bar url
   window.history.replaceState({}, document.title, window.location.pathname)
+  return {}
 }
 
 /**
@@ -64,7 +64,7 @@ export async function postWebApp(path, data) {
   headers.append('Content-Type', 'application/json')
 
   const token = localStorage.getItem('authToken')
-  if (!token) {
+  if (!token && !path.includes('/email-submit')) {
     console.log('postWebApp no token. aborting')
     return
   }

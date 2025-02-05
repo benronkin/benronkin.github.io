@@ -107,6 +107,7 @@ async function handleLoginFormSubmit(e) {
     loginMessageEl.textContent = message
   } catch (err) {
     loginMessageEl.textContent = err.message
+    loginBtn.disabled = false
     console.log(err)
   }
 }

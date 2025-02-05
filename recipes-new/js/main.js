@@ -4,6 +4,12 @@ import { initShopping } from './shopping.js'
 import { initUi, activateUi, setMessage } from './ui.js'
 
 // ----------------------
+// Globals
+// ----------------------
+const loginContainer = document.querySelector('#login-container')
+const headerEl = document.querySelector('#header')
+
+// ----------------------
 // Event listeners
 // ----------------------
 
@@ -20,8 +26,17 @@ document.addEventListener('DOMContentLoaded', async () => {
  * Handle DOMContentLoaded
  */
 async function handleDOMContentLoaded() {
-  handleTokenQueryParam()
   initUi()
+
+  const { error: handleTokenQueryParamError } = handleTokenQueryParam()
+
+  if (handleTokenQueryParamError) {
+    console.log('handleTokenQueryParam Error:', handleTokenQueryParamError)
+    loginContainer.classList.remove('hidden')
+    headerEl.classList.add('hidden')
+    setMessage('Pleases log in to authenticate')
+    return
+  }
 
   const { recipes, shoppingList, shoppingSuggestions, error } = await getWebApp(
     `${state.getWebAppUrl()}/session-opener`
