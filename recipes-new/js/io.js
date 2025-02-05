@@ -10,14 +10,13 @@ export function handleTokenQueryParam() {
   const urlParams = new URLSearchParams(window.location.search)
   const tokenParam = urlParams.get('token')
   if (!tokenParam) {
-    return { error: 'no token' }
+    return
   }
 
   localStorage.setItem('authToken', tokenParam)
 
   // remove query param from address bar url
   window.history.replaceState({}, document.title, window.location.pathname)
-  return {}
 }
 
 /**

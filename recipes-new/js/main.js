@@ -28,10 +28,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function handleDOMContentLoaded() {
   initUi()
 
-  const { error: handleTokenQueryParamError } = handleTokenQueryParam()
+  handleTokenQueryParam()
 
-  if (handleTokenQueryParamError) {
-    console.log('handleTokenQueryParam Error:', handleTokenQueryParamError)
+  const token = urlParams.get('token')
+  if (!token) {
+    console.log('handleDOMContentLoaded: no token')
     loginContainer.classList.remove('hidden')
     headerEl.classList.add('hidden')
     setMessage('Pleases log in to authenticate')
