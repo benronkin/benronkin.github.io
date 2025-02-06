@@ -3,6 +3,7 @@ import { resizeTextarea, isMobile } from './ui.js'
 import { state } from './state.js'
 import { filterIngredient, transformIngredient } from './ingredients.js'
 import { addItemsToShoppingList } from './shopping.js'
+import { setDialog } from './modal.js'
 
 // ----------------------
 // Globals
@@ -27,6 +28,7 @@ const recipeNotes = document.querySelector('#recipe-notes')
 const recipeCategory = document.querySelector('#recipe-category')
 const recipeTags = document.querySelector('#recipe-tags')
 const recipeIdEl = document.querySelector('#recipe-id')
+const recipeDeleteBtn = document.querySelector('#bottom-btn-group .fa-trash')
 
 // ----------------------
 // Exported functions
@@ -71,6 +73,40 @@ export async function initRecipes(recipes) {
   recipeRelated.addEventListener('change', (e) => {
     populateRelatedRecipes(e.target.value)
   })
+
+  /* When the trash recipe button is clicked */
+  recipeDeleteBtn.addEventListener('click', handleRecipeDeleteBtnClick)
+
+  /* When a recipe is confirmed delete */
+  document.addEventListener('delete-recipe', handleDeleteRecipe)
+
+  /**
+   * Handle button click to show delete modal
+   */
+  function handleRecipeDeleteBtnClick() {
+    setDialog({
+      header: 'Delete recipe',
+      message: `Delete the ${recipeTitleEl.value} recipe?`,
+      id: recipeIdEl.innerText
+    })
+    const dialog = document.querySelector('dialog')
+    dialog.showModal()
+  }
+
+  /**
+   * Handle delete recipe confirmation
+   */
+  async function handleDeleteRecipe(e) {
+    const id = e.detail.id
+    const { message } = await getWebApp(
+      `${state.getWebAppUrl()}/recipe-delete?id=${id}`
+    )
+    state.delete('recipes', id)
+    const tab = document.querySelector('.tab.active')
+    handleTabCloseClick(tab)
+    document.querySelector(`.recipe-link[data-id="${id}"`).remove()
+    console.log(`handleDeleteRecipe message: ${message}`)
+  }
 
   state.setRecipes(recipes)
   populateRecipes()
@@ -216,15 +252,10 @@ async function handleRecipeLinkClick(elem) {
   }
 
   loadRecipe(recipe)
-  const { message, error } = await postWebApp(
-    `${state.getWebAppUrl()}/recipe-access`,
-    {
-      id: recipeId
-    }
-  )
-  if (error) {
-    console.log(error)
-  }
+  const resp = await postWebApp(`${state.getWebAppUrl()}/recipe-access`, {
+    id: recipeId
+  })
+  const { message } = resp
   console.log(message)
 }
 

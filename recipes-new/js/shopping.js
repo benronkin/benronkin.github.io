@@ -26,7 +26,7 @@ const sortSwitch = document.querySelector('#sort-switch')
 export async function initShopping(shoppingList, shoppingSuggestions) {
   makeDragStyles()
   displayShoppingList(shoppingList)
-  localStorage.setItem('shopping-suggestions', shoppingSuggestions)
+  state.set('shopping-suggestions', shoppingSuggestions)
   if (modeSelect.value === 'shopping') {
     shoppingContainer.classList.remove('hidden')
     shoppingInput.focus()
@@ -162,15 +162,14 @@ function handleShoppingFormSubmit(e, prepend) {
  * Handle shopping list change
  */
 async function handleShoppingListChange() {
-  const items = getShoppingListItems()
-  updateLocalStorageSuggestions(items)
-  const value = items.join(',')
+  let values = getShoppingListItems()
+  values = state.add('shopping-suggestions', values)
 
   try {
     const { message, error } = await postWebApp(
       `${state.getWebAppUrl()}/shopping-list-update`,
       {
-        value
+        value: values.join(',')
       }
     )
     if (error) {
@@ -235,21 +234,11 @@ function handleSuggestionPlusClick(e) {
  */
 function handleSuggestionTrashClick(e) {
   const div = e.target.closest('.shopping-suggestion')
-  const item = div.textContent.trim()
+  const value = div.textContent.trim()
   div.remove()
-  let localStorageSuggestions = (
-    localStorage.getItem('shopping-suggestions') || ''
-  )
-    .split(',')
-    .map((i) => i.trim())
-
-  localStorageSuggestions = localStorageSuggestions
-    .filter((i) => i !== item)
-    .join(',')
-  localStorage.setItem('shopping-suggestions', localStorageSuggestions)
-
+  const suggestions = state.delete('shopping-suggestions', value)
   postWebApp(`${state.getWebAppUrl()}/shopping-suggestions-update`, {
-    value: localStorageSuggestions
+    value: suggestions.join(',')
   })
 }
 
@@ -323,12 +312,8 @@ function displayShoppingList(shoppingList) {
  * Display a list of suggestions
  */
 function displaySuggestions() {
-  let suggestions = localStorage.getItem('shopping-suggestions')
-  if (suggestions) {
-    suggestions = suggestions
-      .split(',')
-      .filter((s) => s.toString().trim().length > 1)
-  } else {
+  let suggestions = state.get('shopping-suggestions')
+  if (!suggestions) {
     suggestions = ['apples', 'carrots', 'berries']
   }
   suggestionsContainer.innerHTML = ''
@@ -382,22 +367,4 @@ function getShoppingListItems() {
     el.innerText.toLowerCase().trim()
   )
   return items
-}
-
-/**
- * Update local storage suggestions
- */
-function updateLocalStorageSuggestions(items) {
-  let localStorageSuggestions = (
-    localStorage.getItem('shopping-suggestions') || ''
-  ).split(',')
-  for (const item of items) {
-    if (item && !localStorageSuggestions.includes(item)) {
-      localStorageSuggestions.push(item)
-    }
-  }
-  localStorage.setItem(
-    'shopping-suggestions',
-    localStorageSuggestions.join(',')
-  )
 }

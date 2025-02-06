@@ -49,6 +49,10 @@ ul {
   border-radius: 6px;
   cursor: pointer;
 }
+#bottom-btn-group {
+  display: flex;
+  margin-left: auto;
+}
 #header {
   background-color: white;
   margin: 20px;

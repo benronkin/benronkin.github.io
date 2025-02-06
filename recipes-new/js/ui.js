@@ -1,4 +1,5 @@
 import { postWebApp } from './io.js'
+import { initDialog } from './modal.js'
 
 // ----------------------
 // Globals
@@ -44,6 +45,9 @@ export function initUi() {
   modeSelect.addEventListener('change', (e) => {
     handleModeSelectChange(e)
   })
+
+  // init dialog
+  initDialog()
 
   setMessage('Loading...')
 
