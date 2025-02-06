@@ -163,8 +163,7 @@ function handleShoppingFormSubmit(e, prepend) {
  */
 async function handleShoppingListChange() {
   let values = getShoppingListItems()
-  values = state.add('shopping-suggestions', values)
-  console.log('state values', values)
+  state.add('shopping-suggestions', values)
 
   try {
     const { message, error } = await postWebApp(
