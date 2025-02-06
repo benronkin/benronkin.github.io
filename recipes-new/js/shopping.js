@@ -26,7 +26,7 @@ const sortSwitch = document.querySelector('#sort-switch')
 export async function initShopping(shoppingList, shoppingSuggestions) {
   makeDragStyles()
   displayShoppingList(shoppingList)
-  state.set('shopping-suggestions', shoppingSuggestions)
+  state.set('shopping-suggestions', shoppingSuggestions.split(','))
   if (modeSelect.value === 'shopping') {
     shoppingContainer.classList.remove('hidden')
     shoppingInput.focus()
@@ -164,6 +164,7 @@ function handleShoppingFormSubmit(e, prepend) {
 async function handleShoppingListChange() {
   let values = getShoppingListItems()
   values = state.add('shopping-suggestions', values)
+  console.log('state values', values)
 
   try {
     const { message, error } = await postWebApp(
@@ -318,6 +319,7 @@ function displaySuggestions() {
   }
   suggestionsContainer.innerHTML = ''
   const shoppingItems = getShoppingListItems()
+
   suggestions = suggestions.filter((s) => !shoppingItems.includes(s))
   suggestions.sort()
   for (const s of suggestions) {
