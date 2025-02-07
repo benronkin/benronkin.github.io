@@ -30,11 +30,10 @@ export function initUi() {
   loginForm.addEventListener('submit', handleLoginFormSubmit)
 
   /* When fetching recipes or shopping list fails */
-  document.addEventListener('fetch-fail', () => {
-    loginContainer.classList.remove('hidden')
-    recipeLinksPanel.classList.add('hidden')
-    headerEl.classList.add('hidden')
-  })
+  document.addEventListener('fetch-fail', handleFetchFail)
+
+  /* When fetching recipes or shopping list warns */
+  document.addEventListener('fetch-warn', handleFetchWarn)
 
   /* When the left panel toggle is clicked */
   leftPanelToggle.addEventListener('click', () => {
@@ -114,6 +113,23 @@ async function handleLoginFormSubmit(e) {
     loginBtn.disabled = false
     console.log(err)
   }
+}
+
+/**
+ * Handle getWebApp or postWebApp errors
+ */
+function handleFetchFail() {
+  loginContainer.classList.remove('hidden')
+  recipeLinksPanel.classList.add('hidden')
+  headerEl.classList.add('hidden')
+}
+
+/**
+ * Handle getWebApp or postWebApp warnings
+ */
+function handleFetchWarn(e) {
+  setMessage(e.detail.warn)
+  recipeLinksPanel.classList.add('hidden')
 }
 
 /**

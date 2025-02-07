@@ -94,30 +94,14 @@ shoppingForm.addEventListener('submit', (e) =>
 function handleSortSwitchClick() {
   sortSwitch.classList.toggle('on')
   const shoppingItems = document.querySelectorAll('.shopping-item')
-  const shoppingTrashes = document.querySelectorAll('i.fa-trash')
-  const shoppingBars = document.querySelectorAll(
-    '#shopping-container i.fa-bars'
-  )
 
   if (sortSwitch.classList.contains('on')) {
     enableDragging()
     clearSelection()
-    shoppingBars.forEach((el) => el.classList.remove('hidden'))
-    shoppingItems.forEach((el) =>
-      el.removeEventListener('click', handleShoppingItemClick)
-    )
-    shoppingTrashes.forEach((el) =>
-      el.removeEventListener('click', handleShoppingTrashClick)
-    )
+    shoppingItems.forEach((el) => makeElementDraggable(el))
   } else {
     disableDragging()
-    shoppingBars.forEach((el) => el.classList.add('hidden'))
-    shoppingItems.forEach((el) =>
-      el.addEventListener('click', handleShoppingItemClick)
-    )
-    shoppingTrashes.forEach((el) =>
-      el.addEventListener('click', handleShoppingTrashClick)
-    )
+    shoppingItems.forEach((el) => makeElementClickable(el))
   }
 }
 
@@ -146,6 +130,11 @@ function handleShoppingFormSubmit(e, prepend) {
   if (itemEl) {
     // existing item is edited
     itemEl.querySelector('span').innerText = value
+    itemEl.querySelector('.fa-bars').classList.remove('hidden')
+    itemEl.addEventListener('click', handleShoppingItemClick)
+    itemEl
+      .querySelector('.fa-trash')
+      .addEventListener('click', handleShoppingTrashClick)
   } else {
     // new item is added
     if (inShoppingList(value)) {
@@ -259,11 +248,6 @@ function createShoppingItem(item) {
       .trim()
       .toLowerCase()}</span></div>
     <i class="fa fa-trash hidden"></i>`
-
-  div.addEventListener('click', handleShoppingItemClick)
-  div
-    .querySelector('i.fa-trash')
-    .addEventListener('click', handleShoppingTrashClick)
   return div
 }
 
@@ -296,6 +280,12 @@ function addShoppingItemToList(value, prepend) {
   } else {
     shoppingDiv.appendChild(shoppingItem)
   }
+  if (sortSwitch.classList.contains('on')) {
+    makeElementDraggable(shoppingDiv)
+    enableDragging()
+  } else {
+    makeElementClickable(shoppingDiv)
+  }
 }
 
 /**
@@ -325,6 +315,28 @@ function displaySuggestions() {
     const div = createShoppingSuggestion(s)
     suggestionsContainer.appendChild(div)
   }
+}
+
+/**
+ * Make individual shopping item draggable
+ */
+function makeElementDraggable(element) {
+  element.removeEventListener('click', handleShoppingItemClick)
+  element.querySelector('i.fa-bars').classList.remove('hidden')
+  element
+    .querySelector('i.fa-trash')
+    .removeEventListener('click', handleShoppingTrashClick)
+}
+
+/**
+ * Make individual shopping item clickable
+ */
+function makeElementClickable(element) {
+  element.addEventListener('click', handleShoppingItemClick)
+  element.querySelector('i.fa-bars').classList.add('hidden')
+  element
+    .querySelector('i.fa-trash')
+    .addEventListener('click', handleShoppingTrashClick)
 }
 
 /**

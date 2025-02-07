@@ -47,6 +47,13 @@ export async function getWebApp(path) {
     }
     return { ...data, message }
   } catch (error) {
+    if (path.includes('localhost')) {
+      console.warn('Is cloudflare running?')
+      return { warn: 'Is CloudFlare running locally?' }
+    }
+
+    console.log('getWebapp error:', error)
+
     return {
       error: `getWebApp error: ${error}\nRes: ${
         res ? await res.text() : 'res is empty'
@@ -84,9 +91,14 @@ export async function postWebApp(path, data) {
     }
     return { ...data, message }
   } catch (err) {
+    if (path.includes('localhost')) {
+      console.warn('Is cloudflare running?')
+    }
+
     const message = `postWebApp error: ${err}\nFetch payload: ${JSON.stringify(
       data
     )}\nres:${res ? JSON.stringify(res) : 'no res'}`
+    console.log('getWebapp error:', message)
     return { error: message }
   }
 }

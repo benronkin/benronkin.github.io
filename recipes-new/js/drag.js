@@ -27,7 +27,11 @@ export function makeDragStyles() {
  *
  */
 export function enableDragging() {
-  document.querySelectorAll('.shopping-item').forEach((elem) => makeElementDraggable(elem))
+  // clear prior event handlers
+  disableDragging()
+  document
+    .querySelectorAll('.shopping-item')
+    .forEach((elem) => makeElementDraggable(elem))
   document.querySelectorAll('.drag-container').forEach((container) => {
     container.addEventListener('dragover', enableDragContainer)
     container.addEventListener('touchmove', enableDragContainer)
@@ -38,7 +42,9 @@ export function enableDragging() {
  *
  */
 export function disableDragging() {
-  document.querySelectorAll('.draggable').forEach((elem) => breakElementDraggable(elem))
+  document
+    .querySelectorAll('.draggable')
+    .forEach((elem) => breakElementDraggable(elem))
   document.querySelectorAll('.drag-container').forEach((container) => {
     container.removeEventListener('dragover', enableDragContainer)
     container.removeEventListener('touchmove', enableDragContainer)
@@ -75,7 +81,10 @@ function enableDragContainer(e) {
   e.preventDefault()
   const draggedElem = document.querySelector('.dragging')
   const dragContainer = draggedElem.closest('.drag-container')
-  const afterElement = getAfterElement(dragContainer, e.clientY || e.touches[0].clientY)
+  const afterElement = getAfterElement(
+    dragContainer,
+    e.clientY || e.touches[0].clientY
+  )
   if (afterElement === null) {
     dragContainer.appendChild(draggedElem)
   } else {
@@ -113,7 +122,9 @@ function breakElementDraggable(elem) {
  *
  */
 function getAfterElement(container, y) {
-  const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+  const draggableElements = [
+    ...container.querySelectorAll('.draggable:not(.dragging)')
+  ]
   return draggableElements.reduce(
     (closest, child) => {
       const box = child.getBoundingClientRect()

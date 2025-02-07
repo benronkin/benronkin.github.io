@@ -233,6 +233,7 @@ ul {
   padding: 0.5rem;
   background-color: lightgreen;
   margin-bottom: 0.5rem;
+  height: 40px;
 }
 .shopping-item div {
   cursor: pointer;

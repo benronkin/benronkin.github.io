@@ -1,7 +1,7 @@
 import { handleTokenQueryParam, getWebApp } from './io.js'
 import { initRecipes } from './recipes.js'
 import { initShopping } from './shopping.js'
-import { initUi, activateUi, setMessage } from './ui.js'
+import { initUi, activateUi } from './ui.js'
 
 // ----------------------
 // Globals
@@ -35,16 +35,18 @@ async function handleDOMContentLoaded() {
     console.log('handleDOMContentLoaded: no token')
     loginContainer.classList.remove('hidden')
     headerEl.classList.add('hidden')
-    setMessage('Pleases log in to authenticate')
     return
   }
 
-  const { recipes, shoppingList, shoppingSuggestions, error } = await getWebApp(
-    `${state.getWebAppUrl()}/session-opener`
-  )
+  const { recipes, shoppingList, shoppingSuggestions, error, warn } =
+    await getWebApp(`${state.getWebAppUrl()}/session-opener`)
+
+  if (warn) {
+    document.dispatchEvent(new CustomEvent('fetch-warn', { detail: { warn } }))
+    return { error: warn }
+  }
 
   if (error) {
-    setMessage(error)
     document.dispatchEvent(new CustomEvent('fetch-fail'))
     return { error }
   }
