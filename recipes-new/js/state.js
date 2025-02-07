@@ -1,8 +1,8 @@
 const stateObj = {
   data: {
     recipes: [],
-    WEB_APP_URL: 'http://localhost:8787'
-    // WEB_APP_URL: 'https://recipes-cloudflare.ba201220a.workers.dev'
+    // WEB_APP_URL: 'http://localhost:8787'
+    WEB_APP_URL: 'https://recipes-cloudflare.ba201220a.workers.dev'
   },
 
   add(key, values) {
