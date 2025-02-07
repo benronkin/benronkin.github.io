@@ -87,7 +87,7 @@ export async function initRecipes(recipes) {
     setDialog({
       type: MODAL.DELETE_RECIPE,
       header: 'Delete recipe',
-      message: `Delete the ${recipeTitleEl.value} recipe?`,
+      body: `Delete the ${recipeTitleEl.value} recipe?`,
       id: recipeIdEl.innerText
     })
     const dialog = document.querySelector('dialog')
