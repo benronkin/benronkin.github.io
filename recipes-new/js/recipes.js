@@ -171,11 +171,11 @@ async function handleRecipeSearch(e) {
   if (e.key !== 'Enter') {
     return
   }
-  searchRecipesMessageEl.textContent = 'Searching...'
   const value = e.target.value.toLowerCase().trim()
   if (value.length === 0) {
     return
   }
+  searchRecipesMessageEl.textContent = 'Searching...'
   const { recipes } = await getSearchedRecipes(value)
   if (recipes.length === 0) {
     searchRecipesMessageEl.textContent = 'No recipes found'
@@ -404,12 +404,12 @@ function loadRecipe(recipe) {
  * Get the searched recipes
  */
 async function getSearchedRecipes(q) {
-  const { recipes, error } = await getWebApp(
-    `${state.getWebAppUrl()}?path=recipes&q=${q}`
-  )
-  if (error) {
-    console.log(`getSearchedRecipes error: ${error}`)
-    return { error }
+  const data = await getWebApp(`${state.getWebAppUrl()}/recipes-search?q=${q}`)
+
+  const { recipes, message } = data
+  if (message) {
+    console.log(`getSearchedRecipes error: ${message}`)
+    return { error: message }
   }
   return { recipes }
 }
