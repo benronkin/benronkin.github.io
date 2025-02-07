@@ -3,7 +3,7 @@ import { resizeTextarea, isMobile } from './ui.js'
 import { state } from './state.js'
 import { filterIngredient, transformIngredient } from './ingredients.js'
 import { addItemsToShoppingList } from './shopping.js'
-import { setDialog } from './modal.js'
+import { MODAL, setDialog } from './modal.js'
 
 // ----------------------
 // Globals
@@ -85,6 +85,7 @@ export async function initRecipes(recipes) {
    */
   function handleRecipeDeleteBtnClick() {
     setDialog({
+      type: MODAL.DELETE_RECIPE,
       header: 'Delete recipe',
       message: `Delete the ${recipeTitleEl.value} recipe?`,
       id: recipeIdEl.innerText
@@ -97,15 +98,24 @@ export async function initRecipes(recipes) {
    * Handle delete recipe confirmation
    */
   async function handleDeleteRecipe(e) {
+    const modalMessageEl = document.querySelector('#modal-message')
+    modalMessageEl.innerText = ''
     const id = e.detail.id
-    const { message } = await getWebApp(
-      `${state.getWebAppUrl()}/recipe-delete?id=${id}`
+    const password = document.querySelector('#modal-delete-input').value
+    const { error } = await getWebApp(
+      `${state.getWebAppUrl()}/recipe-delete?id=${id}&password=${password}`
     )
+
+    if (error) {
+      modalMessageEl.innerText = error
+      return
+    }
     state.delete('recipes', id)
     const tab = document.querySelector('.tab.active')
     handleTabCloseClick(tab)
     document.querySelector(`.recipe-link[data-id="${id}"`).remove()
     console.log(`handleDeleteRecipe message: ${message}`)
+    document.querySelector('dialog').close()
   }
 
   state.setRecipes(recipes)

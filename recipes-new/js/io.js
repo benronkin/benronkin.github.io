@@ -79,7 +79,7 @@ export async function postWebApp(path, data) {
     res = await fetch(req)
     const { status, message, data } = await res.json()
     if (status !== 200) {
-      console.log(`getWebApp ${status} error:`, message)
+      console.log(`postWebApp ${status} error:`, message)
       return { error: message }
     }
     return { ...data, message }
