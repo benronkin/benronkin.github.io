@@ -148,9 +148,11 @@ function handleShoppingFormSubmit(e, prepend) {
 }
 
 /**
- * Handle shopping list change
+ * Handle shopping list change. handleShoppingTrashClick passes
+ * detail with a callback and callback parameter should the
+ * server update is successful
  */
-async function handleShoppingListChange() {
+async function handleShoppingListChange(e) {
   let values = getShoppingListItems()
   state.add('shopping-suggestions', values)
 
@@ -162,11 +164,14 @@ async function handleShoppingListChange() {
       }
     )
     if (error) {
-      throw new Error(error)
+      setMessage(error)
+      console.warn(error)
+      return
     }
-    console.log(message)
-  } catch (err) {
-    console.log(err)
+    setMessage(message)
+  } catch (error) {
+    setMessage(error)
+    console.warn(error)
   }
 }
 
@@ -178,6 +183,9 @@ function handleShoppingItemClick(e) {
     .querySelectorAll('i.fa-trash')
     .forEach((el) => el.classList.add('hidden'))
   const parent = e.target.closest('.shopping-item')
+  if (!parent) {
+    return
+  }
   parent.classList.toggle('checked')
   if (parent.classList.contains('checked')) {
     shoppingInput.value = parent.innerText
@@ -194,10 +202,10 @@ function handleShoppingItemClick(e) {
  */
 function handleShoppingTrashClick(e) {
   e.stopPropagation()
-  e.target.closest('.shopping-item').remove()
   clearSelection()
-  document.dispatchEvent(new CustomEvent('list-changed'))
   displaySuggestions()
+  e.target.closest('.shopping-item').remove()
+  document.dispatchEvent(new CustomEvent('list-changed'))
 }
 
 /**
