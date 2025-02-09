@@ -168,7 +168,6 @@ async function handleShoppingListChange(e) {
       console.warn(error)
       return
     }
-    setMessage(message)
   } catch (error) {
     setMessage(error)
     console.warn(error)
