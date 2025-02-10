@@ -189,6 +189,11 @@ ul {
   display: flex;
   margin-top: 90px;
 }
+#version-container {
+  margin-left: 20px;
+  font-size: 0.9rem;
+  color: #555555;
+}
 .card {
   background-color: #fafafa;
   color: #666;

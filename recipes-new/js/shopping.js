@@ -288,10 +288,10 @@ function addShoppingItemToList(value, prepend) {
     shoppingDiv.appendChild(shoppingItem)
   }
   if (sortSwitch.classList.contains('on')) {
-    makeElementDraggable(shoppingDiv)
+    makeElementDraggable(shoppingItem)
     enableDragging()
   } else {
-    makeElementClickable(shoppingDiv)
+    makeElementClickable(shoppingItem)
   }
 }
 
@@ -328,6 +328,8 @@ function displaySuggestions() {
  * Make individual shopping item draggable
  */
 function makeElementDraggable(element) {
+  element.classList.remove('clickable')
+
   element.removeEventListener('click', handleShoppingItemClick)
   element.querySelector('i.fa-bars').classList.remove('hidden')
   element
@@ -339,6 +341,11 @@ function makeElementDraggable(element) {
  * Make individual shopping item clickable
  */
 function makeElementClickable(element) {
+  if (element.classList.contains('clickable')) {
+    return
+  }
+  element.classList.add('clickable')
+
   element.addEventListener('click', handleShoppingItemClick)
   element.querySelector('i.fa-bars').classList.add('hidden')
   element
