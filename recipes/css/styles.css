@@ -334,6 +334,9 @@ ul {
   #login-container {
     margin-top: 250px;
   }
+  #recipe-links-panel {
+    position: inherit;
+  }
   #shopping-container {
     margin-top: 90px;
   }

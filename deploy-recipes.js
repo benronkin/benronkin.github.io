@@ -3,7 +3,7 @@ import readlineSync from 'readline-sync'
 import { execSync } from 'child_process'
 
 /**
- * Use this file to build the recipes front end. Do not manually push to github
+ * Use this file to build the recipes front end for prod. Do not manually push to github
  */
 
 /**
@@ -12,7 +12,7 @@ import { execSync } from 'child_process'
 function build() {
   console.clear()
   setProdUrl()
-  setVersion()
+  updateIndexPage()
   commitChanges()
 }
 
@@ -20,7 +20,7 @@ function build() {
  *
  */
 function setProdUrl() {
-  const filePath = './recipes-new/js/state.js'
+  const filePath = './recipes/js/state.js'
   let content = fs.readFileSync(filePath, 'utf8')
   content = content.replace(/WEB_APP_URL:\s*devUrl/, 'WEB_APP_URL: prodUrl')
   fs.writeFileSync(filePath, content, 'utf8')
@@ -30,11 +30,12 @@ function setProdUrl() {
 /**
  *
  */
-function setVersion() {
-  const indexPath = './recipes-new/index.html'
+function updateIndexPage() {
+  const indexPath = './recipes/index.html'
   let content = fs.readFileSync(indexPath, 'utf8')
   const match = content.match(/<span id="version-number">(.*?)<\/span>/)
   const currentVersion = match ? match[1] : null
+
   // Prompt user for the new version
   const newVersion = readlineSync
     .question(`Version (${currentVersion}): `)
@@ -44,6 +45,10 @@ function setVersion() {
     /<span id="version-number">(.*?)<\/span>/,
     `<span id="version-number">${newVersion}</span>`
   )
+
+  // Remove the ronkinben@gmail.com placeholder
+  content = content.replace('value="ronkinben@gmail.com"', 'value=""')
+
   // Write the file
   fs.writeFileSync(indexPath, content, 'utf8')
   console.log(`🔥 Updated version to ${newVersion} in index.html`)
