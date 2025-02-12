@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-store, no-cache, must-revalidate"
+    />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
 
@@ -28,19 +31,22 @@
   <body>
     <div id="header">
       <i id="left-panel-toggle" class="fa-solid fa-bars hidden"></i>
-      <div>
-        <select name="mode-select" id="mode-select">
-          <option value="recipes">Recipes</option>
-          <option value="shopping">Shopping</option>
-        </select>
-        <div id="message">Fetching data from server...</div>
-      </div>
+      <select name="mode-select" id="mode-select">
+        <option value="recipes">Recipes</option>
+        <option value="shopping">Shopping</option>
+      </select>
+      <div id="message">Fetching data from server...</div>
     </div>
 
     <div id="login-container" class="card hidden">
-      <h2>Enter your email address to gain access</h2>
+      <h2>Recipes: Enter your email address to gain access</h2>
       <form id="login-form">
-        <input type="email" name="email" placeholder="Email" style="width: 250px" />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          style="width: 250px"
+        />
         <button id="login-btn" type="submit">Submit</button>
       </form>
       <span id="login-message">&nbsp;</span>
@@ -48,7 +54,12 @@
 
     <div id="shopping-container" class="hidden">
       <form id="shopping-form">
-        <input type="text" id="shopping-input" placeholder="Add item" autocomplete="off" />
+        <input
+          type="text"
+          id="shopping-input"
+          placeholder="Add item"
+          autocomplete="off"
+        />
       </form>
 
       <div class="flex" style="justify-content: space-between">
@@ -83,9 +94,9 @@
           <button id="shop-ingredients" class="hidden">SHOP</button>
         </div>
         <div id="recipe" class="hidden">
-          <input name="recipe-title" id="recipe-title" class="field" />
+          <input name="title" id="recipe-title" class="field" />
           <h3>Notes</h3>
-          <textarea name="recipe-notes" id="recipe-notes" class="field"></textarea>
+          <textarea name="notes" id="recipe-notes" class="field"></textarea>
           <div id="related-recipes-header">
             <h3>related recipes</h3>
             <div id="related-recipes-switch" class="switch ml20">
@@ -94,20 +105,34 @@
           </div>
           <div id="related-recipes-body">
             <div id="related-recipe-links"></div>
-            <textarea name="recipe-related" id="recipe-related" class="field hidden"></textarea>
+            <textarea
+              name="related"
+              id="recipe-related"
+              class="field hidden"
+            ></textarea>
           </div>
           <h3>Ingredients</h3>
-          <textarea name="recipe-ingredients" id="recipe-ingredients" class="field"></textarea>
+          <textarea
+            name="ingredients"
+            id="recipe-ingredients"
+            class="field"
+          ></textarea>
           <h3>Method</h3>
-          <textarea name="recipe-method" id="recipe-method" class="field"></textarea>
+          <textarea name="method" id="recipe-method" class="field"></textarea>
           <h3>Category</h3>
-          <input name="recipe-category" id="recipe-category" class="field" />
+          <input name="category" id="recipe-category" class="field" />
           <h3>Tags</h3>
-          <input name="recipe-tags" id="recipe-tags" class="field" />
+          <input name="tags" id="recipe-tags" class="field" />
           <h3>Id</h3>
           <p id="recipe-id"></p>
+          <div id="bottom-btn-group">
+            <i class="fa fa-trash"></i>
+          </div>
         </div>
       </div>
+    </div>
+    <div id="version-container">
+      Version: <span id="version-number">1.0.1</span>
     </div>
     <script src="./js/main.js" type="module"></script>
   </body>

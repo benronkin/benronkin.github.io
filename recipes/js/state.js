@@ -1,9 +1,42 @@
+const devUrl = 'http://localhost:8787'
+const prodUrl = 'https://recipes-cloudflare.ba201220a.workers.dev'
+
 const stateObj = {
   data: {
     recipes: [],
-    afterRecipeId: null, // for pagination; to be implemented later
-    WEB_APP_URL:
-      'https://script.google.com/macros/s/AKfycbzUYReY4jAwZ0m_jbW1WUPGJxsGtZqJO3QwhxNIn-uOnLHQoCdztG0NHjDbNdZ4QDd5/exec'
+    WEB_APP_URL: prodUrl
+  },
+
+  add(key, values) {
+    const arr = this.get(key)
+    for (let value of values) {
+      if (!value) {
+        continue
+      }
+      if (key !== 'recipes') {
+        value = value.trim()
+      }
+      if (!arr.includes(value)) {
+        arr.push(value)
+      }
+    }
+    this.set(key, arr)
+    return arr
+  },
+
+  delete(key, value) {
+    if (!value) {
+      return
+    }
+    let arr = this.get(key)
+    if (key !== 'recipes') {
+      value = value.trim()
+      arr = arr.filter((v) => v !== value)
+    } else {
+      arr = arr.filter((v) => v.id !== value.id)
+    }
+    this.set(key, arr)
+    return arr
   },
 
   get: function (key) {
@@ -23,6 +56,7 @@ const stateObj = {
   // -----------------------
 
   getWebAppUrl: function () {
+    console.log(`state.getWebAppUrl is using ${this.data.WEB_APP_URL}`)
     return this.data.WEB_APP_URL
   },
 

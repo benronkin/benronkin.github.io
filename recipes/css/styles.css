@@ -49,6 +49,10 @@ ul {
   border-radius: 6px;
   cursor: pointer;
 }
+#bottom-btn-group {
+  display: flex;
+  margin-left: auto;
+}
 #header {
   background-color: white;
   margin: 20px;
@@ -56,11 +60,12 @@ ul {
   padding-top: 20px;
   position: fixed;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   top: 0;
   left: 0;
   right: 0;
   z-index: 3;
+  max-width: 500px;
 }
 #header div {
   display: flex;
@@ -72,11 +77,8 @@ ul {
   padding: 10px;
   margin-right: 10px;
 }
-#login-container {
-  margin-top: 120px;
-}
 #message {
-  margin: 10px 7px;
+  margin-left: auto;
 }
 #mode-select {
   margin-top: 3px;
@@ -187,6 +189,11 @@ ul {
   display: flex;
   margin-top: 90px;
 }
+#version-container {
+  margin-left: 20px;
+  font-size: 0.9rem;
+  color: #555555;
+}
 .card {
   background-color: #fafafa;
   color: #666;
@@ -232,6 +239,7 @@ ul {
   padding: 0.5rem;
   background-color: lightgreen;
   margin-bottom: 0.5rem;
+  height: 40px;
 }
 .shopping-item div {
   cursor: pointer;

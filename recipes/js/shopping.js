@@ -26,7 +26,7 @@ const sortSwitch = document.querySelector('#sort-switch')
 export async function initShopping(shoppingList, shoppingSuggestions) {
   makeDragStyles()
   displayShoppingList(shoppingList)
-  localStorage.setItem('shopping-suggestions', shoppingSuggestions)
+  state.set('shopping-suggestions', shoppingSuggestions.split(','))
   if (modeSelect.value === 'shopping') {
     shoppingContainer.classList.remove('hidden')
     shoppingInput.focus()
@@ -36,8 +36,10 @@ export async function initShopping(shoppingList, shoppingSuggestions) {
 /**
  * Add an array of items to the shopping list
  */
-export function addItemsToShoppingList(newItems) {
-  newItems = newItems.map((item) => item.trim()).filter((item) => item.toString().length > 0)
+export function addItemsToShoppingList(newItems, suppressListChanged = false) {
+  newItems = newItems
+    .map((item) => item.trim())
+    .filter((item) => item.toString().length > 0)
   // avoid duplicating existing items in shopping list
   const items = getShoppingListItems()
   newItems = newItems.filter((item) => !items.includes(item))
@@ -45,7 +47,10 @@ export function addItemsToShoppingList(newItems) {
   for (const item of newItems) {
     addShoppingItemToList(item)
   }
-  document.dispatchEvent(new CustomEvent('list-changed'))
+  if (!suppressListChanged) {
+    // when init loads the list, it must not invoke list-changed
+    document.dispatchEvent(new CustomEvent('list-changed'))
+  }
 }
 
 // ------------------------
@@ -68,12 +73,16 @@ document.addEventListener('clear-selection', clearSelection)
 shoppingInput.addEventListener('keyup', (e) => {
   if (shoppingInput.value.trim() === '') {
     shoppingInput.dataset.index = ''
-    document.querySelectorAll('i.fa-trash').forEach((el) => el.classList.add('hidden'))
+    document
+      .querySelectorAll('i.fa-trash')
+      .forEach((el) => el.classList.add('hidden'))
   }
 })
 
 /* when shopping form is submitted */
-shoppingForm.addEventListener('submit', (e) => handleShoppingFormSubmit(e, 'prepend'))
+shoppingForm.addEventListener('submit', (e) =>
+  handleShoppingFormSubmit(e, 'prepend')
+)
 
 // ------------------------
 // Event handler functions
@@ -85,20 +94,14 @@ shoppingForm.addEventListener('submit', (e) => handleShoppingFormSubmit(e, 'prep
 function handleSortSwitchClick() {
   sortSwitch.classList.toggle('on')
   const shoppingItems = document.querySelectorAll('.shopping-item')
-  const shoppingTrashes = document.querySelectorAll('i.fa-trash')
-  const shoppingBars = document.querySelectorAll('#shopping-container i.fa-bars')
 
   if (sortSwitch.classList.contains('on')) {
     enableDragging()
     clearSelection()
-    shoppingBars.forEach((el) => el.classList.remove('hidden'))
-    shoppingItems.forEach((el) => el.removeEventListener('click', handleShoppingItemClick))
-    shoppingTrashes.forEach((el) => el.removeEventListener('click', handleShoppingTrashClick))
+    shoppingItems.forEach((el) => makeElementDraggable(el))
   } else {
     disableDragging()
-    shoppingBars.forEach((el) => el.classList.add('hidden'))
-    shoppingItems.forEach((el) => el.addEventListener('click', handleShoppingItemClick))
-    shoppingTrashes.forEach((el) => el.addEventListener('click', handleShoppingTrashClick))
+    shoppingItems.forEach((el) => makeElementClickable(el))
   }
 }
 
@@ -127,6 +130,11 @@ function handleShoppingFormSubmit(e, prepend) {
   if (itemEl) {
     // existing item is edited
     itemEl.querySelector('span').innerText = value
+    itemEl.querySelector('.fa-bars').classList.remove('hidden')
+    itemEl.addEventListener('click', handleShoppingItemClick)
+    itemEl
+      .querySelector('.fa-trash')
+      .addEventListener('click', handleShoppingTrashClick)
   } else {
     // new item is added
     if (inShoppingList(value)) {
@@ -140,24 +148,29 @@ function handleShoppingFormSubmit(e, prepend) {
 }
 
 /**
- * Handle shopping list change
+ * Handle shopping list change. handleShoppingTrashClick passes
+ * detail with a callback and callback parameter should the
+ * server update is successful
  */
-async function handleShoppingListChange() {
-  const items = getShoppingListItems()
-  updateLocalStorageSuggestions(items)
-  const value = items.join(',')
+async function handleShoppingListChange(e) {
+  let values = getShoppingListItems()
+  state.add('shopping-suggestions', values)
 
   try {
-    const { message, error } = await postWebApp(state.getWebAppUrl(), {
-      path: 'shopping-list-update',
-      value
-    })
+    const { message, error } = await postWebApp(
+      `${state.getWebAppUrl()}/shopping-list-update`,
+      {
+        value: values.join(',')
+      }
+    )
     if (error) {
-      throw new Error(error)
+      setMessage(error)
+      console.warn(error)
+      return
     }
-    console.log(message)
-  } catch (err) {
-    console.log(err)
+  } catch (error) {
+    setMessage(error)
+    console.warn(error)
   }
 }
 
@@ -165,8 +178,13 @@ async function handleShoppingListChange() {
  *
  */
 function handleShoppingItemClick(e) {
-  document.querySelectorAll('i.fa-trash').forEach((el) => el.classList.add('hidden'))
+  document
+    .querySelectorAll('i.fa-trash')
+    .forEach((el) => el.classList.add('hidden'))
   const parent = e.target.closest('.shopping-item')
+  if (!parent) {
+    return
+  }
   parent.classList.toggle('checked')
   if (parent.classList.contains('checked')) {
     shoppingInput.value = parent.innerText
@@ -183,10 +201,10 @@ function handleShoppingItemClick(e) {
  */
 function handleShoppingTrashClick(e) {
   e.stopPropagation()
-  e.target.closest('.shopping-item').remove()
   clearSelection()
-  document.dispatchEvent(new CustomEvent('list-changed'))
   displaySuggestions()
+  e.target.closest('.shopping-item').remove()
+  document.dispatchEvent(new CustomEvent('list-changed'))
 }
 
 /**
@@ -212,14 +230,11 @@ function handleSuggestionPlusClick(e) {
  */
 function handleSuggestionTrashClick(e) {
   const div = e.target.closest('.shopping-suggestion')
-  const item = div.textContent
+  const value = div.textContent.trim()
   div.remove()
-  let localStorageSuggestions = (localStorage.getItem('shopping-suggestions') || '').split(',')
-  localStorageSuggestions = localStorageSuggestions.filter((i) => i !== item)
-  localStorage.setItem('shopping-suggestions', localStorageSuggestions)
-  postWebApp(state.getWebAppUrl(), {
-    path: 'shopping-suggestions-update',
-    value: localStorageSuggestions
+  const suggestions = state.delete('shopping-suggestions', value)
+  postWebApp(`${state.getWebAppUrl()}/shopping-suggestions-update`, {
+    value: suggestions.join(',')
   })
 }
 
@@ -235,11 +250,11 @@ function createShoppingItem(item) {
   div.classList.add('shopping-item')
   div.id = generateUUID()
   div.innerHTML = `
-    <div><i class="fa-solid fa-bars hidden"></i><span>${item.toString().trim().toLowerCase()}</span></div>
+    <div><i class="fa-solid fa-bars hidden"></i><span>${item
+      .toString()
+      .trim()
+      .toLowerCase()}</span></div>
     <i class="fa fa-trash hidden"></i>`
-
-  div.addEventListener('click', handleShoppingItemClick)
-  div.querySelector('i.fa-trash').addEventListener('click', handleShoppingTrashClick)
   return div
 }
 
@@ -253,8 +268,12 @@ function createShoppingSuggestion(item) {
     <i class="fa fa-trash hidden"></i>`
 
   div.addEventListener('click', handleSuggestionItemClick)
-  div.querySelector('.fa-plus').addEventListener('click', handleSuggestionPlusClick)
-  div.querySelector('.fa-trash').addEventListener('click', handleSuggestionTrashClick)
+  div
+    .querySelector('.fa-plus')
+    .addEventListener('click', handleSuggestionPlusClick)
+  div
+    .querySelector('.fa-trash')
+    .addEventListener('click', handleSuggestionTrashClick)
   return div
 }
 
@@ -268,6 +287,12 @@ function addShoppingItemToList(value, prepend) {
   } else {
     shoppingDiv.appendChild(shoppingItem)
   }
+  if (sortSwitch.classList.contains('on')) {
+    makeElementDraggable(shoppingItem)
+    enableDragging()
+  } else {
+    makeElementClickable(shoppingItem)
+  }
 }
 
 /**
@@ -276,7 +301,7 @@ function addShoppingItemToList(value, prepend) {
 function displayShoppingList(shoppingList) {
   if (shoppingList.length > 0) {
     const values = shoppingList.split(',')
-    addItemsToShoppingList(values)
+    addItemsToShoppingList(values, true)
   }
 }
 
@@ -284,14 +309,13 @@ function displayShoppingList(shoppingList) {
  * Display a list of suggestions
  */
 function displaySuggestions() {
-  let suggestions = localStorage.getItem('shopping-suggestions')
-  if (suggestions) {
-    suggestions = suggestions.split(',').filter((s) => s.toString().trim().length > 1)
-  } else {
+  let suggestions = state.get('shopping-suggestions')
+  if (!suggestions) {
     suggestions = ['apples', 'carrots', 'berries']
   }
   suggestionsContainer.innerHTML = ''
   const shoppingItems = getShoppingListItems()
+
   suggestions = suggestions.filter((s) => !shoppingItems.includes(s))
   suggestions.sort()
   for (const s of suggestions) {
@@ -301,13 +325,46 @@ function displaySuggestions() {
 }
 
 /**
+ * Make individual shopping item draggable
+ */
+function makeElementDraggable(element) {
+  element.classList.remove('clickable')
+
+  element.removeEventListener('click', handleShoppingItemClick)
+  element.querySelector('i.fa-bars').classList.remove('hidden')
+  element
+    .querySelector('i.fa-trash')
+    .removeEventListener('click', handleShoppingTrashClick)
+}
+
+/**
+ * Make individual shopping item clickable
+ */
+function makeElementClickable(element) {
+  if (element.classList.contains('clickable')) {
+    return
+  }
+  element.classList.add('clickable')
+
+  element.addEventListener('click', handleShoppingItemClick)
+  element.querySelector('i.fa-bars').classList.add('hidden')
+  element
+    .querySelector('i.fa-trash')
+    .addEventListener('click', handleShoppingTrashClick)
+}
+
+/**
  *
  */
 function clearSelection() {
   shoppingInput.value = ''
   shoppingInput.dataset.index = ''
-  document.querySelectorAll('i.fa-trash').forEach((el) => el.classList.add('hidden'))
-  document.querySelectorAll('.shopping-item').forEach((el) => el.classList.remove('checked'))
+  document
+    .querySelectorAll('i.fa-trash')
+    .forEach((el) => el.classList.add('hidden'))
+  document
+    .querySelectorAll('.shopping-item')
+    .forEach((el) => el.classList.remove('checked'))
 }
 
 /**
@@ -333,19 +390,8 @@ function inShoppingList(item) {
  * Get shopping list items
  */
 function getShoppingListItems() {
-  const items = [...shoppingDiv.querySelectorAll('.shopping-item')].map((el) => el.innerText.toLowerCase().trim())
+  const items = [...shoppingDiv.querySelectorAll('.shopping-item')].map((el) =>
+    el.innerText.toLowerCase().trim()
+  )
   return items
-}
-
-/**
- * Update local storage suggestions
- */
-function updateLocalStorageSuggestions(items) {
-  let localStorageSuggestions = (localStorage.getItem('shopping-suggestions') || '').split(',')
-  for (const item of items) {
-    if (item && !localStorageSuggestions.includes(item)) {
-      localStorageSuggestions.push(item)
-    }
-  }
-  localStorage.setItem('shopping-suggestions', localStorageSuggestions.join(','))
 }

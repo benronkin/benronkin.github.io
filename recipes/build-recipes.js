@@ -20,7 +20,7 @@ function build() {
  *
  */
 function setProdUrl() {
-  const filePath = './recipes/js/state.js'
+  const filePath = './recipes-new/js/state.js'
   let content = fs.readFileSync(filePath, 'utf8')
   content = content.replace(/WEB_APP_URL:\s*devUrl/, 'WEB_APP_URL: prodUrl')
   fs.writeFileSync(filePath, content, 'utf8')
@@ -31,7 +31,7 @@ function setProdUrl() {
  *
  */
 function setVersion() {
-  const indexPath = './recipes/index.html'
+  const indexPath = './recipes-new/index.html'
   let content = fs.readFileSync(indexPath, 'utf8')
   const match = content.match(/<span id="version-number">(.*?)<\/span>/)
   const currentVersion = match ? match[1] : null

@@ -1,7 +1,13 @@
 import { handleTokenQueryParam, getWebApp } from './io.js'
 import { initRecipes } from './recipes.js'
 import { initShopping } from './shopping.js'
-import { initUi, activateUi, setMessage } from './ui.js'
+import { initUi, activateUi } from './ui.js'
+
+// ----------------------
+// Globals
+// ----------------------
+const loginContainer = document.querySelector('#login-container')
+const headerEl = document.querySelector('#header')
 
 // ----------------------
 // Event listeners
@@ -20,20 +26,29 @@ document.addEventListener('DOMContentLoaded', async () => {
  * Handle DOMContentLoaded
  */
 async function handleDOMContentLoaded() {
-  handleTokenQueryParam()
   initUi()
 
-  const { recipes, shoppingList, shoppingSuggestions, token, error } =
-    await getWebApp(`${state.getWebAppUrl()}?path=session-opener`)
+  handleTokenQueryParam()
 
-  if (error) {
-    setMessage(error)
-    document.dispatchEvent(new CustomEvent('fetch-fail'))
-    return { error }
+  const token = localStorage.getItem('authToken')
+  if (!token) {
+    console.log('handleDOMContentLoaded: no token')
+    loginContainer.classList.remove('hidden')
+    headerEl.classList.add('hidden')
+    return
   }
 
-  if (token) {
-    localStorage.setItem('token', token)
+  const { recipes, shoppingList, shoppingSuggestions, error, warn } =
+    await getWebApp(`${state.getWebAppUrl()}/session-opener`)
+
+  if (warn) {
+    document.dispatchEvent(new CustomEvent('fetch-warn', { detail: { warn } }))
+    return { error: warn }
+  }
+
+  if (error) {
+    document.dispatchEvent(new CustomEvent('fetch-fail'))
+    return { error }
   }
 
   initRecipes(recipes)

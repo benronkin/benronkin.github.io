@@ -1,9 +1,11 @@
 import { postWebApp } from './io.js'
+import { initDialog } from './modal.js'
 
 // ----------------------
 // Globals
 // ----------------------
 
+const headerEl = document.querySelector('#header')
 const loginContainer = document.querySelector('#login-container')
 const loginForm = document.querySelector('#login-form')
 const loginBtn = document.querySelector('#login-btn')
@@ -28,10 +30,10 @@ export function initUi() {
   loginForm.addEventListener('submit', handleLoginFormSubmit)
 
   /* When fetching recipes or shopping list fails */
-  document.addEventListener('fetch-fail', () => {
-    loginContainer.classList.remove('hidden')
-    recipeLinksPanel.classList.add('hidden')
-  })
+  document.addEventListener('fetch-fail', handleFetchFail)
+
+  /* When fetching recipes or shopping list warns */
+  document.addEventListener('fetch-warn', handleFetchWarn)
 
   /* When the left panel toggle is clicked */
   leftPanelToggle.addEventListener('click', () => {
@@ -42,6 +44,9 @@ export function initUi() {
   modeSelect.addEventListener('change', (e) => {
     handleModeSelectChange(e)
   })
+
+  // init dialog
+  initDialog()
 
   setMessage('Loading...')
 
@@ -93,18 +98,38 @@ async function handleLoginFormSubmit(e) {
   const formData = new FormData(loginForm)
   const email = formData.get('email')
   try {
-    const { error, message } = await postWebApp(state.getWebAppUrl(), {
-      email,
-      path: 'login'
-    })
+    const { error, message } = await postWebApp(
+      `${state.getWebAppUrl()}/email-submit`,
+      {
+        email
+      }
+    )
     if (error) {
       throw new Error(error)
     }
     loginMessageEl.textContent = message
   } catch (err) {
     loginMessageEl.textContent = err.message
+    loginBtn.disabled = false
     console.log(err)
   }
+}
+
+/**
+ * Handle getWebApp or postWebApp errors
+ */
+function handleFetchFail() {
+  loginContainer.classList.remove('hidden')
+  recipeLinksPanel.classList.add('hidden')
+  headerEl.classList.add('hidden')
+}
+
+/**
+ * Handle getWebApp or postWebApp warnings
+ */
+function handleFetchWarn(e) {
+  setMessage(e.detail.warn)
+  recipeLinksPanel.classList.add('hidden')
 }
 
 /**

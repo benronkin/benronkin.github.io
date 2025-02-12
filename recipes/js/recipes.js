@@ -3,6 +3,7 @@ import { resizeTextarea, isMobile } from './ui.js'
 import { state } from './state.js'
 import { filterIngredient, transformIngredient } from './ingredients.js'
 import { addItemsToShoppingList } from './shopping.js'
+import { MODAL, setDialog } from './modal.js'
 
 // ----------------------
 // Globals
@@ -27,6 +28,7 @@ const recipeNotes = document.querySelector('#recipe-notes')
 const recipeCategory = document.querySelector('#recipe-category')
 const recipeTags = document.querySelector('#recipe-tags')
 const recipeIdEl = document.querySelector('#recipe-id')
+const recipeDeleteBtn = document.querySelector('#bottom-btn-group .fa-trash')
 
 // ----------------------
 // Exported functions
@@ -72,6 +74,50 @@ export async function initRecipes(recipes) {
     populateRelatedRecipes(e.target.value)
   })
 
+  /* When the trash recipe button is clicked */
+  recipeDeleteBtn.addEventListener('click', handleRecipeDeleteBtnClick)
+
+  /* When a recipe is confirmed delete */
+  document.addEventListener('delete-recipe', handleDeleteRecipe)
+
+  /**
+   * Handle button click to show delete modal
+   */
+  function handleRecipeDeleteBtnClick() {
+    setDialog({
+      type: MODAL.DELETE_RECIPE,
+      header: 'Delete recipe',
+      body: `Delete the ${recipeTitleEl.value} recipe?`,
+      id: recipeIdEl.innerText
+    })
+    const dialog = document.querySelector('dialog')
+    dialog.showModal()
+  }
+
+  /**
+   * Handle delete recipe confirmation
+   */
+  async function handleDeleteRecipe(e) {
+    const modalMessageEl = document.querySelector('#modal-message')
+    modalMessageEl.innerText = ''
+    const id = e.detail.id
+    const password = document.querySelector('#modal-delete-input').value
+    const { error } = await getWebApp(
+      `${state.getWebAppUrl()}/recipe-delete?id=${id}&password=${password}`
+    )
+
+    if (error) {
+      modalMessageEl.innerText = error
+      return
+    }
+    state.delete('recipes', id)
+    const tab = document.querySelector('.tab.active')
+    handleTabCloseClick(tab)
+    document.querySelector(`.recipe-link[data-id="${id}"`).remove()
+    console.log(`handleDeleteRecipe message: ${message}`)
+    document.querySelector('dialog').close()
+  }
+
   state.setRecipes(recipes)
   populateRecipes()
 }
@@ -107,11 +153,11 @@ function handleRecipeContainerPopulated() {
 async function handleRecipeCreate() {
   addRecipeBtn.disabled = true
   addRecipeBtn.textContent = 'Creating...'
-  const { id } = await getWebApp(`${state.getWebAppUrl()}?path=recipe-create`)
+  const { id } = await getWebApp(`${state.getWebAppUrl()}/recipe-create`)
 
   const newRecipe = {
     id,
-    title: 'New Recipe',
+    title: 'New recipe',
     ingredients: '',
     method: '',
     notes: '',
@@ -125,7 +171,7 @@ async function handleRecipeCreate() {
   recipesList.appendChild(li)
   li.click()
   addRecipeBtn.disabled = false
-  addRecipeBtn.textContent = 'NEW RECIPE'
+  addRecipeBtn.textContent = 'New recipe'
 }
 
 /**
@@ -135,11 +181,11 @@ async function handleRecipeSearch(e) {
   if (e.key !== 'Enter') {
     return
   }
-  searchRecipesMessageEl.textContent = 'Searching...'
   const value = e.target.value.toLowerCase().trim()
   if (value.length === 0) {
     return
   }
+  searchRecipesMessageEl.textContent = 'Searching...'
   const { recipes } = await getSearchedRecipes(value)
   if (recipes.length === 0) {
     searchRecipesMessageEl.textContent = 'No recipes found'
@@ -155,7 +201,8 @@ async function handleRecipeSearch(e) {
  * Handle recipe field change
  */
 async function handleFieldChange(elem) {
-  const recipeSection = elem.id.replace('recipe-', '')
+  // const recipeSection = elem.id.replace('recipe-', '')
+  const recipeSection = elem.name
   if (recipeSection === 'title') {
     document
       .querySelector('.tab.active')
@@ -166,12 +213,14 @@ async function handleFieldChange(elem) {
   state.setRecipeSection(id, recipeSection, elem.value)
 
   try {
-    const { message, error } = await postWebApp(state.getWebAppUrl(), {
-      path: 'recipe-update',
-      id,
-      value: elem.value,
-      section: recipeSection
-    })
+    const { message, error } = await postWebApp(
+      `${state.getWebAppUrl()}/recipe-update`,
+      {
+        id,
+        value: elem.value,
+        section: recipeSection
+      }
+    )
     if (error) {
       throw new Error(error)
     }
@@ -213,13 +262,10 @@ async function handleRecipeLinkClick(elem) {
   }
 
   loadRecipe(recipe)
-  const { message, error } = await postWebApp(state.getWebAppUrl(), {
-    path: 'recipe-access',
+  const resp = await postWebApp(`${state.getWebAppUrl()}/recipe-access`, {
     id: recipeId
   })
-  if (error) {
-    console.log(error)
-  }
+  const { message } = resp
   console.log(message)
 }
 
@@ -368,12 +414,12 @@ function loadRecipe(recipe) {
  * Get the searched recipes
  */
 async function getSearchedRecipes(q) {
-  const { recipes, error } = await getWebApp(
-    `${state.getWebAppUrl()}?path=recipes&q=${q}`
-  )
-  if (error) {
-    console.log(`getSearchedRecipes error: ${error}`)
-    return { error }
+  const data = await getWebApp(`${state.getWebAppUrl()}/recipes-search?q=${q}`)
+
+  const { recipes, message } = data
+  if (message) {
+    console.log(`getSearchedRecipes error: ${message}`)
+    return { error: message }
   }
   return { recipes }
 }
@@ -392,6 +438,7 @@ function populateRelatedRecipes(ids) {
     .map((id) => id.trim())
     .filter((id) => id.length > 0)
   const ulEl = document.createElement('ul')
+
   for (const id of idsArr) {
     const title = state.getRecipeById(id).title
     const li = makeRecipeLinkEl(id, title)

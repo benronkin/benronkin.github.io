@@ -8,11 +8,13 @@
  */
 export function handleTokenQueryParam() {
   const urlParams = new URLSearchParams(window.location.search)
-  const token = urlParams.get('t')
-  if (!token) {
+  const tokenParam = urlParams.get('token')
+  if (!tokenParam) {
     return
   }
-  localStorage.setItem('token', token)
+
+  localStorage.setItem('authToken', tokenParam)
+
   // remove query param from address bar url
   window.history.replaceState({}, document.title, window.location.pathname)
 }
@@ -21,26 +23,41 @@ export function handleTokenQueryParam() {
  * Get data from Web app
  */
 export async function getWebApp(path) {
-  const token = localStorage.getItem('token')
-  if (!token) {
-    return { error: 'getWebApp error: No token' }
-  }
-  path += (path.includes('?') ? `&` : `?`) + `t=${token}`
-
   const headers = new Headers()
-  headers.append('Content-Type', 'text/plain;charset=utf-8')
+  headers.append('Content-Type', 'application/json')
+
+  const token = localStorage.getItem('authToken')
+  if (!token) {
+    console.log('getWebApp no token. aborting')
+    return
+  }
+  headers.append('Auth-Token', token)
 
   const req = new Request(path, {
-    redirect: 'follow',
     headers
   })
+  let res
   try {
-    const res = await fetch(req)
-    const jsn = await res.json()
-    return jsn
-  } catch (err) {
+    res = await fetch(req)
+    const { status, message, data } = await res.json()
+
+    if (status !== 200) {
+      console.log(`getWebApp ${status} error:`, message)
+      return { error: message }
+    }
+    return { ...data, message }
+  } catch (error) {
+    if (path.includes('localhost')) {
+      console.warn('Is cloudflare running?')
+      return { warn: 'Is CloudFlare running locally?' }
+    }
+
+    console.log('getWebapp error:', error)
+
     return {
-      error: `getWebApp error: ${err}\nRes: ${await res.text()}`
+      error: `getWebApp error: ${error}\nRes: ${
+        res ? await res.text() : 'res is empty'
+      }`
     }
   }
 }
@@ -49,34 +66,39 @@ export async function getWebApp(path) {
  * Post data to Web app
  */
 export async function postWebApp(path, data) {
-  // user does not need a token to access unprotected paths
-  const unprotectedPaths = ['login']
-  if (!unprotectedPaths.includes(data.path)) {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      return { error: 'postWebApp error: No token' }
-    }
-    path += (path.includes('?') ? `&` : `?`) + `t=${token}`
-  }
-
   const headers = new Headers()
-  headers.append('Content-Type', 'text/plain;charset=utf-8')
+  headers.append('Content-Type', 'application/json')
+
+  const token = localStorage.getItem('authToken')
+  if (!token && !path.includes('/email-submit')) {
+    console.log('postWebApp no token. aborting')
+    return
+  }
+  headers.append('Auth-Token', token)
 
   const req = new Request(path, {
     method: 'POST',
-    redirect: 'follow',
     headers,
     body: JSON.stringify(data)
   })
   let res
   try {
     res = await fetch(req)
-    const jsn = await res.json()
-    return jsn
+    const { status, message, data } = await res.json()
+    if (status !== 200) {
+      console.log(`postWebApp ${status} error:`, message)
+      return { error: message }
+    }
+    return { ...data, message }
   } catch (err) {
+    if (path.includes('localhost')) {
+      console.warn('Is cloudflare running?')
+    }
+
     const message = `postWebApp error: ${err}\nFetch payload: ${JSON.stringify(
       data
     )}\nres:${res ? JSON.stringify(res) : 'no res'}`
+    console.log('getWebapp error:', message)
     return { error: message }
   }
 }
