@@ -206,6 +206,13 @@ ul {
   margin: 10px auto;
   max-width: 960px;
 }
+.fa-plus {
+  padding: 7px;
+  color: white;
+  background-color: purple;
+  border: 1px solid purple;
+  border-radius: 6px;
+}
 .fa-trash {
   cursor: pointer;
   color: white;

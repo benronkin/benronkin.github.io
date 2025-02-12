@@ -98,3 +98,8 @@ export function filterIngredient(line) {
   }
   return true
 }
+
+/**
+ * Remove quantities and parenthesis
+ */
+export function standardizeIngredient(line) {}
