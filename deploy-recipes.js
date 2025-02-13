@@ -37,9 +37,11 @@ function updateIndexPage() {
   const currentVersion = match ? match[1] : null
 
   // Prompt user for the new version
-  const newVersion =
-    readlineSync.question(`Version (${currentVersion}): `).trim() ||
-    currentVersion
+  const newVersion = readlineSync
+    .question(`Version (${currentVersion}): `, {
+      defaultInput: currentVersion
+    })
+    .trim()
   // Update the version in index.html
   content = content.replace(
     /<span id="version-number">(.*?)<\/span>/,
@@ -60,11 +62,27 @@ function updateIndexPage() {
  * Prompts for a commit message and runs gacp
  */
 function commitChanges() {
-  const commitMessage = readlineSync.question('Commit message: ').trim()
+  let lastCommitMessage = ''
+
+  try {
+    lastCommitMessage = execSync('git log -1 --pretty=%B', {
+      encoding: 'utf8'
+    }).trim()
+  } catch (error) {
+    console.log('❌ Could not retrieve last commit message.')
+  }
+
+  const commitMessage = readlineSync
+    .question(`Commit message (${lastCommitMessage}): `, {
+      defaultInput: lastCommitMessage
+    })
+    .trim()
+
   if (!commitMessage) {
     console.log('❌ No commit message entered. Skipping commit.')
     return
   }
+
   try {
     execSync('git add .', { stdio: 'inherit', shell: true })
     execSync(`git commit -m "${commitMessage}"`, {
