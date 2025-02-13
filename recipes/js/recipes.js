@@ -438,7 +438,12 @@ function populateRelatedRecipes(ids) {
   const ulEl = document.createElement('ul')
 
   for (const id of idsArr) {
-    const title = state.getRecipeById(id).title
+    const recipe = state.getRecipeById(id)
+    if (!recipe) {
+      console.log(`populateRelatedRecipes: Oops, id ${id} was not found`)
+      continue
+    }
+    const title = recipe.title
     const li = makeRecipeLinkEl(id, title)
     ulEl.appendChild(li)
   }
