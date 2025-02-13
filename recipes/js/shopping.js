@@ -377,10 +377,9 @@ function populateShopAutoComplete() {
   suggests = suggests.filter((s) => !items.includes(s))
   suggests = suggests.filter((s) => s.includes(q))
 
-  console.log('q', shoppingInput.value)
-  console.log('items', items)
-
-  console.log('suggests', suggests)
+  // console.log('q', shoppingInput.value)
+  // console.log('items', items)
+  // console.log('suggests', suggests)
 
   if (suggests.length === 0) {
     return
