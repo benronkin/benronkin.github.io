@@ -37,9 +37,9 @@ function updateIndexPage() {
   const currentVersion = match ? match[1] : null
 
   // Prompt user for the new version
-  const newVersion = readlineSync
-    .question(`Version (${currentVersion}): `)
-    .trim()
+  const newVersion =
+    readlineSync.question(`Version (${currentVersion}): `).trim() ||
+    currentVersion
   // Update the version in index.html
   content = content.replace(
     /<span id="version-number">(.*?)<\/span>/,
@@ -51,7 +51,9 @@ function updateIndexPage() {
 
   // Write the file
   fs.writeFileSync(indexPath, content, 'utf8')
-  console.log(`🔥 Updated version to ${newVersion} in index.html`)
+  if (newVersion !== currentVersion) {
+    console.log(`🔥 Updated version to ${newVersion} in index.html`)
+  }
 }
 
 /**

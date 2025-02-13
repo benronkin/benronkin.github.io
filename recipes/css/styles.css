@@ -231,6 +231,9 @@ ul {
 .hidden {
   display: none !important;
 }
+.ml20 {
+  margin-left: 20px;
+}
 .recipe-link {
   cursor: pointer;
   padding: 10px;
