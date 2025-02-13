@@ -14,6 +14,7 @@ const shoppingContainer = document.querySelector('#shopping-container')
 const shoppingDiv = document.querySelector('#shopping-div')
 const suggestionsContainer = document.querySelector('#shopping-suggestions')
 const suggestSwitch = document.querySelector('#suggest-switch')
+const suggestAutoComplete = document.querySelector('#suggest-auto-complete')
 const sortSwitch = document.querySelector('#sort-switch')
 
 // ----------------------
@@ -26,6 +27,7 @@ const sortSwitch = document.querySelector('#sort-switch')
 export async function initShopping(shoppingList, shoppingSuggestions) {
   makeDragStyles()
   displayShoppingList(shoppingList)
+  state.set('shopping-items', shoppingList.split(','))
   state.set('shopping-suggestions', shoppingSuggestions.split(','))
   if (modeSelect.value === 'shopping') {
     shoppingContainer.classList.remove('hidden')
@@ -70,14 +72,7 @@ document.addEventListener('list-changed', handleShoppingListChange)
 document.addEventListener('clear-selection', clearSelection)
 
 /* when shopping input key is pressed */
-shoppingInput.addEventListener('keyup', (e) => {
-  if (shoppingInput.value.trim() === '') {
-    shoppingInput.dataset.index = ''
-    document
-      .querySelectorAll('i.fa-trash')
-      .forEach((el) => el.classList.add('hidden'))
-  }
-})
+shoppingInput.addEventListener('keyup', handleShopInputKeyUp)
 
 /* when shopping form is submitted */
 shoppingForm.addEventListener('submit', (e) =>
@@ -145,6 +140,21 @@ function handleShoppingFormSubmit(e, prepend) {
     addShoppingItemToList(value, prepend)
   }
   document.dispatchEvent(new CustomEvent('list-changed'))
+}
+
+/**
+ * Handle key up event in shopping input
+ */
+function handleShopInputKeyUp() {
+  suggestAutoComplete.innerHTML = ''
+  if (shoppingInput.value.trim() === '') {
+    shoppingInput.dataset.index = ''
+    document
+      .querySelectorAll('i.fa-trash')
+      .forEach((el) => el.classList.add('hidden'))
+    return
+  }
+  populateShopAutoComplete()
 }
 
 /**
@@ -222,6 +232,8 @@ function handleSuggestionPlusClick(e) {
   const div = e.target.closest('.shopping-suggestion')
   addShoppingItemToList(div.innerText, 'prepend')
   div.remove()
+  shoppingInput.value = ''
+  shoppingInput.focus()
   document.dispatchEvent(new CustomEvent('list-changed'))
 }
 
@@ -233,6 +245,8 @@ function handleSuggestionTrashClick(e) {
   const value = div.textContent.trim()
   div.remove()
   const suggestions = state.delete('shopping-suggestions', value)
+  shoppingInput.value = ''
+  shoppingInput.focus()
   postWebApp(`${state.getWebAppUrl()}/shopping-suggestions-update`, {
     value: suggestions.join(',')
   })
@@ -351,6 +365,29 @@ function makeElementClickable(element) {
   element
     .querySelector('i.fa-trash')
     .addEventListener('click', handleShoppingTrashClick)
+}
+
+/**
+ *
+ */
+function populateShopAutoComplete() {
+  const items = state.get('shopping-items')
+  let suggests = state.get('shopping-suggestions')
+  suggests = suggests.filter((s) => !items.includes(s))
+  suggests = suggests.filter((s) => s.includes(shoppingInput.value))
+
+  console.log('q', shoppingInput.value)
+  console.log('items', items)
+
+  console.log('suggests', suggests)
+
+  if (suggests.length === 0) {
+    return
+  }
+  for (const s of suggests) {
+    const div = createShoppingSuggestion(s)
+    suggestAutoComplete.appendChild(div)
+  }
 }
 
 /**
