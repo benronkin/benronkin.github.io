@@ -86,7 +86,6 @@ export async function postWebApp(path, data) {
     res = await fetch(req)
     const { status, message, data } = await res.json()
     if (status !== 200) {
-      console.log(`postWebApp ${status} error:`, message)
       return { error: message }
     }
     return { ...data, message }
@@ -97,8 +96,7 @@ export async function postWebApp(path, data) {
 
     const message = `postWebApp error: ${err}\nFetch payload: ${JSON.stringify(
       data
-    )}\nres:${res ? JSON.stringify(res) : 'no res'}`
-    console.log('getWebapp error:', message)
+    )}`
     return { error: message }
   }
 }
