@@ -1,4 +1,10 @@
 // ------------------------
+// Globals
+// ------------------------
+
+let timeout = 10
+
+// ------------------------
 // Exported functions
 // ------------------------
 
@@ -86,8 +92,11 @@ export async function postWebApp(path, data) {
     res = await fetch(req)
     const { status, message, data } = await res.json()
     if (status !== 200) {
-      return { error: message }
+      console.warn(message)
+      timeout *= 2
+      return postWebApp(path, data)
     }
+    timeout = 10
     return { ...data, message }
   } catch (err) {
     if (path.includes('localhost')) {
