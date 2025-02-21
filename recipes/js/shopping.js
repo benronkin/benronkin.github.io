@@ -371,6 +371,9 @@ function makeElementClickable(element) {
  *
  */
 function populateShopAutoComplete() {
+  if (!shoppingInput.value) {
+    return
+  }
   const q = shoppingInput.value.toLowerCase().trim()
   const items = state.get('shopping-items')
   let suggests = state.get('shopping-suggestions')
