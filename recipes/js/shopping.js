@@ -98,6 +98,7 @@ function handleSortSwitchClick() {
     disableDragging()
     shoppingItems.forEach((el) => makeElementClickable(el))
   }
+  shoppingInput.focus()
 }
 
 /**
@@ -122,6 +123,7 @@ function handleShoppingFormSubmit(e, prepend) {
   const itemEl = document.getElementById(itemId)
 
   clearSelection()
+  shoppingInput.focus()
   if (itemEl) {
     // existing item is edited
     itemEl.querySelector('span').innerText = value
@@ -405,7 +407,6 @@ function clearSelection() {
     .forEach((el) => el.classList.remove('checked'))
   suggestionsContainer.innerHTML = ''
   suggestAutoComplete.innerHTML = ''
-  shoppingInput.focus()
 }
 
 /**
