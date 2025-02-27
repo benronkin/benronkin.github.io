@@ -232,8 +232,7 @@ function handleSuggestionPlusClick(e) {
   const div = e.target.closest('.shopping-suggestion')
   addShoppingItemToList(div.innerText, 'prepend')
   div.remove()
-  shoppingInput.value = ''
-  shoppingInput.focus()
+  clearSelection()
   document.dispatchEvent(new CustomEvent('list-changed'))
 }
 
@@ -245,8 +244,7 @@ function handleSuggestionTrashClick(e) {
   const value = div.textContent.trim()
   div.remove()
   const suggestions = state.delete('shopping-suggestions', value)
-  shoppingInput.value = ''
-  shoppingInput.focus()
+  // clearSelection()
   postWebApp(`${state.getWebAppUrl()}/shopping-suggestions-update`, {
     value: suggestions.join(',')
   })
@@ -405,6 +403,9 @@ function clearSelection() {
   document
     .querySelectorAll('.shopping-item')
     .forEach((el) => el.classList.remove('checked'))
+  suggestionsContainer.innerHTML = ''
+  suggestAutoComplete.innerHTML = ''
+  shoppingInput.focus()
 }
 
 /**
