@@ -71,7 +71,7 @@ export async function getWebApp(path) {
 /**
  * Post data to Web app
  */
-export async function postWebApp(path, data) {
+export async function postWebApp(path, clientData) {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
 
@@ -85,27 +85,34 @@ export async function postWebApp(path, data) {
   const req = new Request(path, {
     method: 'POST',
     headers,
-    body: JSON.stringify(data)
+    body: JSON.stringify(clientData)
   })
   let res
   try {
     res = await fetch(req)
     const { status, message, data } = await res.json()
     if (status !== 200) {
+      if (timeout >= 10) {
+        console.warn('postWebApp: server keeps failing. Aborting.')
+        return { error: 'Server keeps failing. Aborting.' }
+      }
       console.warn(message)
       timeout *= 2
-      return postWebApp(path, data)
+      return setTimeout(() => {
+        postWebApp(path, clientData)
+      }, timeout)
+    } else {
+      timeout = 10
     }
-    timeout = 10
     return { ...data, message }
   } catch (err) {
     if (path.includes('localhost')) {
       console.warn('Is cloudflare running?')
     }
 
-    const message = `postWebApp error: ${err}\nFetch payload: ${JSON.stringify(
-      data
+    const errorMessage = `postWebApp error: ${err}\nFetch payload: ${JSON.stringify(
+      clientData
     )}`
-    return { error: message }
+    return { error: errorMessage }
   }
 }
