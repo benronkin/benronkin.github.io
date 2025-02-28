@@ -1,10 +1,4 @@
 // ------------------------
-// Globals
-// ------------------------
-
-let timeout = 10
-
-// ------------------------
 // Exported functions
 // ------------------------
 
@@ -90,27 +84,12 @@ export async function postWebApp(path, clientData) {
   let res
   try {
     res = await fetch(req)
-    const { status, message, data } = await res.json()
-    if (status !== 200) {
-      if (timeout >= 10) {
-        console.warn('postWebApp: server keeps failing. Aborting.')
-        return { error: 'Server keeps failing. Aborting.' }
-      }
-      console.warn(message)
-      setMessage(message)
-      timeout *= 2
-      return setTimeout(() => {
-        postWebApp(path, clientData)
-      }, timeout)
-    } else {
-      timeout = 10
-    }
-    return { ...data, message }
+    const resp = await res.json()
+    return resp
   } catch (err) {
     if (path.includes('localhost')) {
       console.warn('Is cloudflare running?')
     }
-
     const errorMessage = `postWebApp error: ${err}\nFetch payload: ${JSON.stringify(
       clientData
     )}`

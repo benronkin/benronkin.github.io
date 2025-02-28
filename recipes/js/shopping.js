@@ -16,6 +16,7 @@ const suggestionsContainer = document.querySelector('#shopping-suggestions')
 const suggestSwitch = document.querySelector('#suggest-switch')
 const suggestAutoComplete = document.querySelector('#suggest-auto-complete')
 const sortSwitch = document.querySelector('#sort-switch')
+let retryTimeout = 10
 
 // ----------------------
 // Exported functions
@@ -169,7 +170,7 @@ async function handleShoppingListChange(e) {
   state.add('shopping-suggestions', values)
 
   try {
-    const { message, error } = await postWebApp(
+    const { error } = await postWebApp(
       `${state.getWebAppUrl()}/shopping-list-update`,
       {
         value: values.join(',')
@@ -178,7 +179,18 @@ async function handleShoppingListChange(e) {
     if (error) {
       setMessage(error)
       console.warn(error)
-      return
+      if (retryTimeout >= 200) {
+        retryTimeout = 10
+        console.warn(
+          'handleShoppingListChange: server keeps failing. Aborting.'
+        )
+        return
+      }
+
+      retryTimeout *= 2
+      setTimeout(() => {
+        handleShoppingListChange(e)
+      }, retryTimeout)
     }
   } catch (error) {
     setMessage(error)
