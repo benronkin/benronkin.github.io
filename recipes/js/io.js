@@ -97,6 +97,7 @@ export async function postWebApp(path, clientData) {
         return { error: 'Server keeps failing. Aborting.' }
       }
       console.warn(message)
+      setMessage(message)
       timeout *= 2
       return setTimeout(() => {
         postWebApp(path, clientData)
