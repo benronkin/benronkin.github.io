@@ -170,15 +170,15 @@ async function handleShoppingListChange(e) {
   state.add('shopping-suggestions', values)
 
   try {
-    const { error } = await postWebApp(
+    const { status, message } = await postWebApp(
       `${state.getWebAppUrl()}/shopping-list-update`,
       {
         value: values.join(',')
       }
     )
-    if (error) {
-      setMessage(error)
-      console.warn(error)
+    if (status !== 200) {
+      setMessage(message)
+      console.warn(message)
       if (retryTimeout >= 200) {
         retryTimeout = 10
         console.warn(
