@@ -99,7 +99,6 @@ function handleSortSwitchClick() {
     disableDragging()
     shoppingItems.forEach((el) => makeElementClickable(el))
   }
-  shoppingInput.focus()
 }
 
 /**
